@@ -8,13 +8,13 @@
   <link rel="dns-prefetch" href="https://buracagyang.github.io">
   <title>SVM推导过程注解 | Buracag的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="同步于https://blog.csdn.net/buracag_mc/article/details/76762249 [TOC] 前言支持向量机(Support Vector Machine)的原理其实比较简单，它是基于结构风险最小化理论之上在特征空间中建构最优分割超平面。在二维中就是线，在三维中就是面，但我们统称为超平面。">
+  <meta name="description" content="同步于CSDN;音尘杂记 [TOC] 前言支持向量机(Support Vector Machine)的原理其实比较简单，它是基于结构风险最小化理论之上在特征空间中建构最优分割超平面。在二维中就是线，在三维中就是面，但我们统称为超平面。">
 <meta name="keywords" content="技术备忘,算法备忘,统计学运用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SVM推导过程注解">
 <meta property="og:url" content="https://buracagyang.github.io/2019/05/08/SVM推导过程注解/index.html">
 <meta property="og:site_name" content="Buracag的博客">
-<meta property="og:description" content="同步于https://blog.csdn.net/buracag_mc/article/details/76762249 [TOC] 前言支持向量机(Support Vector Machine)的原理其实比较简单，它是基于结构风险最小化理论之上在特征空间中建构最优分割超平面。在二维中就是线，在三维中就是面，但我们统称为超平面。">
+<meta property="og:description" content="同步于CSDN;音尘杂记 [TOC] 前言支持向量机(Support Vector Machine)的原理其实比较简单，它是基于结构风险最小化理论之上在特征空间中建构最优分割超平面。在二维中就是线，在三维中就是面，但我们统称为超平面。">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://img.blog.csdn.net/20170806110734659?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYnVyYWNhZ19tYw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20170806113012070?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYnVyYWNhZ19tYw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
@@ -26,10 +26,10 @@
 <meta property="og:image" content="http://img.blog.csdn.net/20170806114231142?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYnVyYWNhZ19tYw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20170806114343592?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYnVyYWNhZ19tYw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20170806114946494?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYnVyYWNhZ19tYw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2019-05-08T10:45:00.872Z">
+<meta property="og:updated_time" content="2019-05-09T03:11:24.564Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SVM推导过程注解">
-<meta name="twitter:description" content="同步于https://blog.csdn.net/buracag_mc/article/details/76762249 [TOC] 前言支持向量机(Support Vector Machine)的原理其实比较简单，它是基于结构风险最小化理论之上在特征空间中建构最优分割超平面。在二维中就是线，在三维中就是面，但我们统称为超平面。">
+<meta name="twitter:description" content="同步于CSDN;音尘杂记 [TOC] 前言支持向量机(Support Vector Machine)的原理其实比较简单，它是基于结构风险最小化理论之上在特征空间中建构最优分割超平面。在二维中就是线，在三维中就是面，但我们统称为超平面。">
 <meta name="twitter:image" content="http://img.blog.csdn.net/20170806110734659?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYnVyYWNhZ19tYw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
   
     <link rel="alternative" href="/atom.xml" title="Buracag的博客" type="application/atom+xml">
@@ -183,7 +183,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<p>同步于<a href="https://blog.csdn.net/buracag_mc/article/details/76762249" title="https://blog.csdn.net/buracag_mc/article/details/76762249" target="_blank" rel="noopener">https://blog.csdn.net/buracag_mc/article/details/76762249</a></p>
+<p>同步于<a href="https://blog.csdn.net/buracag_mc/article/details/76762249" title="https://blog.csdn.net/buracag_mc/article/details/76762249" target="_blank" rel="noopener">CSDN</a>;<a href="https://www.runblog.online/2019/03/18/svm-process/" target="_blank" rel="noopener">音尘杂记</a></p>
 <p>[TOC]</p>
 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>支持向量机(Support Vector Machine)的原理其实比较简单，它是基于结构风险最小化理论之上在特征空间中建构最优分割超平面。在二维中就是线，在三维中就是面，但我们统称为超平面。</p>
 <a id="more"></a>
@@ -406,6 +406,19 @@
             </div>
         </div>
         
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#求解硬间隔最优化时的相关注解"><span class="toc-number">2.</span> <span class="toc-text">求解硬间隔最优化时的相关注解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#SVM中对偶问题的注解"><span class="toc-number">2.1.</span> <span class="toc-text">SVM中对偶问题的注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SVM中KKT条件注解"><span class="toc-number">2.2.</span> <span class="toc-text">SVM中KKT条件注解</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
         
     </div>
 </aside>
