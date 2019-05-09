@@ -8,13 +8,13 @@
   <link rel="dns-prefetch" href="https://buracagyang.github.io">
   <title>SVM推导过程注解 | Buracag的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="同步于CSDN;音尘杂记 [TOC] 前言支持向量机(Support Vector Machine)的原理其实比较简单，它是基于结构风险最小化理论之上在特征空间中建构最优分割超平面。在二维中就是线，在三维中就是面，但我们统称为超平面。">
+  <meta name="description" content="同步于CSDN;音尘杂记 前言支持向量机(Support Vector Machine)的原理其实比较简单，它是基于结构风险最小化理论之上在特征空间中建构最优分割超平面。在二维中就是线，在三维中就是面，但我们统称为超平面。">
 <meta name="keywords" content="技术备忘,算法备忘,统计学运用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SVM推导过程注解">
 <meta property="og:url" content="https://buracagyang.github.io/2019/05/08/svm-proving-process/index.html">
 <meta property="og:site_name" content="Buracag的博客">
-<meta property="og:description" content="同步于CSDN;音尘杂记 [TOC] 前言支持向量机(Support Vector Machine)的原理其实比较简单，它是基于结构风险最小化理论之上在特征空间中建构最优分割超平面。在二维中就是线，在三维中就是面，但我们统称为超平面。">
+<meta property="og:description" content="同步于CSDN;音尘杂记 前言支持向量机(Support Vector Machine)的原理其实比较简单，它是基于结构风险最小化理论之上在特征空间中建构最优分割超平面。在二维中就是线，在三维中就是面，但我们统称为超平面。">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://img.blog.csdn.net/20170806110734659?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYnVyYWNhZ19tYw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20170806113012070?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYnVyYWNhZ19tYw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
@@ -26,10 +26,10 @@
 <meta property="og:image" content="http://img.blog.csdn.net/20170806114231142?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYnVyYWNhZ19tYw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20170806114343592?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYnVyYWNhZ19tYw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20170806114946494?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYnVyYWNhZ19tYw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2019-05-09T03:21:11.295Z">
+<meta property="og:updated_time" content="2019-05-09T09:14:35.350Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SVM推导过程注解">
-<meta name="twitter:description" content="同步于CSDN;音尘杂记 [TOC] 前言支持向量机(Support Vector Machine)的原理其实比较简单，它是基于结构风险最小化理论之上在特征空间中建构最优分割超平面。在二维中就是线，在三维中就是面，但我们统称为超平面。">
+<meta name="twitter:description" content="同步于CSDN;音尘杂记 前言支持向量机(Support Vector Machine)的原理其实比较简单，它是基于结构风险最小化理论之上在特征空间中建构最优分割超平面。在二维中就是线，在三维中就是面，但我们统称为超平面。">
 <meta name="twitter:image" content="http://img.blog.csdn.net/20170806110734659?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYnVyYWNhZ19tYw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
   
     <link rel="alternative" href="/atom.xml" title="Buracag的博客" type="application/atom+xml">
@@ -184,7 +184,6 @@
       
         <hr>
 <p>同步于<a href="https://blog.csdn.net/buracag_mc/article/details/76762249" title="https://blog.csdn.net/buracag_mc/article/details/76762249" target="_blank" rel="noopener">CSDN</a>;<a href="https://www.runblog.online/2019/03/18/svm-process/" target="_blank" rel="noopener">音尘杂记</a></p>
-<p>[TOC]</p>
 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>支持向量机(Support Vector Machine)的原理其实比较简单，它是基于结构风险最小化理论之上在特征空间中建构最优分割超平面。在二维中就是线，在三维中就是面，但我们统称为超平面。</p>
 <a id="more"></a>
 <p>就我所看到的相关书本、论文以及网上博文情况来看，其一般步骤通常如下：</p>
@@ -393,6 +392,20 @@
 </article>
 
   
+<nav id="article-nav">
+  
+    <a href="/2019/05/09/numpy-vectorize/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          利用numpy.vectorize提升计算速度
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -556,6 +569,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">统计学运用</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
             
             <div class="clearfix"></div>

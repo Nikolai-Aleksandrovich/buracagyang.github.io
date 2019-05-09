@@ -6,15 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://buracagyang.github.io">
-  <title>Tag: 算法备忘 | Buracag的博客</title>
+  <title>利用numpy.vectorize提升计算速度 | Buracag的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Buracag的博客">
-<meta property="og:url" content="https://buracagyang.github.io/tags/算法备忘/index.html">
+  <meta name="description" content="同步于CSDN;音尘杂记 前言在实际项目中，对超大矩阵进行计算或者对超大的DataFrame进行计算是一个经常会出现的场景。这里先不考虑开发机本身内存等客观硬件因素，仅从设计上讨论一下不同实现方式带来的性能差异，抛砖引玉。">
+<meta name="keywords" content="技术备忘,Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="利用numpy.vectorize提升计算速度">
+<meta property="og:url" content="https://buracagyang.github.io/2019/05/09/numpy-vectorize/index.html">
 <meta property="og:site_name" content="Buracag的博客">
+<meta property="og:description" content="同步于CSDN;音尘杂记 前言在实际项目中，对超大矩阵进行计算或者对超大的DataFrame进行计算是一个经常会出现的场景。这里先不考虑开发机本身内存等客观硬件因素，仅从设计上讨论一下不同实现方式带来的性能差异，抛砖引玉。">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="https://www.runblog.online/wp-content/uploads/2019/03/1.png">
+<meta property="og:image" content="https://www.runblog.online/wp-content/uploads/2019/03/2-1.png">
+<meta property="og:image" content="https://www.runblog.online/wp-content/uploads/2019/03/for-loops-1.png">
+<meta property="og:image" content="https://www.runblog.online/wp-content/uploads/2019/03/list-generator.png">
+<meta property="og:image" content="https://www.runblog.online/wp-content/uploads/2019/03/multiprocessing.png">
+<meta property="og:image" content="https://www.runblog.online/wp-content/uploads/2019/03/vectorize.png">
+<meta property="og:updated_time" content="2019-05-09T09:15:52.461Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Buracag的博客">
+<meta name="twitter:title" content="利用numpy.vectorize提升计算速度">
+<meta name="twitter:description" content="同步于CSDN;音尘杂记 前言在实际项目中，对超大矩阵进行计算或者对超大的DataFrame进行计算是一个经常会出现的场景。这里先不考虑开发机本身内存等客观硬件因素，仅从设计上讨论一下不同实现方式带来的性能差异，抛砖引玉。">
+<meta name="twitter:image" content="https://www.runblog.online/wp-content/uploads/2019/03/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Buracag的博客" type="application/atom+xml">
   
@@ -146,36 +158,83 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-numpy-vectorize" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/08/svm-proving-process/" class="archive-article-date">
-  	<time datetime="2019-05-08T09:51:18.299Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-08</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/08/svm-proving-process/">SVM推导过程注解</a>
+    <h1 class="article-title" itemprop="name">
+      利用numpy.vectorize提升计算速度
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/05/09/numpy-vectorize/" class="archive-article-date">
+  	<time datetime="2019-05-09T09:11:56.441Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>同步于<a href="https://blog.csdn.net/buracag_mc/article/details/88748607" title="https://blog.csdn.net/buracag_mc/article/details/88748607" target="_blank" rel="noopener">CSDN</a>;<a href="https://www.runblog.online/2019/03/18/increase-calculation-speed-with-numpy-vectorize/" target="_blank" rel="noopener">音尘杂记</a></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在实际项目中，对超大矩阵进行计算或者对超大的DataFrame进行计算是一个经常会出现的场景。这里先不考虑开发机本身内存等客观硬件因素，仅从设计上讨论一下不同实现方式带来的性能差异，抛砖引玉。</p>
+<a id="more"></a>
+<p>项目中有这样一个需求，需要根据历史销量数据计算SKU(Stock Keeping Unit)之间的相似度，或者更通俗一点说是根据历史销量数据求不同SKU之间出现的订单交集以及并集大小(注:SKU数量大概15k左右，订单数大概1000k左右)。</p>
+<p>这里给几条示例数据，可以更直观形象地理解这个需求：<br><img src="https://www.runblog.online/wp-content/uploads/2019/03/1.png" alt></p>
+<p>然后需要根据这些历史的orderno-sku(订单-商品)数据求解出sku的相似度矩阵。其中SKU1和SKU2之间的相似度定义为:<br><img src="https://www.runblog.online/wp-content/uploads/2019/03/2-1.png" alt></p>
+<p>可以很快速地想到几种解决方案：</p>
+<ul>
+<li><p>直接for loops；</p>
+</li>
+<li><p>for loops稍微改进采用列表生成器；</p>
+</li>
+<li><p>采用多进程并行计算；</p>
+</li>
+<li><p><strong>采用numpy.vectorize</strong></p>
+</li>
+</ul>
+<h1 id="1-for-loops计算相似度矩阵"><a href="#1-for-loops计算相似度矩阵" class="headerlink" title="1. for loops计算相似度矩阵"></a>1. for loops计算相似度矩阵</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@timer</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gen_corr_matrix_for_loops</span><span class="params">(order_df)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    for loops计算相似度矩阵</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    df = order_df.groupby([<span class="string">'sku'</span>]).agg(&#123;<span class="string">'orderno'</span>: <span class="keyword">lambda</span> x: set(x)&#125;).reset_index()</span><br><span class="line">    <span class="keyword">del</span> order_df</span><br><span class="line">    gc.collect()</span><br><span class="line">    l = len(df)</span><br><span class="line">    sku_series = df.sku.astype(str)</span><br><span class="line">    corr_matrix_arr = np.ones((l, l))</span><br><span class="line"></span><br><span class="line">    tbar = trange(l)</span><br><span class="line">    tbar.set_description(<span class="string">"compute corr matrix"</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> tbar:</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(i + <span class="number">1</span>, l):</span><br><span class="line">            corr_matrix_arr[j, i] = corr_matrix_arr[i, j] = len(df.iloc[i, <span class="number">1</span>] &amp; df.iloc[j, <span class="number">1</span>]) / len(</span><br><span class="line">                df.iloc[i, <span class="number">1</span>] | df.iloc[j, <span class="number">1</span>])</span><br><span class="line">    corr_matrix_df = pd.DataFrame(columns=sku_series, index=sku_series, data=corr_matrix_arr)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> corr_matrix_df</span><br></pre></td></tr></table></figure>
+<p>计算耗时：2000s+<br><img src="https://www.runblog.online/wp-content/uploads/2019/03/for-loops-1.png" alt></p>
+<h1 id="2-list-generator计算相似度矩阵"><a href="#2-list-generator计算相似度矩阵" class="headerlink" title="2.list generator计算相似度矩阵"></a>2.list generator计算相似度矩阵</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@timer</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gen_corr_matrix_generator</span><span class="params">(order_df)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    列表生成器计算相似度矩阵</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    df = order_df.groupby([<span class="string">'sku'</span>]).agg(&#123;<span class="string">'orderno'</span>: <span class="keyword">lambda</span> x: set(x)&#125;).reset_index()</span><br><span class="line">    <span class="keyword">del</span> order_df</span><br><span class="line">    gc.collect()</span><br><span class="line">    l= len(df)</span><br><span class="line">    sku_series = df.sku.astype(str)</span><br><span class="line">    corr_matrix_arr = np.ones((l, l))</span><br><span class="line"></span><br><span class="line">    l1 = df.orderno</span><br><span class="line">    l2 = np.array(df[<span class="string">'orderno'</span>].apply(len), dtype=np.int8)</span><br><span class="line"></span><br><span class="line">    result_list = [[i, j, len(l1[i] &amp; l1[j])] <span class="keyword">for</span> i <span class="keyword">in</span> range(l)</span><br><span class="line">                   <span class="keyword">for</span> j <span class="keyword">in</span> range(i+<span class="number">1</span>, l) <span class="keyword">if</span> len(l1[i] &amp; l1[j]) &gt; <span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i, j, k <span class="keyword">in</span> result_list:</span><br><span class="line">        corr_matrix_arr[j, i] = corr_matrix_arr[i, j] = k * <span class="number">1.0</span> / (l2[i] + l2[j] - k)</span><br><span class="line">    corr_matrix_df = pd.DataFrame(columns=sku_series, index=sku_series, data=corr_matrix_arr)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> corr_matrix_df</span><br></pre></td></tr></table></figure>
+<p>计算耗时：1296s<br><img src="https://www.runblog.online/wp-content/uploads/2019/03/list-generator.png" alt></p>
+<h1 id="3-多进程计算相似度矩阵"><a href="#3-多进程计算相似度矩阵" class="headerlink" title="3.多进程计算相似度矩阵"></a>3.多进程计算相似度矩阵</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@timer</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gen_corr_matrix_multiprocessing</span><span class="params">(order_df)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    多进程计算相似度矩阵</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    df = order_df.groupby([<span class="string">'sku'</span>]).agg(&#123;<span class="string">'orderno'</span>: <span class="keyword">lambda</span> x: set(x)&#125;).reset_index()</span><br><span class="line">    <span class="keyword">del</span> order_df</span><br><span class="line">    gc.collect()</span><br><span class="line">    l = len(df)</span><br><span class="line">    sku_series = df.sku.astype(str)</span><br><span class="line">    </span><br><span class="line">    l1 = df.orderno</span><br><span class="line">    l2 = np.array(df[<span class="string">'orderno'</span>].apply(len), dtype=np.int8)</span><br><span class="line">    <span class="keyword">del</span> df</span><br><span class="line">    gc.collect()</span><br><span class="line"></span><br><span class="line">    arr2 = np.zeros((l, l), dtype=np.float32)</span><br><span class="line">    pairs = [[i, j] <span class="keyword">for</span> i <span class="keyword">in</span> range(l - <span class="number">1</span>) <span class="keyword">for</span> j <span class="keyword">in</span> range(i + <span class="number">1</span>, l)]</span><br><span class="line"></span><br><span class="line">    loops = int(math.ceil((l ** <span class="number">2</span> - l) / <span class="number">10</span> ** <span class="number">6</span> / <span class="number">2</span>))</span><br><span class="line"></span><br><span class="line">    tbar = trange(loops)</span><br><span class="line">    tbar.set_description(<span class="string">"compute corr matrix"</span>)</span><br><span class="line">    pool = Pool(<span class="number">4</span>)</span><br><span class="line">    <span class="keyword">for</span> loop <span class="keyword">in</span> tbar:</span><br><span class="line">        temp_lists = [[i, j, l1[i], l1[j]] <span class="keyword">for</span> i, j <span class="keyword">in</span> pairs[(<span class="number">10</span> ** <span class="number">6</span> * loop): (<span class="number">10</span> ** <span class="number">6</span> * (loop + <span class="number">1</span>))]]</span><br><span class="line">        temp_results = pool.map(cal, temp_lists)</span><br><span class="line">        <span class="keyword">for</span> i, j, k <span class="keyword">in</span> temp_results:</span><br><span class="line">            arr2[i, j] = k</span><br><span class="line">    pool.close()</span><br><span class="line">    pool.join()</span><br><span class="line"></span><br><span class="line">    arr1 = l2 + l2.reshape((l, <span class="number">1</span>))</span><br><span class="line">    arr2 = arr2 + arr2.T  <span class="comment"># 变对称阵</span></span><br><span class="line">    arr3 = arr2 / (arr1 - arr2) + np.eye(l)</span><br><span class="line">    <span class="keyword">del</span> arr1</span><br><span class="line">    <span class="keyword">del</span> arr2</span><br><span class="line">    gc.collect()</span><br><span class="line"></span><br><span class="line">    corr_matrix_df = pd.DataFrame(columns=sku_series, index=sku_series, data=arr3)</span><br><span class="line">    <span class="keyword">return</span> corr_matrix_df</span><br></pre></td></tr></table></figure>
+<p>计算耗时：1563s<br><img src="https://www.runblog.online/wp-content/uploads/2019/03/multiprocessing.png" alt></p>
+<h1 id="4-numpy-vectorize计算相似度矩阵"><a href="#4-numpy-vectorize计算相似度矩阵" class="headerlink" title="4.numpy.vectorize计算相似度矩阵"></a>4.numpy.vectorize计算相似度矩阵</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@timer</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gen_corr_matrix_vectorize</span><span class="params">(order_df)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    numpy.vectorice计算相似度矩阵</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    df = order_df.groupby([<span class="string">'sku'</span>]).agg(&#123;<span class="string">'orderno'</span>: <span class="keyword">lambda</span> x: set(x)&#125;).reset_index()</span><br><span class="line">    l = len(df)</span><br><span class="line">    sku_series = df.sku.astype(str)</span><br><span class="line">    arr = df.orderno.values</span><br><span class="line">    corr_matrix_arr = np.zeros((l, l))</span><br><span class="line">    f_vec = np.vectorize(len)</span><br><span class="line">    arr1 = f_vec(arr)</span><br><span class="line"></span><br><span class="line">    tbar = trange(l - <span class="number">1</span>)</span><br><span class="line">    tbar.set_description(<span class="string">"compute corr matrix"</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> tbar(l - <span class="number">1</span>):</span><br><span class="line">        corr_matrix_arr[i, (i + <span class="number">1</span>): l] = f_vec(arr[(i + <span class="number">1</span>): l] &amp; arr[i])</span><br><span class="line">    corr_matrix_arr1 = np.add.outer(arr1, arr1)</span><br><span class="line">    temp = corr_matrix_arr / (corr_matrix_arr1 - corr_matrix_arr)</span><br><span class="line">    temp = temp + temp.T + np.eye(l)</span><br><span class="line">    <span class="keyword">return</span> pd.DataFrame(columns=sku_series, index=sku_series, data=temp)</span><br></pre></td></tr></table></figure>
+<p>计算耗时：72s<br><img src="https://www.runblog.online/wp-content/uploads/2019/03/vectorize.png" alt></p>
+<p>可以看到，使用numpy.vectorize提升了20倍左右！</p>
+<p><strong>思考：</strong><br>结合到实际业务中，其实有很多可以改进的地方：1. 并不需要计算所有SKU之间的相似度（提速）; 2. 可以只保存上三角阵或保存有效的相似SKU数据(降低内存)。这块儿就不展开赘述了。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -185,29 +244,125 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法备忘</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">统计学运用</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://qr.liantu.com/api.php?text=https://buracagyang.github.io/2019/05/09/numpy-vectorize/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2019/05/08/svm-proving-process/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">SVM推导过程注解</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-for-loops计算相似度矩阵"><span class="toc-number">2.</span> <span class="toc-text">1. for loops计算相似度矩阵</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-list-generator计算相似度矩阵"><span class="toc-number">3.</span> <span class="toc-text">2.list generator计算相似度矩阵</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-多进程计算相似度矩阵"><span class="toc-number">4.</span> <span class="toc-text">3.多进程计算相似度矩阵</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-numpy-vectorize计算相似度矩阵"><span class="toc-number">5.</span> <span class="toc-text">4.numpy.vectorize计算相似度矩阵</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -230,9 +385,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
