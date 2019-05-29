@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Buracag的博客">
 <meta property="og:description" content="同步于CSDN;音尘杂记 前面在回顾sklearn时，在广义线性模型中看到选择模型时可以采用AIC和BIC准则，特地复习了下统计学基础，简记如下，以抛砖引玉。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-29T07:31:18.527Z">
+<meta property="og:updated_time" content="2019-05-29T08:13:52.100Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AIC和BIC相关知识">
 <meta name="twitter:description" content="同步于CSDN;音尘杂记 前面在回顾sklearn时，在广义线性模型中看到选择模型时可以采用AIC和BIC准则，特地复习了下统计学基础，简记如下，以抛砖引玉。">
@@ -185,16 +185,18 @@
 <p>对于回归方程来说，$R^2$有以下几个意义：</p>
 <ol>
 <li>R square可以作为选择不同模型的标准。在拟合数据之前，不能确定数据的确定模型关系，可以对变量的不同数学形式进行拟合，再看R square的大小。</li>
-<li>在数据的关系存在非线性可能情况下：<br> a) R squared越大不一定拟合越好；<br> b) 如何一个模型的R square很小，不一定代表数据之间没有关系，而很有可能是选择的模型不对，或者存在有其他的函数关系。</li>
+<li>在数据的关系存在非线性可能情况下：<br>a) R squared越大不一定拟合越好；<br>b) 如何一个模型的R square很小，不一定代表数据之间没有关系，而很有可能是选择的模型不对，或者存在有其他的函数关系。</li>
 <li><strong>当自变量个数增加时，尽管有的自变量与的线性关系不显著，其R square也会增大</strong>，对于这种情况需采用Adjusted R squared进行调整。</li>
 </ol>
 <h2 id="2-调整R-square"><a href="#2-调整R-square" class="headerlink" title="2. 调整R square"></a>2. 调整R square</h2><p>由于在模型中增加变量时，$R^2$没有下降，所以存在一种过度拟合模型的内在趋势，即向模型中增加变量固然可以改善数据拟合程度，但这样也会导致预测的方差正大，这时就需要用到调整 $R^2$。<br>$$<br>\bar{R_2} = 1 - \frac{n-1}{n-k}(1-R^2)<br>$$<br>调整$R^2$用作拟合优度的度量，它能够适当消除在模型中增加变量所导致的自由度损失。</p>
 <p>调整 $R^2$对模型扩张时自由度的损失进行了弥补，但又存在一个问题，随着样本容量的增大，这种弥补是否足以保证该准则肯定能让分析者得到正确的模型，所以提出了另外两个拟合度量指标，一个是赤池信息准则(Akaike Information Criterion, AIC)，另一个是施瓦茨或贝叶斯信息准则(Bayesian Information Criterion,BIC)。</p>
-<h2 id="3-AIC和BIC"><a href="#3-AIC和BIC" class="headerlink" title="3. AIC和BIC"></a>3. AIC和BIC</h2><p>$$<br>AIC(K) = s_y^2(1-R^2)e^{2k/n}<br>$$<br>$$<br>BIC(K) = s_y^2(1-R^2)n^{k/n}<br>$$<br>$s_y^2$中没有对自由度进行修正，虽然随着$R^2$的提高，这两个指标都有所改善(下降),但在其他条件不变的情况下，模型规模扩大又会使这两个指标恶化。与$\bar{R^2}$一样，实现同样的拟合程度，这些指标在平均每次观测使用参数个数(K/n)较少时更有效。使用对数通常更方便，多数统计软件报告度量指标是：<br>$$<br>AIC(K) = ln(\frac{e^{\prime}e}{n}) + \frac{2K}{n}<br>$$<br>$$<br>BIC(K) = ln(\frac{e^{\prime}e}{n}) + \frac{Kln{n}}{n}<br>$$</p>
+<h2 id="3-AIC和BIC"><a href="#3-AIC和BIC" class="headerlink" title="3. AIC和BIC"></a>3. AIC和BIC</h2><p>$$<br>AIC(K) = s_y^2(1-R^2)e^{2k/n}<br>$$</p>
+<p>$$<br>BIC(K) = s_y^2(1-R^2)n^{k/n}<br>$$</p>
+<p>$s_y^2$中没有对自由度进行修正，虽然随着$R^2$的提高，这两个指标都有所改善(下降),但在其他条件不变的情况下，模型规模扩大又会使这两个指标恶化。与$\bar{R^2}$一样，实现同样的拟合程度，这些指标在平均每次观测使用参数个数(K/n)较少时更有效。使用对数通常更方便，多数统计软件报告度量指标是：<br>$$<br>AIC(K) = ln(\frac{e^{\prime}e}{n}) + \frac{2K}{n}<br>$$</p>
+<p>$$<br>BIC(K) = ln(\frac{e^{\prime}e}{n}) + \frac{Kln{n}}{n}<br>$$</p>
 <p><u><strong>更一般地：</strong></u><br>$$<br>AIC(K) = 2K - 2ln(L)<br>$$<br>其中k是模型参数个数，L为似然函数。从一组可供选择的模型中选择最佳模型时，通常选择AIC最小的模型。</p>
 <p>当两个模型之间存在较大差异时，差异主要体现在似然函数项，当似然函数差异不显著时，上市第一项，即模型复杂度则起作用，从而参数个数少的模型是较好的选择。</p>
-<p>一般而言，当模型复杂度提高(k增大)时，似然函数L也会增大，从而使AIC变小，但是k过大时，似然函数增速减缓，导致AIC增大，模型过于复杂容易造成过拟合现象。目标是选取AIC最小的模型，AIC不仅要提高模型拟合度(极大似然)，而且引入了惩罚项，使模型参数尽可能少，有助于降低过拟合的可能性。</p>
-<p>$$<br>BIC(K) = Kln{n} - 2ln(L)<br>$$<br>其中k是模型参数个数，n为样本数量，L为似然函数。与AIC类似地，引入了模型参数个数作为惩罚项，但是<strong>BIC的惩罚项比AIC的大</strong>，考虑了样本数量，样本数量过多时，可有效防止模型精度过高造成的模型复杂度过高；其中 $kln{n}$惩罚项在维度过大且训练样本数据相对较少的情况下，可以有效避免出现维度灾难现象。</p>
+<p>一般而言，当模型复杂度提高(k增大)时，似然函数L也会增大，从而使AIC变小，但是k过大时，似然函数增速减缓，导致AIC增大，模型过于复杂容易造成过拟合现象。目标是选取AIC最小的模型，AIC不仅要提高模型拟合度(极大似然)，而且引入了惩罚项，使模型参数尽可能少，有助于降低过拟合的可能性。<br>$$<br>BIC(K) = Kln{n} - 2ln(L)<br>$$<br>其中k是模型参数个数，n为样本数量，L为似然函数。与AIC类似地，引入了模型参数个数作为惩罚项，但是<strong>BIC的惩罚项比AIC的大</strong>，考虑了样本数量，样本数量过多时，可有效防止模型精度过高造成的模型复杂度过高；其中 $kln{n}$惩罚项在维度过大且训练样本数据相对较少的情况下，可以有效避免出现维度灾难现象。</p>
 
       
 
@@ -469,7 +471,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+                <a href="javascript:void(0)" class="js-tag color1">统计学运用</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -477,7 +479,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">统计学运用</a>
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
             
             <div class="clearfix"></div>
