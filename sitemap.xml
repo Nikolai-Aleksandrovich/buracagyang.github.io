@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://buracagyang.github.io/2019/05/29/single-layer-perceptron/</loc>
+    
+    <lastmod>2019-05-29T09:07:51.066Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://buracagyang.github.io/2019/05/09/numpy-vectorize/</loc>
     
-    <lastmod>2019-05-29T08:15:09.591Z</lastmod>
+    <lastmod>2019-05-29T08:21:24.556Z</lastmod>
     
   </url>
   
