@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://buracagyang.github.io/2019/05/29/aic-and-bic/</loc>
+    
+    <lastmod>2019-05-29T07:20:11.780Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://buracagyang.github.io/2019/05/09/numpy-vectorize/</loc>
     
     <lastmod>2019-05-09T09:17:33.957Z</lastmod>
