@@ -8,13 +8,13 @@
   <link rel="dns-prefetch" href="https://buracagyang.github.io">
   <title>利用numpy.vectorize提升计算速度 | Buracag的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="同步于CSDN;音尘杂记 前言在实际项目中，对超大矩阵进行计算或者对超大的DataFrame进行计算是一个经常会出现的场景。这里先不考虑开发机本身内存等客观硬件因素，仅从设计上讨论一下不同实现方式带来的性能差异，抛砖引玉。">
+  <meta name="description" content="同步于CSDN;音尘杂记 在实际项目中，对超大矩阵进行计算或者对超大的DataFrame进行计算是一个经常会出现的场景。这里先不考虑开发机本身内存等客观硬件因素，仅从设计上讨论一下不同实现方式带来的性能差异，抛砖引玉。">
 <meta name="keywords" content="技术备忘,Python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="利用numpy.vectorize提升计算速度">
 <meta property="og:url" content="https://buracagyang.github.io/2019/05/09/numpy-vectorize/index.html">
 <meta property="og:site_name" content="Buracag的博客">
-<meta property="og:description" content="同步于CSDN;音尘杂记 前言在实际项目中，对超大矩阵进行计算或者对超大的DataFrame进行计算是一个经常会出现的场景。这里先不考虑开发机本身内存等客观硬件因素，仅从设计上讨论一下不同实现方式带来的性能差异，抛砖引玉。">
+<meta property="og:description" content="同步于CSDN;音尘杂记 在实际项目中，对超大矩阵进行计算或者对超大的DataFrame进行计算是一个经常会出现的场景。这里先不考虑开发机本身内存等客观硬件因素，仅从设计上讨论一下不同实现方式带来的性能差异，抛砖引玉。">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://buracagyang.github.io/2019/05/09/numpy-vectorize/1.png">
 <meta property="og:image" content="https://buracagyang.github.io/2019/05/09/numpy-vectorize/2.png">
@@ -22,10 +22,10 @@
 <meta property="og:image" content="https://buracagyang.github.io/2019/05/09/numpy-vectorize/4.png">
 <meta property="og:image" content="https://buracagyang.github.io/2019/05/09/numpy-vectorize/5.png">
 <meta property="og:image" content="https://buracagyang.github.io/2019/05/09/numpy-vectorize/6.png">
-<meta property="og:updated_time" content="2019-05-29T08:21:24.556Z">
+<meta property="og:updated_time" content="2019-05-29T09:26:50.637Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="利用numpy.vectorize提升计算速度">
-<meta name="twitter:description" content="同步于CSDN;音尘杂记 前言在实际项目中，对超大矩阵进行计算或者对超大的DataFrame进行计算是一个经常会出现的场景。这里先不考虑开发机本身内存等客观硬件因素，仅从设计上讨论一下不同实现方式带来的性能差异，抛砖引玉。">
+<meta name="twitter:description" content="同步于CSDN;音尘杂记 在实际项目中，对超大矩阵进行计算或者对超大的DataFrame进行计算是一个经常会出现的场景。这里先不考虑开发机本身内存等客观硬件因素，仅从设计上讨论一下不同实现方式带来的性能差异，抛砖引玉。">
 <meta name="twitter:image" content="https://buracagyang.github.io/2019/05/09/numpy-vectorize/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Buracag的博客" type="application/atom+xml">
@@ -180,7 +180,7 @@
       
         <hr>
 <p>同步于<a href="https://blog.csdn.net/buracag_mc/article/details/88748607" title="https://blog.csdn.net/buracag_mc/article/details/88748607" target="_blank" rel="noopener">CSDN</a>;<a href="https://www.runblog.online/2019/03/18/increase-calculation-speed-with-numpy-vectorize/" target="_blank" rel="noopener">音尘杂记</a></p>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在实际项目中，对超大矩阵进行计算或者对超大的DataFrame进行计算是一个经常会出现的场景。这里先不考虑开发机本身内存等客观硬件因素，仅从设计上讨论一下不同实现方式带来的性能差异，抛砖引玉。</p>
+<p>在实际项目中，对超大矩阵进行计算或者对超大的DataFrame进行计算是一个经常会出现的场景。这里先不考虑开发机本身内存等客观硬件因素，仅从设计上讨论一下不同实现方式带来的性能差异，抛砖引玉。</p>
 <a id="more"></a>
 <p>项目中有这样一个需求，需要根据历史销量数据计算SKU(Stock Keeping Unit)之间的相似度，或者更通俗一点说是根据历史销量数据求不同SKU之间出现的订单交集以及并集大小(注:SKU数量大概15k左右，订单数大概1000k左右)。</p>
 <p>这里给几条示例数据，可以更直观形象地理解这个需求：</p>
@@ -354,7 +354,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-for-loops计算相似度矩阵"><span class="toc-number">2.</span> <span class="toc-text">1.for loops计算相似度矩阵</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-list-generator计算相似度矩阵"><span class="toc-number">3.</span> <span class="toc-text">2.list generator计算相似度矩阵</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-多进程计算相似度矩阵"><span class="toc-number">4.</span> <span class="toc-text">3.多进程计算相似度矩阵</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-numpy-vectorize计算相似度矩阵"><span class="toc-number">5.</span> <span class="toc-text">4.numpy.vectorize计算相似度矩阵</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-for-loops计算相似度矩阵"><span class="toc-number">1.</span> <span class="toc-text">1.for loops计算相似度矩阵</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-list-generator计算相似度矩阵"><span class="toc-number">2.</span> <span class="toc-text">2.list generator计算相似度矩阵</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-多进程计算相似度矩阵"><span class="toc-number">3.</span> <span class="toc-text">3.多进程计算相似度矩阵</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-numpy-vectorize计算相似度矩阵"><span class="toc-number">4.</span> <span class="toc-text">4.numpy.vectorize计算相似度矩阵</span></a></li></ol>
                     </div>
                 </span>
             </div>
