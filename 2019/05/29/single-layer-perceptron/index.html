@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://buracagyang.github.io">
-  <title>single-layer-perceptron | Buracag的博客</title>
+  <title>单层感知器为什么不能解决异或(XOR)问题 | Buracag的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="同步于CSDN;音尘杂记 单层感知器为什么不能解决异或问题(XOR)问题？给出两个思路去考虑这个小问题~">
 <meta name="keywords" content="技术备忘,算法备忘">
 <meta property="og:type" content="article">
-<meta property="og:title" content="single-layer-perceptron">
+<meta property="og:title" content="单层感知器为什么不能解决异或(XOR)问题">
 <meta property="og:url" content="https://buracagyang.github.io/2019/05/29/single-layer-perceptron/index.html">
 <meta property="og:site_name" content="Buracag的博客">
 <meta property="og:description" content="同步于CSDN;音尘杂记 单层感知器为什么不能解决异或问题(XOR)问题？给出两个思路去考虑这个小问题~">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://buracagyang.github.io/2019/05/29/single-layer-perceptron/1.png">
-<meta property="og:updated_time" content="2019-05-29T09:07:51.066Z">
+<meta property="og:updated_time" content="2019-05-29T09:18:04.966Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="single-layer-perceptron">
+<meta name="twitter:title" content="单层感知器为什么不能解决异或(XOR)问题">
 <meta name="twitter:description" content="同步于CSDN;音尘杂记 单层感知器为什么不能解决异或问题(XOR)问题？给出两个思路去考虑这个小问题~">
 <meta name="twitter:image" content="https://buracagyang.github.io/2019/05/29/single-layer-perceptron/1.png">
   
@@ -160,7 +160,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      single-layer-perceptron
+      单层感知器为什么不能解决异或(XOR)问题
     </h1>
   
 
@@ -188,9 +188,9 @@
 <p>如下为简单起见，仅考虑只有一个输出的简单情况。设$x_i(t)$是时刻$t$感知器的输入（i=1,2,……,n），$ω_i(t)$是相应的连接权值，$y(t)$是实际的输出，$d(t)$是所期望的输出，且感知器的输出或者为1，或者为0。</p>
 <h1 id="3-线性不可分问题"><a href="#3-线性不可分问题" class="headerlink" title="3. 线性不可分问题 "></a>3. 线性不可分问题 </h1><p>单层感知器不能表达的问题被称为线性不可分问题。 1969年，明斯基证明了“异或”问题是线性不可分问题。</p>
 <h1 id="4-“与”、”或”、”非”问题的证明"><a href="#4-“与”、”或”、”非”问题的证明" class="headerlink" title="4. “与”、”或”、”非”问题的证明"></a>4. “与”、”或”、”非”问题的证明</h1><ul>
-<li>由于单层感知器的输出为：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y(x1,x2) = f(ω1 * x1 + ω2 * x2 - θ)</span><br></pre></td></tr></table></figure>
-</li>
+<li>由于单层感知器的输出为：</li>
 </ul>
+<p>$$ y(x1,x2) = f(ω1 <em> x1 + ω2 </em> x2 - θ) $$</p>
 <p>所以，用感知器实现简单逻辑运算的情况如下：</p>
 <ul>
 <li><p>“与”运算（And, x1∧x2）<br>令 ω1 = ω2 = 1，θ = 1.5，则: y = f(1 <em> x1 + 1 </em> x2 - 1.5)<br>显然，当x1和x2均为1时，y的值1；而当x1和x2有一个为0时，y的值就为0.</p>
@@ -206,26 +206,26 @@
 <table>
 <thead>
 <tr>
-<th>(x1, x2)</th>
-<th>y</th>
+<th style="text-align:center">(x1, x2)</th>
+<th style="text-align:center">y</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>(0, 0)</td>
-<td>0</td>
+<td style="text-align:center">(0, 0)</td>
+<td style="text-align:center">0</td>
 </tr>
 <tr>
-<td>(0, 1)</td>
-<td>1</td>
+<td style="text-align:center">(0, 1)</td>
+<td style="text-align:center">1</td>
 </tr>
 <tr>
-<td>(1, 0)</td>
-<td>1</td>
+<td style="text-align:center">(1, 0)</td>
+<td style="text-align:center">1</td>
 </tr>
 <tr>
-<td>(1, 1)</td>
-<td>0</td>
+<td style="text-align:center">(1, 1)</td>
+<td style="text-align:center">0</td>
 </tr>
 </tbody>
 </table>
@@ -349,6 +349,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2019/05/29/python-basic-about-class/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Python中定义类的相关知识
+        
+      </div>
+    </a>
   
   
     <a href="/2019/05/29/aic-and-bic/" id="article-nav-older" class="article-nav-link-wrap">
@@ -516,7 +525,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+                <a href="javascript:void(0)" class="js-tag color1">统计学运用</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -524,7 +537,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">统计学运用</a>
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
             
             <div class="clearfix"></div>

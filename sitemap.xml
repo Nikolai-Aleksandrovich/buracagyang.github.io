@@ -2,9 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://buracagyang.github.io/2019/05/29/logistic-loss-function/</loc>
+    
+    <lastmod>2019-05-29T09:19:42.700Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://buracagyang.github.io/2019/05/29/aic-and-bic/</loc>
+    
+    <lastmod>2019-05-29T09:19:36.344Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://buracagyang.github.io/2019/05/29/single-layer-perceptron/</loc>
     
-    <lastmod>2019-05-29T09:07:51.066Z</lastmod>
+    <lastmod>2019-05-29T09:18:04.966Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://buracagyang.github.io/2019/05/29/python-basic-about-class/</loc>
+    
+    <lastmod>2019-05-29T09:15:12.257Z</lastmod>
     
   </url>
   
@@ -12,13 +33,6 @@
     <loc>https://buracagyang.github.io/2019/05/09/numpy-vectorize/</loc>
     
     <lastmod>2019-05-29T08:21:24.556Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://buracagyang.github.io/2019/05/29/aic-and-bic/</loc>
-    
-    <lastmod>2019-05-29T08:13:52.100Z</lastmod>
     
   </url>
   

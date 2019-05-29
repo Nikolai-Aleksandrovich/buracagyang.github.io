@@ -6,15 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://buracagyang.github.io">
-  <title>Buracag的博客</title>
+  <title>Logistic loss函数 | Buracag的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Buracag的博客">
-<meta property="og:url" content="https://buracagyang.github.io/index.html">
+  <meta name="description" content="同步于CSDN;音尘杂记 前面在浏览sklearn中关于Logistic Regression部分，看到关于带正则项的LR目标损失函数的定义形式的时候，对具体表达式有点困惑，后查阅资料，将思路整理如下。">
+<meta name="keywords" content="统计学运用,机器学习,算法备忘">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Logistic loss函数">
+<meta property="og:url" content="https://buracagyang.github.io/2019/05/29/logistic-loss-function/index.html">
 <meta property="og:site_name" content="Buracag的博客">
+<meta property="og:description" content="同步于CSDN;音尘杂记 前面在浏览sklearn中关于Logistic Regression部分，看到关于带正则项的LR目标损失函数的定义形式的时候，对具体表达式有点困惑，后查阅资料，将思路整理如下。">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="https://buracagyang.github.io/2019/05/29/logistic-loss-function/20170827141819860.png">
+<meta property="og:updated_time" content="2019-05-29T09:19:42.700Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Buracag的博客">
+<meta name="twitter:title" content="Logistic loss函数">
+<meta name="twitter:description" content="同步于CSDN;音尘杂记 前面在浏览sklearn中关于Logistic Regression部分，看到关于带正则项的LR目标损失函数的定义形式的时候，对具体表达式有点困惑，后查阅资料，将思路整理如下。">
+<meta name="twitter:image" content="https://buracagyang.github.io/2019/05/29/logistic-loss-function/20170827141819860.png">
   
     <link rel="alternative" href="/atom.xml" title="Buracag的博客" type="application/atom+xml">
   
@@ -146,16 +153,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-logistic-loss-function" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-logistic-loss-function" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/29/logistic-loss-function/">Logistic loss函数</a>
+    <h1 class="article-title" itemprop="name">
+      Logistic loss函数
     </h1>
   
 
@@ -170,11 +175,98 @@
       
         <p>同步于<a href="https://blog.csdn.net/buracag_mc" target="_blank" rel="noopener">CSDN</a>;<a href="https://www.runblog.online/" target="_blank" rel="noopener">音尘杂记</a></p>
 <p>前面在浏览sklearn中关于<a href="https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression" title="Logistic Regression" target="_blank" rel="noopener">Logistic Regression</a>部分，看到关于带正则项的LR目标损失函数的定义形式的时候，对具体表达式有点困惑，后查阅资料，将思路整理如下。</p>
-        
-          <a class="article-more-a" href="/2019/05/29/logistic-loss-function/#more">more >></a>
-        
+<a id="more"></a>
+<h1 id="1-sklearn文档中的LR损失函数"><a href="#1-sklearn文档中的LR损失函数" class="headerlink" title="1. sklearn文档中的LR损失函数"></a>1. sklearn文档中的LR损失函数</h1><p>先看sklearn对于LR目标损失函数(带L2)的定义：<br>$$<br>\min_{w, c} \frac{1}{2}w^T w + C \sum_{i=1}^n \log(\exp(- y_i (X_i^T w + c)) + 1)<br>$$</p>
+<p>看到这个表达形式，其实是有两个疑问：</p>
+<ul>
+<li><p>logistic loss的表达形式</p>
+</li>
+<li><p>正则项的惩罚系数</p>
+</li>
+</ul>
+<p>对于第二个问题，其实比较容易解释。通常我们在最小化结构风险时，会给我们的惩罚项乘上一个惩罚系数λ(通常1 &lt; λ &lt; 0)，<br>$$<br>\min_{w, λ} \sum_{i=1}^nloss(y, y_i) + λw^T w<br>$$<br>一般，为方便处理，做一个技巧性地处理，对多项式乘上一个正数 1/2λ, 得到：<br>$$<br>\min_{w, λ} \frac{1}{2λ}\sum_{i=1}^nloss(y, y_i) + \frac{1}{2}w^T w<br>$$<br>令C = 1/2λ即可。</p>
+<p>但是对于第一个形式，当时比较困惑；特意翻看了一下我以前记录的关于<a href="https://blog.csdn.net/buracag_mc/article/details/77620686" title="LR损失函数" target="_blank" rel="noopener">LR以及LR损失函数</a>的一些笔记。</p>
+<h1 id="2-LR损失函数"><a href="#2-LR损失函数" class="headerlink" title="2. LR损失函数"></a>2. LR损失函数</h1><p>为了方便说明笔者当时的疑惑所在，便将当时脑海里存在的logistic loss函数形式 和 sklearn中LR损失函数的推导方法分别记为旧思路和新思路吧。</p>
+<h2 id="2-1-logistic基础知识"><a href="#2-1-logistic基础知识" class="headerlink" title="2.1 logistic基础知识"></a>2.1 logistic基础知识</h2><p>如指数分布、高斯分布等分布一样，logistic是一种变量的分布，它也有自己的概率分布函数和概率密度函数，其中概率分布函数如下：<br>$$<br>F(x) = P(X \leq x) = \frac{1}{1+e^{-(x-\mu)/\gamma}}<br>$$</p>
+<p>对概率分布函数求导，记得到对应的概率密度函数：<br>$$<br>f(x) = \frac{e^{-(x- \mu)/ \gamma}}{\gamma(1+e^{-(x-\mu)/\gamma})^2}<br>$$</p>
+<p>其中，$\mu$就是分布对应的均值，$\gamma$是对应的形状参数。</p>
+<p>下文，为简介方便起见，将$-(x-\mu)/\gamma$ 替换为 $-x$,故记为：<br>$$<br>F(x) = \frac{1}{1+exp(-x)}<br>$$</p>
+<p>对应示例图如下：<br><img src="/2019/05/29/logistic-loss-function/20170827141819860.png" alt="这里写图片描述"></p>
+<p>logistic有一个很重要的性质是：<br>$$<br>F(-x) = \frac{1}{1+exp(x)} = \frac{1}{1+\frac{1}{exp(-x)}} =<br>\frac{exp(-x)}{1+exp(-x)}=1-\frac{1}{1+exp(-x)}=1-F(x)<br>$$</p>
+<p>通常，应用到LR中，有如下形式：</p>
+<blockquote>
+<p><strong>(1)</strong><br>$$<br>P(Y=1|\beta,x) = \frac{1}{1+exp(-\beta x)} = \frac{e^{\beta x}}{1+e^{\beta x}}<br>$$<br>$$<br>P(Y=0|\beta,x) = 1 - \frac{1}{1+exp(-\beta x)} = \frac{1}{1+e^{\beta x}}<br>$$</p>
+</blockquote>
+<blockquote>
+<p>一个事件的几率(odds)，定义为该事件发生与不发生的概率比值，若事件发生概率为p：</p>
+</blockquote>
+<p>$$<br>odds = \frac{p}{1-p}<br>$$</p>
+<p>那么该事件的对数几率（log odds或者logit）如下：<br>$$<br>logit(p)=log\frac{p}{1−p}<br>$$</p>
+<p>那么，对于上述二项，Y=1的对数几率就是：<br>$$<br>log \frac{P(Y=1|\beta,x)}{1−P(Y=1|\beta,x)}=log \frac{P(Y=1|\beta,x)}{P(Y=0|\beta,x)}=\beta x<br>$$</p>
+<p>也就是说，输出Y=1的对数几率是由输入x的线性函数表示的模型，这就是逻辑回归模型。易知，当 $\beta x$的值越大，$P(Y=1|\beta,x)$越接近1；$\beta x$越小,$P(Y=1|\beta,x)$ 越接近0。</p>
+<p>其实，LR就是一个线性分类的模型。与线性回归不同的是：LR将线性方程输出的很大范围的数压缩到了[0,1]区间上；更优雅地说：<strong>LR就是一个被logistic方程归一化后的线性回归</strong>。</p>
+<h2 id="2-2-旧思路"><a href="#2-2-旧思路" class="headerlink" title="2.2 旧思路"></a>2.2 旧思路</h2><p>旧思路要从LR的参数求解过程说起。</p>
+<p>我们知道统计学中一种很常用的方法是根据最大化似然函数的值来估计总体参数。在机器学习领域，我们听到的更多是损失函数的概念，常通过构建损失函数，然后最小化损失函数估计目标参数。在这里，<strong>最大化对数似然函数与最小化对数似然损失函数其实是等价的</strong>，下面我们可以看到。</p>
+<ul>
+<li><p>假设我们有n个独立的训练样本${(x_1,y_1),(x_2,y_2),(x_3,y_3),…,(x_n,y_n)},y={0,1}$,那么每一个观察到的样本$(x_i,y_i)$出现的概率是：<br>$$<br>P(y_i,x_i) = P(y_i=1 | x_i)^{y_i}(1-P(y_i=1 | x_i))^{1-y_i}<br>$$<br>显然，$y_i$为1时，保留前半部分；$y_i$为0时，保留后半部分。</p>
+</li>
+<li><p>构建似然函数：<br>$$<br>L(\beta) = \prod P(y_i=1|x_i)^{y_i}(1-P(y_i=1|x_i))^{1-y_i}<br>$$</p>
+</li>
+<li><p>OK,对似然函数取对数，得到对数似然函数：</p>
+</li>
+</ul>
+<p>$$LL(\beta) = log(L(\beta))= log(\prod P(y_i=1|x_i)^{y_i}(1-P(y_i=1|x_i))^{1-y_i}) $$</p>
+<p> $= \sum_{i=1}^{n}(y_i log P(y_i=1|x_i) + (1-y_i)log(1-P(y_i=1|x_i)))$</p>
+<p> $= \sum_{i=1}^{n}y_i log \frac{P(y_i=1|x_i)}{1-P(y_i=1|x_i)} + \sum_{i=1}^{n}log(1-P(y_i=1|x_i))$</p>
+<p> $= \sum_{i=1}^{n}y_i(\beta x) + \sum_{i=1}^{n}logP(y_i=0|x_i)$</p>
+<p> $= \sum_{i=1}^{n}y_i(\beta x) - \sum_{i=1}^{n}log(1+e^{\beta x})$</p>
+<ul>
+<li><p>用 $LL(\beta)$ 对 $\beta$ 求偏导，得：<br>$\frac{\partial LL(\beta)}{\partial \beta}<br>= \sum_{i=1}^{n}y_ix_i - \sum_{i=1}^{n} \frac{e^{\beta x_i}}{1+e^{\beta x_i}}.x_i$</p>
+<p>$= \sum_{i=1}^{n}(y_i - P(y_i=1|x_i))x_i$<br>该式是无法解析求解，故会用到一些优化算法进行求解(梯度下降、牛顿法等)，这不是本文重点，便不再赘述。</p>
+</li>
+</ul>
+<p>咋一看的确与sklearn中的形式差别有点大，所以请看新思路。</p>
+<h2 id="2-3-新思路"><a href="#2-3-新思路" class="headerlink" title="2.3 新思路"></a>2.3 新思路</h2><p>在式(1)中， $x$表示特征向量，$\beta$表示相应的超参数，此时$y\in({0, 1})$表示样本对应的标签(label)。</p>
+<p>这里，特别要讲的是另一种表达形式，将标签与预测函数在形式上统一了：</p>
+<blockquote>
+<p><strong>(2)</strong><br>$$<br>P(g=\pm1 |\beta, x) = \frac{1}{1+exp(-g\beta x)}<br>$$</p>
+</blockquote>
+<p>此时的样本标签$g\in({1, -1})$。</p>
+<p>虽然式(1)与式(2)看起来似乎不同，但是我们可以有如下证明：<br>$$<br>P(Y=1|\beta,x) = \frac{e^{\beta x}}{1+e^{\beta x}} =  \frac{1}{1+exp(-\beta x)} = P(g=1 |\beta, x)<br>$$<br>同理，我们可以证明$P(Y=0|\beta,x)$ 和 $P(g=-1|\beta,x)$是等价的。</p>
+<p>既然两种形式是等价的，为了适应更加广泛的分类loss最小化的框架，故采用第二种形式来表示LR.毕竟<strong>Simple is better than complex.</strong></p>
+<p>首先定义$x_i$为特征向量，$y_i$为样本标签,则目标损失函数可以表示为：<br>$$<br>arg\min_{\beta}\sum_{i=1}L(y_i, f(x_i))<br>$$<br>其中，f是我们的回归方程，L是目标损失函数。</p>
+<p>对应到LR中，我们有<br>$$<br>f(x) = \beta x<br>$$<br>$$<br>L(y, f(x)) = log(1 + exp(-yf(x)))<br>$$<br>如果将LR的第二种表达形式带入到损失函数L中，可得：<br>$$<br>L(y, f(x)) = log(1 + exp(-yf(x))) = log(\frac{1}{P(y|\beta,x)})<br>$$</p>
+<p>再进一步：<br>$$<br>arg\min_{\beta}\sum_{i=1}L(y_i, f(x_i)) = arg\min_{\beta}\sum_{i=1}log(\frac{1}{P(y_i|\beta,x_i)})<br>$$<br>$$<br>= arg\max_{\beta}\sum_{i=1}log(P(y_i|\beta,x_i))= arg\max_{\beta}\prod_{i=1}P(y_i|\beta,x_i)<br>$$<br><strong>等式最后即为极大似然估计的表达形式。</strong></p>
+<h1 id="3-思考"><a href="#3-思考" class="headerlink" title="3. 思考"></a>3. 思考</h1><p>其实到这儿，我们不难发现在旧思路中，推导极大化对数似然函数中的第二步：<br>$= \sum_{i=1}^{n}(y_i log P(y_i=1|x_i) + (1-y_i)log(1-P(y_i=1|x_i)))$</p>
+<p>与新思路中的：<br>$$<br>=arg\max_{\beta}\sum_{i=1}log(P(y_i|\beta,x_i))<br>$$<br><strong>本质是统一的。</strong></p>
+<p>最后</p>
+<blockquote>
+<p><strong>“Simple is better than complex.”   – The Zen of Python, by Tim Peters</strong></p>
+</blockquote>
+
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -202,16 +294,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/29/logistic-loss-function/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://qr.liantu.com/api.php?text=https://buracagyang.github.io/2019/05/29/logistic-loss-function/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2019/05/29/python-basic-about-class/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Python中定义类的相关知识</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -226,424 +377,32 @@
         </div>
         
         
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-python-basic-about-class" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/29/python-basic-about-class/">Python中定义类的相关知识</a>
-    </h1>
-  
-
-        
-        <a href="/2019/05/29/python-basic-about-class/" class="archive-article-date">
-  	<time datetime="2019-05-29T09:12:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>同步于<a href="https://blog.csdn.net/buracag_mc/article/details/88748607" title="https://blog.csdn.net/buracag_mc/article/details/88748607" target="_blank" rel="noopener">CSDN</a>;<a href="https://www.runblog.online/2019/03/18/increase-calculation-speed-with-numpy-vectorize/" target="_blank" rel="noopener">音尘杂记</a></p>
-<p>主要介绍了在python中，抽象类的定义、多态的概念、类中属性的封装以及类中常见的修饰器。</p>
-        
-          <a class="article-more-a" href="/2019/05/29/python-basic-about-class/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术备忘</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/29/python-basic-about-class/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-sklearn文档中的LR损失函数"><span class="toc-number">1.</span> <span class="toc-text">1. sklearn文档中的LR损失函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-LR损失函数"><span class="toc-number">2.</span> <span class="toc-text">2. LR损失函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-logistic基础知识"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 logistic基础知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-旧思路"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 旧思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-新思路"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 新思路</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-思考"><span class="toc-number">3.</span> <span class="toc-text">3. 思考</span></a></li></ol>
+                    </div>
+                </span>
             </div>
         </div>
         
-        
     </div>
 </aside>
 
 
 
-
   
-    <article id="post-single-layer-perceptron" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/29/single-layer-perceptron/">单层感知器为什么不能解决异或(XOR)问题</a>
-    </h1>
   
 
-        
-        <a href="/2019/05/29/single-layer-perceptron/" class="archive-article-date">
-  	<time datetime="2019-05-29T09:05:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>同步于<a href="https://blog.csdn.net/buracag_mc" target="_blank" rel="noopener">CSDN</a>;<a href="https://www.runblog.online/" target="_blank" rel="noopener">音尘杂记</a></p>
-<p>单层感知器为什么不能解决异或问题(XOR)问题？给出两个思路去考虑这个小问题~</p>
-        
-          <a class="article-more-a" href="/2019/05/29/single-layer-perceptron/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术备忘</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法备忘</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/29/single-layer-perceptron/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-aic-and-bic" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/29/aic-and-bic/">AIC和BIC相关知识</a>
-    </h1>
   
 
-        
-        <a href="/2019/05/29/aic-and-bic/" class="archive-article-date">
-  	<time datetime="2019-05-29T07:14:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>同步于<a href="https://blog.csdn.net/buracag_mc" target="_blank" rel="noopener">CSDN</a>;<a href="https://www.runblog.online/" target="_blank" rel="noopener">音尘杂记</a></p>
-<p>前面在回顾<a href="https://github.com/scikit-learn/scikit-learn" target="_blank" rel="noopener">sklearn</a>时，在广义线性模型中看到选择模型时可以采用AIC和BIC准则，特地复习了下统计学基础，简记如下，以抛砖引玉。</p>
-        
-          <a class="article-more-a" href="/2019/05/29/aic-and-bic/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术备忘</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">统计学运用</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/29/aic-and-bic/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-numpy-vectorize" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/09/numpy-vectorize/">利用numpy.vectorize提升计算速度</a>
-    </h1>
   
 
-        
-        <a href="/2019/05/09/numpy-vectorize/" class="archive-article-date">
-  	<time datetime="2019-05-09T09:11:56.441Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p>同步于<a href="https://blog.csdn.net/buracag_mc/article/details/88748607" title="https://blog.csdn.net/buracag_mc/article/details/88748607" target="_blank" rel="noopener">CSDN</a>;<a href="https://www.runblog.online/2019/03/18/increase-calculation-speed-with-numpy-vectorize/" target="_blank" rel="noopener">音尘杂记</a></p>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在实际项目中，对超大矩阵进行计算或者对超大的DataFrame进行计算是一个经常会出现的场景。这里先不考虑开发机本身内存等客观硬件因素，仅从设计上讨论一下不同实现方式带来的性能差异，抛砖引玉。</p>
-        
-          <a class="article-more-a" href="/2019/05/09/numpy-vectorize/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术备忘</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/09/numpy-vectorize/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-svm-proving-process" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/08/svm-proving-process/">SVM推导过程注解</a>
-    </h1>
-  
-
-        
-        <a href="/2019/05/08/svm-proving-process/" class="archive-article-date">
-  	<time datetime="2019-05-08T09:51:18.299Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p>同步于<a href="https://blog.csdn.net/buracag_mc/article/details/76762249" title="https://blog.csdn.net/buracag_mc/article/details/76762249" target="_blank" rel="noopener">CSDN</a>;<a href="https://www.runblog.online/2019/03/18/svm-process/" target="_blank" rel="noopener">音尘杂记</a></p>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>支持向量机(Support Vector Machine)的原理其实比较简单，它是基于结构风险最小化理论之上在特征空间中建构最优分割超平面。在二维中就是线，在三维中就是面，但我们统称为超平面。</p>
-        
-          <a class="article-more-a" href="/2019/05/08/svm-proving-process/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术备忘</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">统计学运用</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法备忘</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/08/svm-proving-process/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
 
 
@@ -666,8 +425,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
