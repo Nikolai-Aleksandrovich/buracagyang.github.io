@@ -40,6 +40,12 @@
   
 
 </head>
+
+
+  <link rel="stylesheet" href="/lib/gitalk/gitalk.css">
+  <script src="/lib/gitalk/gitalk.min.js"></script>
+
+
 </html>
 <body>
   <div id="container" q-class="show:isCtnShow">
@@ -413,6 +419,26 @@
   
 
   
+
+
+
+<div class="gitalk">
+    <div id="gitalk-container"></div>
+    <script type="text/javascript">
+        const gitalk = new Gitalk({
+            clientID: 'b59e8ee91a1328df0e4b',
+            clientSecret: 'dc587f6db5e16b8811a1942c6d16b8da0d7f60c3',
+            repo: 'https://github.com/buracagyang/buracagyang.github.io',
+            owner: 'buracagyang',
+            admin: ['buracagyang'],
+            id: md5(location.pathname),      // Ensure uniqueness and length less than 50
+            distractionFreeMode: false  // Facebook-like distraction free mode
+        })
+ 
+        gitalk.render('gitalk-container')
+    </script>
+</div>
+
 
 
           </div>
