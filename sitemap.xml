@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://buracagyang.github.io/2019/05/08/svm-proving-process/</loc>
+    
+    <lastmod>2019-06-03T06:56:36.824Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://buracagyang.github.io/2019/06/03/quantile-regression/</loc>
     
     <lastmod>2019-06-03T06:28:16.590Z</lastmod>
@@ -26,13 +33,6 @@
     <loc>https://buracagyang.github.io/2019/05/09/numpy-vectorize/</loc>
     
     <lastmod>2019-05-29T09:26:50.637Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://buracagyang.github.io/2019/05/08/svm-proving-process/</loc>
-    
-    <lastmod>2019-05-29T09:26:19.000Z</lastmod>
     
   </url>
   
