@@ -2,51 +2,51 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://buracagyang.github.io/2019/05/08/svm-proving-process/</loc>
+    <loc>https://buracagyang.github.io/2019/05/29/single-layer-perceptron/</loc>
     
-    <lastmod>2019-06-03T07:52:35.630Z</lastmod>
+    <lastmod>2019-06-03T10:51:33.221Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://buracagyang.github.io/2019/06/03/quantile-regression/</loc>
     
-    <lastmod>2019-06-03T06:28:16.590Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://buracagyang.github.io/2019/05/29/aic-and-bic/</loc>
-    
-    <lastmod>2019-05-29T09:26:57.292Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://buracagyang.github.io/2019/05/29/logistic-loss-function/</loc>
-    
-    <lastmod>2019-05-29T09:26:53.950Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://buracagyang.github.io/2019/05/09/numpy-vectorize/</loc>
-    
-    <lastmod>2019-05-29T09:26:50.637Z</lastmod>
+    <lastmod>2019-06-03T10:51:29.009Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://buracagyang.github.io/2019/05/29/python-basic-about-class/</loc>
     
-    <lastmod>2019-05-29T09:25:57.967Z</lastmod>
+    <lastmod>2019-06-03T10:51:24.181Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://buracagyang.github.io/2019/05/29/single-layer-perceptron/</loc>
+    <loc>https://buracagyang.github.io/2019/05/09/numpy-vectorize/</loc>
     
-    <lastmod>2019-05-29T09:18:04.966Z</lastmod>
+    <lastmod>2019-06-03T10:51:20.277Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://buracagyang.github.io/2019/05/29/logistic-loss-function/</loc>
+    
+    <lastmod>2019-06-03T10:51:02.378Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://buracagyang.github.io/2019/05/29/aic-and-bic/</loc>
+    
+    <lastmod>2019-06-03T10:50:57.672Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://buracagyang.github.io/2019/05/08/svm-proving-process/</loc>
+    
+    <lastmod>2019-06-03T07:52:35.630Z</lastmod>
     
   </url>
   
