@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://buracagyang.github.io/2019/06/03/quantile-regression/</loc>
+    
+    <lastmod>2019-06-03T06:28:16.590Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://buracagyang.github.io/2019/05/29/aic-and-bic/</loc>
+    
+    <lastmod>2019-05-29T09:26:57.292Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://buracagyang.github.io/2019/05/29/logistic-loss-function/</loc>
+    
+    <lastmod>2019-05-29T09:26:53.950Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://buracagyang.github.io/2019/05/09/numpy-vectorize/</loc>
     
     <lastmod>2019-05-29T09:26:50.637Z</lastmod>
@@ -19,20 +40,6 @@
     <loc>https://buracagyang.github.io/2019/05/29/python-basic-about-class/</loc>
     
     <lastmod>2019-05-29T09:25:57.967Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://buracagyang.github.io/2019/05/29/logistic-loss-function/</loc>
-    
-    <lastmod>2019-05-29T09:19:42.700Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://buracagyang.github.io/2019/05/29/aic-and-bic/</loc>
-    
-    <lastmod>2019-05-29T09:19:36.344Z</lastmod>
     
   </url>
   
