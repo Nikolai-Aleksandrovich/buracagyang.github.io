@@ -393,22 +393,24 @@
   
   
   
-    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-<div id="gitalk-container"></div>
-<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div> 
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
 <script type="text/javascript">
-    var gitalk = new Gitalk({
-        clientID: '',
-        clientSecret: 'e8a8251bb9bd5ec9913a699734a6824bea1d6ec3',
-        id: window.location.pathname,
-        repo: 'buracagyang.github.io',
-        owner: 'buracagyang',
-        admin: 'buracagyang',
-        distractionFreeMode: 'true',
-        enableHotKey: 'false',
-       
-    })
-    gitalk.render('gitalk-container')
+
+if(true){
+	var gitalk = new Gitalk({
+  	clientID: '',
+  	clientSecret: '',
+  	repo: 'buracagyang.github.io',
+  	owner: 'buracagyang',
+  	admin: ['buracagyang'],
+  	id: 'Mon Jun 03 2019 14:24:43 GMT+0800',
+  	distractionFreeMode: 'true'
+})
+gitalk.render('gitalk-container') 
+}
 </script>
   
   
