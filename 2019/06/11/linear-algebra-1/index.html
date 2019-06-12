@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Buracag的博客">
 <meta property="og:description" content="同步于CSDN;音尘杂记 后续几篇笔记主要想回顾整理一下需要用到的数学基础知识，主要包括了线性代数、微积分、概念论、数学优化和信息论等内容。相对比较基础，权当复习回顾完善整个知识体系结构。错误之处，还望诸君不吝指教。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-12T05:50:47.146Z">
+<meta property="og:updated_time" content="2019-06-12T06:05:04.076Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="线性代数1-向量和向量空间">
 <meta name="twitter:description" content="同步于CSDN;音尘杂记 后续几篇笔记主要想回顾整理一下需要用到的数学基础知识，主要包括了线性代数、微积分、概念论、数学优化和信息论等内容。相对比较基础，权当复习回顾完善整个知识体系结构。错误之处，还望诸君不吝指教。">
@@ -199,7 +199,7 @@
 <h1 id="3-常见的向量"><a href="#3-常见的向量" class="headerlink" title="3. 常见的向量"></a>3. 常见的向量</h1><p><strong>全0向量</strong>指所有元素都为0的向量，用<strong>0</strong>表示。全0向量为笛卡尔坐标系中的原点。</p>
 <p><strong>全1向量</strong>指所有值为1的向量，用<strong>1</strong>表示。</p>
 <p><strong>one-hot向量</strong>为有且只有一个元素为1，其余元素都为0 的向量。one-hot向量是在数字电路中的一种状态编码，指对任意给定的状态，状态寄存器中只有1位为1，其余位都为0。</p>
-<h1 id="4-范数"><a href="#4-范数" class="headerlink" title="4. 范数"></a>4. 范数</h1><p><strong>范数（Norm）</strong>是一个表示向量“长度”的函数，为向量空间内的所有向量赋予非零的正长度或大小。对于一个n维向量<strong>v</strong>，一个常见的范数函数为$\ell_p$范数，<br>$$<br>\ell_p(v) = ||v||<em>p = (\sum</em>{i=1}^{n}|v_i|^p)^{1/p}, \tag{1.11}<br>$$<br>其中$p \geq 0$为一个标量的参数。常见的$p$的取值有1, 2，$\infty$等。</p>
+<h1 id="4-范数"><a href="#4-范数" class="headerlink" title="4. 范数"></a>4. 范数</h1><p><strong>范数（Norm）</strong>是一个表示向量“长度”的函数，为向量空间内的所有向量赋予非零的正长度或大小。对于一个n维向量<strong>v</strong>，一个常见的范数函数为$\ell_p$范数，<br>$$<br>\ell_p(v) = ||v||<em>p = (\sum</em>{i=1}^{n}|v_i|^p)^{1/p}, \tag{1.11}<br>$$<br>其中$p \geq 0$为一个标量的参数。常见的$p$的取值有1，2，$\infty$等。</p>
 <p>$\ell_1$<strong>范数 </strong>， $p = 1$<br>$$<br>\ell_1(v) = \sum_{i=1}^{n}|v_i|, \tag{1.12}<br>$$<br>$\ell_2$<strong>范数 </strong>， $p = 2$<br>$$<br>\ell_2(v) = \sqrt{\sum_{i=1}^{n}|v_i|^2} = \sqrt{v^Tv}, \tag{1.13}<br>$$<br>$\ell_2$范数又称为<strong>Euclidean范数</strong>或者<strong>Frobenius范数</strong>。从几何角度，向量也可以表示为从原点出发的一个有向线段，其$\ell_2$范数为线段的长度，也常称为向量的模。</p>
 <p>$\ell_{\infty}$<strong>范数 </strong>， $p = \infty$,表示为各个元素的最大绝对值<br>$$<br>\ell_{\infty}(v) = ||v||_{\infty} = max\{v_1,v_2, …, v_n\}, \tag{1.14}<br>$$</p>
 <p>主要参考<a href="https://github.com/nndl/nndl.github.io" target="_blank" rel="noopener">https://github.com/nndl/nndl.github.io</a></p>
