@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://buracagyang.github.io/"/>
-  <updated>2019-06-03T10:51:29.009Z</updated>
+  <updated>2019-06-11T09:36:51.395Z</updated>
   <id>https://buracagyang.github.io/</id>
   
   <author>
@@ -15,6 +15,57 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>linear-algebra-2</title>
+    <link href="https://buracagyang.github.io/2019/06/11/linear-algebra-2/"/>
+    <id>https://buracagyang.github.io/2019/06/11/linear-algebra-2/</id>
+    <published>2019-06-11T09:36:51.000Z</published>
+    <updated>2019-06-11T09:36:51.395Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://buracagyang.github.io/2019/06/11/linear-algebra-1/"/>
+    <id>https://buracagyang.github.io/2019/06/11/linear-algebra-1/</id>
+    <published>2019-06-11T09:36:42.000Z</published>
+    <updated>2019-06-12T05:12:12.872Z</updated>
+    
+    <content type="html"><![CDATA[<p>同步于<a href="https://blog.csdn.net/buracag_mc" target="_blank" rel="noopener">CSDN</a>;<a href="https://www.runblog.online/" target="_blank" rel="noopener">音尘杂记</a></p><p>后续几篇笔记主要想回顾整理一下需要用到的数学基础知识，主要包括了线性代数、微积分、概念论、数学优化和信息论等内容。相对比较基础，权当复习回顾完善整个知识体系结构。错误之处，还望诸君不吝指教。</p><a id="more"></a><h1 id="1-向量"><a href="#1-向量" class="headerlink" title="1. 向量"></a>1. 向量</h1><p><strong>标量（Scalar）</strong>是一个实数，只有大小，没有方向。而<strong>向量（Vector）</strong>是由一组实数组成的有序数组，同时具有大小和方向。例，一个n维<strong>向量a</strong> 是由n个有序实数组成，表示为：<br>$$<br>a = [a_1, a_2, …, a_n], \tag{1.1}<br>$$<br>其中$a_i$称为向量a的第$i$个分量，或第$i$维。向量符号通常用黑体小写字母$<strong>a, b, c，</strong>$或小写希腊字母$\alpha, \beta, \gamma$ 等来表示。</p><h1 id="2-向量空间"><a href="#2-向量空间" class="headerlink" title="2. 向量空间"></a>2. 向量空间</h1><p><strong>向量空间（Vector Space）</strong>，也称<strong>线性空间（Linear Space）</strong>，是指由向量组成的集合，并满足以下两个条件：</p><ol><li><p>向量加法：向量空间$V$中的两个向量<strong>a</strong>和<strong>b</strong>，它们的和<strong>a + b</strong>也属于空间$V$；</p></li><li><p>标量乘法：向量空间$V$中的任一向量<strong>a</strong>和任一标量$c$，它们的乘积$c · a$也属于空间V。</p></li></ol><p><strong>欧氏空间</strong> 一个常用的线性空间是<strong>欧氏空间（Euclidean Space）</strong>。一个欧氏空间表示通常为$\mathbb{R}^n$，其中n为空间<strong>维度（Dimension）</strong>。欧氏空间中向量的加法和标量乘法定义为：<br>$$<br>\begin{eqnarray<em>}<br>[a_1, a_2, … , a_n] + [b_1, b_2, … , b_n] &amp;=&amp; [a_1 + b_1, a_2 + b_2, … , a_n + b_n], \tag{1.2} \<br>c[a_1, a_2, … , a_n] &amp;=&amp; [ca_1, ca_2, … , ca_n] \tag{1.3}<br>\end{eqnarray</em>}<br>$$<br>其中$a, b, c \in \mathbb{R}$为一个标量。</p><p><strong>线性子空间</strong> 向量空间$V$的线性子空间$U$是$V$的一个子集，并且满足向量空间的条件（向量加法和标量乘法）。</p><p><strong>线性无关</strong> 线性空间$V$中的一组向量${v_1, v_2, … , v_n}$，如果对任意的一组标量$\lambda_1, \lambda_2, … , \lambda_n$，满足$\lambda_1v_1 + \lambda_2v_2 + ·… + \lambda_nv_n = 0$，则必然$\lambda_1 = \lambda_2 = … =\lambda_n = 0$，那么${v_1, v_2, … , v_n}$是线性无关的，也称为线性独立的。</p><p><strong>基向量</strong> 向量空间$V$的<strong>基（Base）</strong>$B = {e_1, e_2, … , e_n}$ 是$V$的有限子集，其元素之间线性无关。向量空间$V$所有的向量都可以按唯一的方式表达为$B$中向量的线性组合。对任意$v \in V$，存在一组标量$(\lambda_1, \lambda_2, … , \lambda_n)$ 使得:<br>$$<br>v = \lambda_1e_1 + \lambda_2e_2 + … + \lambda_ne_n \tag{1.4}<br>$$<br>其中基$B$中的向量称为基向量（Base Vector）。如果基向量是有序的，则标量$(\lambda_1, \lambda_2, … , \lambda_n)$ 称为向量$v$关于基$B$的<strong>坐标（Coordinates）</strong>。</p><p>n维空间$V$的一组<strong>标准基（Standard Basis）</strong>为:<br>$$<br>\begin{eqnarray<em>}<br>e_1 &amp;=&amp; [1, 0, …, 0], \tag{1.5} \<br>e_2 &amp;=&amp; [0, 1, …, 0], \tag{1.6} \<br>&amp;…&amp; \tag{1.7} \<br>e_n &amp;=&amp; [0, 0, …, 1], \tag{1.8}<br>\end{eqnarray</em>}<br>$$<br>$V$中的任一向量$v = [v_1, v_2, … , v_n]$可以唯一的表示为:<br>$$<br>[v_1, v_2, … , v_n] = v_1e_1 + v_2e_2 + … + v_ne_n, \tag{1.9}<br>$$<br>$v_1, v_2, … , v_n$也称为向量$v$的<strong>笛卡尔坐标（Cartesian Coordinate）</strong>。向量空间中的每个向量可以看作是一个线性空间中的笛卡儿坐标。</p><p><strong>内积</strong> 一个n维线性空间中的两个向量$a$和$b$，其内积为:<br>$$<br>⟨a, b⟩ = \sum_{i=1}^{n}a_ib_i, \tag{1.10}<br>$$<br><strong>正交</strong> 如果向量空间中两个向量的内积为0，则它们<strong>正交（Orthogonal）</strong>。如果向量空间中一个向量$v$与子空间$U$中的每个向量都正交，那么向量$v$和子空间$U$正交。</p><h1 id="3-常见的向量"><a href="#3-常见的向量" class="headerlink" title="3. 常见的向量"></a>3. 常见的向量</h1><p><strong>全0向量</strong>指所有元素都为0的向量，用<strong>0</strong>表示。全0向量为笛卡尔坐标系中的原点。</p><p><strong>全1向量</strong>指所有值为1的向量，用<strong>1</strong>表示。</p><p><strong>one-hot向量</strong>为有且只有一个元素为1，其余元素都为0 的向量。one-hot向量是在数字电路中的一种状态编码，指对任意给定的状态，状态寄存器中只有1位为1，其余位都为0。</p><h1 id="4-范数"><a href="#4-范数" class="headerlink" title="4. 范数"></a>4. 范数</h1><p><strong>范数（Norm）</strong>是一个表示向量“长度”的函数，为向量空间内的所有向量赋予非零的正长度或大小。对于一个n维向量<strong>v</strong>，一个常见的范数函数为$\ell_p$范数，<br>$$<br>\ell_p(v) = ||v||<em>p = (\sum</em>{i=1}^{n}|v_i|^p)^{1/p}, \tag{1.11}<br>$$<br>其中$p \geq 0$为一个标量的参数。常见的$p$的取值有1,2，$\infty$等。</p><p>$\ell_1$<strong>范数 </strong>， $p = 1$<br>$$<br>\ell_1(v) = \sum_{i=1}^{n}|v_i|, \tag{1.12}<br>$$<br>$\ell_2$<strong>范数 </strong>， $p = 2$<br>$$<br>\ell_2(v) = \sqrt{\sum_{i=1}^{n}|v_i|^2} = \sqrt{v^Tv}, \tag{1.13}<br>$$<br>$\ell_2$范数又称为<strong>Euclidean范数</strong>或者<strong>Frobenius范数</strong>。从几何角度，向量也可以表示为从原点出发的一个有向线段，其$\ell_2$范数为线段的长度，也常称为向量的模。</p><p>$\ell_{\infty}$<strong>范数 </strong>， $p = \infty$,表示为各个元素的最大绝对值<br>$$<br>\ell_{\infty}(v) = ||v||_{\infty} = max{v_1,v_2, …, v_n}, \tag{1.14}<br>$$</p><p>主要参考<a href="https://github.com/nndl/nndl.github.io" target="_blank" rel="noopener">https://github.com/nndl/nndl.github.io</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;同步于&lt;a href=&quot;https://blog.csdn.net/buracag_mc&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;CSDN&lt;/a&gt;;&lt;a href=&quot;https://www.runblog.online/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;音尘杂记&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;后续几篇笔记主要想回顾整理一下需要用到的数学基础知识，主要包括了线性代数、微积分、概念论、数学优化和信息论等内容。相对比较基础，权当复习回顾完善整个知识体系结构。错误之处，还望诸君不吝指教。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="技术备忘" scheme="https://buracagyang.github.io/tags/%E6%8A%80%E6%9C%AF%E5%A4%87%E5%BF%98/"/>
+    
+      <category term="基础知识" scheme="https://buracagyang.github.io/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>derivative1</title>
+    <link href="https://buracagyang.github.io/2019/06/11/derivative1/"/>
+    <id>https://buracagyang.github.io/2019/06/11/derivative1/</id>
+    <published>2019-06-11T09:33:53.000Z</published>
+    <updated>2019-06-11T09:33:53.079Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>分位数回归简介</title>
@@ -115,7 +166,7 @@
     <link href="https://buracagyang.github.io/2019/05/29/aic-and-bic/"/>
     <id>https://buracagyang.github.io/2019/05/29/aic-and-bic/</id>
     <published>2019-05-29T07:14:58.000Z</published>
-    <updated>2019-06-03T10:50:57.672Z</updated>
+    <updated>2019-06-11T09:48:46.932Z</updated>
     
     <content type="html"><![CDATA[<p>同步于<a href="https://blog.csdn.net/buracag_mc" target="_blank" rel="noopener">CSDN</a>;<a href="https://www.runblog.online/" target="_blank" rel="noopener">音尘杂记</a></p><p>前面在回顾<a href="https://github.com/scikit-learn/scikit-learn" target="_blank" rel="noopener">sklearn</a>时，在广义线性模型中看到选择模型时可以采用AIC和BIC准则，特地复习了下统计学基础，简记如下，以抛砖引玉。</p><a id="more"></a><h2 id="1-模型拟合优度检验"><a href="#1-模型拟合优度检验" class="headerlink" title="1. 模型拟合优度检验"></a>1. 模型拟合优度检验</h2><p>最基础的一个模型拟合优度的检验量就是R square(方程的确定系数)。<br>已知一组样本观测值 $(X_i, Y_i)$,其中i=1,2,3,…,n得到如下样本回归方程：<br>$$<br>\hat{Y_i} = \hat{\beta_0} + \hat{\beta_1}X_i<br>$$<br>而Y的第i个观测值与样本均值的离差 $y_i = Y_i - \bar{Y}$，其可以分解为两部分之和：<br>$$<br>y_i = Y_i - \bar{Y} = (Y_i - \hat{Y_i}) + (\hat{Y_i} - \bar{Y}) = e_i + \hat{y_i}<br>$$<br>其中 $\hat{y_i} = (\hat{Y_i} - \bar{Y})$是样本拟合值与观测值的平均值之差，可认为是由回归直线解释的部分，通常称之为”离差”；</p><p>$e_i = (Y_i - \hat{Y_i})$是实际观测值与回归拟合值之差，是回归直线不能解释的部分，通常称之为”残差”。</p><p>如果 $Y_i = \hat{Y_i}$,即实际观测值落在样本回归”线”上，则拟合最好。</p><p>对于所有样本点，<strong>可以证明</strong>：<br>$$<br>\sum{y_i}^2 = \sum{\hat{y_i}^2} + \sum{e_i^2} + 2\sum{\hat{y_i}^2e_i} = \sum{\hat{y_i}^2} + \sum{e_i^2}<br>$$<br>记:<br>$TSS = \sum{y_i^2} = \sum{(Y_i - \bar{Y})^2}$为总体平方和(Total Sum of Squares)<br>$ESS = \sum{\hat{y_i}^2} = \sum{(\hat{Y_i} - \bar{Y})^2}$为回归平方和(Explained Sum of Squares, <strong>注意有的教材又称之为Regression Sum of Squares</strong>)<br>$RSS = \sum{e_i^2} = \sum{(Y_i - \hat{Y_i})^2}$为残差平方和(Residual Sum of Squares, <strong>注意有的教材又称之为Error Sum of Squares</strong>)<br>$$<br>TSS = ESS + RSS<br>$$<br>所以Y的观测值围绕其均值的总离差(total variation)可分解为两部分：一部分来自回归线(ESS)，另一部分则来自与随机误差(RSS)</p><blockquote><p>在给定样本中，TSS不变，如果实际观测点离样本回归线越近，则ESS在TSS中占的比重越大，因此定义<strong>拟合优度：回归平方和ESS与TSS的比值。</strong></p></blockquote><p>记 $R^2 = \frac{ESS}{TSS} = 1 - \frac{RSS}{TSS}$，称 $R^2$为(样本)可决系数/判定系数</p><p>对于回归方程来说，$R^2$有以下几个意义：</p><ol><li>R square可以作为选择不同模型的标准。在拟合数据之前，不能确定数据的确定模型关系，可以对变量的不同数学形式进行拟合，再看R square的大小。</li><li>在数据的关系存在非线性可能情况下：<br>a) R squared越大不一定拟合越好；<br>b) 如何一个模型的R square很小，不一定代表数据之间没有关系，而很有可能是选择的模型不对，或者存在有其他的函数关系。</li><li><strong>当自变量个数增加时，尽管有的自变量与的线性关系不显著，其R square也会增大</strong>，对于这种情况需采用Adjusted R squared进行调整。</li></ol><h2 id="2-调整R-square"><a href="#2-调整R-square" class="headerlink" title="2. 调整R square"></a>2. 调整R square</h2><p>由于在模型中增加变量时，$R^2$没有下降，所以存在一种过度拟合模型的内在趋势，即向模型中增加变量固然可以改善数据拟合程度，但这样也会导致预测的方差正大，这时就需要用到调整 $R^2$。<br>$$<br>\bar{R_2} = 1 - \frac{n-1}{n-k}(1-R^2)<br>$$<br>调整$R^2$用作拟合优度的度量，它能够适当消除在模型中增加变量所导致的自由度损失。</p><p>调整 $R^2$对模型扩张时自由度的损失进行了弥补，但又存在一个问题，随着样本容量的增大，这种弥补是否足以保证该准则肯定能让分析者得到正确的模型，所以提出了另外两个拟合度量指标，一个是赤池信息准则(Akaike Information Criterion, AIC)，另一个是施瓦茨或贝叶斯信息准则(Bayesian Information Criterion,BIC)。</p><h2 id="3-AIC和BIC"><a href="#3-AIC和BIC" class="headerlink" title="3. AIC和BIC"></a>3. AIC和BIC</h2><p>$$<br>AIC(K) = s_y^2(1-R^2)e^{2k/n}<br>$$</p><p>$$<br>BIC(K) = s_y^2(1-R^2)n^{k/n}<br>$$</p><p>$s_y^2$中没有对自由度进行修正，虽然随着$R^2$的提高，这两个指标都有所改善(下降),但在其他条件不变的情况下，模型规模扩大又会使这两个指标恶化。与$\bar{R^2}$一样，实现同样的拟合程度，这些指标在平均每次观测使用参数个数(K/n)较少时更有效。使用对数通常更方便，多数统计软件报告度量指标是：<br>$$<br>AIC(K) = ln(\frac{e^{\prime}e}{n}) + \frac{2K}{n}<br>$$</p><p>$$<br>BIC(K) = ln(\frac{e^{\prime}e}{n}) + \frac{Kln{n}}{n}<br>$$</p><p><u><strong>更一般地：</strong></u><br>$$<br>AIC(K) = 2K - 2ln(L)<br>$$<br>其中k是模型参数个数，L为似然函数。从一组可供选择的模型中选择最佳模型时，通常选择AIC最小的模型。</p><p>当两个模型之间存在较大差异时，差异主要体现在似然函数项，当似然函数差异不显著时，上市第一项，即模型复杂度则起作用，从而参数个数少的模型是较好的选择。</p><p>一般而言，当模型复杂度提高(k增大)时，似然函数L也会增大，从而使AIC变小，但是k过大时，似然函数增速减缓，导致AIC增大，模型过于复杂容易造成过拟合现象。目标是选取AIC最小的模型，AIC不仅要提高模型拟合度(极大似然)，而且引入了惩罚项，使模型参数尽可能少，有助于降低过拟合的可能性。<br>$$<br>BIC(K) = Kln{n} - 2ln(L)<br>$$<br>其中k是模型参数个数，n为样本数量，L为似然函数。与AIC类似地，引入了模型参数个数作为惩罚项，但是<strong>BIC的惩罚项比AIC的大</strong>，考虑了样本数量，样本数量过多时，可有效防止模型精度过高造成的模型复杂度过高；其中 $kln{n}$惩罚项在维度过大且训练样本数据相对较少的情况下，可以有效避免出现维度灾难现象。</p>]]></content>
     
