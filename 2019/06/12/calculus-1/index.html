@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Buracag的博客">
 <meta property="og:description" content="同步于CSDN;音尘杂记 微积分1，主要回顾关于微积分中关于导数的相关知识。错误之处，还望诸君不吝指教。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-12T11:43:02.868Z">
+<meta property="og:updated_time" content="2019-06-12T11:52:31.256Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="微积分1-导数">
 <meta name="twitter:description" content="同步于CSDN;音尘杂记 微积分1，主要回顾关于微积分中关于导数的相关知识。错误之处，还望诸君不吝指教。">
@@ -215,20 +215,23 @@
 </tbody>
 </table>
 <p><strong>高阶导数</strong> 对一个函数的导数继续求导，可以得到高阶导数。函数$f(x)$的导数$f′(x)$称为一阶导数，$f′(x)$的导数称为二阶导数，记为$f′′(x)$或$\frac{d^2f(x)}{dx^2}$。</p>
-<p><strong>偏导数</strong> 对于一个多元变量函数$f : \mathbb{R}^d \to \mathbb{R}$，它的偏导数（Partial Derivative ）是关于其中一个变量$x_i$的导数，而保持其他变量固定，可以记为$f’_{x_i} (x)，\\bigtriangledown_{x_i}f(x)，\frac{∂f(x)}{∂x_i}或\frac{∂}{∂x_i}f(x)$。</p>
+<p><strong>偏导数</strong> 对于一个多元变量函数$f : \mathbb{R}^d \to \mathbb{R}$，它的偏导数（Partial Derivative ）是关于其中一个变量$x_i$的导数，而保持其他变量固定，可以记为$f’_{x_i} (x)，\bigtriangledown_{x_i}f(x)，\frac{∂f(x)}{∂x_i}或\frac{∂}{∂x_i}f(x)$。</p>
 <h1 id="2-矩阵微积分"><a href="#2-矩阵微积分" class="headerlink" title="2. 矩阵微积分"></a>2. 矩阵微积分</h1><p>为了书写简便，我们通常把<strong>单个函数对多个变量</strong> 或者 <strong>多元函数对单个变量</strong>的偏导数写成向量和矩阵的形式，使其可以被当成一个整体被处理。<strong>矩阵微积分（Matrix Calculus）</strong>是多元微积分的一种表达方式，即使用矩阵和向量来表示因变量每个成分关于自变量每个成分的偏导数。</p>
 <p>矩阵微积分的表示通常有两种符号约定：<strong>分子布局（Numerator Layout）</strong>和<strong>分母布局（Denominator Layout）</strong>。两者的区别是一个标量关于一个向量的导数是写成列向量还是行向量。</p>
 <h2 id="2-1-标量关于向量的偏导数"><a href="#2-1-标量关于向量的偏导数" class="headerlink" title="2.1 标量关于向量的偏导数"></a>2.1 标量关于向量的偏导数</h2><p>对于一个$d$维向量$x \in \mathbb{R}^p$，函数$y = f(x) = f(x_1, … , x_p) \in \mathbb{R}$，则$y$关于$x$的偏导数为</p>
-<p>分母布局 :<br>$$<br>\frac{\partial y}{\partial x} = [\frac{\partial y}{\partial x_1}, …, \frac{\partial y}{\partial x_p}]^T \qquad \in \mathbb{R}^{p \times 1} \tag{1.3}<br>$$<br>分子布局：<br>$$<br>\frac{\partial y}{\partial x} = [\frac{\partial y}{\partial x_1}, …, \frac{\partial y}{\partial x_p}] \qquad \in \mathbb{R}^{1 \times p} \tag{1.4}<br>$$<br>在分母布局中，$\frac{∂y}{∂x}为列向量，而在分子布局中， $\frac{∂y}{∂x}为行向量。下文如无特殊说明，均采用分母布局</p>
+<p>分母布局 :<br>$$<br>\frac{\partial y}{\partial x} = [\frac{\partial y}{\partial x_1}, …, \frac{\partial y}{\partial x_p}]^T \qquad \in \mathbb{R}^{p \times 1} \tag{1.3}<br>$$<br>分子布局：<br>$$<br>\frac{\partial y}{\partial x} = [\frac{\partial y}{\partial x_1}, …, \frac{\partial y}{\partial x_p}] \qquad \in \mathbb{R}^{1 \times p} \tag{1.4}<br>$$<br>在分母布局中，$\frac{∂y}{∂x}$为列向量，而在分子布局中， $\frac{∂y}{∂x}$为行向量。下文如无特殊说明，均采用分母布局。</p>
 <h2 id="2-2-向量关于标量的偏导数"><a href="#2-2-向量关于标量的偏导数" class="headerlink" title="2.2 向量关于标量的偏导数"></a>2.2 向量关于标量的偏导数</h2><p>对于一个标量$x \in \mathbb{R}$，函数$y = f(x) \in \mathbb{R}^q，则$y$关于$x$的偏导数为</p>
-<p>分母布局<br>$$<br>\frac{\partial y}{\partial x} = [\frac{\partial y_1}{\partial x}, …, \frac{\partial y_q}{\partial x}] \qquad \in \mathbb{R}^{1 \times q} \tag{1.5}<br>$$<br>分子布局<br>$$<br>\frac{\partial y}{\partial x} = [\frac{\partial y_1}{\partial x}, …, \frac{\partial y_q}{\partial x}]^T \qquad \in \mathbb{R}^{q \times 1} \tag{1.6}<br>$$</p>
-<p>在分母布局中，$\frac{∂y}{∂x}为行向量，而在分子布局中， $\frac{∂y}{∂x}为列向量。</p>
+<p>分母布局：<br>$$<br>\frac{\partial y}{\partial x} = [\frac{\partial y_1}{\partial x}, …, \frac{\partial y_q}{\partial x}] \qquad \in \mathbb{R}^{1 \times q} \tag{1.5}<br>$$<br>分子布局：<br>$$<br>\frac{\partial y}{\partial x} = [\frac{\partial y_1}{\partial x}, …, \frac{\partial y_q}{\partial x}]^T \qquad \in \mathbb{R}^{q \times 1} \tag{1.6}<br>$$</p>
+<p>在分母布局中，$\frac{∂y}{∂x}$为行向量，而在分子布局中， $\frac{∂y}{∂x}$为列向量。</p>
 <h2 id="2-3-向量关于向量的偏导数"><a href="#2-3-向量关于向量的偏导数" class="headerlink" title="2.3 向量关于向量的偏导数"></a>2.3 向量关于向量的偏导数</h2><p>对于一个$d$维向量$x \in \mathbb{R}^p$，函数$y = f(x) \in \mathbb{R}^q$ 的值也为一个向量，则$f(x)$关于$x$的偏导数（分母布局）为<br>$$<br>\frac{\partial f(x)}{\partial x} =<br>\begin {bmatrix}<br>&amp;\frac{\partial y_1}{\partial x_1}&amp; &amp;…&amp; &amp;\frac{\partial y_q}{\partial x_1}&amp; \\<br>&amp;\vdots&amp; &amp;\vdots&amp; &amp;\vdots&amp; \\<br>&amp;\frac{\partial y_1}{\partial x_p}&amp; &amp;…&amp; &amp;\frac{\partial y_q}{\partial x_p}&amp; \\<br>\end {bmatrix} \in \mathbb{R}^{p \times q} \tag{1.7}<br>$$<br>称之为<strong>雅克比矩阵（Jacobian Matrix）</strong>。</p>
 <h1 id="3-导数法则"><a href="#3-导数法则" class="headerlink" title="3. 导数法则"></a>3. 导数法则</h1><p>复合函数的导数的计算可以通过以下法则来简化。</p>
 <h2 id="3-1-加-减-法则"><a href="#3-1-加-减-法则" class="headerlink" title="3.1 加(减)法则"></a>3.1 加(减)法则</h2><p>若$x \in \mathbb{R}^p，y = f(x) \in \mathbb{R}^q，z = g(x) \in \mathbb{R}^q$，则<br>$$<br>\frac{\partial(y+z)}{\partial x} = \frac{\partial y}{\partial x} + \frac{\partial z}{\partial x} \in \mathbb{R}^{p×q} \tag{1.10}<br>$$</p>
-<h2 id="3-2-乘法法则"><a href="#3-2-乘法法则" class="headerlink" title="3.2 乘法法则"></a>3.2 乘法法则</h2><p>(1) 若$x \in \mathbb{R}^p，y = f(x) \in \mathbb{R}^q，z = g(x) \in \mathbb{R}^q，则<br>$$<br>\frac{∂y^Tz}{∂x} = \frac{∂y}{∂x}z + \frac{∂z}{∂x}y \in \mathbb{R}^p \tag{1.11}<br>$$<br>(2) 若$x \in \mathbb{R}^p，y = f(x) \in \mathbb{R}^s，z = g(x) \in \mathbb{R}^t，A \in \mathbb{R}^{s×t}$和$x$无关，则<br>$$<br>\frac{∂y^TAz}{∂x} = \frac{∂y}{∂x}Az + \frac{∂z}{∂x}A^Ty \in \mathbb{R}^p \tag{1.12}<br>$$<br>(3) 若$x \in \mathbb{R}^p，y = f(x) \in \mathbb{R}，z = g(x) \in \mathbb{R}^q，则<br>$$<br>\frac{∂yz}{∂x} = y\frac{∂z}{∂x} + \frac{∂y}{∂x}z^T \in \mathbb{R}^{p×q} \tag{1.13}<br>$$</p>
+<h2 id="3-2-乘法法则"><a href="#3-2-乘法法则" class="headerlink" title="3.2 乘法法则"></a>3.2 乘法法则</h2><p>(1) 若$x \in \mathbb{R}^p，y = f(x) \in \mathbb{R}^q，z = g(x) \in \mathbb{R}^q$，则<br>$$<br>\frac{∂y^Tz}{∂x} = \frac{∂y}{∂x}z + \frac{∂z}{∂x}y \in \mathbb{R}^p \tag{1.11}<br>$$</p>
+<p>(2) 若$x \in \mathbb{R}^p，y = f(x) \in \mathbb{R}^s，z = g(x) \in \mathbb{R}^t，A \in \mathbb{R}^{s×t}$ 和 $x$ 无关，则<br>$$<br>\frac{∂y^TAz}{∂x} = \frac{∂y}{∂x}Az + \frac{∂z}{∂x}A^Ty \in \mathbb{R}^p \tag{1.12}<br>$$<br>(3) 若$x \in \mathbb{R}^p，y = f(x) \in \mathbb{R}，z = g(x) \in \mathbb{R}^q$，则<br>$$<br>\frac{∂yz}{∂x} = y\frac{∂z}{∂x} + \frac{∂y}{∂x}z^T \in \mathbb{R}^{p×q} \tag{1.13}<br>$$</p>
 <h2 id="3-3-链式法则"><a href="#3-3-链式法则" class="headerlink" title="3.3 链式法则"></a>3.3 链式法则</h2><p><strong>链式法则（Chain Rule）</strong>是在微积分中求复合函数导数的一种常用方法。</p>
-<p>(1) 若$x \in \mathbb{R}，u = u(x) \in \mathbb{R}^s，g = g(u) \in \mathbb{R}^t，则<br>$$<br>\frac{∂g}{∂x} = \frac{∂u}{∂x}\frac{∂g}{∂u} \in \mathbb{R}^{1×t} \tag{1.14}<br>$$<br>(2) 若$x \in \mathbb{R}^p，y = g(x) \in \mathbb{R}^s，z = f(y) \in \mathbb{R}^t，则<br>$$<br>\frac{∂z}{∂x} = \frac{∂y}{∂x}\frac{∂z}{∂y} \in \mathbb{R}^{p×t} \tag{1.15}<br>$$<br>(2) 若$X \in \mathbb{R}^{p×q}$为矩阵，$y = g(X) \in \mathbb{R}^s，z = f(y) \in \mathbb{R}$，则<br>$$<br>\frac{∂z}{∂X_{ij}} = \frac{∂y}{∂X_{ij}}\frac{∂z}{∂y} \in \mathbb{R} \tag{1.16}<br>$$<br>主要参考<a href="https://github.com/nndl/nndl.github.io" target="_blank" rel="noopener">https://github.com/nndl/nndl.github.io</a></p>
+<p>(1) 若$x \in \mathbb{R}，u = u(x) \in \mathbb{R}^s，g = g(u) \in \mathbb{R}^t$，则<br>$$<br>\frac{∂g}{∂x} = \frac{∂u}{∂x}\frac{∂g}{∂u} \in \mathbb{R}^{1×t} \tag{1.14}<br>$$</p>
+<p>(2) 若$x \in \mathbb{R}^p，y = g(x) \in \mathbb{R}^s，z = f(y) \in \mathbb{R}^t$，则<br>$$<br>\frac{∂z}{∂x} = \frac{∂y}{∂x}\frac{∂z}{∂y} \in \mathbb{R}^{p×t} \tag{1.15}<br>$$</p>
+<p>(3) 若$X \in \mathbb{R}^{p×q}$为矩阵，$y = g(X) \in \mathbb{R}^s，z = f(y) \in \mathbb{R}$，则<br>$$<br>\frac{∂z}{∂X_{ij}} = \frac{∂y}{∂X_{ij}}\frac{∂z}{∂y} \in \mathbb{R} \tag{1.16}<br>$$<br>主要参考<a href="https://github.com/nndl/nndl.github.io" target="_blank" rel="noopener">https://github.com/nndl/nndl.github.io</a></p>
 
       
 
