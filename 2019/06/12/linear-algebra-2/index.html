@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Buracag的博客">
 <meta property="og:description" content="同步于CSDN;音尘杂记 线性代数2，主要回顾关于矩阵的相关知识。错误之处，还望诸君不吝指教。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-12T08:49:44.779Z">
+<meta property="og:updated_time" content="2019-06-12T09:18:35.555Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="线性代数2-矩阵">
 <meta name="twitter:description" content="同步于CSDN;音尘杂记 线性代数2，主要回顾关于矩阵的相关知识。错误之处，还望诸君不吝指教。">
@@ -200,7 +200,7 @@
 <p><strong>范数</strong> 在“线性代数1-向量和向量空间”中已经提及<br>$$<br>\ell_p(v) = \parallel v \parallel_p = {(\sum_{i=1}^{n}|v_i|^p)}^{1/p}, \tag{1.13}<br>$$</p>
 <h1 id="3-矩阵类型"><a href="#3-矩阵类型" class="headerlink" title="3. 矩阵类型"></a>3. 矩阵类型</h1><p><strong>对称矩阵</strong> 对称矩阵（Symmetric Matrix）指其转置等于自己的矩阵，即满足$A = A^T$。</p>
 <p><strong>对角矩阵</strong> 对角矩阵（Diagonal Matrix）是一个主对角线之外的元素皆为0 的矩阵。对角线上的元素可以为0 或其他值。一个$n × n$的对角矩阵$A$满足<br>$$<br>[A]_{ij} = 0 \qquad if \quad i\neq j \quad \forall i,j \in \{1, …, n\} \tag{1.14}<br>$$<br>对角矩阵A也可以记为diag(a)，a 为一个n维向量，并满足<br>$$<br>[A]_{ii} = a_i \tag{1.15}<br>$$</p>
-<p>其中$n × n$的对角矩阵$A = diag(a)$和$n$维向量b的乘积为一个$n$维向量<br>$$<br>Ab = diag(a)b = a \odot b \tag{1.16}<br>$$<br>其中$\odot$表示点乘，即$(a \odot b)_i = a_ib_i。</p>
+<p>其中$n × n$的对角矩阵$A = diag(a)$和$n$维向量b的乘积为一个$n$维向量<br>$$<br>Ab = diag(a)b = a \odot b \tag{1.16}<br>$$<br>其中$\odot$表示点乘，即$(a \odot b)_i = a_ib_i$。</p>
 <p><strong>单位矩阵</strong> 单位矩阵（Identity Matrix）是一种特殊的的对角矩阵，其主对角线元素为1，其余元素为0。$n$阶单位矩阵$I_n$，是一个$n × n$的方块矩阵。可以记为$I_n = diag(1, 1, …, 1)$。一个m × n的矩阵A和单位矩阵的乘积等于其本身。<br>$$<br>AI_n = I_mA = A \tag{1.17}<br>$$<br><strong>逆矩阵</strong> 对于一个$n × n$的方块矩阵$A$，如果存在另一个方块矩阵$B$使得<br>$$<br>AB = BA = I_n \tag{1.18}<br>$$<br>其中$I_n$为单位阵，则称$A$是可逆的。矩阵$B$称为矩阵A的逆矩阵（Inverse Matrix），记为$A^{−1}$。</p>
 <blockquote>
 <p>一个方阵的行列式等于0当且仅当该方阵不可逆时。</p>
@@ -213,6 +213,7 @@
 <h1 id="5-矩阵分解"><a href="#5-矩阵分解" class="headerlink" title="5. 矩阵分解"></a>5. 矩阵分解</h1><p>一个矩阵通常可以用一些比较“简单”的矩阵来表示，称为<strong>矩阵分解（Matrix Decomposition, Matrix Factorization）</strong>。</p>
 <p><strong>奇异值分解</strong> 一个$m×n$的矩阵$A$的奇异值分解（Singular Value Decomposition，SVD）定义为<br>$$<br>A = U\sum V^T \tag{1.22}<br>$$<br>其中$U$和$V$分别为$m × m$和$n × n$的正交矩阵，$\sum$为$m × n$的对角矩阵，其对角线上的元素称为奇异值（Singular Value）。</p>
 <p><strong>特征分解</strong> 一个$n × n$的方块矩阵$A$的特征分解（Eigendecomposition）定义为<br>$$<br>A = Q\Lambda Q^{-1} \tag{1.23}<br>$$<br>其中$Q$为$n×n$的方块矩阵，其每一列都为$A$的特征向量，Λ为对角阵，其每一个对角元素为$A$的特征值。<br>如果$A$为对称矩阵，则A可以被分解为<br>$$<br>A = Q\Lambda Q^T \tag{1.24}<br>$$<br>其中Q为正交阵。</p>
+<p>主要参考<a href="https://github.com/nndl/nndl.github.io" target="_blank" rel="noopener">https://github.com/nndl/nndl.github.io</a></p>
 
       
 
