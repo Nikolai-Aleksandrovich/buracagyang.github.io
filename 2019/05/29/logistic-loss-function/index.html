@@ -9,7 +9,7 @@
   <title>Logistic loss函数 | Buracag的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="同步于CSDN;音尘杂记 前面在浏览sklearn中关于Logistic Regression部分，看到关于带正则项的LR目标损失函数的定义形式的时候，对具体表达式有点困惑，后查阅资料，将思路整理如下。">
-<meta name="keywords" content="统计学运用,机器学习,算法备忘">
+<meta name="keywords" content="机器学习,算法备忘,统计学运用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Logistic loss函数">
 <meta property="og:url" content="https://buracagyang.github.io/2019/05/29/logistic-loss-function/index.html">
@@ -214,7 +214,7 @@
 <h2 id="2-2-旧思路"><a href="#2-2-旧思路" class="headerlink" title="2.2 旧思路"></a>2.2 旧思路</h2><p>旧思路要从LR的参数求解过程说起。</p>
 <p>我们知道统计学中一种很常用的方法是根据最大化似然函数的值来估计总体参数。在机器学习领域，我们听到的更多是损失函数的概念，常通过构建损失函数，然后最小化损失函数估计目标参数。在这里，<strong>最大化对数似然函数与最小化对数似然损失函数其实是等价的</strong>，下面我们可以看到。</p>
 <ul>
-<li><p>假设我们有n个独立的训练样本${(x_1,y_1),(x_2,y_2),(x_3,y_3),…,(x_n,y_n)},y={0,1}$,那么每一个观察到的样本$(x_i,y_i)$出现的概率是：<br>$$<br>P(y_i,x_i) = P(y_i=1 | x_i)^{y_i}(1-P(y_i=1 | x_i))^{1-y_i}<br>$$<br>显然，$y_i$为1时，保留前半部分；$y_i$为0时，保留后半部分。</p>
+<li><p>假设我们有n个独立的训练样本$\{(x_1,y_1),(x_2,y_2),(x_3,y_3),…,(x_n,y_n)\},y={0,1}$,那么每一个观察到的样本$(x_i,y_i)$出现的概率是：<br>$$<br>P(y_i,x_i) = P(y_i=1 | x_i)^{y_i}(1-P(y_i=1 | x_i))^{1-y_i}<br>$$<br>显然，$y_i$为1时，保留前半部分；$y_i$为0时，保留后半部分。</p>
 </li>
 <li><p>构建似然函数：<br>$$<br>L(\beta) = \prod P(y_i=1|x_i)^{y_i}(1-P(y_i=1|x_i))^{1-y_i}<br>$$</p>
 </li>
@@ -283,15 +283,15 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">统计学运用</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">机器学习</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法备忘</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">统计学运用</a>
         		</li>
       		
 		</ul>
@@ -560,10 +560,6 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">统计学运用</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">基础知识</a>
               </li>
              
@@ -573,6 +569,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">算法备忘</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">统计学运用</a>
               </li>
              
               <li class="article-tag-list-item">

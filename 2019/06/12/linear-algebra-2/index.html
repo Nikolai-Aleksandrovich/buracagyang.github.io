@@ -6,15 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://buracagyang.github.io">
-  <title>Tag: 技术备忘 | Buracag的博客</title>
+  <title>线性代数2-矩阵 | Buracag的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Buracag的博客">
-<meta property="og:url" content="https://buracagyang.github.io/tags/技术备忘/index.html">
+  <meta name="description" content="同步于CSDN;音尘杂记 线性代数2，主要回顾关于矩阵的相关知识。错误之处，还望诸君不吝指教。">
+<meta name="keywords" content="技术备忘,基础知识">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线性代数2-矩阵">
+<meta property="og:url" content="https://buracagyang.github.io/2019/06/12/linear-algebra-2/index.html">
 <meta property="og:site_name" content="Buracag的博客">
+<meta property="og:description" content="同步于CSDN;音尘杂记 线性代数2，主要回顾关于矩阵的相关知识。错误之处，还望诸君不吝指教。">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-06-12T08:25:42.228Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Buracag的博客">
+<meta name="twitter:title" content="线性代数2-矩阵">
+<meta name="twitter:description" content="同步于CSDN;音尘杂记 线性代数2，主要回顾关于矩阵的相关知识。错误之处，还望诸君不吝指教。">
   
     <link rel="alternative" href="/atom.xml" title="Buracag的博客" type="application/atom+xml">
   
@@ -152,36 +157,91 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-linear-algebra-2" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      线性代数2-矩阵
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/12/linear-algebra-2/" class="archive-article-date">
+
+        
+        <a href="/2019/06/12/linear-algebra-2/" class="archive-article-date">
   	<time datetime="2019-06-12T06:47:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-12</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/12/linear-algebra-2/">线性代数2-矩阵</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>同步于<a href="https://blog.csdn.net/buracag_mc" target="_blank" rel="noopener">CSDN</a>;<a href="https://www.runblog.online/" target="_blank" rel="noopener">音尘杂记</a></p>
+<p>线性代数2，主要回顾关于矩阵的相关知识。错误之处，还望诸君不吝指教。</p>
+<a id="more"></a>
+<h1 id="1-线性映射"><a href="#1-线性映射" class="headerlink" title="1. 线性映射"></a>1. 线性映射</h1><p><strong>线性映射（Linear Mapping）</strong>是指从线性空间V 到线性空间W的一个映射函数$f : V \to W$，并满足：对于$V$中任何两个向量$u$和$v$以及任何标量$c$，有<br>$$<br>\begin{eqnarray}<br>f(u+v) &amp;=&amp; f(u) + f(v), \tag{1.1} \\<br>f(cv) &amp;=&amp; cf(v). \tag{1.2}<br>\end{eqnarray}<br>$$</p>
+<p>两个有限维欧式空间的映射函数$f: \mathbb{R}^n \to \mathbb{R}^m$可以表示为<br>$$<br>y = Ax \triangleq<br>\begin {bmatrix}<br>a_11x_1 + a_12x_2 + … + a_1nx_n \\<br>a_21x_1 + a_22x_2 + … + a_2nx_n \\<br>\vdots \\<br>a_m1x_1 + a_m2x_2 + … + a_mnx_n \\<br>\end {bmatrix}, \tag{1.3}<br>$$<br>其中$A$定义为$m × n$的<strong>矩阵（Matrix）</strong>，是一个由$m$行$n$列元素排列成的矩形阵列。一个矩阵A从左上角数起的第$i$行第$j$列上的元素称为第$i, j$项，通常记为$[A]<em>{ij}$或$a</em>{ij}$。矩阵$A$定义了一个从$\mathbb{R}^n$到$\mathbb{R}^m$的线性映射；向量$x \in $\mathbb{R}^n$和$y \in $\mathbb{R}^m$分别为两个空间中的<strong>列向量</strong>，即大小分别为$n x 1$和$m x 1$的矩阵。<br>$$<br>x =\begin {bmatrix}<br>x_1 \\<br>x_2 \\<br>\vdots \\<br>x_n \\<br>\end {bmatrix}, y = \begin {bmatrix}<br>y_1 \\<br>y_2 \\<br>\vdots \\<br>y_m \\<br>\end {bmatrix}, \tag{1.4}<br>$$<br>一般为方便统一，书籍中约定逗号隔离的向量表示$[x_1, x_2, … , x_n]$为行向量，列向量通常用分号隔开的表示$x =  [x_1; x_2; … ; x_n]$，或行向量的转置$[x_1, x_2, … , x_n]^T$。</p>
+<h1 id="2-矩阵操作"><a href="#2-矩阵操作" class="headerlink" title="2. 矩阵操作"></a>2. 矩阵操作</h1><p><strong>加</strong> 如果$A$和$B$都为$m×n$的矩阵，则$A$和$B$的加也是$m×n$的矩阵，其每个元素是$A$和$B$相应元素相加。<br>$$<br>[A + B]<em>{ij} = a</em>{ij} + b_{ij} \tag{1.5}<br>乘积假设有两个A和B 分别表示两个线性映射g : Rm → Rk 和f : Rn → Rm，<br>则其复合线性映射<br>(g ◦ f)(x) = g(f(x)) = g(Bx) = A(Bx) = (AB)x, (A.20)<br>其中AB 表示矩阵A和B 的乘积，定义为<br>[AB]ij =<br>Xm<br>k=1<br>aikbkj . (A.21)<br>两个矩阵的乘积仅当第一个矩阵的列数和第二个矩阵的行数相等时才能定义。<br>如A是k × m矩阵和B 是m × n矩阵，则乘积AB 是一个k × n 的矩阵。<br>矩阵的乘法满足结合律和分配律：<br>• 结合律：(AB)C = A(BC),<br>• 分配律：(A + B)C = AC + BC，C(A + B) = CA + CB.<br>Hadamard 积A和B 的Hadamard 积，也称为逐点乘积，为A和B 中对应的<br>元素相乘。<br>$$</p>
+<p><strong>乘积</strong> 假设有两个$A$和$B$分别表示两个线性映射$g : \mathbb{R}^m \to \mathbb{R}^k$ 和 $f: \mathbb{R}^n \to \mathbb{R}^m，则其复合线性映射为：<br>$$<br>(g \circ f)(x) = g(f(x)) = g(Bx) = A(Bx) = (AB)x, \tag{1.6}<br>其中AB 表示矩阵A和B 的乘积，定义为<br>[AB]ij =<br>Xm<br>k=1<br>aikbkj . (A.21)<br>两个矩阵的乘积仅当第一个矩阵的列数和第二个矩阵的行数相等时才能定义。<br>如A是k × m矩阵和B 是m × n矩阵，则乘积AB 是一个k × n 的矩阵。<br>矩阵的乘法满足结合律和分配律：<br>• 结合律：(AB)C = A(BC),<br>• 分配律：(A + B)C = AC + BC，C(A + B) = CA + CB.<br>Hadamard 积A和B 的Hadamard 积，也称为逐点乘积，为A和B 中对应的<br>元素相乘。<br>$$<br>其中$AB$表示矩阵$A$和$B$的乘积，定义为<br>$$<br>[AB]<em>{ij} = \sum</em>{k=1}^na_{ik}b_{kj} \tag{1.7}<br>$$<br>两个矩阵的乘积仅当第一个矩阵的列数和第二个矩阵的行数相等时才能定义。如$A$是$k × m$矩阵和$B$是$m × n$矩阵，则乘积$AB$是一个$k × n$的矩阵。矩阵的乘法也满足结合律和分配律：</p>
+<ul>
+<li><p>结合律： $(AB)C = A(BC)$,</p>
+</li>
+<li><p>分配律： $(A + B)C = AC + BC，C(A + B) = CA + CB$.</p>
+</li>
+</ul>
+<p><strong>Hadamard 积</strong> $A$和$B$的<em>Hadamard</em>积，也称为<em>逐点乘积</em>，为$A$和$B$中对应的元素相乘。<br>$$<br>[A \odot B]<em>{ij} = a</em>{ij}b_{ij} \tag{1.8}<br>$$<br>一个标量$c$与矩阵$A$乘积为$A$的每个元素是$A$的相应元素与$c$的乘积<br>$$<br>[cA]<em>{ij} = ca</em>{ij} \tag{1.9}<br>$$</p>
+<p><strong>转置</strong> $m×n$矩阵$A$的<strong>转置（Transposition）</strong>是一个$n×m$的矩阵，记为$A^T$，$A^T$的第$i$行第$j$列的元素是原矩阵A的第$j$行第$i$列的元素，<br>$$<br>[A^T]<em>{ij} = [A]</em>{ji} \tag{1.10}<br>$$<br><strong>向量化</strong> 矩阵的向量化是将矩阵表示为一个列向量。这里，<strong>vec</strong>是向量化算子。设$A = [a_{ij}]<em>{m×n}$，则<br>$$<br>vec(A) = [a</em>{11}, a_{21}, … , a_{m1}, a_{12}, a_{22}, … , a_{m2}, … , a_{1n}, a_{2n}, … , a_{mn}]^T \tag{1.11}<br>$$</p>
+<p><strong>迹</strong> $n x n$矩阵$A$的对角线元素之和称为它的<strong>迹（Trace）</strong>，记为tr(A)。尽管矩阵的乘法不满足交换律，但它们的迹相同，即tr(AB) = tr(BA)。</p>
+<p><strong>行列式</strong> $n x n$矩阵$A$的行列式是一个将其映射到标量的函数，通常记作$det(A)$或$|A|$。行列式可以看做是有向面积或体积的概念在欧氏空间中的推广。在$n$维欧氏空间中，行列式描述的是一个线性变换对“体积”所造成的影响。一个$n × n$的矩阵$A$的行列式定义为：<br>$$<br>det(A) = \sum_{\sigma \in S_n}(-1)^k\prod a_i,\sigma(i) \tag{1.12}<br>$$<br>解释一下，$S_n$是${1,2,…,n}$的所有排列的集合，$\sigma$是其中一个排列，$\sigma(i)$是元素i在排列$\sigma$中的位置，k表示$\sigma$中的逆序对的数量。</p>
+<p>其中逆序对的定义为：在排列$\sigma$中，如果有序数对$(i, j)$满足$1 \leq i &lt; j \leq n$但$\sigma(i) &gt; \sigma(j)$，则其为$\sigma$的一个逆序对。举个例子(左侧为排列， 右侧为逆序对数量)：<br>$$<br>eg：[4, 3, 1, 2, 5] \to 5<br>$$</p>
+<p><strong>秩</strong> 一个矩阵$A$的列秩是$A$的线性无关的列向量数量，行秩是$A$的线性无关的行向量数量。一个矩阵的列秩和行秩总是相等的，简称为<strong>秩（Rank）</strong>。</p>
+<p>一个$m × n$的矩阵$A$的秩最大为$min(m, n)$。若$rank(A) = min(m, n)$，则称矩阵为满秩的。如果一个矩阵不满秩，说明其包含线性相关的列向量或行向量，其行列式为0。两个矩阵的乘积$AB$的秩$rank(AB) \leq min(rank(A), rank(B))$。</p>
+<p><strong>范数</strong> 在“线性代数1-向量和向量空间”中已经提及<br>$$<br>\ell_p(v) = \parallel v \parallel_p = {(\sum_{i=1}^{n}|v_i|^p)}^{1/p}, \tag{1.13}<br>$$</p>
+<h1 id="3-矩阵类型"><a href="#3-矩阵类型" class="headerlink" title="3. 矩阵类型"></a>3. 矩阵类型</h1><p><strong>对称矩阵</strong> 对称矩阵（Symmetric Matrix）指其转置等于自己的矩阵，即满足$A = A^T$。</p>
+<p><strong>对角矩阵</strong> 对角矩阵（Diagonal Matrix）是一个主对角线之外的元素皆为0 的矩阵。对角线上的元素可以为0 或其他值。一个$n × n$的对角矩阵$A$满足：<br>$$<br>[A]<em>{ij} = 0 \qquad if \quad i\neq j \quad \forall i,j \in \{1, …, n\} \tag{1.14}<br>$$<br>对角矩阵A也可以记为diag(a)，a 为一个n维向量，并满足<br>$$<br>[A]</em>{ii} = a_i \tag{1.15}<br>$$</p>
+<p>其中$n × n$的对角矩阵$A = diag(a)$和$n$维向量b的乘积为一个$n$维向量<br>$$<br>Ab = diag(a)b = a \odot b \tag{1.16}<br>$$<br>其中$\odot$表示点乘，即$(a \odot b)_i = a_ib_i。</p>
+<p><strong>单位矩阵</strong> 单位矩阵（Identity Matrix）是一种特殊的的对角矩阵，其主对角线元素为1，其余元素为0。$n$阶单位矩阵$I_n$，是一个$n × n$的方块矩阵。可以记为$I_n = diag(1, 1, …, 1)$。一个m × n的矩阵A和单位矩阵的乘积等于其本身。<br>$$<br>AI_n = I_mA = A \tag{1.17}<br>$$<br><strong>逆矩阵</strong> 对于一个$n × n$的方块矩阵$A$，如果存在另一个方块矩阵$B$使得<br>$$<br>AB = BA = I_n \tag{1.18}<br>$$<br>其中$I_n$为单位阵，则称$A$是可逆的。矩阵$B$称为矩阵A的逆矩阵（Inverse Matrix），记为$A^{−1}$。</p>
+<blockquote>
+<p>一个方阵的行列式等于0当且仅当该方阵不可逆时。</p>
+</blockquote>
+<p><strong>正定矩阵</strong> 对于一个$n×n$的对称矩阵$A$，如果对于所有的非零向量$x \in \mathbb{R}^n$都满足<br>$$<br>x^TAx &gt; 0 \tag{1.19}<br>$$<br>则$A$为正<strong>定矩阵（Positive-Definite Matrix）</strong>。如果$x^TAx \geq 0$，则$A$是<strong>半正定矩阵（Positive-Semidefinite Matrix）</strong>。</p>
+<p><strong>正交矩阵</strong> 正交矩阵（Orthogonal Matrix）$A$为一个方块矩阵，其逆矩阵等于其转置矩阵。<br>$$<br>A^T = A^{-1} \tag{1.20}<br>$$<br>等价于$A^TA = AA^T = I_n$。</p>
+<p><strong>Gram矩阵</strong> 向量空间中一组向量$v_1, v_2 , … , v_n$的Gram 矩阵（Gram Matrix）;G是内积的对称矩阵，其元素$G_{ij}为${v_i}^T v_j$。</p>
+<h1 id="4-特征值与特征矢量"><a href="#4-特征值与特征矢量" class="headerlink" title="4. 特征值与特征矢量"></a>4. 特征值与特征矢量</h1><p>如果一个标量$\lambda$和一个非零向量v满足<br>$$<br>Av = \lambda v \tag{1.21}<br>$$</p>
+<p>则$\lambada$和$v$分别称为矩阵$A$的<strong>特征值（Eigenvalue）</strong>和<strong>特征向量（Eigenvector）</strong>。</p>
+<h1 id="5-矩阵分解"><a href="#5-矩阵分解" class="headerlink" title="5. 矩阵分解"></a>5. 矩阵分解</h1><p>一个矩阵通常可以用一些比较“简单”的矩阵来表示，称为<strong>矩阵分解（Matrix Decomposition, Matrix Factorization）</strong>。</p>
+<p><strong>奇异值分解</strong> 一个$m×n$的矩阵$A$的奇异值分解（Singular Value Decomposition，SVD）定义为<br>$$<br>A = U\sum V^T \tag{1.22}<br>$$<br>其中$U$和$V$分别为$m × m$和$n × n$的正交矩阵，$\sum$为$m × n$的对角矩阵，其对角线上的元素称为奇异值（Singular Value）。</p>
+<p><strong>特征分解</strong> 一个$n × n$的方块矩阵$A$的特征分解（Eigendecomposition）定义为<br>$$<br>A = Q\Lambda Q^{-1} \tag{1.23}<br>$$<br>其中$Q$为$n×n$的方块矩阵，其每一列都为$A$的特征向量，Λ为对角阵，其每一个对角元素为$A$的特征值。<br>如果$A$为对称矩阵，则A可以被分解为<br>$$<br>A = Q\Lambda Q^T \tag{1.24}<br>$$<br>其中Q为正交阵。</p>
 
-        <div class="article-info info-on-right">
-          
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -197,317 +257,143 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://qr.liantu.com/api.php?text=https://buracagyang.github.io/2019/06/12/linear-algebra-2/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/11/linear-algebra-1/" class="archive-article-date">
-  	<time datetime="2019-06-11T09:36:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-11</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/06/11/linear-algebra-1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">线性代数1-向量和向量空间</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/11/linear-algebra-1/">线性代数1-向量和向量空间</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术备忘</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">基础知识</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-线性映射"><span class="toc-number">1.</span> <span class="toc-text">1. 线性映射</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-矩阵操作"><span class="toc-number">2.</span> <span class="toc-text">2. 矩阵操作</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-矩阵类型"><span class="toc-number">3.</span> <span class="toc-text">3. 矩阵类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-特征值与特征矢量"><span class="toc-number">4.</span> <span class="toc-text">4. 特征值与特征矢量</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-矩阵分解"><span class="toc-number">5.</span> <span class="toc-text">5. 矩阵分解</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/03/quantile-regression/" class="archive-article-date">
-  	<time datetime="2019-06-03T06:24:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-03</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/03/quantile-regression/">分位数回归简介</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术备忘</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">统计学运用</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/29/python-basic-about-class/" class="archive-article-date">
-  	<time datetime="2019-05-29T09:12:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-29</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/29/python-basic-about-class/">Python中定义类的相关知识</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术备忘</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/29/single-layer-perceptron/" class="archive-article-date">
-  	<time datetime="2019-05-29T09:05:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-29</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/29/single-layer-perceptron/">单层感知器为什么不能解决异或(XOR)问题</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术备忘</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法备忘</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/29/aic-and-bic/" class="archive-article-date">
-  	<time datetime="2019-05-29T07:14:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-29</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/29/aic-and-bic/">AIC和BIC相关知识</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术备忘</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">统计学运用</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/09/numpy-vectorize/" class="archive-article-date">
-  	<time datetime="2019-05-09T09:11:56.441Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/09/numpy-vectorize/">利用numpy.vectorize提升计算速度</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术备忘</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/08/svm-proving-process/" class="archive-article-date">
-  	<time datetime="2019-05-08T09:51:18.299Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-08</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/08/svm-proving-process/">SVM推导过程注解</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术备忘</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法备忘</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">统计学运用</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
+  
+    <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div> 
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+
+if(true){
+	var gitalk = new Gitalk({
+  	clientID: 'b59e8ee91a1328df0e4b',
+  	clientSecret: 'e8a8251bb9bd5ec9913a699734a6824bea1d6ec3',
+  	repo: 'blog_comments',
+  	owner: 'buracagyang',
+  	admin: ['buracagyang'],
+  	id: 'Wed Jun 12 2019 14:47:09 GMT+0800',
+  	distractionFreeMode: 'true'
+})
+gitalk.render('gitalk-container') 
+}
+</script>
+  
   
 
-    
 
 
           </div>
@@ -530,9 +416,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
