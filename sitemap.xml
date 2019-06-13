@@ -2,23 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://buracagyang.github.io/2019/06/12/calculus-1/</loc>
+    <loc>https://buracagyang.github.io/2019/06/12/calculus-2/</loc>
     
-    <lastmod>2019-06-12T11:52:31.256Z</lastmod>
+    <lastmod>2019-06-13T10:03:56.445Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://buracagyang.github.io/2019/06/12/linear-algebra-2/</loc>
     
-    <lastmod>2019-06-12T11:16:04.730Z</lastmod>
+    <lastmod>2019-06-13T08:50:33.702Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://buracagyang.github.io/2019/06/11/linear-algebra-1/</loc>
     
-    <lastmod>2019-06-12T11:14:53.440Z</lastmod>
+    <lastmod>2019-06-13T08:38:48.746Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://buracagyang.github.io/2019/06/12/calculus-1/</loc>
+    
+    <lastmod>2019-06-13T08:38:43.848Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://buracagyang.github.io/2019/05/09/numpy-vectorize/</loc>
+    
+    <lastmod>2019-06-12T12:45:42.710Z</lastmod>
     
   </url>
   
@@ -54,13 +68,6 @@
     <loc>https://buracagyang.github.io/2019/05/29/python-basic-about-class/</loc>
     
     <lastmod>2019-06-03T10:51:24.181Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://buracagyang.github.io/2019/05/09/numpy-vectorize/</loc>
-    
-    <lastmod>2019-06-03T10:51:20.277Z</lastmod>
     
   </url>
   
