@@ -6,31 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://buracagyang.github.io">
-  <title>SVM推导过程注解 | Buracag的博客</title>
+  <title>概率论1-随机事件和概率 | Buracag的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="同步于CSDN;音尘杂记 前言支持向量机(Support Vector Machine)的原理其实比较简单，它是基于结构风险最小化理论之上在特征空间中建构最优分割超平面。在二维中就是线，在三维中就是面，但我们统称为超平面。">
-<meta name="keywords" content="技术备忘,统计学运用,算法备忘">
+  <meta name="description" content="同步于CSDN;音尘杂记 主要回顾概率论中关于样本空间、随机事件和常见概率分布的基础知识。 1. 样本空间样本空间 是一个随机试验所有可能结果的集合。例如，如果抛掷一枚硬币，那么样本空间就是集合{正面，反面}。如果投掷一个骰子，那么样本空间就是{1, 2, 3, 4, 5, 6}。随机试验中的每个可能结果称为样本点。 有些试验有两个或多个可能的样本空间。例如，从52 张扑克牌中随机抽出一张，样本空">
+<meta name="keywords" content="技术备忘,基础知识">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SVM推导过程注解">
-<meta property="og:url" content="https://buracagyang.github.io/2019/05/08/svm-proving-process/index.html">
+<meta property="og:title" content="概率论1-随机事件和概率">
+<meta property="og:url" content="https://buracagyang.github.io/2019/06/14/probability-theory-1/index.html">
 <meta property="og:site_name" content="Buracag的博客">
-<meta property="og:description" content="同步于CSDN;音尘杂记 前言支持向量机(Support Vector Machine)的原理其实比较简单，它是基于结构风险最小化理论之上在特征空间中建构最优分割超平面。在二维中就是线，在三维中就是面，但我们统称为超平面。">
+<meta property="og:description" content="同步于CSDN;音尘杂记 主要回顾概率论中关于样本空间、随机事件和常见概率分布的基础知识。 1. 样本空间样本空间 是一个随机试验所有可能结果的集合。例如，如果抛掷一枚硬币，那么样本空间就是集合{正面，反面}。如果投掷一个骰子，那么样本空间就是{1, 2, 3, 4, 5, 6}。随机试验中的每个可能结果称为样本点。 有些试验有两个或多个可能的样本空间。例如，从52 张扑克牌中随机抽出一张，样本空">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://img.blog.csdn.net/20170806110734659?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYnVyYWNhZ19tYw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://img.blog.csdn.net/20170806113012070?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYnVyYWNhZ19tYw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://img.blog.csdn.net/20170806113254715?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYnVyYWNhZ19tYw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://img.blog.csdn.net/20170806113534514?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYnVyYWNhZ19tYw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://img.blog.csdn.net/20170806113608420?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYnVyYWNhZ19tYw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://img.blog.csdn.net/20170806113656054?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYnVyYWNhZ19tYw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://img.blog.csdn.net/20170806113836750?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYnVyYWNhZ19tYw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://img.blog.csdn.net/20170806114231142?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYnVyYWNhZ19tYw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://img.blog.csdn.net/20170806114343592?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYnVyYWNhZ19tYw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:image" content="http://img.blog.csdn.net/20170806114946494?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYnVyYWNhZ19tYw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2019-06-03T10:51:36.385Z">
+<meta property="og:image" content="https://buracagyang.github.io/2019/06/14/probability-theory-1/pdf-cdf.png">
+<meta property="og:updated_time" content="2019-06-14T07:36:27.200Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SVM推导过程注解">
-<meta name="twitter:description" content="同步于CSDN;音尘杂记 前言支持向量机(Support Vector Machine)的原理其实比较简单，它是基于结构风险最小化理论之上在特征空间中建构最优分割超平面。在二维中就是线，在三维中就是面，但我们统称为超平面。">
-<meta name="twitter:image" content="http://img.blog.csdn.net/20170806110734659?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYnVyYWNhZ19tYw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta name="twitter:title" content="概率论1-随机事件和概率">
+<meta name="twitter:description" content="同步于CSDN;音尘杂记 主要回顾概率论中关于样本空间、随机事件和常见概率分布的基础知识。 1. 样本空间样本空间 是一个随机试验所有可能结果的集合。例如，如果抛掷一枚硬币，那么样本空间就是集合{正面，反面}。如果投掷一个骰子，那么样本空间就是{1, 2, 3, 4, 5, 6}。随机试验中的每个可能结果称为样本点。 有些试验有两个或多个可能的样本空间。例如，从52 张扑克牌中随机抽出一张，样本空">
+<meta name="twitter:image" content="https://buracagyang.github.io/2019/06/14/probability-theory-1/pdf-cdf.png">
   
     <link rel="alternative" href="/atom.xml" title="Buracag的博客" type="application/atom+xml">
   
@@ -168,126 +159,78 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-svm-proving-process" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-probability-theory-1" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      SVM推导过程注解
+      概率论1-随机事件和概率
     </h1>
   
 
         
-        <a href="/2019/05/08/svm-proving-process/" class="archive-article-date">
-  	<time datetime="2019-05-08T09:51:18.299Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-08</time>
+        <a href="/2019/06/14/probability-theory-1/" class="archive-article-date">
+  	<time datetime="2019-06-14T02:15:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-14</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <hr>
-<p>同步于<a href="https://blog.csdn.net/buracag_mc/article/details/76762249" title="https://blog.csdn.net/buracag_mc/article/details/76762249" target="_blank" rel="noopener">CSDN</a>;<a href="https://www.runblog.online/2019/03/18/svm-process/" target="_blank" rel="noopener">音尘杂记</a></p>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>支持向量机(Support Vector Machine)的原理其实比较简单，它是基于结构风险最小化理论之上在特征空间中建构最优分割超平面。在二维中就是线，在三维中就是面，但我们统称为超平面。</p>
+        <p>同步于<a href="https://blog.csdn.net/buracag_mc" target="_blank" rel="noopener">CSDN</a>;<a href="https://www.runblog.online/" target="_blank" rel="noopener">音尘杂记</a></p>
+<p>主要回顾概率论中关于样本空间、随机事件和常见概率分布的基础知识。</p>
+<h1 id="1-样本空间"><a href="#1-样本空间" class="headerlink" title="1. 样本空间"></a>1. 样本空间</h1><p><strong>样本空间</strong> 是一个随机试验所有可能结果的集合。例如，如果抛掷一枚硬币，那么样本空间就是集合{正面，反面}。如果投掷一个骰子，那么样本空间就是{1, 2, 3, 4, 5, 6}。随机试验中的每个可能结果称为样本点。</p>
+<p>有些试验有两个或多个可能的样本空间。例如，从52 张扑克牌中随机抽出一张，样本空间可以是数字（A到K），也可以是花色（黑桃，红桃，梅花，方块）。如果要完整地描述一张牌，就需要同时给出数字和花色，这时样本空间可以通过构建上述两个样本空间的笛卡儿乘积来得到。</p>
 <a id="more"></a>
-<p>就我所看到的相关书本、论文以及网上博文情况来看，其一般步骤通常如下：</p>
+<h1 id="2-随机事件"><a href="#2-随机事件" class="headerlink" title="2. 随机事件"></a>2. 随机事件</h1><p><strong>随机事件</strong>（或简称<strong>事件</strong>） 指的是一个被赋予概率的事物集合，也就是样本空间中的一个子集。<strong>概率(Probability)</strong>表示一个随机事件发生的可能性大小，为0 到1 之间的一个非负实数。比如，一个0.5 的概率表示一个事件有50%的可能性发生。</p>
+<p>对于一个机会均等的抛硬币动作来说，其样本空间为“正面”或“反面”。我们可以定义各个随机事件，并计算其概率。比如，</p>
 <ul>
-<li>在二维平面中的线性可分情况开始讲解，求解硬间隔最优化</li>
-<li>随后放宽条件，这时可以引入松弛向量，然后求解软间隔最优化</li>
-<li>再后面拓展到线性不可分的情况，这时引入核函数方法（kernel trick），将低维数据映射到高维特征空间，在高维特征空间中，这些训练样本便是线性可分的了。</li>
+<li>{正面}，其概率为0.5；</li>
+<li>{反面}，其概率为0.5；</li>
+<li>空集∅，不是正面也不是反面，其概率为0；</li>
+<li>{正面| 反面}，不是正面就是反面，其概率为1</li>
 </ul>
-<p>SVM在数据挖掘与统计机器学习的书中是必讲的，网上优秀的教程也很多；故这里我只是将某些一笔带过或者模棱两可的推导步骤结合自己学习过程做一些补充，错误与不尽之处还望大家不吝指教！欢迎大家使劲儿拍砖耶！</p>
-<h1 id="求解硬间隔最优化时的相关注解"><a href="#求解硬间隔最优化时的相关注解" class="headerlink" title="求解硬间隔最优化时的相关注解"></a>求解硬间隔最优化时的相关注解</h1><ul>
-<li><p>首先我们回忆一下初中所学的知识,两条平行线的方程分别为：<br>$ax + by = c1$<br>$ax + by = c2$           (1)<br>两条平行线的距离d为：<br>$ d = \frac{|c_1-c_2|}{\sqrt(a^2+b^2)} $ (2)</p>
-</li>
-<li><p>范数(norm)相关知识：<br>p-范数 $||X||_p = (|x_1|^p + |x_2|^p+…+ |x_n|^p)^{1/p}$;也即:</p>
-<ul>
-<li><p>1-范数 =$|x_1| + |x_2|+…+ |x_n|$</p>
-</li>
-<li><p>2-范数 =$ (|x_1|^2 + |x_2|^2 + …+|x_n|^2)^{1/2}$</p>
-</li>
-<li><p>$\infty-范数 = MAX(|x_1|, |x_2|, …, |x_n|)$</p>
-</li>
-</ul>
-</li>
-</ul>
-<p>跟博文<a href="http://blog.csdn.net/buracag_mc/article/details/75159437" title="http://blog.csdn.net/buracag_mc/article/details/75159437" target="_blank" rel="noopener">http://blog.csdn.net/buracag_mc/article/details/75159437</a>中所讲的闵可夫斯基距离是否有些似曾相识；的确是这样的，p-范数确实满足范数的定义。其中三角不等式的证明不是平凡的，这个结论通常称为闵可夫斯基不等式。</p>
-<p>其中2-范数简单记为||X||,也就是我们通常意义上所说的欧式距离！</p>
-<p>先描述一下，假设我们有N个训练样本${(x_1, y_1),(x_1, y_1), …, (x_n, y_n)}$，x是2维向量，而$y_i \in {+1, -1}$是训练样本的标签，分别代表两个不同的类。这里我们需要用这些样本去训练学习一个线性分类器：$f(x)=sgn(w^Tx + b)$，sgn函数就是一个符号函数，也就是说$w^Tx+ b$大于0的时候，输出f(x) = 1，小于0的时候，f(x) = -1。而$w^Tx + b=0$就是我们要寻找的分类超平面，如下图所示：<br><img src="http://img.blog.csdn.net/20170806110734659?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYnVyYWNhZ19tYw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p>我们需要这个超平面分隔这两类的效果最好，也就是说让这个超平面到这两个类的最近的那个样本的距离相同且最大。为了更好的说明，找到两个和这个超平面平行和距离相等的超平面，其实在平面几何中我们知道这就是平行线的移动，OK,如果各移动m个单位就达到要求，即：</p>
-<p>$H_1: y = w^Tx + b=m$<br>$H_2: y = w^Tx + b=-m$</p>
-<p>形式是不跟教材中的不一样？没关系，这里我们只是需要方程两边同时除以一个m即可：</p>
-<p>$H_1: y = (\frac{w}{m})^Tx + \frac{b}{m}=1$<br>$H_2: y = (\frac{w}{m})^Tx + \frac{b}{m}=-1$(4)</p>
-<p>这里为了统一起见，我们令w = w/m, b=b/m，注意与前面所说的$w^Tx + b=0$中的w和b是有区别的。(其实对于$w^Tx + b=0$,我们可以进行同样处理$H_1: y = (\frac{w}{m})^Tx + \frac{b}{m}=\frac{0}{m}$,再令w=w/m, b=b/m,即可完全统一了)</p>
-<p>在H1左侧的函数值大于1，所有其分类为+1；在H2右侧的函数值小于1，所有其分类为-1，<br>可以统一记为记为$y_i(W^T.x_i + b) \geq 1$<br>这样便是我们熟悉的形式了！</p>
-<hr>
-<p>下面大家便可以猜想到了，求$H_1$和$H_2$之间的最大距离。当然如果是在二维平面中(当然，这里是以二维特征来说的，当然就是二维平面了)，易知便是两条平行线之间的距离，根据前面所所述平行线的距离即可求出，这里我们称之为margin。<br>即：margin = 2/||W||<br>这里对于二维特征$W^T = (w_1,w_2)$，||W||便是参数W的二范数(有的教科书又称之“模”)，将上式展开表示我们熟悉的平行线的距离了$margin = \frac{2}{\sqrt(w_1^2 + w_2^2)}$</p>
-<p>但是，在统计机器学习中，我们要让它符合更多一般的情况，美其名曰便是“泛化能力”。将特征空间拓展到多维的情况，便是用向量来进行表示了，故在多维特征空间中，我们同样求margin= 2/||W||。</p>
-<p>要使margin最大，即需W最小，故我们设我们的目标函数：<br>$min \frac{1}{2}||W||^2$<br>$s.t. yi(W^Tx_i + b) \geq 1, \forall x_i$                                              (5)</p>
-<p>很多人会纠结W前面的系数1/2，这里加不加1/2其实没关系，这是为了求导时消去。其实在机器学习中， 我们常见的平方损失函数便是进行了同样的处理，在前面加了个常数系数1/2。</p>
-<p>对于(5)式，准确的讲这是一个带有不等式约束的条件极值问题，根据高等数学和基础运筹学内容可以知道，我们可以用<strong>拉格朗日方法求解</strong>。</p>
-<p>这里我必须要补充的一点是：通过查阅教科书以及在阅读网上的优秀教程，我发现不同教科书和网上不同的教程都有不同的说法，虽然实质是不变的，但当时我遇到的坑必须给大家给填了。</p>
-<p>首先带不等式约束的条件极值问题中会有大于号约束、小于号约束两种(这里我们暂且先不说带等号，下文将KKT条件的时候一并补充)</p>
-<ul>
-<li><p>第一种说法如下：将所有不等式约束条件<strong>统一为小于号约束</strong>，然后拉格朗日方程的构建规则是用约束方程乘以非负的拉格朗日系数，然后再<strong>加上</strong>目标函数即可。</p>
-</li>
-<li><p>第二种说法如下：将所有不等式约束条件<strong>统一为大于号约束</strong>，然后拉格朗日方程的构建规则是用约束方程乘以非负的拉格朗日系数，然后再从目标函数中<strong>减去</strong>即可。</p>
-</li>
-</ul>
-<p>其实我们可以发现这两种说法是等价的！事实确实如此，但是很多博文在讲解拉格朗日函数的构建时要么说用目标函数加上约束方程乘以非负的拉格朗日系数，要么说用目标函数减去约束方程乘以非负的拉格朗日系数。</p>
-<p>可能某些文章作者完全没有申明大前提，他们准确的说法应该是，<strong><em>当统一成小于号约束时，拉格朗日函数的构建时是用目标函数加上约束方程乘以非负的拉格朗日系数；当统一成大于号约束时，拉格朗日函数的构建时是用目标函数减去约束方程乘以非负的拉格朗日系数。</em></strong>在不提前申明不同的大前提下，可能会误导不细心以及课程学的不仔细的读者(当时包括我=_=！)，导致某些人纳闷了，咦，这个拉格朗日咋一会儿是加上约束约束乘以拉格朗日系数，一会儿又是减去约束方程乘以拉格朗日系数啊？？？</p>
-<p>为了统一与方便说明起见，故下文我们运用的第一种规则，将不等式约束条件统一成小于号约束。于是得到拉格朗日方程如下：<br>$L(w,b,a) = \frac{1}{2}||W||^2 + \sum_{i=1}^{n}a_i(1-y_i(wx_i+b)) = \frac{1}{2}||W||^2 - \sum_{i=1}^{n}a_i(y_i(wx_i+b)) + \sum_{i=1}^{n}a_i $<br>(6)</p>
-<p>拉格朗日函数构建好后接下来便是简单的求解问题了，分别对W和b求偏导数并令其为零，得到如下结果：<br>$W = \sum_{i=1}^{n}a_iy_ix_i$                                    (7)<br>$\sum_{i=1}^{n}a_iy_i = 0$                                                 (8)    </p>
-<p>带入(6)式即可得到:<br>$Max.W(a) =\sum_{i=1}^{n}a_i - \frac{1}{2}\sum_{i=1,j=1}^{n}a_ia_jy_iy_jx_i^Tx_j$<br>$s.t. a_i \geq 0, \sum_{i=1}^{n}a_iy_i = 0$(9)</p>
-<p>为什么$min \frac{1}{2}||W||^2$问题变成了<br>$Max.W(a) =\sum_{i=1}^{n}a_i - \frac{1}{2}\sum_{i=1,j=1}^{n}a_ia_jy_iy_jx_i^Tx_j$<br>当然是对偶问题的求解了！对偶问题是怎么推导过来的？很多文章仅仅只是一笔带过了这么重要的推导内容。。。导致很多人有些小困惑哈~，为什么构建拉格朗日函数后就将求最小化问题变成求最大化问题？OK，既然本文的定位是SVM推导过程中的解析及注解，必定是要把这个问题完整给推导清楚的。</p>
-<h2 id="SVM中对偶问题的注解"><a href="#SVM中对偶问题的注解" class="headerlink" title="SVM中对偶问题的注解"></a>SVM中对偶问题的注解</h2><p>再回看(6)式，<br>$L(w,b,a) = \frac{1}{2}||W||^2 + \sum_{i=1}^{n}a_i(1-y_i(W^Tx_i+b)) = \frac{1}{2}||W||^2 - \sum_{i=1}^{n}a_i(y_i(W^Tx_i+b)) + \sum_{i=1}^{n}a_i $<br>$s.t. a_i \geq 0$</p>
-<p>我们要处理的最优化问题最正确的表达形式其实为：<br>        <img src="http://img.blog.csdn.net/20170806113012070?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYnVyYWNhZ19tYw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述">            (10)<br>上式才是严格带有不等式约束条件下的拉格朗日条件极值的表达式。我读的很多介绍SVM的文章(包括我看的书本)都是没说的！(10)式便是一个凸规划问题。</p>
-<p>其意义是先对a求偏导，令其等于0消掉a，然后再对W和b求L的最小值。</p>
-<p>要直接求解(10)式是有难度的，幸好这个问题可以通过拉格朗日对偶问题来解决。常说对偶问题对偶问题，现在就是真正发挥这把利器的时候了。对(10)式做一个简单的等价变换：<br>                        <img src="http://img.blog.csdn.net/20170806113254715?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYnVyYWNhZ19tYw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述">(11)</p>
-<p><strong>上式即为对偶变换</strong>，这样就把这个凸规划问题转换成了对偶问题</p>
-<p>其意义是：原凸规划问题可以转化为先对W和b求偏导，令两个偏导数都等于0消掉W和b，然后再对a求L的最大值。与(10)的意义是相反的，或者说是对偶的！不知我讲到这步，大家是否对对偶问题有了一个豁然开朗的感觉——啊！原来对偶问题就是这啊！！</p>
-<p>然后将求得的(7)式和(8)式带入(6)式，得：<br>                            <img src="http://img.blog.csdn.net/20170806113534514?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYnVyYWNhZ19tYw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述">        (12)<br>将(12)式带入(11)式得：<br>                <img src="http://img.blog.csdn.net/20170806113608420?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYnVyYWNhZ19tYw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述">            (13)<br>再考虑到(8)式，对偶问题的完整表达为：<br><img src="http://img.blog.csdn.net/20170806113656054?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYnVyYWNhZ19tYw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述">                            (14)</p>
-<p>到了这一步，我们便可以直接用数值方法计算求解拉格朗日乘数a了。求得a过后根据(7)式可以得到W，然后根据超平面方程可以求出b。最终便得到了我们想要的超平面和分类决策函数，也就是我们训练好的SVM分类器。那么对于待分类样本X，其分类为为：<br>                                      <img src="http://img.blog.csdn.net/20170806113836750?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYnVyYWNhZ19tYw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述">    (15)</p>
-<p>我们根据(15)式可以发现，对于一个待分类样本，我们先计算待分类样本和训练样本的内积然后加权就和再加上b值即可。训练样本特别大的情况下，如果对所有训练样本做运算是否太耗时了啊？很多教科书以及网上教程都是直接说根据KKT条件可知，只有支持向量的乘子(拉格朗日乘数)$a_i$不等于0，其他训练样本的乘子都为0，这样便会大大减少运算量，也是后面SVM引入核函数(kernel)的铺垫。这又会引起新的疑惑，为什么只有支持向量对应的乘子不为0呢？</p>
-<h2 id="SVM中KKT条件注解"><a href="#SVM中KKT条件注解" class="headerlink" title="SVM中KKT条件注解"></a>SVM中KKT条件注解</h2><p>这里还是继续讨论一下带等式和不等式约束的条件极值问题。任何极值问题的约束条件不外乎3种：等式、大于号和小于号，为了统一起见，我们将不等式约束统一为小于号。<br>例如：<br>$min(max)    f(x) $<br>$s.t.     g_i(x) \leq0,i=1,2…n_1$<br>$     h_j(x) = 0,j=1,2…n_2$</p>
-<p>那么一个极值优化问题我们转化为：<br><img src="http://img.blog.csdn.net/20170806114231142?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYnVyYWNhZ19tYw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<ul>
-<li>KKT条件就是函数的最优值必须满足以下条件：<ul>
-<li>L对各个x的偏导为零</li>
-<li>h(x) = 0</li>
-<li>$\sum_{i=1}^{n_1}a_ig_i(x) =0 , a_i\geq0$</li>
-</ul>
-</li>
-</ul>
-<p>假设一个目标函数，3个不等式约束条件把自变量约束在一定范围，而目标函数是在这个范围内寻找最优解。<br><img src="http://img.blog.csdn.net/20170806114343592?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYnVyYWNhZ19tYw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<ul>
-<li><p>1.函数开始也不知道该取哪一个值是吧，假设某一次取得自变量集合为x1*，发现不满足约束，然后再换呀换；</p>
-</li>
-<li><p>2.假设到x2<em>满足约束条件，但是这个时候函数值不是最优的，并且x2</em>使得g1(x)与g2(x)等于0了，而g3(x)还是小于0。这个时候，我们发现在x2*的基础上再寻找一组更优解要靠谁呢？当然是要靠约束条件g1(x)与g2(x)，因为他们等于0了，很极限呀，一不小心，走错了就不满足这两个约束的条件了，这个时候我们会选择g1(x)与g2(x)的梯度方向往下走，以寻找最优值解。</p>
-</li>
-<li><p>3.这个时候需不需要管约束条件g3(x)呢？正常来说管不管都可以，如果管，也取g3在x2<em>处的梯度的话，由于g3已经满足小于0的条件，这时候再取在x2</em>处的梯度，有可能更快得到结果，也有可能适得其反；如果不管g3，由于g1和g2已经在边缘了，只取g1和g2的梯度，是肯定会让目标函数接近解的；故我们这时候是不用考虑g3的；</p>
-</li>
-<li><p>4.再往下走，到了x3*处发现g2和g3等于0了，也就是说走到边了，而g1是满足约束小于0的，这时候我们重复上一步，取g2和g3的梯度方向作为变化方向，而不用管g1.</p>
-</li>
-<li><p>5.一直循环3(4)步，直到找到最优解。</p>
-</li>
-</ul>
-<p>可以看到的是，如果如果g1、g2=0时，由于他们本身的条件是小于0的，我们是需要优化他们的，操作上便是乘以一个正常数a作为他们梯度增长的倍数(或者说学习效率)，那些暂且不需要考虑的约束，例如这里说的g3，我们可以乘以系数0，即在下一次的优化中是不用考虑这些约束的。综上所述的话：<br>$\sum_{i=1}^{n_1}a_ig_i(x) = 0, a_i\geq0$</p>
-<p>如上，简单直观地说便是KKT条件中第三个式子的意义了。</p>
-<p>回到SVM的推导上来，对于(6)式，我们知道其KKT条件中的第三个式子为:<br>$\sum_{i=1}^{n_1}a_i(1-y_i(W^T.x_i+b)) = 0$，</p>
-<p>我们知道除了支持向量，对于其他训练样本有：</p>
-<ul>
-<li><p>$y_i(W^T.x_i + b) &gt; 1$ 也即$1 - y_i(W^T.x_i + b) &lt;0$根据前面所述的内容知道，其对应的乘子为0。</p>
-</li>
-<li><p>对于支持向量来说：$y_i(W^T.x_i + b) =1$ 也即$1 - y_i(W^T.x_i + b) =0$，其对应的乘子不为0。</p>
-</li>
-</ul>
-<p>也就是说，新来的待分类样本只需与支持向量求内积即可，这便大大减少了计算量！这便是KKT条件在SVM关键推导中的应用。</p>
-<p>这里我再补偿一下另外一种思路，其实本质还是KKT条件：<br>由于(5)式与(10)式等价，即：<br><img src="http://img.blog.csdn.net/20170806114946494?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYnVyYWNhZ19tYw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述">        (16)</p>
-<p>故要使(16)式成立，只有令$a_i(1-y_i(W^T.x_i+b)) = 0$成立，由此得到KKT的第三个条件：<br>$\sum_{i=1}^{n_1}a_i(1-y_i(W^T.x_i+b)) = 0$<br>同样可出结论：支持向量对应的乘子为正系数；如果一个样本不是支持向量，则其对应的乘子为0。</p>
-<hr>
+<h1 id="3-随机变量"><a href="#3-随机变量" class="headerlink" title="3. 随机变量"></a>3. 随机变量</h1><p>在随机试验中，试验的结果可以用一个数$X$来表示，这个数$X$是随着试验结果的不同而变化的，是样本点的一个函数。我们把这种数称为<strong>随机变量（Random Variable）</strong>。例如，随机掷一个骰子，得到的点数就可以看成一个随机变量$X$，$X$的取值为{1, 2, 3, 4, 5, 6}。</p>
+<p>如果随机掷两个骰子，整个事件空间Ω可以由36 个元素组成：<br>$$<br>Ω = \{(i, j)|i = 1, … , 6; j = 1, … , 6\} \tag{1}<br>$$<br>一个随机事件也可以定义多个随机变量。比如在掷两个骰子的随机事件中，可以定义随机变量$X$为获得的两个骰子的点数和，也可以定义随机变量$Y$为获得的两个骰子的点数差。随机变量$X$可以有11个整数值，而随机变量Y 只有6个。<br>$$<br>\begin{eqnarray}<br>X(i, j) &amp;:=&amp; i + j, x = 2, 3, … , 12 \tag{2} \\<br>Y (i, j) &amp;:=&amp; | i − j |, y = 0, 1, 2, 3, 4, 5 \tag{3}<br>\end{eqnarray}<br>$$</p>
+<p>其中$i, j$分别为两个骰子的点数。</p>
+<h2 id="3-1-离散随机变量"><a href="#3-1-离散随机变量" class="headerlink" title="3.1 离散随机变量"></a>3.1 离散随机变量</h2><p>如果随机变量$X$所有可能取的值为有限可列举的，有$n$个有限取值${x_1, … , x_n}$,则称$X$为离散随机变量</p>
+<p>要了解$X$的统计规律，就必须知道它取每种可能值$x_i$的概率，即<br>$$<br>P(X = x_i) = p(x_i), \qquad ∀i \in [1, n] \tag{4}<br>$$<br>$p(x_1), … , p(x_n)$称为离散型随机变量$X$的<strong>概率分布（Probability Distribution）</strong>或<strong>分布</strong>，并且满足<br>$$<br>\begin{eqnarray}<br>\sum_{i=1}^{n}p(x_i) &amp;=&amp; 1 \\<br>p(x_i) &amp;\geq&amp; 0, \qquad \forall i \in [1, n]<br>\end{eqnarray}\tag{5}<br>$$<br>常见的离散随机变量的概率分布有：</p>
+<p><strong>伯努利分布</strong> 在一次试验中，事件A出现的概率为$\mu$，不出现的概率为$1−\mu$。若用变量$X$表示事件A出现的次数，则$X$的取值为0和1，其相应的分布为:<br>$$<br>p(x) = μ^x(1 − μ)^{(1−x)} \tag{6}<br>$$<br>这个分布称为<strong>伯努利分布（Bernoulli Distribution）</strong>,又名两点分布或者<strong>0-1分布</strong>。</p>
+<p><strong>二项分布</strong> 在n次伯努利分布中，若以变量$X$表示事件A出现的次数，则$X$的取值为{0, · · · , n}，其相应的分布为<strong>二项分布（Binomial Distribution）</strong>。<br>$$<br>P(X = k) = \tbinom{n}{k}μ^k(1 − μ)^{n−k}, \quad k = 1, … , n \tag{7}<br>$$<br>其中￥\tbinom{n}{k}$为二项式系数（这就是二项分布的名称的由来），表示从$n$个元素中取出$k$个元素而不考虑其顺序的<strong>组合</strong>的总数。</p>
+<h2 id="3-2-连续随机变量"><a href="#3-2-连续随机变量" class="headerlink" title="3.2 连续随机变量"></a>3.2 连续随机变量</h2><p>与离散随机变量不同，一些随机变量$X$的取值是不可列举的，由全部实数或者由一部分区间组成，比如<br>$$<br>X = \{x|a ≤ x ≤ b\}, -\infty &lt; a &lt; b &lt; \infty \tag{8}<br>$$<br>则称$X$为<strong>连续随机变量</strong>。连续随机变量的值是不可数及无穷尽的。</p>
+<p>对于连续随机变量$X$，它取一个具体值$x_i$的概率为0，这个离散随机变量截然不同。因此用列举连续随机变量取某个值的概率来描述这种随机变量不但做不到，也毫无意义。</p>
+<p>连续随机变量$X$的概率分布一般用<strong>概率密度函数（Probability Density Function，PDF）</strong> p(x)来描述。p(x)为可积函数，并满足<br>$$<br>\begin{eqnarray}<br>\int_{-\infty}^{\infty} p(x)dx &amp;=&amp; 1 \\<br>p(x) &amp;≥&amp; 0<br>\end{eqnarray} \tag{9}<br>$$<br>给定概率密度函数p(x)，便可以计算出随机变量落入某一个区间的概率，而p(x)本身反映了随机变量取落入x的非常小的邻近区间中的概率大小。常见的连续随机变量的概率分布有：</p>
+<p><strong>均匀分布</strong> 若a, b为有限数，[a, b]上的<strong>均匀分布（Uniform Distribution）</strong>的概率密度函数定义为<br>$$<br>p(x) = \begin {cases}<br>\frac{1}{b-a}&amp;,&amp; a\leq x \leq b \\<br>0&amp;,&amp; x<a 或 x>b<br>\end {cases} \tag{10}<br>$$</a></p>
+<p><strong>正态分布</strong> 正态分布（Normal Distribution），又名<strong>高斯分布（Gaussian Distribution）</strong>，是自然界最常见的一种分布，并且具有很多良好的性质，在很多领域都有非常重要的影响力，其概率密度函数为<br>$$<br>p(x) = \frac{1}{\sqrt{2\pi}\sigma}exp(− \frac{(x − μ)^2}{2\sigma^2}) \tag{11}<br>$$<br>其中$\sigma &gt; 0$，$\mu$和$\sigma$均为常数。若随机变量$X$服从一个参数为$\mu$和$\sigma$的概率分布，简记为<br>$$<br>X \sim \cal N(\mu, \sigma^2) \tag{12}<br>$$<br>当$\mu = 0，\sigma = 1$时，称为<strong>标准正态分布（Standard Normal Distribution）</strong>。</p>
+<h2 id="3-3-累积分布函数"><a href="#3-3-累积分布函数" class="headerlink" title="3.3 累积分布函数"></a>3.3 累积分布函数</h2><p>对于一个随机变量$X$，其<strong>累积分布函数（Cumulative Distribution Function，CDF）</strong>是随机变量$X$的取值小于等于$x$的概率。<br>$$<br>cdf(x) = P(X \leq x) \tag{13}<br>$$<br>以连续随机变量$X$为例，累积分布函数定义为<br>$$<br>cdf(x) =\int_{-\infty}^{x}p(t)dt \tag{14}<br>$$<br>其中p(x)为概率密度函数。下图给出了标准正态分布的累计分布函数和概率密度函数。</p>
+<p><img src="/2019/06/14/probability-theory-1/pdf-cdf.png" alt="pdf-cdf"></p>
+<h1 id="4-随机向量"><a href="#4-随机向量" class="headerlink" title="4. 随机向量"></a>4. 随机向量</h1><p><strong>随机向量</strong> 是指一组随机变量构成的向量。如果$X_1,X_2, … ,X_n$ 为$n$个随机变量, 那么称$[X_1,X_2, … ,X_n]$为一个$n$维随机向量。一维随机向量称为随机变量。随机向量也分为<strong>离散随机向量</strong>和<strong>连续随机向量</strong>。</p>
+<h2 id="4-1离散随机向量"><a href="#4-1离散随机向量" class="headerlink" title="4.1离散随机向量"></a>4.1离散随机向量</h2><p>离散随机向量的<strong>联合概率分布（Joint Probability Distribution）</strong>为<br>$$<br>P(X_1 = x_1,X_2 = x_2, … ,X_n = x_n) = p(x_1, x_2, … , x_n) \tag{15}<br>$$<br>其中$x_i \in \omega_i$为变量$X_i$的取值，$\omega_i$为变量$X_i$的样本空间。和离散随机变量类似，离散随机向量的概率分布满足<br>$$<br>\begin{eqnarray}<br>&amp;p(x_1, x_2, … , x_n) \geq 0, \quad ∀x_1 \in \omega_1, x_2 \in \omega_2, … , x_n \in \omega_n \tag{16} \\<br>&amp;\sum_{x_1 \in \omega_1}\sum_{x_2 \in \omega_2}…\sum_{x_n \in \omega_n}p(x_1, x_2, … , x_n) = 1 \tag{17}<br>\end{eqnarray}<br>$$<br><strong>多项分布</strong> 一个常见的离散向量概率分布为<strong>多项分布（Multinomial Distribution）</strong>。多项分布是二项分布在随机向量的推广。假设一个袋子中装了很多球，总共有$K$个不同的颜色。我们从袋子中取出$n$个球。每次取出一个时，就在袋子中放入一个同样颜色的球（或者说有放回的抽样）。这样保证同一颜色的球在不同试验中被取出的概率是相等的。令$X$为一个$K$维随机向量，每个元素$X_k(k = 1, … ,K)$为取出的$n$个球中颜色为$k$的球的数量，则$X$服从多项分布，其概率分布为<br>$$<br>p(x_1, … , x_K|\mu) = \frac{n!}{x_1! … x_K!}μ_1^{x_1} … μ_K^{x_K} \tag{18}<br>$$<br>其中$\mu = [\mu_1, … , \mu_K]^T$分别为每次抽取的球的颜色为1, … ,K的概率；$x_1, … , x_K$为非负整数，并且满足$\sum_{k=1}^{K}x_k = n$。</p>
+<p>多项分布的概率分布也可以用gamma函数表示：<br>$$<br>p(x_1, … , x_K|\mu) = \frac{\Gamma(\sum_k x_k+1)}{\prod_k \Gamma(x_k+1)}\prod_{k=1}^{K}\mu_k^{x_k} \tag{19}<br>$$<br>其中$\Gamma(z) = \int_{0}^{\infty}\frac{t^{z−1}}{exp(t)}dt$为gamma函数。这种表示形式和狄利克雷分布(  Dirichlet Distribution)类似，而狄利克雷分布可以作为多项分布的共轭先验。</p>
+<h2 id="4-2-连续随机向量"><a href="#4-2-连续随机向量" class="headerlink" title="4.2 连续随机向量"></a>4.2 连续随机向量</h2><p>连续随机向量的其<strong>联合概率密度函数（Joint Probability Density Function）</strong>满足<br>$$<br>\begin{eqnarray}<br>p(x) = p(x_1, … , x_n) ≥ 0 \tag{20} \\<br>\int_{-\infty}^{+\infty} … \int_{-\infty}^{+\infty}p(x_1, … , x_n)dx_1 … dx_n = 1 \tag{21}<br>\end{eqnarray}<br>$$<br><strong>多元正态分布</strong> 一个常见的连续随机向量分布为<strong>多元正态分布（Multivariate Normal</strong><br><strong>Distribution）</strong>，也称为<strong>多元高斯分布（Multivariate Gaussian Distribution）</strong>。若$n$维随机向量$X = [X_1, … ,X_n]^T$服从$n$元正态分布，其密度函数为<br>$$<br>p(x) = \frac{1}{(2π)^{n/2}|\sum|^{1/2}} exp(-\frac{1}{2}(x−\mu)^T\sum^{−1}(x−\mu)) \tag{22}<br>$$<br>其中$\mu$为多元正态分布的均值向量，$\sum$为多元正态分布的协方差矩阵，$|\sum|$表示$\sum$的行列式。</p>
+<p><strong>各项同性高斯分布</strong> 如果一个多元高斯分布的协方差矩阵简化为$\sum = \sigma^2I$，即每一个维随机变量都独立并且方差相同，那么这个多元高斯分布称为<strong>各项同性高斯分布（Isotropic Gaussian Distribution）</strong>。</p>
+<p><strong>Dirichlet 分布</strong> 一个$n$维随机向量$X$的Dirichlet 分布为<br>$$<br>p(x|\alpha) = \frac{\Gamma(\alpha_0)}{\Gamma(\alpha_1) … \Gamma(\alpha_n)} \prod_{i=1}^{n}x_i^{\alpha_i - 1} \tag{23}<br>$$</p>
+<p>其中$\alpha = [\alpha_1, … , \alpha_K]^T$为Dirichlet分布的参数。</p>
+<h1 id="5-边际分布"><a href="#5-边际分布" class="headerlink" title="5. 边际分布"></a>5. 边际分布</h1><p>对于二维离散随机向量$(X, Y)$，假设$X$取值空间为$\Omega_x$，$Y$取值空间为$\Omega_y$。其联合概率分布满足<br>$$<br>p(x, y) \geq 0,\sum_{x\in \Omega_x}\sum_{y \in \Omega_y}p(x_i, y_j) = 1 \tag{24}<br>$$<br>对于联合概率分布p(x, y)，我们可以分别对x和y进行求和。</p>
+<p>(1) 对于固定的x，<br>$$<br>\sum_{y\in \Omega_y}p(x, y) = P(X = x) = p(x) \tag{25}<br>$$<br>(2) 对于固定的y，<br>$$<br>\sum_{x \in \Omega_x}p(x, y) = P(Y = y) = p(y) \tag{26}<br>$$<br>由离散随机向量$(X, Y)$的联合概率分布，对$Y$的所有取值进行求和得到$X$的概率分布；而对$X$的所有取值进行求和得到$Y$的概率分布。这里p(x)和p(y)就称为p(x, y)的<strong>边际分布（Marginal Distribution）</strong>。</p>
+<p>对于二维连续随机向量(X, Y)，其边际分布为：<br>$$<br>\begin{eqnarray}<br>p(x) = \int_{-\infty}^{+\infty}p(x, y)dy \tag{27} \\<br>p(y) = \int_{-\infty}^{+\infty}p(x, y)dx \tag{28}<br>\end{eqnarray}<br>$$<br>一个二元正态分布的边际分布仍为正态分布。</p>
+<h1 id="6-条件概率分布"><a href="#6-条件概率分布" class="headerlink" title="6. 条件概率分布"></a>6. 条件概率分布</h1><p>对于离散随机向量$(X, Y)$，已知$X = x$的条件下，随机变量$Y = y$的<strong>条件概率（Conditional Probability）</strong>为：<br>$$<br>p(y|x) = P(Y = y|X = x) = \frac{p(x, y)}{p(x)} \tag{29}<br>$$<br>这个公式定义了随机变量$Y$关于随机变量X的条件概率分布（Conditional Probability Distribution），简称条件分布。</p>
+<p>对于二维连续随机向量$(X, Y)$，已知$X = x$的条件下，随机变量$Y = y$的<strong>条件概率密度函数（Conditional Probability Density Function）</strong>为<br>$$<br>p(y|x) = \frac{p(x, y)}{p(x)} \tag{30}<br>$$<br>同理，已知$Y = y$的条件下，随机变量$X = x$的条件概率密度函数为<br>$$<br>p(x|y) = \frac{p(x, y)}{p(y)} \tag{31}<br>$$</p>
+<p>通过公式(30) 和(31)，我们可以得到两个条件概率p(y|x) 和p(x|y) 之间的关系。<br>$$<br>p(y|x) = \frac{p(x|y)p(y)}{p(x)} \tag{32}<br>$$<br>这个公式称为<strong>贝叶斯定理（Bayes’ Theorem）</strong>，或贝叶斯公式。</p>
+<h1 id="7-独立与条件独立"><a href="#7-独立与条件独立" class="headerlink" title="7. 独立与条件独立"></a>7. 独立与条件独立</h1><p>对于两个离散（或连续）随机变量$X$和$Y$，如果其联合概率（或联合概率密度函数）p(x, y) 满足<br>$$<br>p(x, y) = p(x)p(y) \tag{33}<br>$$<br>则称X 和Y相互<strong>独立（independence）</strong>，记为$X \perp !!! \perp Y$。</p>
+<p>对于三个离散（或连续）随机变量X、Y 和Z，如果条件概率（或联合概率密度函数）p(x, y|z) 满足<br>$$<br>p(x, y|z) = P(X = x, Y = y|Z = z) = p(x|z)p(y|z) \tag{34}<br>$$</p>
+<p>则称在给定变量$Z$时，$X$和$Y$<strong>条件独立（conditional independence）</strong>，记为$X \perp !!! \perp Y|Z$。</p>
+<h1 id="8-期望和方差"><a href="#8-期望和方差" class="headerlink" title="8. 期望和方差"></a>8. 期望和方差</h1><p><strong>期望</strong> 对于离散变量$X$，其概率分布为$p(x_1), … , p(x_n)$，$X$的期望（Expectation）或均值定义为<br>$$<br>\Bbb{E}[X] = \sum_{i=1}^{n}x_ip(x_i) \tag{35}<br>$$<br>对于连续随机变量$X$，概率密度函数为$p(x)$，其期望定义为<br>$$<br>\Bbb{E}[X] = \int_{\Bbb{R}}xp(x) dx \tag{36}<br>$$<br><strong>方差</strong> 随机变量$X$的方差（Variance）用来定义它的概率分布的离散程度，定义为<br>$$<br>var(X) = \Bbb{E}[X − \Bbb{E}(X)]^2 \tag{37}<br>$$<br>随机变量$X$的方差也称为它的二阶矩。$\sqrt{var(X)}$则称为$X$的根方差或标准差。</p>
+<p><strong>协方差</strong> 两个连续随机变量X和Y的<strong>协方差（Covariance）</strong>用来衡量两个随机变量的分布之间的总体变化性，定义为<br>$$<br>cov(X, Y) = \Bbb{E}[(X − \Bbb(X))((Y − \Bbb{E}(Y))] \tag{38}<br>$$<br>协方差经常也用来衡量两个随机变量之间的线性相关性。如果两个随机变量的协方差为0，那么称这两个随机变量是<strong>线性不相关</strong>。两个随机变量之间没有这里的线性相关性，并非表示它们之间独立的，可能存在某种非线性的函数关系。反之，如果X 与Y是统计独立的，那么它们之间的协方差一定为0。</p>
+<p><strong>协方差矩阵</strong> 两个m和n维的连续随机向量X和Y，它们的协方差（Covariance）为m × n的矩阵，定义为<br>$$<br>cov(X,Y) = \Bbb{E}[(X − \Bbb{E}(X))(Y − \Bbb{E}(Y))^T] \tag{39}<br>$$<br>协方差矩阵$cov(X,Y)$的第$(i, j)$个元素等于随机变量$X_i$和$Y_j$的协方差。两个向量变量的协方差$cov(X,Y)$与$cov(Y,X)$互为转置关系。如果两个随机向量的协方差矩阵为对角阵，那么称这两个随机向量是无关的。</p>
+<p>单个随机向量X的协方差矩阵定义为<br>$$<br>cov(X) = cov(X,X) \tag{40}<br>$$</p>
+<h2 id="8-1-Jensen不等式"><a href="#8-1-Jensen不等式" class="headerlink" title="8.1 Jensen不等式"></a>8.1 Jensen不等式</h2><p>如果$X$是随机变量，$g$是凸函数，则<br>$$<br>g(\Bbb{E}[X]) \leq \Bbb{E}[g(X)] \tag{41}<br>$$</p>
+<p>等式当且仅当$X$是一个常数或$g$是线性时成立。</p>
+<h2 id="8-2-大数定律和中心极限定理"><a href="#8-2-大数定律和中心极限定理" class="headerlink" title="8.2 大数定律和中心极限定理"></a>8.2 大数定律和中心极限定理</h2><p><strong>大数定律（Law Of Large Numbers）</strong> 是指$n$个样本$X_1, … ,X_n$是独立同分布的，即$E[X_1] = … = E[X_n] = \mu$，那么其均值收敛于期望值$\mu$<br>$$<br>\lim_{n \to \infty} \bar{X}_n = \lim_{n\to \infty} \frac{1}{n}(X_1 + … + X_n) \to \mu \tag{42}<br>$$<br><strong>中心极限定理(Central Limit Theorem)</strong> 是指$n$个样本$X_1, … ,X_n$是独立同分布的，则对任意x，分布函数<br>$$<br>F_n(x) = P(\frac{\sum_{i=1}^{n}X_i - n\mu}{\sigma \sqrt{n}} \leq x)<br>$$<br>满足：</p>
+<p>$\lim_{n\to \infty} F_n(x)$ 近似服从标准正态分布 $\cal{N}(0, 1)$。</p>
+<p>主要参考<a href="https://github.com/nndl/nndl.github.io" target="_blank" rel="noopener">https://github.com/nndl/nndl.github.io</a></p>
 
       
 
@@ -326,11 +269,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">统计学运用</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法备忘</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">基础知识</a>
         		</li>
       		
 		</ul>
@@ -386,7 +325,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://qr.liantu.com/api.php?text=https://buracagyang.github.io/2019/05/08/svm-proving-process/" alt="微信分享二维码">
+      <img src="http://qr.liantu.com/api.php?text=https://buracagyang.github.io/2019/06/14/probability-theory-1/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -400,15 +339,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/05/09/numpy-vectorize/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          利用numpy.vectorize提升计算速度
-        
-      </div>
-    </a>
   
+    <a href="/2019/06/12/calculus-2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">微积分2-常见函数的导数</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
@@ -433,7 +368,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#求解硬间隔最优化时的相关注解"><span class="toc-number">2.</span> <span class="toc-text">求解硬间隔最优化时的相关注解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#SVM中对偶问题的注解"><span class="toc-number">2.1.</span> <span class="toc-text">SVM中对偶问题的注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SVM中KKT条件注解"><span class="toc-number">2.2.</span> <span class="toc-text">SVM中KKT条件注解</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-样本空间"><span class="toc-number">1.</span> <span class="toc-text">1. 样本空间</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-随机事件"><span class="toc-number">2.</span> <span class="toc-text">2. 随机事件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-随机变量"><span class="toc-number">3.</span> <span class="toc-text">3. 随机变量</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-离散随机变量"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 离散随机变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-连续随机变量"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 连续随机变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-累积分布函数"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 累积分布函数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-随机向量"><span class="toc-number">4.</span> <span class="toc-text">4. 随机向量</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1离散随机向量"><span class="toc-number">4.1.</span> <span class="toc-text">4.1离散随机向量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-连续随机向量"><span class="toc-number">4.2.</span> <span class="toc-text">4.2 连续随机向量</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-边际分布"><span class="toc-number">5.</span> <span class="toc-text">5. 边际分布</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-条件概率分布"><span class="toc-number">6.</span> <span class="toc-text">6. 条件概率分布</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-独立与条件独立"><span class="toc-number">7.</span> <span class="toc-text">7. 独立与条件独立</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8-期望和方差"><span class="toc-number">8.</span> <span class="toc-text">8. 期望和方差</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#8-1-Jensen不等式"><span class="toc-number">8.1.</span> <span class="toc-text">8.1 Jensen不等式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-2-大数定律和中心极限定理"><span class="toc-number">8.2.</span> <span class="toc-text">8.2 大数定律和中心极限定理</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -468,7 +403,7 @@ if(true){
   	repo: 'blog_comments',
   	owner: 'buracagyang',
   	admin: ['buracagyang'],
-  	id: 'Wed May 08 2019 17:51:18 GMT+0800',
+  	id: 'Fri Jun 14 2019 10:15:42 GMT+0800',
   	distractionFreeMode: 'true'
 })
 gitalk.render('gitalk-container') 
