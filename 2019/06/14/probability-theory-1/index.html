@@ -17,7 +17,7 @@
 <meta property="og:description" content="同步于CSDN;音尘杂记 主要回顾概率论中关于样本空间、随机事件和常见概率分布的基础知识。 1. 样本空间样本空间 是一个随机试验所有可能结果的集合。例如，如果抛掷一枚硬币，那么样本空间就是集合{正面，反面}。如果投掷一个骰子，那么样本空间就是{1, 2, 3, 4, 5, 6}。随机试验中的每个可能结果称为样本点。 有些试验有两个或多个可能的样本空间。例如，从52 张扑克牌中随机抽出一张，样本空">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://buracagyang.github.io/2019/06/14/probability-theory-1/pdf-cdf.png">
-<meta property="og:updated_time" content="2019-06-14T07:36:27.200Z">
+<meta property="og:updated_time" content="2019-06-14T07:46:11.368Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="概率论1-随机事件和概率">
 <meta name="twitter:description" content="同步于CSDN;音尘杂记 主要回顾概率论中关于样本空间、随机事件和常见概率分布的基础知识。 1. 样本空间样本空间 是一个随机试验所有可能结果的集合。例如，如果抛掷一枚硬币，那么样本空间就是集合{正面，反面}。如果投掷一个骰子，那么样本空间就是{1, 2, 3, 4, 5, 6}。随机试验中的每个可能结果称为样本点。 有些试验有两个或多个可能的样本空间。例如，从52 张扑克牌中随机抽出一张，样本空">
@@ -198,11 +198,11 @@
 <h2 id="3-1-离散随机变量"><a href="#3-1-离散随机变量" class="headerlink" title="3.1 离散随机变量"></a>3.1 离散随机变量</h2><p>如果随机变量$X$所有可能取的值为有限可列举的，有$n$个有限取值${x_1, … , x_n}$,则称$X$为离散随机变量</p>
 <p>要了解$X$的统计规律，就必须知道它取每种可能值$x_i$的概率，即<br>$$<br>P(X = x_i) = p(x_i), \qquad ∀i \in [1, n] \tag{4}<br>$$<br>$p(x_1), … , p(x_n)$称为离散型随机变量$X$的<strong>概率分布（Probability Distribution）</strong>或<strong>分布</strong>，并且满足<br>$$<br>\begin{eqnarray}<br>\sum_{i=1}^{n}p(x_i) &amp;=&amp; 1 \\<br>p(x_i) &amp;\geq&amp; 0, \qquad \forall i \in [1, n]<br>\end{eqnarray}\tag{5}<br>$$<br>常见的离散随机变量的概率分布有：</p>
 <p><strong>伯努利分布</strong> 在一次试验中，事件A出现的概率为$\mu$，不出现的概率为$1−\mu$。若用变量$X$表示事件A出现的次数，则$X$的取值为0和1，其相应的分布为:<br>$$<br>p(x) = μ^x(1 − μ)^{(1−x)} \tag{6}<br>$$<br>这个分布称为<strong>伯努利分布（Bernoulli Distribution）</strong>,又名两点分布或者<strong>0-1分布</strong>。</p>
-<p><strong>二项分布</strong> 在n次伯努利分布中，若以变量$X$表示事件A出现的次数，则$X$的取值为{0, · · · , n}，其相应的分布为<strong>二项分布（Binomial Distribution）</strong>。<br>$$<br>P(X = k) = \tbinom{n}{k}μ^k(1 − μ)^{n−k}, \quad k = 1, … , n \tag{7}<br>$$<br>其中￥\tbinom{n}{k}$为二项式系数（这就是二项分布的名称的由来），表示从$n$个元素中取出$k$个元素而不考虑其顺序的<strong>组合</strong>的总数。</p>
+<p><strong>二项分布</strong> 在n次伯努利分布中，若以变量$X$表示事件A出现的次数，则$X$的取值为{0, · · · , n}，其相应的分布为<strong>二项分布（Binomial Distribution）</strong>。<br>$$<br>P(X = k) = \tbinom{n}{k}μ^k(1 − μ)^{n−k}, \quad k = 1, … , n \tag{7}<br>$$<br>其中$\tbinom{n}{k}$为二项式系数（这就是二项分布的名称的由来），表示从$n$个元素中取出$k$个元素而不考虑其顺序的<strong>组合</strong>的总数。</p>
 <h2 id="3-2-连续随机变量"><a href="#3-2-连续随机变量" class="headerlink" title="3.2 连续随机变量"></a>3.2 连续随机变量</h2><p>与离散随机变量不同，一些随机变量$X$的取值是不可列举的，由全部实数或者由一部分区间组成，比如<br>$$<br>X = \{x|a ≤ x ≤ b\}, -\infty &lt; a &lt; b &lt; \infty \tag{8}<br>$$<br>则称$X$为<strong>连续随机变量</strong>。连续随机变量的值是不可数及无穷尽的。</p>
 <p>对于连续随机变量$X$，它取一个具体值$x_i$的概率为0，这个离散随机变量截然不同。因此用列举连续随机变量取某个值的概率来描述这种随机变量不但做不到，也毫无意义。</p>
 <p>连续随机变量$X$的概率分布一般用<strong>概率密度函数（Probability Density Function，PDF）</strong> p(x)来描述。p(x)为可积函数，并满足<br>$$<br>\begin{eqnarray}<br>\int_{-\infty}^{\infty} p(x)dx &amp;=&amp; 1 \\<br>p(x) &amp;≥&amp; 0<br>\end{eqnarray} \tag{9}<br>$$<br>给定概率密度函数p(x)，便可以计算出随机变量落入某一个区间的概率，而p(x)本身反映了随机变量取落入x的非常小的邻近区间中的概率大小。常见的连续随机变量的概率分布有：</p>
-<p><strong>均匀分布</strong> 若a, b为有限数，[a, b]上的<strong>均匀分布（Uniform Distribution）</strong>的概率密度函数定义为<br>$$<br>p(x) = \begin {cases}<br>\frac{1}{b-a}&amp;,&amp; a\leq x \leq b \\<br>0&amp;,&amp; x<a 或 x>b<br>\end {cases} \tag{10}<br>$$</a></p>
+<p><strong>均匀分布</strong> 若a, b为有限数，[a, b]上的<strong>均匀分布（Uniform Distribution）</strong>的概率密度函数定义为<br>$$<br>p(x) = \begin {cases}<br>\frac{1}{b-a}, a\leq x \leq b \\<br>0, x<a \quad or x>b<br>\end {cases} \tag{10}<br>$$</a></p>
 <p><strong>正态分布</strong> 正态分布（Normal Distribution），又名<strong>高斯分布（Gaussian Distribution）</strong>，是自然界最常见的一种分布，并且具有很多良好的性质，在很多领域都有非常重要的影响力，其概率密度函数为<br>$$<br>p(x) = \frac{1}{\sqrt{2\pi}\sigma}exp(− \frac{(x − μ)^2}{2\sigma^2}) \tag{11}<br>$$<br>其中$\sigma &gt; 0$，$\mu$和$\sigma$均为常数。若随机变量$X$服从一个参数为$\mu$和$\sigma$的概率分布，简记为<br>$$<br>X \sim \cal N(\mu, \sigma^2) \tag{12}<br>$$<br>当$\mu = 0，\sigma = 1$时，称为<strong>标准正态分布（Standard Normal Distribution）</strong>。</p>
 <h2 id="3-3-累积分布函数"><a href="#3-3-累积分布函数" class="headerlink" title="3.3 累积分布函数"></a>3.3 累积分布函数</h2><p>对于一个随机变量$X$，其<strong>累积分布函数（Cumulative Distribution Function，CDF）</strong>是随机变量$X$的取值小于等于$x$的概率。<br>$$<br>cdf(x) = P(X \leq x) \tag{13}<br>$$<br>以连续随机变量$X$为例，累积分布函数定义为<br>$$<br>cdf(x) =\int_{-\infty}^{x}p(t)dt \tag{14}<br>$$<br>其中p(x)为概率密度函数。下图给出了标准正态分布的累计分布函数和概率密度函数。</p>
 <p><img src="/2019/06/14/probability-theory-1/pdf-cdf.png" alt="pdf-cdf"></p>
@@ -229,7 +229,7 @@
 <h2 id="8-1-Jensen不等式"><a href="#8-1-Jensen不等式" class="headerlink" title="8.1 Jensen不等式"></a>8.1 Jensen不等式</h2><p>如果$X$是随机变量，$g$是凸函数，则<br>$$<br>g(\Bbb{E}[X]) \leq \Bbb{E}[g(X)] \tag{41}<br>$$</p>
 <p>等式当且仅当$X$是一个常数或$g$是线性时成立。</p>
 <h2 id="8-2-大数定律和中心极限定理"><a href="#8-2-大数定律和中心极限定理" class="headerlink" title="8.2 大数定律和中心极限定理"></a>8.2 大数定律和中心极限定理</h2><p><strong>大数定律（Law Of Large Numbers）</strong> 是指$n$个样本$X_1, … ,X_n$是独立同分布的，即$E[X_1] = … = E[X_n] = \mu$，那么其均值收敛于期望值$\mu$<br>$$<br>\lim_{n \to \infty} \bar{X}_n = \lim_{n\to \infty} \frac{1}{n}(X_1 + … + X_n) \to \mu \tag{42}<br>$$<br><strong>中心极限定理(Central Limit Theorem)</strong> 是指$n$个样本$X_1, … ,X_n$是独立同分布的，则对任意x，分布函数<br>$$<br>F_n(x) = P(\frac{\sum_{i=1}^{n}X_i - n\mu}{\sigma \sqrt{n}} \leq x)<br>$$<br>满足：</p>
-<p>$\lim_{n\to \infty} F_n(x)$ 近似服从标准正态分布 $\cal{N}(0, 1)$。</p>
+<p>$\lim_{n \to \infty}  F_n(x)$ 近似服从标准正态分布 $\cal{N}(0, 1)$。</p>
 <p>主要参考<a href="https://github.com/nndl/nndl.github.io" target="_blank" rel="noopener">https://github.com/nndl/nndl.github.io</a></p>
 
       
