@@ -6,20 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://buracagyang.github.io">
-  <title>概率论1-随机过程 | Buracag的博客</title>
+  <title>概率论2-随机过程 | Buracag的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="同步于CSDN;音尘杂记 随机过程（Stochastic Process） 是一组随机变量$X_t$的集合，其中$t$属于一个索引（index）集合$\cal{T}$。索引集合$\cal{T}$可以定义在时间域或者空间域，但一般为时间域，以实数或正数表示。当t为实数时，随机过程为连续随机过程；当t为整数时，为离散随机过程。 日常生活中的很多例子包括股票的波动、语音信号、身高的变化等都可以看作是随机">
 <meta name="keywords" content="技术备忘,基础知识">
 <meta property="og:type" content="article">
-<meta property="og:title" content="概率论1-随机过程">
+<meta property="og:title" content="概率论2-随机过程">
 <meta property="og:url" content="https://buracagyang.github.io/2019/06/14/probability-theory-2/index.html">
 <meta property="og:site_name" content="Buracag的博客">
 <meta property="og:description" content="同步于CSDN;音尘杂记 随机过程（Stochastic Process） 是一组随机变量$X_t$的集合，其中$t$属于一个索引（index）集合$\cal{T}$。索引集合$\cal{T}$可以定义在时间域或者空间域，但一般为时间域，以实数或正数表示。当t为实数时，随机过程为连续随机过程；当t为整数时，为离散随机过程。 日常生活中的很多例子包括股票的波动、语音信号、身高的变化等都可以看作是随机">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-17T01:39:48.459Z">
+<meta property="og:image" content="https://buracagyang.github.io/2019/06/14/probability-theory-2/fig1.png">
+<meta property="og:image" content="https://buracagyang.github.io/2019/06/14/probability-theory-2/fig2.png">
+<meta property="og:updated_time" content="2019-06-17T01:46:33.350Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="概率论1-随机过程">
+<meta name="twitter:title" content="概率论2-随机过程">
 <meta name="twitter:description" content="同步于CSDN;音尘杂记 随机过程（Stochastic Process） 是一组随机变量$X_t$的集合，其中$t$属于一个索引（index）集合$\cal{T}$。索引集合$\cal{T}$可以定义在时间域或者空间域，但一般为时间域，以实数或正数表示。当t为实数时，随机过程为连续随机过程；当t为整数时，为离散随机过程。 日常生活中的很多例子包括股票的波动、语音信号、身高的变化等都可以看作是随机">
+<meta name="twitter:image" content="https://buracagyang.github.io/2019/06/14/probability-theory-2/fig1.png">
   
     <link rel="alternative" href="/atom.xml" title="Buracag的博客" type="application/atom+xml">
   
@@ -164,7 +167,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      概率论1-随机过程
+      概率论2-随机过程
     </h1>
   
 
@@ -199,8 +202,11 @@
 <p>假设一个未知函数$f(x)$服从高斯过程，且为平滑函数。如果两个样本$x_1, x_2$比较接近，那么对应的$f(x_1), f(x_2)$也比较接近。假设从函数$f(x)$中采样有限个样本$X = [x_1, x_2, … , x_N]$，这$N$个点服从一个多元正态分布，<br>$$<br>[f(x_1), f(x_2), … , f(x_N)]^T \sim N(\mu(X),K(X,X)) \tag{6}<br>$$<br>其中$\mu(X) = [\mu(x_1), \mu(x_2), … , \mu(x_N)]^T$是均值向量，$K(X,X) = [k(x_i, x_j )]_{N×N}$是协方差矩阵，$k(x_i, x_j)$为核函数，可以衡量两个样本的相似度。</p>
 <p>在高斯过程回归，一个常用的核函数是平方指数（Squared Exponential）函数<br>$$<br>k(x_i, x_j) = exp(\frac{−∥x_i − x_j∥^2}{2l^2}) \tag{7}<br>$$<br>其中$l$为超参数。当$x_i$和$x_j$越接近，其核函数的值越大，表明$f(x_i)$和$f(x_j)$越相关。</p>
 <p>假设$f(x)$的一组带噪声的观测值为${(x_n, y_n)}_{n=1}^N，其中$y_n \sim N(f(x_n), \sigma^2)$为正态分布，$\sigma$为噪声方差。</p>
-<p>对于一个新的样本点$x^∗$，我们希望预测函数$y^∗ = f(x^∗)$。令$y = [y_1, y_2, … , y_n]$为已有的观测值，根据高斯过程的假设，$[y; y^∗]$ 满足<br>$$<br>\begin {bmatrix}<br>y \\<br>y^<em> \end {bmatrix} \sim N<br>\left(<br>\begin {bmatrix}<br>\mu(X) \\<br>\mu(x^</em>)\end {bmatrix},<br>\begin {bmatrix}<br>K(X, X) + \sigma^2 I &amp; K(x^<em>, X)^T \\<br>K(x^</em>, X) &amp; k(x^<em>, x^</em>)<br>\end {bmatrix}<br>\right) \tag{8}<br>$$<br>其中$K(x^*,X) = [k(x^∗, x_1), … , k(x^∗, x^n)]$。</p>
-<p>根据上面的联合分布，$y^∗$的后验分布为<br>$$<br>p(y^∗|X, y) = N(\hat{\mu}, \hat{\sigma}^2) \tag{9}<br>$$<br>其中均值$\hat{\mu}$和方差$\hat{\sigma}$为<br>$$<br>\begin {eqnarray}<br>\hat{\mu} &amp;=&amp; K(x^<em>, X)(K(X, X) + \sigma^2 I)^{-1}(y-\mu(X)) + \mu(x^</em>) \tag{10} \\<br>\hat{\sigma}^2 &amp;=&amp; k(x^<em>, x^</em>) - K(x^<em>, X)(K(X, X) + \sigma^2 I)^{-1}K(x^</em>,X)^T \tag{11}<br>\end {eqnarray}<br>$$</p>
+<p>对于一个新的样本点$x^∗$，我们希望预测函数$y^∗ = f(x^∗)$。令$y = [y_1, y_2, … , y_n]$为已有的观测值，根据高斯过程的假设，$[y; y^∗]$ 满足</p>
+<p><img src="/2019/06/14/probability-theory-2/fig1.png" alt="fig1"></p>
+<p>其中$K(x^*,X) = [k(x^∗, x_1), … , k(x^∗, x^n)]$。</p>
+<p>根据上面的联合分布，$y^∗$的后验分布为<br>$$<br>p(y^∗|X, y) = N(\hat{\mu}, \hat{\sigma}^2) \tag{9}<br>$$<br>其中均值$\hat{\mu}$和方差$\hat{\sigma}$为</p>
+<p><img src="/2019/06/14/probability-theory-2/fig2.png" alt="fig2"></p>
 <p>从公式(10) 可以看出，均值函数$\mu(x)$可以近似地互相抵消。在实际应用中，一般假设$\mu(x) = 0$，均值$\hat{\mu}$可以将简化为<br>$$<br>\hat{\mu} = K(x^∗,X)(K(X,X) + \sigma^2 I)^{−1}y \tag{12}<br>$$<br>高斯过程回归可以认为是一种有效的贝叶斯优化方法，广泛地应用于机器学习中。</p>
 <p>主要参考<a href="https://github.com/nndl/nndl.github.io" target="_blank" rel="noopener">https://github.com/nndl/nndl.github.io</a></p>
 
