@@ -6,15 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://buracagyang.github.io">
-  <title>Buracag的博客</title>
+  <title>数学优化1-数学优化的类型 | Buracag的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Buracag的博客">
-<meta property="og:url" content="https://buracagyang.github.io/page/2/index.html">
+  <meta name="description" content="同步于CSDN;音尘杂记 数学优化（Mathematical Optimization）问题，也叫最优化问题，是指在一定约束条件下，求解一个目标函数的最大值（或最小值）问题。 数学优化问题的定义为：给定一个目标函数（也叫代价函数）$f : \cal{A} → \Bbb{R}$，寻找一个变量（也叫参数）$x^* \in \cal{D}$，使得对于所有$\cal{D}$中的$x，f(x^∗) ≤ f(">
+<meta name="keywords" content="技术备忘,基础知识">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数学优化1-数学优化的类型">
+<meta property="og:url" content="https://buracagyang.github.io/2019/06/17/mathematical-optimization-1/index.html">
 <meta property="og:site_name" content="Buracag的博客">
+<meta property="og:description" content="同步于CSDN;音尘杂记 数学优化（Mathematical Optimization）问题，也叫最优化问题，是指在一定约束条件下，求解一个目标函数的最大值（或最小值）问题。 数学优化问题的定义为：给定一个目标函数（也叫代价函数）$f : \cal{A} → \Bbb{R}$，寻找一个变量（也叫参数）$x^* \in \cal{D}$，使得对于所有$\cal{D}$中的$x，f(x^∗) ≤ f(">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-06-17T11:59:47.652Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Buracag的博客">
+<meta name="twitter:title" content="数学优化1-数学优化的类型">
+<meta name="twitter:description" content="同步于CSDN;音尘杂记 数学优化（Mathematical Optimization）问题，也叫最优化问题，是指在一定约束条件下，求解一个目标函数的最大值（或最小值）问题。 数学优化问题的定义为：给定一个目标函数（也叫代价函数）$f : \cal{A} → \Bbb{R}$，寻找一个变量（也叫参数）$x^* \in \cal{D}$，使得对于所有$\cal{D}$中的$x，f(x^∗) ≤ f(">
   
     <link rel="alternative" href="/atom.xml" title="Buracag的博客" type="application/atom+xml">
   
@@ -152,22 +157,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-single-layer-perceptron" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-mathematical-optimization-1" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/29/single-layer-perceptron/">单层感知器为什么不能解决异或(XOR)问题</a>
+    <h1 class="article-title" itemprop="name">
+      数学优化1-数学优化的类型
     </h1>
   
 
         
-        <a href="/2019/05/29/single-layer-perceptron/" class="archive-article-date">
-  	<time datetime="2019-05-29T09:05:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-29</time>
+        <a href="/2019/06/17/mathematical-optimization-1/" class="archive-article-date">
+  	<time datetime="2019-06-17T11:45:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-17</time>
 </a>
         
       </header>
@@ -175,12 +178,48 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>同步于<a href="https://blog.csdn.net/buracag_mc" target="_blank" rel="noopener">CSDN</a>;<a href="https://www.runblog.online/" target="_blank" rel="noopener">音尘杂记</a></p>
-<p>单层感知器为什么不能解决异或问题(XOR)问题？给出两个思路去考虑这个小问题~</p>
-        
-          <a class="article-more-a" href="/2019/05/29/single-layer-perceptron/#more">more >></a>
-        
+<p><strong>数学优化（Mathematical Optimization）</strong>问题，也叫最优化问题，是指在一定约束条件下，求解一个目标函数的最大值（或最小值）问题。</p>
+<p>数学优化问题的定义为：给定一个目标函数（也叫代价函数）$f : \cal{A} → \Bbb{R}$，寻找一个变量（也叫参数）$x^* \in \cal{D}$，使得对于所有$\cal{D}$中的$x，f(x^∗) ≤ f(x)$（最小化）；或者$f(x^∗) \geq f(x)^（最大化），其中$\cal{D}$为变量$x$的约束集，也叫可行域；$cal{D}$中的变量被称为是可行解。</p>
+<a id="more"></a>
+<h1 id="1-离散优化和连续优化"><a href="#1-离散优化和连续优化" class="headerlink" title="1. 离散优化和连续优化"></a>1. 离散优化和连续优化</h1><p>根据输入变量$x$的值域是否为实数域，数学优化问题可以分为离散优化问题和连续优化问题。</p>
+<h2 id="1-1-离散优化问题"><a href="#1-1-离散优化问题" class="headerlink" title="1.1 离散优化问题"></a>1.1 离散优化问题</h2><p><strong>离散优化（Discrete Optimization）</strong>问题是目标函数的输入变量为离散变量，比如为整数或有限集合中的元素。离散优化问题主要有两个分支：</p>
+<ol>
+<li><strong>组合优化（Combinatorial Optimization）</strong>：其目标是从一个有限集合中找出使得目标函数最优的元素。在一般的组合优化问题中，集合中的元素之间存在一定的关联，可以表示为图结构。典型的组合优化问题有旅<br> 行商问题、最小生成树问题、图着色问题等。很多机器学习问题都是组合优化问题，比如特征选择、聚类问题、超参数优化问题以及<strong>结构化学习（Structured Learning）</strong>中标签预测问题等。</li>
+<li><strong>整数规划（Integer Programming）</strong>：输入变量$x \in \Bbb{Z}^d$为整数。一般常见的整数规划问题为<strong>整数线性规划（Integer Linear Programming，ILP）</strong>。整数线性规划的一种最直接的求解方法是：（1）去掉输入必须为整数的限制，将原问题转换为一般的线性规划问题，这个线性规划问题为原问题的松弛问题；（2）求得相应松弛问题的解；（3）把松弛问题的解四舍五入到最接近的整数。但是这种方法得到的解一般都不是最优的，因此原问题的最优解不一定在松弛问题最优解的附近。另外，这种方法得到的解也不一<br> 定满足约束条件。</li>
+</ol>
+<p>离散优化问题的求解一般都比较困难，优化算法的复杂度都比较高。</p>
+<h2 id="1-2-连续优化问题"><a href="#1-2-连续优化问题" class="headerlink" title="1.2 连续优化问题"></a>1.2 连续优化问题</h2><p><strong>连续优化（Continuous Optimization）</strong>问题是目标函数的输入变量为连续变量$x \in \Bbb{R}^d$，即目标函数为实函数。下文的内容主要以连续优化为主。</p>
+<h1 id="2-无约束优化和约束优化"><a href="#2-无约束优化和约束优化" class="headerlink" title="2. 无约束优化和约束优化"></a>2. 无约束优化和约束优化</h1><p>在连续优化问题中，根据是否有变量的约束条件，可以将优化问题分为无约束优化问题和约束优化问题。</p>
+<p><strong>无约束优化问题（Unconstrained Optimization）</strong>的可行域为整个实数域$\cal{D} = \Bbb{R}^d$，可以写为<br>$$<br>\min_{x} f(x) \tag{1}<br>$$<br>其中$x \in \Bbb{R}^d$为输入变量，$f : \Bbb{R}^d \to \Bbb{R}$为目标函数。</p>
+<p><strong>约束优化问题（Constrained Optimization）</strong>中变量x需要满足一些等式或不等式的约束。约束优化问题通常使用拉格朗日乘数法来进行求解。</p>
+<h1 id="3-线性优化和非线性优化"><a href="#3-线性优化和非线性优化" class="headerlink" title="3. 线性优化和非线性优化"></a>3. 线性优化和非线性优化</h1><p>如果在公式(1) 中，目标函数和所有的约束函数都为线性函数，则该问题为<strong>线性规划问题（Linear Programming）</strong>。相反，如果目标函数或任何一个约束函数为非线性函数，则该问题为<strong>非线性规划问题（Nonlinear Programming）</strong>。</p>
+<p>在非线性优化问题中，有一类比较特殊的问题是<strong>凸优化问题（Convex Programming）</strong>。在凸优化问题中，变量x 的可行域为凸集，即对于集合中任意两点，它们的连线全部位于在集合内部。目标函数f 也必须为凸函数，即满足<br>$$<br>f(\alpha x + (1 − \alpha)y) \leq \alpha f(x) + (1 − \alpha)f(y), ∀\alpha \in [0, 1] \tag{2}<br>$$</p>
+<p>凸优化问题是一种特殊的约束优化问题，需满足目标函数为凸函数，并且等式约束函数为线性函数，不等式约束函数为凹函数。</p>
+<p>主要参考<a href="https://github.com/nndl/nndl.github.io" target="_blank" rel="noopener">https://github.com/nndl/nndl.github.io</a></p>
+
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -195,7 +234,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法备忘</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">基础知识</a>
         		</li>
       		
 		</ul>
@@ -204,16 +243,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/29/single-layer-perceptron/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://qr.liantu.com/api.php?text=https://buracagyang.github.io/2019/06/17/mathematical-optimization-1/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2019/06/14/probability-theory-2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">概率论2-随机过程</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -228,271 +326,57 @@
         </div>
         
         
-    </div>
-</aside>
-
-
-
-
-
-  
-    <article id="post-aic-and-bic" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/29/aic-and-bic/">AIC和BIC相关知识</a>
-    </h1>
-  
-
-        
-        <a href="/2019/05/29/aic-and-bic/" class="archive-article-date">
-  	<time datetime="2019-05-29T07:14:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>同步于<a href="https://blog.csdn.net/buracag_mc" target="_blank" rel="noopener">CSDN</a>;<a href="https://www.runblog.online/" target="_blank" rel="noopener">音尘杂记</a></p>
-<p>前面在回顾<a href="https://github.com/scikit-learn/scikit-learn" target="_blank" rel="noopener">sklearn</a>时，在广义线性模型中看到选择模型时可以采用AIC和BIC准则，特地复习了下统计学基础，简记如下，以抛砖引玉。</p>
-        
-          <a class="article-more-a" href="/2019/05/29/aic-and-bic/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术备忘</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">统计学运用</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/29/aic-and-bic/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-离散优化和连续优化"><span class="toc-number">1.</span> <span class="toc-text">1. 离散优化和连续优化</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-离散优化问题"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 离散优化问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-连续优化问题"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 连续优化问题</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-无约束优化和约束优化"><span class="toc-number">2.</span> <span class="toc-text">2. 无约束优化和约束优化</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-线性优化和非线性优化"><span class="toc-number">3.</span> <span class="toc-text">3. 线性优化和非线性优化</span></a></li></ol>
+                    </div>
+                </span>
             </div>
         </div>
         
-        
     </div>
 </aside>
 
 
 
-
-
   
-    <article id="post-numpy-vectorize" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/09/numpy-vectorize/">利用numpy.vectorize提升计算速度</a>
-    </h1>
   
 
-        
-        <a href="/2019/05/09/numpy-vectorize/" class="archive-article-date">
-  	<time datetime="2019-05-09T09:11:56.441Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p>同步于<a href="https://blog.csdn.net/buracag_mc/article/details/88748607" title="https://blog.csdn.net/buracag_mc/article/details/88748607" target="_blank" rel="noopener">CSDN</a>;<a href="https://www.runblog.online/2019/03/18/increase-calculation-speed-with-numpy-vectorize/" target="_blank" rel="noopener">音尘杂记</a></p>
-<p>在实际项目中，对超大矩阵进行计算或者对超大的DataFrame进行计算是一个经常会出现的场景。这里先不考虑开发机本身内存等客观硬件因素，仅从设计上讨论一下不同实现方式带来的性能差异，抛砖引玉。</p>
-        
-          <a class="article-more-a" href="/2019/05/09/numpy-vectorize/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术备忘</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/09/numpy-vectorize/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-  
-    <article id="post-svm-proving-process" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/08/svm-proving-process/">SVM推导过程注解</a>
-    </h1>
   
 
-        
-        <a href="/2019/05/08/svm-proving-process/" class="archive-article-date">
-  	<time datetime="2019-05-08T09:51:18.299Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p>同步于<a href="https://blog.csdn.net/buracag_mc/article/details/76762249" title="https://blog.csdn.net/buracag_mc/article/details/76762249" target="_blank" rel="noopener">CSDN</a>;<a href="https://www.runblog.online/2019/03/18/svm-process/" target="_blank" rel="noopener">音尘杂记</a></p>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>支持向量机(Support Vector Machine)的原理其实比较简单，它是基于结构风险最小化理论之上在特征空间中建构最优分割超平面。在二维中就是线，在三维中就是面，但我们统称为超平面。</p>
-        
-          <a class="article-more-a" href="/2019/05/08/svm-proving-process/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术备忘</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">统计学运用</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法备忘</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/08/svm-proving-process/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
+  
 
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-    </nav>
   
+    <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div> 
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+
+if(true){
+	var gitalk = new Gitalk({
+  	clientID: 'b59e8ee91a1328df0e4b',
+  	clientSecret: 'e8a8251bb9bd5ec9913a699734a6824bea1d6ec3',
+  	repo: 'blog_comments',
+  	owner: 'buracagyang',
+  	admin: ['buracagyang'],
+  	id: 'Mon Jun 17 2019 19:45:42 GMT+0800',
+  	distractionFreeMode: 'true'
+})
+gitalk.render('gitalk-container') 
+}
+</script>
+  
+  
+
 
 
           </div>
@@ -514,8 +398,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
