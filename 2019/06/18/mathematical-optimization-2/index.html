@@ -6,15 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://buracagyang.github.io">
-  <title>Buracag的博客</title>
+  <title>数学优化2-优化算法 | Buracag的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Buracag的博客">
-<meta property="og:url" content="https://buracagyang.github.io/page/2/index.html">
+  <meta name="description" content="同步于CSDN;音尘杂记 优化问题一般都是通过迭代的方式来求解：通过猜测一个初始的估计$x_0$，然后不断迭代产生新的估计$x_1, x_2, …  x_t$，希望$x_t$最终收敛到期望的最优解$x^∗$。 一个好的优化算法应该是在一定的时间或空间复杂度下能够快速准确地找到最优解。同时，好的优化算法受初始猜测点的影响较小，通过迭代能稳定地找到最优解$x^∗$的邻域，然后迅速收敛于$x^∗$。 优">
+<meta name="keywords" content="技术备忘,基础知识">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数学优化2-优化算法">
+<meta property="og:url" content="https://buracagyang.github.io/2019/06/18/mathematical-optimization-2/index.html">
 <meta property="og:site_name" content="Buracag的博客">
+<meta property="og:description" content="同步于CSDN;音尘杂记 优化问题一般都是通过迭代的方式来求解：通过猜测一个初始的估计$x_0$，然后不断迭代产生新的估计$x_1, x_2, …  x_t$，希望$x_t$最终收敛到期望的最优解$x^∗$。 一个好的优化算法应该是在一定的时间或空间复杂度下能够快速准确地找到最优解。同时，好的优化算法受初始猜测点的影响较小，通过迭代能稳定地找到最优解$x^∗$的邻域，然后迅速收敛于$x^∗$。 优">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="https://buracagyang.github.io/2019/06/18/mathematical-optimization-2/sample.gif">
+<meta property="og:updated_time" content="2019-06-18T08:30:45.441Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Buracag的博客">
+<meta name="twitter:title" content="数学优化2-优化算法">
+<meta name="twitter:description" content="同步于CSDN;音尘杂记 优化问题一般都是通过迭代的方式来求解：通过猜测一个初始的估计$x_0$，然后不断迭代产生新的估计$x_1, x_2, …  x_t$，希望$x_t$最终收敛到期望的最优解$x^∗$。 一个好的优化算法应该是在一定的时间或空间复杂度下能够快速准确地找到最优解。同时，好的优化算法受初始猜测点的影响较小，通过迭代能稳定地找到最优解$x^∗$的邻域，然后迅速收敛于$x^∗$。 优">
+<meta name="twitter:image" content="https://buracagyang.github.io/2019/06/18/mathematical-optimization-2/sample.gif">
   
     <link rel="alternative" href="/atom.xml" title="Buracag的博客" type="application/atom+xml">
   
@@ -152,22 +159,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-python-basic-about-class" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-mathematical-optimization-2" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/29/python-basic-about-class/">Python中定义类的相关知识</a>
+    <h1 class="article-title" itemprop="name">
+      数学优化2-优化算法
     </h1>
   
 
         
-        <a href="/2019/05/29/python-basic-about-class/" class="archive-article-date">
-  	<time datetime="2019-05-29T09:12:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-29</time>
+        <a href="/2019/06/18/mathematical-optimization-2/" class="archive-article-date">
+  	<time datetime="2019-06-18T05:17:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-18</time>
 </a>
         
       </header>
@@ -175,12 +180,54 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>同步于<a href="https://blog.csdn.net/buracag_mc" target="_blank" rel="noopener">CSDN</a>;<a href="https://www.runblog.online/" target="_blank" rel="noopener">音尘杂记</a></p>
-<p>主要介绍了在python中，抽象类的定义、多态的概念、类中属性的封装以及类中常见的修饰器。</p>
-        
-          <a class="article-more-a" href="/2019/05/29/python-basic-about-class/#more">more >></a>
-        
+<p>优化问题一般都是通过迭代的方式来求解：通过猜测一个初始的估计$x_0$，然后不断迭代产生新的估计$x_1, x_2, …  x_t$，希望$x_t$最终收敛到期望的最优解$x^∗$。</p>
+<p>一个好的优化算法应该是在一定的时间或空间复杂度下能够快速准确地找到最优解。同时，好的优化算法受初始猜测点的影响较小，通过迭代能稳定地找到最优解$x^∗$的邻域，然后迅速收敛于$x^∗$。</p>
+<p>优化算法中常用的迭代方法有线性搜索和置信域方法等。线性搜索的策略是寻找方向和步长，具体算法有梯度下降法、牛顿法、共轭梯度法等。在<a href="https://blog.csdn.net/buracag_mc/article/details/77620686" target="_blank" rel="noopener">文章</a>中也简要介绍过梯度下降的概念，这里为使得整个体系完整故重新记录一下。</p>
+<a id="more"></a>
+<h1 id="1-全局最优和局部最优"><a href="#1-全局最优和局部最优" class="headerlink" title="1. 全局最优和局部最优"></a>1. 全局最优和局部最优</h1><p>对于很多非线性优化问题，会存在若干个局部的极小值。<strong>局部最小值</strong>，或<strong>局部最优解</strong>$x^∗$定义为：存在一个$\delta &gt; 0$，对于所有的满足$∥x−x^*∥ \leq \delta$的x，公式$f(x^∗) \leq f(x)$成立。也就是说，在$x^∗$的附近区域内，所有的函数值都大于或者等于$f(x^∗)$。</p>
+<p>对于所有的$x \in A$，都有$f(x^∗) \leq f(x)$成立，则$x^∗$为全局最小值，或全局最优解。一般的，求局部最优解是容易的，但很难保证其为全局最优解。对于线性规划或凸优化问题，局部最优解就是全局最优解。</p>
+<p>要确认一个点$x^∗$是否为局部最优解，通过比较它的邻域内有没有更小的函数值是不现实的。如果函数$f(x)$是二次连续可微的，我们可以通过检查目标函数在点$x^∗$的梯度$∇f(x^∗)$和Hessian矩阵$\nabla^2f(x^∗)$来判断。</p>
+<blockquote>
+<p><strong>定理1 局部最小值的一阶必要条件：</strong> 如果$x^∗$为局部最优解并且函数$f$在$x^∗$的邻域内一阶可微，则在$∇f(x^∗) = 0$。</p>
+</blockquote>
+<p><strong>证明.</strong> 如果函数$f(x)$是连续可微的，根据泰勒展开公式（Taylor’s Formula），函数$f(x)$的一阶展开可以近似为<br>$$<br>f(x^∗ + \Delta x) = f(x^∗) + \Delta x^T \nabla f(x^∗) \tag{1}<br>$$<br>假设$∇f(x^∗) \neq 0$，则可以找到一个$\Delta x$（比如$\Delta x = −\alpha ∇f(x^∗)$，$\alpha$为很小的正数），使得<br>$$<br>f(x^∗ + \Delta x) − f(x^∗) = \Delta x^T \nabla f(x^∗) \leq 0 \tag{2}<br>$$</p>
+<p>这和局部最优的定义矛盾。</p>
+<blockquote>
+<p><strong>定理2 局部最优解的二阶必要条件：</strong> 如果$x^<em>$为局部最优解并且函数$f$在$x^</em>$的领域内二阶可微，则$\nabla f(x^<em>)=0, \nabla^2 f(x^</em>)$为半正定矩阵。</p>
+</blockquote>
+<p><strong>证明.</strong> 如果函数$f(x)$是二次连续可微的，函数$f(x)$的二阶展开可以近似为<br>$$<br>f(x^∗ + \Delta x) = f(x^∗) + \Delta x^T \nabla f(x^∗) + \frac{1}{2}\Delta x^T (\nabla^2f(x^∗))\Delta x \tag{3}<br>$$<br>由一阶必要性定理可知$\nabla f(x^∗) = 0$，则<br>$$<br>f(x^∗ + \Delta x) − f(x^∗) = \frac{1}{2}\Delta x^T (\nabla^2 f(x^∗))\Delta x \geq 0 \tag{4}<br>$$<br>即Hessian矩阵$\nabla^2f(x^∗)$为半正定矩阵。</p>
+<h1 id="2-梯度下降法"><a href="#2-梯度下降法" class="headerlink" title="2. 梯度下降法"></a>2. 梯度下降法</h1><p><strong>梯度下降法（Gradient Descent Method）</strong>，也叫<strong>最速下降法（Steepest Descend Method）</strong>，经常用来求解无约束优化的极小值问题。</p>
+<p>对于函数$f(x)$，如果$f(x)$在点$x_t$附近是连续可微的，那么$f(x)$下降最快的方向是$f(x)$在$x_t$点的梯度方法的反方向。根据泰勒一阶展开公式，<br>$$<br>f(x_{t+1}) = f(x_t + \Delta x) \approx f(x_t) + \Delta x^T \nabla f(x_t) \tag{5}<br>$$<br>要使得$f(x_{t+1}) &lt; f(x_t)$，就得使$\Delta x^T\nabla f(x_t) &lt; 0$。我们取$\Delta x = −\alpha \nabla f(x_t)$。如果$\alpha &gt; 0$为一个够小数值时，那么$f(x_{t+1}) &lt; f(x_t)$ 成立。</p>
+<p>这样我们就可以从一个初始值$x_0$出发，通过迭代公式<br>$$<br>x_{t+1} = x_t − \alpha_t\nabla f(x_t), t \geq 0 \tag{6}<br>$$<br>生成序列$x_0, x_1, x_2, …$ 使得<br>$$<br>f(x_0) \geq f(x_1) \geq f(x_2) \geq … \tag{7}<br>$$<br>如果顺利的话，序列($x_n$) 收敛到局部最优解$x^∗$。注意每次迭代步长$\alpha$可以改变，但其取值必须合适，如果过大就不会收敛，如果过小则收敛速度太慢。</p>
+<p>梯度下降法的示例过程可以参见下图：</p>
+<p><img src="/2019/06/18/mathematical-optimization-2/sample.gif" alt="sample"></p>
+<p>梯度下降法为一阶收敛算法，当靠近极小值时梯度变小，收敛速度会变慢，并且可能以“之字形”的方式下降。如果目标函数为二阶连续可微，我们可以采用牛顿法。牛顿法为二阶收敛算法，收敛速度更快，但是每次迭代需要计算<br>Hessian矩阵的逆矩阵，复杂度较高。相反，如果我们要求解一个最大值问题，就需要向梯度正方向迭代进行搜索，逐渐接近函数的局部极大值点，这个过程则被称为梯度上升法（GradientAscent）。</p>
+<p>后面准备专门整理一份梯度下降中关于批量梯度下降(BGD)、随机梯度下降(SGD)、小批量梯度下降(MBGD)、Momentum、Adagrad等资料。</p>
+<p>主要参考<a href="https://github.com/nndl/nndl.github.io" target="_blank" rel="noopener">https://github.com/nndl/nndl.github.io</a></p>
+
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -195,7 +242,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">基础知识</a>
         		</li>
       		
 		</ul>
@@ -204,16 +251,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/29/python-basic-about-class/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://qr.liantu.com/api.php?text=https://buracagyang.github.io/2019/06/18/mathematical-optimization-2/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2019/06/17/mathematical-optimization-1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">数学优化1-数学优化的类型</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -228,353 +334,57 @@
         </div>
         
         
-    </div>
-</aside>
-
-
-
-
-
-  
-    <article id="post-single-layer-perceptron" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/29/single-layer-perceptron/">单层感知器为什么不能解决异或(XOR)问题</a>
-    </h1>
-  
-
-        
-        <a href="/2019/05/29/single-layer-perceptron/" class="archive-article-date">
-  	<time datetime="2019-05-29T09:05:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>同步于<a href="https://blog.csdn.net/buracag_mc" target="_blank" rel="noopener">CSDN</a>;<a href="https://www.runblog.online/" target="_blank" rel="noopener">音尘杂记</a></p>
-<p>单层感知器为什么不能解决异或问题(XOR)问题？给出两个思路去考虑这个小问题~</p>
-        
-          <a class="article-more-a" href="/2019/05/29/single-layer-perceptron/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术备忘</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法备忘</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/29/single-layer-perceptron/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-全局最优和局部最优"><span class="toc-number">1.</span> <span class="toc-text">1. 全局最优和局部最优</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-梯度下降法"><span class="toc-number">2.</span> <span class="toc-text">2. 梯度下降法</span></a></li></ol>
+                    </div>
+                </span>
             </div>
         </div>
         
-        
     </div>
 </aside>
 
 
 
-
-
   
-    <article id="post-aic-and-bic" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/29/aic-and-bic/">AIC和BIC相关知识</a>
-    </h1>
   
 
-        
-        <a href="/2019/05/29/aic-and-bic/" class="archive-article-date">
-  	<time datetime="2019-05-29T07:14:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>同步于<a href="https://blog.csdn.net/buracag_mc" target="_blank" rel="noopener">CSDN</a>;<a href="https://www.runblog.online/" target="_blank" rel="noopener">音尘杂记</a></p>
-<p>前面在回顾<a href="https://github.com/scikit-learn/scikit-learn" target="_blank" rel="noopener">sklearn</a>时，在广义线性模型中看到选择模型时可以采用AIC和BIC准则，特地复习了下统计学基础，简记如下，以抛砖引玉。</p>
-        
-          <a class="article-more-a" href="/2019/05/29/aic-and-bic/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术备忘</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">统计学运用</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/29/aic-and-bic/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-  
-    <article id="post-numpy-vectorize" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/09/numpy-vectorize/">利用numpy.vectorize提升计算速度</a>
-    </h1>
   
 
-        
-        <a href="/2019/05/09/numpy-vectorize/" class="archive-article-date">
-  	<time datetime="2019-05-09T09:11:56.441Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p>同步于<a href="https://blog.csdn.net/buracag_mc/article/details/88748607" title="https://blog.csdn.net/buracag_mc/article/details/88748607" target="_blank" rel="noopener">CSDN</a>;<a href="https://www.runblog.online/2019/03/18/increase-calculation-speed-with-numpy-vectorize/" target="_blank" rel="noopener">音尘杂记</a></p>
-<p>在实际项目中，对超大矩阵进行计算或者对超大的DataFrame进行计算是一个经常会出现的场景。这里先不考虑开发机本身内存等客观硬件因素，仅从设计上讨论一下不同实现方式带来的性能差异，抛砖引玉。</p>
-        
-          <a class="article-more-a" href="/2019/05/09/numpy-vectorize/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术备忘</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/09/numpy-vectorize/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
   
-    <article id="post-svm-proving-process" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/08/svm-proving-process/">SVM推导过程注解</a>
-    </h1>
-  
-
-        
-        <a href="/2019/05/08/svm-proving-process/" class="archive-article-date">
-  	<time datetime="2019-05-08T09:51:18.299Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p>同步于<a href="https://blog.csdn.net/buracag_mc/article/details/76762249" title="https://blog.csdn.net/buracag_mc/article/details/76762249" target="_blank" rel="noopener">CSDN</a>;<a href="https://www.runblog.online/2019/03/18/svm-process/" target="_blank" rel="noopener">音尘杂记</a></p>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>支持向量机(Support Vector Machine)的原理其实比较简单，它是基于结构风险最小化理论之上在特征空间中建构最优分割超平面。在二维中就是线，在三维中就是面，但我们统称为超平面。</p>
-        
-          <a class="article-more-a" href="/2019/05/08/svm-proving-process/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术备忘</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">统计学运用</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法备忘</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/05/08/svm-proving-process/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
 
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-    </nav>
   
+    <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div> 
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+
+if(true){
+	var gitalk = new Gitalk({
+  	clientID: 'b59e8ee91a1328df0e4b',
+  	clientSecret: 'e8a8251bb9bd5ec9913a699734a6824bea1d6ec3',
+  	repo: 'blog_comments',
+  	owner: 'buracagyang',
+  	admin: ['buracagyang'],
+  	id: 'Tue Jun 18 2019 13:17:45 GMT+0800',
+  	distractionFreeMode: 'true'
+})
+gitalk.render('gitalk-container') 
+}
+</script>
+  
+  
+
 
 
           </div>
@@ -596,8 +406,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
