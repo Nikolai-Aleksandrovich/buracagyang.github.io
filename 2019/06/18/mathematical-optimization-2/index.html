@@ -17,7 +17,7 @@
 <meta property="og:description" content="同步于CSDN;音尘杂记 优化问题一般都是通过迭代的方式来求解：通过猜测一个初始的估计$x_0$，然后不断迭代产生新的估计$x_1, x_2, …  x_t$，希望$x_t$最终收敛到期望的最优解$x^∗$。 一个好的优化算法应该是在一定的时间或空间复杂度下能够快速准确地找到最优解。同时，好的优化算法受初始猜测点的影响较小，通过迭代能稳定地找到最优解$x^∗$的邻域，然后迅速收敛于$x^∗$。 优">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://buracagyang.github.io/2019/06/18/mathematical-optimization-2/sample.gif">
-<meta property="og:updated_time" content="2019-06-18T08:30:45.441Z">
+<meta property="og:updated_time" content="2019-06-18T09:45:50.821Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数学优化2-优化算法">
 <meta name="twitter:description" content="同步于CSDN;音尘杂记 优化问题一般都是通过迭代的方式来求解：通过猜测一个初始的估计$x_0$，然后不断迭代产生新的估计$x_1, x_2, …  x_t$，希望$x_t$最终收敛到期望的最优解$x^∗$。 一个好的优化算法应该是在一定的时间或空间复杂度下能够快速准确地找到最优解。同时，好的优化算法受初始猜测点的影响较小，通过迭代能稳定地找到最优解$x^∗$的邻域，然后迅速收敛于$x^∗$。 优">
@@ -193,7 +193,7 @@
 <p><strong>证明.</strong> 如果函数$f(x)$是连续可微的，根据泰勒展开公式（Taylor’s Formula），函数$f(x)$的一阶展开可以近似为<br>$$<br>f(x^∗ + \Delta x) = f(x^∗) + \Delta x^T \nabla f(x^∗) \tag{1}<br>$$<br>假设$∇f(x^∗) \neq 0$，则可以找到一个$\Delta x$（比如$\Delta x = −\alpha ∇f(x^∗)$，$\alpha$为很小的正数），使得<br>$$<br>f(x^∗ + \Delta x) − f(x^∗) = \Delta x^T \nabla f(x^∗) \leq 0 \tag{2}<br>$$</p>
 <p>这和局部最优的定义矛盾。</p>
 <blockquote>
-<p><strong>定理2 局部最优解的二阶必要条件：</strong> 如果$x^<em>$为局部最优解并且函数$f$在$x^</em>$的领域内二阶可微，则$\nabla f(x^<em>)=0, \nabla^2 f(x^</em>)$为半正定矩阵。</p>
+<p><strong>定理2 局部最优解的二阶必要条件：</strong> 如果$x^∗$为局部最优解并且函数$f$在$x^∗$的领域内二阶可微，则$\nabla f(x^∗)=0, \nabla^2 f(x^*)$为半正定矩阵。</p>
 </blockquote>
 <p><strong>证明.</strong> 如果函数$f(x)$是二次连续可微的，函数$f(x)$的二阶展开可以近似为<br>$$<br>f(x^∗ + \Delta x) = f(x^∗) + \Delta x^T \nabla f(x^∗) + \frac{1}{2}\Delta x^T (\nabla^2f(x^∗))\Delta x \tag{3}<br>$$<br>由一阶必要性定理可知$\nabla f(x^∗) = 0$，则<br>$$<br>f(x^∗ + \Delta x) − f(x^∗) = \frac{1}{2}\Delta x^T (\nabla^2 f(x^∗))\Delta x \geq 0 \tag{4}<br>$$<br>即Hessian矩阵$\nabla^2f(x^∗)$为半正定矩阵。</p>
 <h1 id="2-梯度下降法"><a href="#2-梯度下降法" class="headerlink" title="2. 梯度下降法"></a>2. 梯度下降法</h1><p><strong>梯度下降法（Gradient Descent Method）</strong>，也叫<strong>最速下降法（Steepest Descend Method）</strong>，经常用来求解无约束优化的极小值问题。</p>
@@ -201,7 +201,7 @@
 <p>这样我们就可以从一个初始值$x_0$出发，通过迭代公式<br>$$<br>x_{t+1} = x_t − \alpha_t\nabla f(x_t), t \geq 0 \tag{6}<br>$$<br>生成序列$x_0, x_1, x_2, …$ 使得<br>$$<br>f(x_0) \geq f(x_1) \geq f(x_2) \geq … \tag{7}<br>$$<br>如果顺利的话，序列($x_n$) 收敛到局部最优解$x^∗$。注意每次迭代步长$\alpha$可以改变，但其取值必须合适，如果过大就不会收敛，如果过小则收敛速度太慢。</p>
 <p>梯度下降法的示例过程可以参见下图：</p>
 <p><img src="/2019/06/18/mathematical-optimization-2/sample.gif" alt="sample"></p>
-<p>梯度下降法为一阶收敛算法，当靠近极小值时梯度变小，收敛速度会变慢，并且可能以“之字形”的方式下降。如果目标函数为二阶连续可微，我们可以采用牛顿法。牛顿法为二阶收敛算法，收敛速度更快，但是每次迭代需要计算<br>Hessian矩阵的逆矩阵，复杂度较高。相反，如果我们要求解一个最大值问题，就需要向梯度正方向迭代进行搜索，逐渐接近函数的局部极大值点，这个过程则被称为梯度上升法（GradientAscent）。</p>
+<p>梯度下降法为一阶收敛算法，当靠近极小值时梯度变小，收敛速度会变慢，并且可能以“之字形”的方式下降。如果目标函数为二阶连续可微，我们可以采用牛顿法。牛顿法为二阶收敛算法，收敛速度更快，但是每次迭代需要计算Hessian矩阵的逆矩阵，复杂度较高。相反，如果我们要求解一个最大值问题，就需要向梯度正方向迭代进行搜索，逐渐接近函数的局部极大值点，这个过程则被称为梯度上升法（GradientAscent）。</p>
 <p>后面准备专门整理一份梯度下降中关于批量梯度下降(BGD)、随机梯度下降(SGD)、小批量梯度下降(MBGD)、Momentum、Adagrad等资料。</p>
 <p>主要参考<a href="https://github.com/nndl/nndl.github.io" target="_blank" rel="noopener">https://github.com/nndl/nndl.github.io</a></p>
 
