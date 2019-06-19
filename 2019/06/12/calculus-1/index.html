@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Buracag的博客">
 <meta property="og:description" content="同步于CSDN;音尘杂记 微积分1，主要回顾关于微积分中关于导数的相关知识。错误之处，还望诸君不吝指教。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-14T12:55:11.836Z">
+<meta property="og:updated_time" content="2019-06-19T12:26:52.094Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="微积分1-导数">
 <meta name="twitter:description" content="同步于CSDN;音尘杂记 微积分1，主要回顾关于微积分中关于导数的相关知识。错误之处，还望诸君不吝指教。">
@@ -225,13 +225,13 @@
 <p>在分母布局中，$\frac{∂y}{∂x}$为行向量，而在分子布局中， $\frac{∂y}{∂x}$为列向量。</p>
 <h2 id="2-3-向量关于向量的偏导数"><a href="#2-3-向量关于向量的偏导数" class="headerlink" title="2.3 向量关于向量的偏导数"></a>2.3 向量关于向量的偏导数</h2><p>对于一个$d$维向量$x \in \mathbb{R}^p$，函数$y = f(x) \in \mathbb{R}^q$ 的值也为一个向量，则$f(x)$关于$x$的偏导数（分母布局）为<br>$$<br>\frac{\partial f(x)}{\partial x} =<br>\begin {bmatrix}<br>&amp;\frac{\partial y_1}{\partial x_1}&amp; &amp;…&amp; &amp;\frac{\partial y_q}{\partial x_1}&amp; \\<br>&amp;\vdots&amp; &amp;\vdots&amp; &amp;\vdots&amp; \\<br>&amp;\frac{\partial y_1}{\partial x_p}&amp; &amp;…&amp; &amp;\frac{\partial y_q}{\partial x_p}&amp; \\<br>\end {bmatrix} \in \mathbb{R}^{p \times q} \tag{1.7}<br>$$<br>称之为<strong>雅克比矩阵（Jacobian Matrix）</strong>。</p>
 <h1 id="3-导数法则"><a href="#3-导数法则" class="headerlink" title="3. 导数法则"></a>3. 导数法则</h1><p>复合函数的导数的计算可以通过以下法则来简化。</p>
-<h2 id="3-1-加-减-法则"><a href="#3-1-加-减-法则" class="headerlink" title="3.1 加(减)法则"></a>3.1 加(减)法则</h2><p>若$x \in \mathbb{R}^p，y = f(x) \in \mathbb{R}^q，z = g(x) \in \mathbb{R}^q$，则<br>$$<br>\frac{\partial(y+z)}{\partial x} = \frac{\partial y}{\partial x} + \frac{\partial z}{\partial x} \in \mathbb{R}^{p×q} \tag{1.10}<br>$$</p>
-<h2 id="3-2-乘法法则"><a href="#3-2-乘法法则" class="headerlink" title="3.2 乘法法则"></a>3.2 乘法法则</h2><p>(1) 若$x \in \mathbb{R}^p，y = f(x) \in \mathbb{R}^q，z = g(x) \in \mathbb{R}^q$，则<br>$$<br>\frac{∂y^Tz}{∂x} = \frac{∂y}{∂x}z + \frac{∂z}{∂x}y \in \mathbb{R}^p \tag{1.11}<br>$$</p>
-<p>(2) 若$x \in \mathbb{R}^p，y = f(x) \in \mathbb{R}^s，z = g(x) \in \mathbb{R}^t，A \in \mathbb{R}^{s×t}$ 和 $x$ 无关，则<br>$$<br>\frac{∂y^TAz}{∂x} = \frac{∂y}{∂x}Az + \frac{∂z}{∂x}A^Ty \in \mathbb{R}^p \tag{1.12}<br>$$<br>(3) 若$x \in \mathbb{R}^p，y = f(x) \in \mathbb{R}，z = g(x) \in \mathbb{R}^q$，则<br>$$<br>\frac{∂yz}{∂x} = y\frac{∂z}{∂x} + \frac{∂y}{∂x}z^T \in \mathbb{R}^{p×q} \tag{1.13}<br>$$</p>
+<h2 id="3-1-加-减-法则"><a href="#3-1-加-减-法则" class="headerlink" title="3.1 加(减)法则"></a>3.1 加(减)法则</h2><p>若$x \in \mathbb{R}^p，y = f(x) \in \mathbb{R}^q，z = g(x) \in \mathbb{R}^q$，则<br>$$<br>\frac{\partial(y+z)}{\partial x} = \frac{\partial y}{\partial x} + \frac{\partial z}{\partial x} \in \mathbb{R}^{p×q} \tag{1.8}<br>$$</p>
+<h2 id="3-2-乘法法则"><a href="#3-2-乘法法则" class="headerlink" title="3.2 乘法法则"></a>3.2 乘法法则</h2><p>(1) 若$x \in \mathbb{R}^p，y = f(x) \in \mathbb{R}^q，z = g(x) \in \mathbb{R}^q$，则<br>$$<br>\frac{∂y^Tz}{∂x} = \frac{∂y}{∂x}z + \frac{∂z}{∂x}y \in \mathbb{R}^p \tag{1.9}<br>$$</p>
+<p>(2) 若$x \in \mathbb{R}^p，y = f(x) \in \mathbb{R}^s，z = g(x) \in \mathbb{R}^t，A \in \mathbb{R}^{s×t}$ 和 $x$ 无关，则<br>$$<br>\frac{∂y^TAz}{∂x} = \frac{∂y}{∂x}Az + \frac{∂z}{∂x}A^Ty \in \mathbb{R}^p \tag{1.10}<br>$$<br>(3) 若$x \in \mathbb{R}^p，y = f(x) \in \mathbb{R}，z = g(x) \in \mathbb{R}^q$，则<br>$$<br>\frac{∂yz}{∂x} = y\frac{∂z}{∂x} + \frac{∂y}{∂x}z^T \in \mathbb{R}^{p×q} \tag{1.11}<br>$$</p>
 <h2 id="3-3-链式法则"><a href="#3-3-链式法则" class="headerlink" title="3.3 链式法则"></a>3.3 链式法则</h2><p><strong>链式法则（Chain Rule）</strong>是在微积分中求复合函数导数的一种常用方法。</p>
-<p>(1) 若$x \in \mathbb{R}，u = u(x) \in \mathbb{R}^s，g = g(u) \in \mathbb{R}^t$，则<br>$$<br>\frac{∂g}{∂x} = \frac{∂u}{∂x}\frac{∂g}{∂u} \in \mathbb{R}^{1×t} \tag{1.14}<br>$$</p>
-<p>(2) 若$x \in \mathbb{R}^p，y = g(x) \in \mathbb{R}^s，z = f(y) \in \mathbb{R}^t$，则<br>$$<br>\frac{∂z}{∂x} = \frac{∂y}{∂x}\frac{∂z}{∂y} \in \mathbb{R}^{p×t} \tag{1.15}<br>$$</p>
-<p>(3) 若$X \in \mathbb{R}^{p×q}$为矩阵，$y = g(X) \in \mathbb{R}^s，z = f(y) \in \mathbb{R}$，则<br>$$<br>\frac{∂z}{∂X_{ij}} = \frac{∂y}{∂X_{ij}}\frac{∂z}{∂y} \in \mathbb{R} \tag{1.16}<br>$$<br>主要参考<a href="https://github.com/nndl/nndl.github.io" target="_blank" rel="noopener">https://github.com/nndl/nndl.github.io</a></p>
+<p>(1) 若$x \in \mathbb{R}，u = u(x) \in \mathbb{R}^s，g = g(u) \in \mathbb{R}^t$，则<br>$$<br>\frac{∂g}{∂x} = \frac{∂u}{∂x}\frac{∂g}{∂u} \in \mathbb{R}^{1×t} \tag{1.12}<br>$$</p>
+<p>(2) 若$x \in \mathbb{R}^p，y = g(x) \in \mathbb{R}^s，z = f(y) \in \mathbb{R}^t$，则<br>$$<br>\frac{∂z}{∂x} = \frac{∂y}{∂x}\frac{∂z}{∂y} \in \mathbb{R}^{p×t} \tag{1.13}<br>$$</p>
+<p>(3) 若$X \in \mathbb{R}^{p×q}$为矩阵，$y = g(X) \in \mathbb{R}^s，z = f(y) \in \mathbb{R}$，则<br>$$<br>\frac{∂z}{∂X_{ij}} = \frac{∂y}{∂X_{ij}}\frac{∂z}{∂y} \in \mathbb{R} \tag{1.14}<br>$$<br>主要参考<a href="https://github.com/nndl/nndl.github.io" target="_blank" rel="noopener">https://github.com/nndl/nndl.github.io</a></p>
 
       
 
