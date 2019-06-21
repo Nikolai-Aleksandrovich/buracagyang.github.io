@@ -6,23 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://buracagyang.github.io">
-  <title>概率论2-随机过程 | Buracag的博客</title>
+  <title>mathematical-optimization-3 | Buracag的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="同步于CSDN;音尘杂记 随机过程（Stochastic Process） 是一组随机变量$X_t$的集合，其中$t$属于一个索引（index）集合$\cal{T}$。索引集合$\cal{T}$可以定义在时间域或者空间域，但一般为时间域，以实数或正数表示。当t为实数时，随机过程为连续随机过程；当t为整数时，为离散随机过程。 日常生活中的很多例子包括股票的波动、语音信号、身高的变化等都可以看作是随机">
+  <meta name="description" content="同步于CSDN;音尘杂记 主要介绍一下数学优化中的拉格朗日乘数法和KKT条件，其实在 拙文 中已经有关于KKT条件的简要介绍和自己的个人总结，这里再一起回顾一下。">
 <meta name="keywords" content="技术备忘,基础知识">
 <meta property="og:type" content="article">
-<meta property="og:title" content="概率论2-随机过程">
-<meta property="og:url" content="https://buracagyang.github.io/2019/06/14/probability-theory-2/index.html">
+<meta property="og:title" content="mathematical-optimization-3">
+<meta property="og:url" content="https://buracagyang.github.io/2019/06/19/mathematical-optimization-3/index.html">
 <meta property="og:site_name" content="Buracag的博客">
-<meta property="og:description" content="同步于CSDN;音尘杂记 随机过程（Stochastic Process） 是一组随机变量$X_t$的集合，其中$t$属于一个索引（index）集合$\cal{T}$。索引集合$\cal{T}$可以定义在时间域或者空间域，但一般为时间域，以实数或正数表示。当t为实数时，随机过程为连续随机过程；当t为整数时，为离散随机过程。 日常生活中的很多例子包括股票的波动、语音信号、身高的变化等都可以看作是随机">
+<meta property="og:description" content="同步于CSDN;音尘杂记 主要介绍一下数学优化中的拉格朗日乘数法和KKT条件，其实在 拙文 中已经有关于KKT条件的简要介绍和自己的个人总结，这里再一起回顾一下。">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://buracagyang.github.io/2019/06/14/probability-theory-2/fig1.png">
-<meta property="og:image" content="https://buracagyang.github.io/2019/06/14/probability-theory-2/fig2.png">
-<meta property="og:updated_time" content="2019-06-17T02:07:41.649Z">
+<meta property="og:updated_time" content="2019-06-21T05:41:23.055Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="概率论2-随机过程">
-<meta name="twitter:description" content="同步于CSDN;音尘杂记 随机过程（Stochastic Process） 是一组随机变量$X_t$的集合，其中$t$属于一个索引（index）集合$\cal{T}$。索引集合$\cal{T}$可以定义在时间域或者空间域，但一般为时间域，以实数或正数表示。当t为实数时，随机过程为连续随机过程；当t为整数时，为离散随机过程。 日常生活中的很多例子包括股票的波动、语音信号、身高的变化等都可以看作是随机">
-<meta name="twitter:image" content="https://buracagyang.github.io/2019/06/14/probability-theory-2/fig1.png">
+<meta name="twitter:title" content="mathematical-optimization-3">
+<meta name="twitter:description" content="同步于CSDN;音尘杂记 主要介绍一下数学优化中的拉格朗日乘数法和KKT条件，其实在 拙文 中已经有关于KKT条件的简要介绍和自己的个人总结，这里再一起回顾一下。">
   
     <link rel="alternative" href="/atom.xml" title="Buracag的博客" type="application/atom+xml">
   
@@ -160,20 +157,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-probability-theory-2" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-mathematical-optimization-3" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      概率论2-随机过程
+      mathematical-optimization-3
     </h1>
   
 
         
-        <a href="/2019/06/14/probability-theory-2/" class="archive-article-date">
-  	<time datetime="2019-06-14T12:09:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-14</time>
+        <a href="/2019/06/19/mathematical-optimization-3/" class="archive-article-date">
+  	<time datetime="2019-06-19T12:47:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-19</time>
 </a>
         
       </header>
@@ -181,33 +178,25 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>同步于<a href="https://blog.csdn.net/buracag_mc" target="_blank" rel="noopener">CSDN</a>;<a href="https://www.runblog.online/" target="_blank" rel="noopener">音尘杂记</a></p>
-<p><strong>随机过程（Stochastic Process）</strong> 是一组随机变量$X_t$的集合，其中$t$属于一个索引（index）集合$\cal{T}$。索引集合$\cal{T}$可以定义在时间域或者空间域，但一般为时间域，以实数或正数表示。当t为实数时，随机过程为连续随机过程；当t为整数时，为离散随机过程。</p>
-<p>日常生活中的很多例子包括股票的波动、语音信号、身高的变化等都可以看作是随机过程。常见的和时间相关的随机过程模型包括<strong>伯努利过程、随机游走（Random Walk）、马尔可夫过程</strong>等。和空间相关的随机过程通常称为<strong>随机场（Random Field）</strong>。比如一张二维的图片，每个像素点（变量）通过空间的位置进行索引，这些像素就组成了一个随机过程。</p>
+<p>主要介绍一下数学优化中的拉格朗日乘数法和KKT条件，其实在 <a href="https://blog.csdn.net/buracag_mc/article/details/76762249" target="_blank" rel="noopener">拙文</a> 中已经有关于KKT条件的简要介绍和自己的个人总结，这里再一起回顾一下。</p>
 <a id="more"></a>
-<h1 id="1-马尔可夫过程"><a href="#1-马尔可夫过程" class="headerlink" title="1. 马尔可夫过程"></a>1. 马尔可夫过程</h1><p><strong>马尔可夫性质</strong> 在随机过程中，<strong>马尔可夫性质（Markov Property）</strong>是指一个随机过程在给定现在状态及所有过去状态情况下，其未来状态的条件概率分布仅依赖于当前状态。以离散随机过程为例，假设随机变量$X_0,X_1, … ,X_T$构成一个随机过程。这些随机变量的所有可能取值的集合被称为<strong>状态空间（State Space）</strong>。如果$X_{t+1}$对于过去状态的条件概率分布仅是$X_t$的一个函数，则<br>$$<br>P(X_{t+1} = x_{t+1}|X_{0:t} = x_{0:t}) = P(X_{t+1} = x_{t+1}|X_t = x_t) \tag{1}<br>$$<br>其中$X{0:t}$表示变量集合$X_0,X_1, … ,X_t，x_{0:t}$表示为在状态空间中的状态序列。</p>
-<blockquote>
-<p>马尔可夫性质也可以描述为给定当前状态时，将来的状态与过去状态是条件独立的。</p>
-</blockquote>
-<h2 id="1-1-马尔可夫链"><a href="#1-1-马尔可夫链" class="headerlink" title="1.1 马尔可夫链"></a>1.1 马尔可夫链</h2><p>离散时间的马尔可夫过程也称为<strong>马尔可夫链（Markov Chain）</strong>。如果一个马尔可夫链的条件概率<br>$$<br>P(X_{t+1} = s_i|X_t = s_j) = T(s_i, s_j) \tag{2}<br>$$<br>在不同时间都是不变的，即和时间$t$无关，则称为<strong>时间同质的马尔可夫链（Time-Homogeneous Markov Chains）</strong>。如果状态空间是有限的，$T(s_i, s_j)$也可以用一个矩阵$T$表示，称为<strong>状态转移矩阵（Transition Matrix）</strong>，其中元素$t_{ij}$表示状态$s_i$转移到状态$s_j$的概率。</p>
-<p><strong>平稳分布</strong> 假设状态空间大小为$M$，向量$\pi = [\pi_1, … , 、\pi_M]^T$ 为状态空间中的一个分布，满足$0 ≤ \pi_i ≤ 1$ 和$\sum_{i=1}^{M}\pi_i =1$。</p>
-<p>对于状态转移矩阵为$T$的时间同质的马尔可夫链，如果存在一个分布$\pi$满足<br>$$<br>\pi = T \pi \tag{3}<br>$$<br>即分布$\pi$就称为该马尔可夫链的<strong>平稳分布（Stationary Distribution）</strong>。根据特征向量的定义可知，$\pi$为矩阵$T$的（归一化）的对应特征值为1的特征向量。</p>
-<p>如果一个马尔可夫链的状态转移矩阵T满足<strong>所有状态可遍历性</strong>以及<strong>非周期性</strong>，那么对于任意一个初始状态分布$\pi^{(0)}$，将经过一定时间的状态转移之后，都会收敛到平稳分布，即<br>$$<br>\pi = \lim_{N \to \infty}T^Nπ^{(0)} \tag{4}<br>$$</p>
-<blockquote>
-<p>定理1 - <strong>细致平稳条件（Detailed Balance Condition）</strong>： 如果一个马尔科夫链满足<br>$$<br>\pi_it_{ij} = \pi_jt_{ji} \tag{5}<br>$$<br>则一定会收敛到平稳分布$\pi$。</p>
-<p>细致平稳条件保证了从状态$i$转移到状态$j$的数量和从状态$j$转移到状态$i$的数量相一致，相互抵消，所以数量不发生改变。</p>
-<p>细致平稳条件只是马尔科夫链收敛的充分条件，不是必要条件。</p>
-</blockquote>
-<h1 id="2-高斯过程"><a href="#2-高斯过程" class="headerlink" title="2. 高斯过程"></a>2. 高斯过程</h1><p><strong>高斯过程（Gaussian Process）</strong>也是一种应用广泛的随机过程模型。假设有一组连续随机变量$X_0,X_1, … ,X_T$ ，如果由这组随机变量构成的任一有限集合$X_{t_1,… ,t_k} = [X_{t_1} , … ,X_{t_n}]^T$都服从一个多元正态分布，那么这组随机变量为一个随机过程。高斯过程也可以定义为：如果$X_{t_1, … ,t_n}$ 的任一线性组合都服从一元正态分布，那么这组随机变量为一个随机过程。</p>
-<p><strong>高斯过程回归</strong> 高斯过程回归（Gaussian Process Regression）是利用高斯过程来对一个函数分布进行建模。和机器学习中参数化建模（比如贝叶斯线性回归）相比，高斯过程是一种非参数模型，可以拟合一个黑盒函数，并给出拟合结果的置信度[Rasmussen, 2004]。</p>
-<p>假设一个未知函数$f(x)$服从高斯过程，且为平滑函数。如果两个样本$x_1, x_2$比较接近，那么对应的$f(x_1), f(x_2)$也比较接近。假设从函数$f(x)$中采样有限个样本$X = [x_1, x_2, … , x_N]$，这$N$个点服从一个多元正态分布，<br>$$<br>[f(x_1), f(x_2), … , f(x_N)]^T \sim N(\mu(X),K(X,X)) \tag{6}<br>$$<br>其中$\mu(X) = [\mu(x_1), \mu(x_2), … , \mu(x_N)]^T$是均值向量，$K(X,X) = [k(x_i, x_j )]_{N×N}$是协方差矩阵，$k(x_i, x_j)$为核函数，可以衡量两个样本的相似度。</p>
-<p>在高斯过程回归，一个常用的核函数是平方指数（Squared Exponential）函数<br>$$<br>k(x_i, x_j) = exp(\frac{−∥x_i − x_j∥^2}{2l^2}) \tag{7}<br>$$<br>其中$l$为超参数。当$x_i$和$x_j$越接近，其核函数的值越大，表明$f(x_i)$和$f(x_j)$越相关。</p>
-<p>假设$f(x)$的一组带噪声的观测值为${(x_n, y_n)}_{n=1}^N$，其中$y_n \sim N(f(x_n), \sigma^2)$为正态分布，$\sigma$为噪声方差。</p>
-<p>对于一个新的样本点$x^∗$，我们希望预测函数$y^∗ = f(x^∗)$。令$y = [y_1, y_2, … , y_n]$为已有的观测值，根据高斯过程的假设，$[y; y^∗]$ 满足</p>
-<p><img src="/2019/06/14/probability-theory-2/fig1.png" alt="fig1"></p>
-<p>其中$K(x^*,X) = [k(x^∗, x_1), … , k(x^∗, x^n)]$。</p>
-<p>根据上面的联合分布，$y^∗$的后验分布为<br>$$<br>p(y^∗|X, y) = N(\hat{\mu}, \hat{\sigma}^2) \tag{9}<br>$$<br>其中均值$\hat{\mu}$和方差$\hat{\sigma}$为</p>
-<p><img src="/2019/06/14/probability-theory-2/fig2.png" alt="fig2"></p>
-<p>从公式(10) 可以看出，均值函数$\mu(x)$可以近似地互相抵消。在实际应用中，一般假设$\mu(x) = 0$，均值$\hat{\mu}$可以将简化为<br>$$<br>\hat{\mu} = K(x^∗,X)(K(X,X) + \sigma^2 I)^{−1}y \tag{12}<br>$$<br>高斯过程回归可以认为是一种有效的贝叶斯优化方法，广泛地应用于机器学习中。</p>
+<p><strong>拉格朗日乘数法（Lagrange Multiplier）</strong>是约束优化问题的一种有效求解方法。约束优化问题可以表示为<br>$$<br>\begin{eqnarray}<br>\min_{x} \qquad &amp;f(x) \\<br>subject \quad to \qquad &amp;h_i(x) = 0, i = 1, … ,m \\<br>\qquad &amp;g_j(x) ≤ 0, j = 1, . . . , n<br>\end{eqnarray} \tag{1}<br>$$</p>
+<p>其中$h_i(x)$为等式约束函数，$g_j(x)$为不等式约束函数。x的可行域为<br>$$<br>\cal{D} = domf\cap \bigcap_{i=1}^{m} domh_i \cap \bigcap_{j=1}^{n} domg_j \subseteq \Bbb{R}^d \tag{2}<br>$$<br>其中$domf$是函数f的定义域。</p>
+<h1 id="1-等式约束优化问题"><a href="#1-等式约束优化问题" class="headerlink" title="1. 等式约束优化问题"></a>1. 等式约束优化问题</h1><p>如果公式(1) 中只有等式约束，我们可以构造一个拉格朗日函数Λ(x, λ):<br>$$<br>\Lambda(x, \lambda) = f(x) + \sum_{i=1}^{m}\lambda_i h_i(x) \tag{3}<br>$$<br>其中$\lambda$为拉格朗日乘数。如果$f(x^∗)$是原始约束优化问题的局部最优值，那么存在一个$λ^∗$使得$(x^∗, λ^∗)$为拉格朗日函数$Λ(x, λ)$的平稳点（stationary point）。因此，只需要令$\frac{\partialΛ(x,λ)}{\partial x} = 0$和$\frac{\partialΛ(x,λ)}{\partial \lambda} = 0$，得到<br>$$<br>\nabla f(x) + \sum_{i=1}^{m}\lambda_i \nabla h_i(x) = 0 \tag{4}<br>$$</p>
+<p>$$<br>h_i(x) = 0, \qquad i=0, …, m \tag{5}<br>$$</p>
+<p>上面方程组的解即为原始问题的可能解。在实际应用中，需根据问题来验证是否为极值点。</p>
+<p>拉格朗日乘数法是将一个有$d$个变量和$m$个等式约束条件的最优化问题转换为一个有$d + m$个变量的函数求平稳点的问题。拉格朗日乘数法所得的平稳点会包含原问题的所有极值点，但并不保证每个平稳点都是原问题的极值点。</p>
+<h1 id="2-不等式约束优化问题"><a href="#2-不等式约束优化问题" class="headerlink" title="2. 不等式约束优化问题"></a>2. 不等式约束优化问题</h1><p>对于公式(1) 中定义的一般约束优化问题，其拉格朗日函数为<br>$$<br>\Lambda(x, a, b) = f(x) + \sum_{i=1}^{m}a_i h_i(x) + \sum_{j=1}^{n}b_j g_j(x) \tag{6}<br>$$<br>其中$a = [a_1, … , a_m]^T$为等式约束的拉格朗日乘数，$b = [b_1, … , b_n]^T$为不等式约束的拉格朗日乘数。</p>
+<p>当约束条件不满足时，有$\max_{a,b} \Lambda(x, a, b) = \infty$；当约束条件满足时并且$b ≥ 0$时，$\max_{a,b} \Lambda(x, a, b) = f(x)$。因此原始约束优化问题等价于<br>$$<br>\min_x \max_{a,b} \Lambda(x, a, b) \tag{7}<br>$$</p>
+<p>$$<br>subject \quad to \qquad b ≥ 0 \tag{8}<br>$$</p>
+<p>这个min-max优化问题称为<strong>主问题（Primal Problem）</strong>。</p>
+<p><strong>对偶问题</strong> 主问题的优化一般比较困难，我们可以通过交换min-max 的顺序来简化。定义拉格朗日对偶函数为<br>$$<br>\Gamma(a, b) = \inf_{x \in D}\Lambda (x, a, b) \tag{9}<br>$$</p>
+<p>$\Gamma(a, b)$是一个凹函数，即使$f(x)$是非凸的。</p>
+<p>当$b \geq 0$时，对于任意的$\tilde{x} \in \cal{D}$，有<br>$$<br>\Gamma(a, b) = \inf_{x\in D}\Lambda(x, a, b) \leq \Lambda(\tilde{x}, a, b) ≤ f(\tilde{x}) \tag{10}<br>$$<br>令$p^∗$是原问题的最优值，则有<br>$$<br>\Gamma(a, b) \leq p^∗ \tag{11}<br>$$<br>即拉格朗日对偶函数$Γ(a, b)$为原问题最优值的下界。</p>
+<p>优化拉格朗日对偶函数$Γ(a, b)$并得到原问题的最优下界，称为<strong>拉格朗日对偶问题（Lagrange Dual Problem）</strong>。<br>$$<br>\begin{eqnarray}<br>\max_{a,b} \qquad &amp;\Gamma(a, b) \tag{12}  \\<br>subject \quad to \qquad &amp;b ≥ 0 \tag{13}<br>\end{eqnarray}<br>$$<br>拉格朗日对偶函数为凹函数，因此拉格朗日对偶问题为<strong>凸优化问题</strong>。</p>
+<p>令$d^∗$表示拉格朗日对偶问题的最优值，则有$d^∗ \leq p^∗$，这个性质称为<strong>弱对偶性（Weak Duality）</strong>。如果$d^∗ = p^∗$，这个性质称为<strong>强对偶性（Strong Duality）</strong>。</p>
+<p>当强对偶性成立时，令$x^∗$和$a^∗, b^∗$分别是原问题和对偶问题的最优解，那么它们满足以下条件：<br>$$<br>\begin{eqnarray}<br>&amp; \nabla f(x^∗) + \sum_{i=1}^ma_i^∗ \nabla h_i(x^∗) + \sum_{j=1}^{n}b_j^∗\nabla g_j(x^∗) = 0 \tag{14} \\<br>&amp; h_i(x^∗) = 0, \quad i = 0, … ,m \tag{15} \\<br>&amp; g_j(x^∗) \leq 0, \quad j = 0, … , n \tag{16} \\<br>&amp; b_j^∗ g_j(x^∗) = 0, \quad j = 0, … , n \tag{17} \\<br>&amp; b_j^∗ \geq 0, \quad j = 0, … , n \tag{18}<br>\end{eqnarray}<br>$$<br>称为不等式约束优化问题的<strong>KKT条件（Karush-Kuhn-Tucker Conditions）</strong>。KKT条件是拉格朗日乘数法在不等式约束优化问题上的泛化。当原问题是凸优化问题时，满足KKT条件的解也是原问题和对偶问题的最优解。</p>
+<p>KKT条件中需要关注的是公式(17)，称为互补松弛条件（Complementary Slackness）。如果最优解$x^∗$出现在不等式约束的边界上$g_j(x) = 0$，则$b_j^∗ &gt; 0$；如果$x^∗$出现在不等式约束的内部$g_j(x) &lt; 0$，则$b_j^∗$= 0$。互补松弛条件说明当最优解出现在不等式约束的内部，则约束失效。</p>
 <p>主要参考<a href="https://github.com/nndl/nndl.github.io" target="_blank" rel="noopener">https://github.com/nndl/nndl.github.io</a></p>
 
       
@@ -303,7 +292,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://qr.liantu.com/api.php?text=https://buracagyang.github.io/2019/06/14/probability-theory-2/" alt="微信分享二维码">
+      <img src="http://qr.liantu.com/api.php?text=https://buracagyang.github.io/2019/06/19/mathematical-optimization-3/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -317,18 +306,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/06/17/mathematical-optimization-1/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          数学优化1-数学优化的类型
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/06/14/probability-theory-1/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">概率论1-随机事件和概率</div>
+    <a href="/2019/06/18/mathematical-optimization-2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">数学优化2-优化算法</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -355,7 +335,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-马尔可夫过程"><span class="toc-number">1.</span> <span class="toc-text">1. 马尔可夫过程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-马尔可夫链"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 马尔可夫链</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-高斯过程"><span class="toc-number">2.</span> <span class="toc-text">2. 高斯过程</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-等式约束优化问题"><span class="toc-number">1.</span> <span class="toc-text">1. 等式约束优化问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-不等式约束优化问题"><span class="toc-number">2.</span> <span class="toc-text">2. 不等式约束优化问题</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -390,7 +370,7 @@ if(true){
   	repo: 'blog_comments',
   	owner: 'buracagyang',
   	admin: ['buracagyang'],
-  	id: 'Fri Jun 14 2019 20:09:53 GMT+0800',
+  	id: 'Wed Jun 19 2019 20:47:06 GMT+0800',
   	distractionFreeMode: 'true'
 })
 gitalk.render('gitalk-container') 
