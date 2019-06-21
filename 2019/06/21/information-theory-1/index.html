@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Buracag的博客">
 <meta property="og:description" content="同步于CSDN;音尘杂记 信息论（Information Theory）是数学、物理、统计、计算机科学等多个学科的交叉领域。信息论是由Claude Shannon 最早提出的，主要研究信息的量化、存储和通信等方法。这里，“信息”是指一组消息的集合。假设在一个噪声通道上发送消息，我们需要考虑如何对每一个信息进行编码、传输以及解码，使得接收者可以尽可能准确地重构出消息。 在机器学习相关领域，信息论也有">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-21T06:15:16.983Z">
+<meta property="og:updated_time" content="2019-06-21T06:44:19.716Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="信息论1-熵">
 <meta name="twitter:description" content="同步于CSDN;音尘杂记 信息论（Information Theory）是数学、物理、统计、计算机科学等多个学科的交叉领域。信息论是由Claude Shannon 最早提出的，主要研究信息的量化、存储和通信等方法。这里，“信息”是指一组消息的集合。假设在一个噪声通道上发送消息，我们需要考虑如何对每一个信息进行编码、传输以及解码，使得接收者可以尽可能准确地重构出消息。 在机器学习相关领域，信息论也有">
@@ -214,7 +214,10 @@
 </tbody>
 </table>
 <h1 id="2-联合熵和条件熵"><a href="#2-联合熵和条件熵" class="headerlink" title="2. 联合熵和条件熵"></a>2. 联合熵和条件熵</h1><p>对于两个离散随机变量$X$和$Y$ ，假设$X$取值集合为$cal{X}$；$Y$取值集合为$\cal{Y}$，其联合概率分布满足为$p(x, y)$，</p>
-<p>则$X$和$Y$的<strong>联合熵（Joint Entropy）</strong>为<br>$$<br>H(X, Y) = −\sum_{x \in \cal{X}} \sum_{y \in \cal{Y}}p(x, y) log p(x, y) \tag{3}<br>$$<br>$X$和$Y$的<strong>条件熵（Conditional Entropy）</strong>为<br>$$<br>H(X|Y) = −\sum_{x \in \cal{X}} \sum_{y \in \cal{Y}}p(x, y) log p(x|y) = −\sum_{x \in \cal{X}} \sum_{y \in \cal{Y}}p(x, y) log \frac{p(x,y)}{p(y)} \tag{4}<br>$$<br>根据其定义，条件熵也可以写为<br>$$<br>H(X|Y) = H(X, Y) − H(Y) \tag{5}<br>$$<br>主要参考<a href="https://github.com/nndl/nndl.github.io" target="_blank" rel="noopener">https://github.com/nndl/nndl.github.io</a></p>
+<p>则$X$和$Y$的<strong>联合熵（Joint Entropy）</strong>为<br>$$<br>H(X, Y) = −\sum_{x \in \cal{X}} \sum_{y \in \cal{Y}}p(x, y) log p(x, y) \tag{3}<br>$$<br>$X$和$Y$的<strong>条件熵（Conditional Entropy）</strong>为<br>$$<br>H(X|Y) = −\sum_{x \in \cal{X}} \sum_{y \in \cal{Y}}p(x, y) log p(x|y) = −\sum_{x \in \cal{X}} \sum_{y \in \cal{Y}}p(x, y) log \frac{p(x,y)}{p(y)} \tag{4}<br>$$<br>根据其定义，条件熵也可以写为<br>$$<br>H(X|Y) = H(X, Y) − H(Y) \tag{5}<br>$$</p>
+<h1 id="3-互信息"><a href="#3-互信息" class="headerlink" title="3. 互信息"></a>3. 互信息</h1><p><strong>互信息（Mutual Information）</strong>是衡量已知一个变量时，另一个变量不确定性的减少程度。两个离散随机变量X 和Y 的互信息定义为<br>$$<br>I(X; Y ) =\sum_{x \in \cal{X}} \sum_{y \in \cal{Y}}p(x, y) \frac{log p(x, y)}{p(x)p(y)} \tag{6}<br>$$<br>互信息的一个性质为<br>$$<br>\begin{eqnarray}<br>I(X;Y) &amp;=&amp; H(X) − H(X|Y) \tag{7} \\<br>&amp;=&amp; H(Y) − H(Y|X) \tag{8} \\<br>&amp;=&amp; H(X) + H(Y) - H(X, Y) \tag{9}<br>\end{eqnarray}<br>$$</p>
+<p>如果X和Y相互独立，即X不对Y提供任何信息，反之亦然，因此它们的互信息最小， 即$I(X;Y)$为零。</p>
+<p>主要参考<a href="https://github.com/nndl/nndl.github.io" target="_blank" rel="noopener">https://github.com/nndl/nndl.github.io</a></p>
 
       
 
@@ -323,6 +326,15 @@
   
 <nav id="article-nav">
   
+    <a href="/2019/06/21/information-theory-2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          信息论2-交叉熵和散度
+        
+      </div>
+    </a>
+  
   
     <a href="/2019/06/19/mathematical-optimization-3/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">数学优化3-拉格朗日乘数法与KKT条件</div>
@@ -352,7 +364,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-自信息和熵"><span class="toc-number">1.</span> <span class="toc-text">1. 自信息和熵</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-联合熵和条件熵"><span class="toc-number">2.</span> <span class="toc-text">2. 联合熵和条件熵</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-自信息和熵"><span class="toc-number">1.</span> <span class="toc-text">1. 自信息和熵</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-联合熵和条件熵"><span class="toc-number">2.</span> <span class="toc-text">2. 联合熵和条件熵</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-互信息"><span class="toc-number">3.</span> <span class="toc-text">3. 互信息</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -513,11 +525,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">基础知识</a>
+                <a href="javascript:void(0)" class="js-tag color1">统计学运用</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">统计学运用</a>
+                <a href="javascript:void(0)" class="js-tag color5">基础知识</a>
               </li>
              
               <li class="article-tag-list-item">
