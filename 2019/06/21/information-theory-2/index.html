@@ -22,7 +22,7 @@
 <meta property="og:image" content="https://buracagyang.github.io/2019/06/21/information-theory-2/distances.svg">
 <meta property="og:image" content="https://buracagyang.github.io/2019/06/21/information-theory-2/earth_move_q1.svg">
 <meta property="og:image" content="https://buracagyang.github.io/2019/06/21/information-theory-2/earth_move_q2.svg">
-<meta property="og:updated_time" content="2019-06-24T09:09:49.066Z">
+<meta property="og:updated_time" content="2019-06-24T09:14:45.201Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="信息论2-交叉熵和散度">
 <meta name="twitter:description" content="同步于CSDN;音尘杂记 1. 交叉熵对应分布为$p(x)$的随机变量，熵$H(p)$表示其最优编码长度。交叉熵（Cross Entropy）是按照概率分布$q$的最优编码对真实分布为$p$的信息进行编码的长度，">
@@ -209,8 +209,8 @@
 <p><img src="/2019/06/21/information-theory-2/distances.svg" alt="distances"></p>
 <p>最终得到EMD=0.8252404410039889</p>
 <h2 id="4-2-利用对偶问题求解EMD"><a href="#4-2-利用对偶问题求解EMD" class="headerlink" title="4.2 利用对偶问题求解EMD"></a>4.2 利用对偶问题求解EMD</h2><p>事实上，4.1节说的求解方式在很多情形下是不适用的，在示例中我们只用了10个状态去描述分布，但是在很多应用中，输入的状态数很容易的就到达了上万维，甚至近似求$\gamma$都是不可能的。</p>
-<p>但实际上我们并不需要关注$\gamma$，我们仅需要知道具体的EMD数值，我们可以通过$\nabla_{P_1}EMD(P_1, P_2)$,其中$P_1$和$P_2$仅仅是我们的约束条件，这是不可能以任何直接的方式实现的。</p>
-<p>但是，这里有另外一个更加方便的方法去求解EMD；任何LP问题都有两种表示问题的方法：原始问题(4.1所诉)和对偶问题。所以刚才的问题转化成对偶问题如下：<br>$$<br>\begin {eqnarray}<br>maxmize \qquad &amp;\tilde{z}=b^T.y \\<br>st. \qquad &amp;A^T.y \leq c<br>\end {eqnarray} \tag{9}<br>$$</p>
+<p>但实际上我们并不需要关注$\gamma$，我们仅需要知道具体的EMD数值，我们必须能够计算梯度$\nabla_{P_1}EMD(P_1, P_2)$，因为$P_1$和$P_2$仅仅是我们的约束条件，这是不可能以任何直接的方式实现的。</p>
+<p>但是，这里有另外一个更加方便的方法去求解EMD；任何LP问题都有两种表示问题的方法：原始问题(4.1所述)和对偶问题。所以刚才的问题转化成对偶问题如下：<br>$$<br>\begin {eqnarray}<br>maxmize \qquad &amp;\tilde{z}=b^T.y \\<br>st. \qquad &amp;A^T.y \leq c<br>\end {eqnarray} \tag{9}<br>$$</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">opt_res = linprog(-b, A.T, c, bounds=(<span class="literal">None</span>, <span class="literal">None</span>))</span><br><span class="line"></span><br><span class="line">emd = -opt_res.fun</span><br><span class="line">f = opt_res.x[<span class="number">0</span>:l]</span><br><span class="line">g = opt_res.x[l:]</span><br><span class="line"></span><br><span class="line"><span class="comment"># print(dual_result)</span></span><br><span class="line">print(<span class="string">"dual EMD: "</span>, emd)</span><br></pre></td></tr></table></figure>
 <p>得到其结果：EMD=0.8252404410039867</p>
 <p>或者另一种方式：</p>
