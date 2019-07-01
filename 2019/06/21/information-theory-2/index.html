@@ -8,25 +8,26 @@
   <link rel="dns-prefetch" href="https://buracagyang.github.io">
   <title>信息论2-交叉熵和散度 | Buracag的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="同步于CSDN;音尘杂记 1. 交叉熵对应分布为$p(x)$的随机变量，熵$H(p)$表示其最优编码长度。交叉熵（Cross Entropy）是按照概率分布$q$的最优编码对真实分布为$p$的信息进行编码的长度，">
+  <meta name="description" content="同步于CSDN;音尘杂记 主要总结了交叉熵、KL散度、JS散度和wasserstein距离(也称推土机距离，EMD)的相关知识，其中EMD的直观表示可以参见下图：  1. 交叉熵对应分布为$p(x)$的随机变量，熵$H(p)$表示其最优编码长度。交叉熵（Cross Entropy）是按照概率分布$q$的最优编码对真实分布为$p$的信息进行编码的长度，">
 <meta name="keywords" content="技术备忘,基础知识">
 <meta property="og:type" content="article">
 <meta property="og:title" content="信息论2-交叉熵和散度">
 <meta property="og:url" content="https://buracagyang.github.io/2019/06/21/information-theory-2/index.html">
 <meta property="og:site_name" content="Buracag的博客">
-<meta property="og:description" content="同步于CSDN;音尘杂记 1. 交叉熵对应分布为$p(x)$的随机变量，熵$H(p)$表示其最优编码长度。交叉熵（Cross Entropy）是按照概率分布$q$的最优编码对真实分布为$p$的信息进行编码的长度，">
+<meta property="og:description" content="同步于CSDN;音尘杂记 主要总结了交叉熵、KL散度、JS散度和wasserstein距离(也称推土机距离，EMD)的相关知识，其中EMD的直观表示可以参见下图：  1. 交叉熵对应分布为$p(x)$的随机变量，熵$H(p)$表示其最优编码长度。交叉熵（Cross Entropy）是按照概率分布$q$的最优编码对真实分布为$p$的信息进行编码的长度，">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="https://buracagyang.github.io/2019/06/21/information-theory-2/EMD.png">
 <meta property="og:image" content="https://buracagyang.github.io/2019/06/21/information-theory-2/q1.svg">
 <meta property="og:image" content="https://buracagyang.github.io/2019/06/21/information-theory-2/q2.svg">
 <meta property="og:image" content="https://buracagyang.github.io/2019/06/21/information-theory-2/gamma.svg">
 <meta property="og:image" content="https://buracagyang.github.io/2019/06/21/information-theory-2/distances.svg">
 <meta property="og:image" content="https://buracagyang.github.io/2019/06/21/information-theory-2/earth_move_q1.svg">
 <meta property="og:image" content="https://buracagyang.github.io/2019/06/21/information-theory-2/earth_move_q2.svg">
-<meta property="og:updated_time" content="2019-06-24T09:14:45.201Z">
+<meta property="og:updated_time" content="2019-07-01T02:42:46.793Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="信息论2-交叉熵和散度">
-<meta name="twitter:description" content="同步于CSDN;音尘杂记 1. 交叉熵对应分布为$p(x)$的随机变量，熵$H(p)$表示其最优编码长度。交叉熵（Cross Entropy）是按照概率分布$q$的最优编码对真实分布为$p$的信息进行编码的长度，">
-<meta name="twitter:image" content="https://buracagyang.github.io/2019/06/21/information-theory-2/q1.svg">
+<meta name="twitter:description" content="同步于CSDN;音尘杂记 主要总结了交叉熵、KL散度、JS散度和wasserstein距离(也称推土机距离，EMD)的相关知识，其中EMD的直观表示可以参见下图：  1. 交叉熵对应分布为$p(x)$的随机变量，熵$H(p)$表示其最优编码长度。交叉熵（Cross Entropy）是按照概率分布$q$的最优编码对真实分布为$p$的信息进行编码的长度，">
+<meta name="twitter:image" content="https://buracagyang.github.io/2019/06/21/information-theory-2/EMD.png">
   
     <link rel="alternative" href="/atom.xml" title="Buracag的博客" type="application/atom+xml">
   
@@ -185,6 +186,8 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>同步于<a href="https://blog.csdn.net/buracag_mc" target="_blank" rel="noopener">CSDN</a>;<a href="https://www.runblog.online/" target="_blank" rel="noopener">音尘杂记</a></p>
+<p>主要总结了交叉熵、KL散度、JS散度和wasserstein距离(也称推土机距离，EMD)的相关知识，其中EMD的直观表示可以参见下图：</p>
+<p><img src="/2019/06/21/information-theory-2/EMD.png" alt="EMD"></p>
 <h1 id="1-交叉熵"><a href="#1-交叉熵" class="headerlink" title="1. 交叉熵"></a>1. 交叉熵</h1><p>对应分布为$p(x)$的随机变量，熵$H(p)$表示其最优编码长度。<strong>交叉熵（Cross Entropy）</strong>是按照概率分布$q$的最优编码对真实分布为$p$的信息进行编码的长度，</p>
 <a id="more"></a>
 <p>交叉熵定义为<br>$$<br>H(p, q) = \Bbb{E}_p[−log q(x)] = −\sum_{x}p(x)logq(x) \tag{1}<br>$$<br>在给定$p$的情况下，如果$q$和$p$越接近，交叉熵越小；如果$q$和$p$越远，交叉熵就越大。</p>
