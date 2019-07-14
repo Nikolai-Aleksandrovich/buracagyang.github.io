@@ -20,7 +20,7 @@
 <meta property="og:image" content="https://buracagyang.github.io/2019/07/14/breadth-depth-first-search/BFS.gif">
 <meta property="og:image" content="https://buracagyang.github.io/2019/07/14/breadth-depth-first-search/DFS.gif">
 <meta property="og:image" content="https://buracagyang.github.io/2019/07/14/breadth-depth-first-search/BFS.gif">
-<meta property="og:updated_time" content="2019-07-14T07:36:32.227Z">
+<meta property="og:updated_time" content="2019-07-14T07:39:12.841Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深广度搜索实现">
 <meta name="twitter:description" content="同步于CSDN;音尘杂记 前面项目在做一个遍历搜索的时候，有用到深度/广度搜索的相关知识；原理很简单，不再拾人牙慧了哈；这篇文章主要是将我自己简单实现的深广度搜索分享出来并与Python networkx模块中的已有实现做一个简单对比。">
@@ -208,7 +208,7 @@
 <p>用<code>networkx</code>实现的结果是：15 ms ± 63 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)</p>
 <h1 id="3-2-广度优先搜索对比结果"><a href="#3-2-广度优先搜索对比结果" class="headerlink" title="3.2 广度优先搜索对比结果"></a>3.2 广度优先搜索对比结果</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">%%timeit -n <span class="number">100</span></span><br><span class="line"><span class="comment"># 法一：手写实现</span></span><br><span class="line">g = Graph()</span><br><span class="line">g.add_node_neighbors(node_edges)</span><br><span class="line">result1 = g.breadth_first_search(root)</span><br></pre></td></tr></table></figure>
 <p>手写实现的结果是：24.2 ms ± 61.5 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">%%timeit</span><br><span class="line"><span class="comment"># 法二：networkx</span></span><br><span class="line">result2 = bd_first_search(node_edges, <span class="string">'depth'</span>, root)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">%%timeit -n <span class="number">100</span></span><br><span class="line"><span class="comment"># 法二：networkx</span></span><br><span class="line">result2 = bd_first_search(node_edges, <span class="string">'depth'</span>, root)</span><br></pre></td></tr></table></figure>
 <p>用<code>networkx</code>实现的结果是：14 ms ± 129 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)</p>
 <p>从上面的对比结果可以看出几个问题：</p>
 <ul>
