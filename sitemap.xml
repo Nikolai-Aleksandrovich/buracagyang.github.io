@@ -2,6 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://buracagyang.github.io/2019/05/28/ab-test/</loc>
+    
+    <lastmod>2019-07-28T09:20:39.764Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://buracagyang.github.io/2019/06/12/calculus-2/</loc>
+    
+    <lastmod>2019-07-28T08:55:50.444Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://buracagyang.github.io/2019/06/12/calculus-1/</loc>
+    
+    <lastmod>2019-07-28T08:55:43.551Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://buracagyang.github.io/2019/05/29/aic-and-bic/</loc>
+    
+    <lastmod>2019-07-28T08:55:35.276Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://buracagyang.github.io/2019/07/14/breadth-depth-first-search/</loc>
     
     <lastmod>2019-07-17T12:31:15.013Z</lastmod>
@@ -12,13 +40,6 @@
     <loc>https://buracagyang.github.io/2019/06/21/information-theory-2/</loc>
     
     <lastmod>2019-07-14T06:52:21.445Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://buracagyang.github.io/2019/06/12/calculus-2/</loc>
-    
-    <lastmod>2019-06-25T08:04:16.781Z</lastmod>
     
   </url>
   
@@ -65,13 +86,6 @@
   </url>
   
   <url>
-    <loc>https://buracagyang.github.io/2019/06/12/calculus-1/</loc>
-    
-    <lastmod>2019-06-19T12:26:52.094Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://buracagyang.github.io/2019/06/18/mathematical-optimization-2/</loc>
     
     <lastmod>2019-06-18T09:45:50.821Z</lastmod>
@@ -89,13 +103,6 @@
     <loc>https://buracagyang.github.io/2019/05/09/numpy-vectorize/</loc>
     
     <lastmod>2019-06-12T12:45:42.710Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://buracagyang.github.io/2019/05/29/aic-and-bic/</loc>
-    
-    <lastmod>2019-06-11T09:48:46.932Z</lastmod>
     
   </url>
   

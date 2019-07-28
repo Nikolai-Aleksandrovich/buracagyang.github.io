@@ -6,22 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://buracagyang.github.io">
-  <title>微积分2-常见函数的导数 | Buracag的博客</title>
+  <title>A/B-test显著性检验 | Buracag的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="同步于CSDN;音尘杂记 在微积分1中已经附上了一个常见函数形式的导数，下文主要是关于向量函数及其导数，以及在机器学习和神经网络中常见的Logistic函数、Softmax函数的导数形式。">
-<meta name="keywords" content="技术备忘,基础知识">
+  <meta name="description" content="同步于CSDN;音尘杂记； A/B-test解读A/B-test是为同一个目标制定两个方案，在同一时间维度，分别让组成成分相同（相似）的用户群组随机的使用一个方案，收集各群组的用户体验数据和业务数据，最后根据显著性检验分析评估出最好版本正式采用。 使用A/B-test首先需要建立一个待测试的版本服务，这个版本服务可能在标题、字体、排版、背景颜色、措辞等方面与原有版本服务有所不同，然后将这两个版本服">
+<meta name="keywords" content="技术备忘,统计学运用">
 <meta property="og:type" content="article">
-<meta property="og:title" content="微积分2-常见函数的导数">
-<meta property="og:url" content="https://buracagyang.github.io/2019/06/12/calculus-2/index.html">
+<meta property="og:title" content="A&#x2F;B-test显著性检验">
+<meta property="og:url" content="https://buracagyang.github.io/2019/05/28/ab-test/index.html">
 <meta property="og:site_name" content="Buracag的博客">
-<meta property="og:description" content="同步于CSDN;音尘杂记 在微积分1中已经附上了一个常见函数形式的导数，下文主要是关于向量函数及其导数，以及在机器学习和神经网络中常见的Logistic函数、Softmax函数的导数形式。">
+<meta property="og:description" content="同步于CSDN;音尘杂记； A/B-test解读A/B-test是为同一个目标制定两个方案，在同一时间维度，分别让组成成分相同（相似）的用户群组随机的使用一个方案，收集各群组的用户体验数据和业务数据，最后根据显著性检验分析评估出最好版本正式采用。 使用A/B-test首先需要建立一个待测试的版本服务，这个版本服务可能在标题、字体、排版、背景颜色、措辞等方面与原有版本服务有所不同，然后将这两个版本服">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://buracagyang.github.io/2019/06/12/calculus-2/logistic.png">
-<meta property="og:updated_time" content="2019-07-28T08:55:50.444Z">
+<meta property="og:updated_time" content="2019-07-28T09:20:39.764Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="微积分2-常见函数的导数">
-<meta name="twitter:description" content="同步于CSDN;音尘杂记 在微积分1中已经附上了一个常见函数形式的导数，下文主要是关于向量函数及其导数，以及在机器学习和神经网络中常见的Logistic函数、Softmax函数的导数形式。">
-<meta name="twitter:image" content="https://buracagyang.github.io/2019/06/12/calculus-2/logistic.png">
+<meta name="twitter:title" content="A&#x2F;B-test显著性检验">
+<meta name="twitter:description" content="同步于CSDN;音尘杂记； A/B-test解读A/B-test是为同一个目标制定两个方案，在同一时间维度，分别让组成成分相同（相似）的用户群组随机的使用一个方案，收集各群组的用户体验数据和业务数据，最后根据显著性检验分析评估出最好版本正式采用。 使用A/B-test首先需要建立一个待测试的版本服务，这个版本服务可能在标题、字体、排版、背景颜色、措辞等方面与原有版本服务有所不同，然后将这两个版本服">
   
     <link rel="alternative" href="/atom.xml" title="Buracag的博客" type="application/atom+xml">
   
@@ -159,38 +157,88 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-calculus-2" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-ab-test" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      微积分2-常见函数的导数
+      A/B-test显著性检验
     </h1>
   
 
         
-        <a href="/2019/06/12/calculus-2/" class="archive-article-date">
-  	<time datetime="2019-06-12T12:44:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-12</time>
+        <a href="/2019/05/28/ab-test/" class="archive-article-date">
+  	<time datetime="2019-05-28T08:39:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>同步于<a href="https://blog.csdn.net/buracag_mc" target="_blank" rel="noopener">CSDN</a>;<a href="https://www.runblog.online/" target="_blank" rel="noopener">音尘杂记</a></p>
-<p>在微积分1中已经附上了一个常见函数形式的导数，下文主要是关于向量函数及其导数，以及在机器学习和神经网络中常见的Logistic函数、Softmax函数的导数形式。</p>
-<a id="more"></a>
-<h1 id="1-向量函数及其导数"><a href="#1-向量函数及其导数" class="headerlink" title="1. 向量函数及其导数"></a>1. 向量函数及其导数</h1><p>$$<br>\begin{eqnarray}<br>\frac{\partial x}{\partial x} &amp;=&amp; I \tag{1.1} \\<br>\frac{\partial Ax}{\partial x} &amp;=&amp; A^T \tag{1.2} \\<br>\frac{\partial x^TA}{\partial x} &amp;=&amp; A \tag{1.3}<br>\end{eqnarray}<br>$$</p>
-<h1 id="2-按位计算的向量函数及其导数"><a href="#2-按位计算的向量函数及其导数" class="headerlink" title="2. 按位计算的向量函数及其导数"></a>2. 按位计算的向量函数及其导数</h1><p>假设一个函数$f(x)$的输入是标量$x$。对于一组$K$个标量$x_1, … , x_K$，我们可以通过$f(x)$得到另外一组$K$个标量$z_1, … , z_K$，<br>$$<br>z_k = f(x_k), ∀k = 1, … ,K \tag{1.4}<br>$$<br>为了简便起见，我们定义$x = [x_1, … , x_K]^T，z = [z_1, … , z_K]^T$，<br>$$<br>z = f(x) \tag{1.5}<br>$$<br>其中$f(x)$是按位运算的，即$[f(x)]_i = f(x_i)$。</p>
-<p>当$x$为标量时，$f(x)$的导数记为$f′(x)$。当输入为$K$维向量$x = [x_1, … , x_K]^T$时，其导数为一个对角矩阵。<br>$$<br>\begin{eqnarray}<br>\frac{\partial f(x)}{\partial x} &amp;=&amp; [\frac{\partial f(x_j)}{\partial x_i}]_{K \times K} \ <br>&amp;=&amp; \begin {bmatrix}<br>&amp;f’(x_1)&amp; \quad &amp;0&amp; \quad &amp;…&amp; \quad &amp;0&amp; \\<br>&amp;0&amp; \quad &amp;f’(x_2)&amp; \quad &amp;…&amp; \quad &amp;0&amp; \\<br>&amp;\vdots&amp; \quad &amp;\vdots&amp; \quad &amp;\vdots&amp; \quad &amp;\vdots&amp; \quad \\<br>&amp;0&amp; \quad &amp;0&amp; \quad &amp;…&amp; \quad &amp;f’(x_K)&amp; \\<br>\end {bmatrix} \\<br>&amp;=&amp; diag(f’(x))<br>\end{eqnarray}  \tag{1.6}<br>$$</p>
-<h1 id="3-Logistic函数的导数"><a href="#3-Logistic函数的导数" class="headerlink" title="3. Logistic函数的导数"></a>3. Logistic函数的导数</h1><p>关于logistic函数其实在博文<a href="https://buracagyang.github.io/2019/05/29/logistic-loss-function/">‘Logistic loss函数’</a>中已经有所介绍，接下来要说是更广义的logistic函数的定义：<br>$$<br>logistic(x) = \frac{L}{1 + exp(−k(x − x_0))} \tag{1.7}<br>$$<br>其中，$x_0$是中心点，$L$是最大值，$k$是曲线的倾斜度。下图给出了几种不同参数的Logistic函数曲线。当$x$趋向于$−\infty$时，logistic(x)接近于0；当$x$趋向于$+\infty$时，logistic(x) 接近于$L$。</p>
-<p><img src="/2019/06/12/calculus-2/logistic.png" alt="logistic"></p>
-<p>当参数为($k = 1,  x_0 = 0, L = 1$) 时，Logistic 函数称为标准Logistic 函数，记为f(x)。<br>$$<br>f(x) = \frac{1}{1 + exp(−x)} \tag{1.8}<br>$$<br>标准logistic函数有两个重要的性质如下：<br>$$<br>\begin{eqnarray}<br>f(x) &amp;=&amp; 1 - f(x) \tag{1.9} \\<br>f’(x) &amp;=&amp; f(x)(1 - f(x)) \tag{1.10}<br>\end{eqnarray}<br>$$<br>当输入为$K$维向量$x=[x_1, …, x_K]^T$时，其导数为：<br>$$<br>f’(x) = diag(f(x) \odot (1 − f(x))) \tag{1.11}<br>$$</p>
-<h1 id="4-Softmax函数的导数"><a href="#4-Softmax函数的导数" class="headerlink" title="4. Softmax函数的导数"></a>4. Softmax函数的导数</h1><p>Softmax函数是将多个标量映射为一个概率分布。对于$K$个标量$x_1, … , x_K$，softmax 函数定义为<br>$$<br>z_k = softmax(x_k) = \frac{exp(x_k)}{\sum_{i=1}^{K}exp(x_i)} \tag{1.12}<br>$$<br>这样，我们可以将$K$个变量$x_1, … , x_K$转换为一个分布：$z_1, … , z_K$，满足<br>$$<br>z_k \in [0, 1], ∀k, \quad  \sum_{k=1}^{K}z_k = 1 \tag{1.13}<br>$$<br>当Softmax函数的输入为$K$维向量$x$时，<br>$$<br>\begin{eqnarray}<br>\hat{z} &amp;=&amp; softmax(x) \\<br>&amp;=&amp; \frac{1}{\sum_{k=1}^{K}exp(x_k)}\begin{bmatrix}<br>exp(x_1) \\<br>\vdots \\<br>exp(x_K) \\<br>\end{bmatrix} \\<br>&amp;=&amp; \frac{exp(x)}{\sum_{k=1}^{K}exp(x)} \ <br>&amp;=&amp; \frac{exp(x)}{1_K^Texp(x)} \\<br>\end{eqnarray} \tag{1.14}<br>$$<br>其中$1_K = [1, … , 1]_{K×1}$是$K$维的全1向量。</p>
-<p>Softmax函数的导数为<br>$$<br>\begin{eqnarray}<br>\frac{\partial softmax(x)}{\partial x} &amp;=&amp; \frac{\partial(\frac{exp(x)}{1_K^Texp(x)})}{\partial x} \tag{1.15} \\<br>&amp;=&amp; \frac{1}{1_K^Texp(x)}\frac{\partial exp(x)}{\partial(x)} + \frac{\partial(\frac{1}{1_K^Texp(x)})}{\partial x}(exp(x))^T \tag{1.16} \\<br>&amp;=&amp; \frac{diag(exp(x))}{1_K^Texp(x)} - (\frac{1}{(1_K^Texp(x))^2})\frac{\partial(1_K^Texp(x))}{\partial x}(exp(x))^T \tag{1.17} \\<br>&amp;=&amp; \frac{diag(exp(x))}{1_K^Texp(x)} - (\frac{1}{(1_K^Texp(x))^2})diag(exp(x))1_K(exp(x))^T \tag{1.18} \\<br>&amp;=&amp; \frac{diag(exp(x))}{1_K^Texp(x)} - (\frac{1}{(1_K^Texp(x))^2})exp(x)(exp(x))^T \tag{1.19} \\<br>&amp;=&amp; diag(\frac{exp(x)}{1_K^Texp(x)}) - \frac{exp(x)}{1_K^Texp(x)}.\frac{(exp(x))^T}{1_K^Texp(x)} \tag{1.20} \\<br>&amp;=&amp; diag(softmax(x)) - softmax(x).softmax(x)^T \tag{1.21}<br>\end{eqnarray}<br>$$<br>其中式(1.16)请参考 <a href="https://buracagyang.github.io/2019/06/12/calculus-1/">‘微积分1-导数’</a> 式(1.13)。</p>
-<p>主要参考<a href="https://github.com/nndl/nndl.github.io" target="_blank" rel="noopener">https://github.com/nndl/nndl.github.io</a></p>
+        <p>同步于<a href="https://blog.csdn.net/buracag_mc" target="_blank" rel="noopener">CSDN</a>;<a href="https://www.runblog.online/" target="_blank" rel="noopener">音尘杂记</a>；</p>
+<h1 id="A-B-test解读"><a href="#A-B-test解读" class="headerlink" title="A/B-test解读"></a>A/B-test解读</h1><p>A/B-test是为同一个目标制定两个方案，在同一时间维度，分别让组成成分相同（相似）的用户群组随机的使用一个方案，收集各群组的用户体验数据和业务数据，最后根据显著性检验分析评估出最好版本正式采用。</p>
+<p>使用A/B-test首先需要建立一个待测试的版本服务，这个版本服务可能在标题、字体、排版、背景颜色、措辞等方面与原有版本服务有所不同，然后将这两个版本服务以随机的方式同时推送给测试用户。接下来分别统计两个版本的用户转化率指标，然后根据样本数据进行显著性检验。</p>
+<h1 id="测试目的"><a href="#测试目的" class="headerlink" title="测试目的"></a>测试目的</h1><p>页面（版本）的某一特定更新对转化率指标（如UV-线索转化率、UV-上架转化率、UV-成交转化率或者线索-上架转化率等）的影响效果。</p>
+<h1 id="A-B-test显著性检验"><a href="#A-B-test显著性检验" class="headerlink" title="A/B-test显著性检验"></a>A/B-test显著性检验</h1><p>随机将测试用户群分为2部分，用户群1使用A方案，用户群2使用B方案，经过一定测试时间后，根据收集到的两方案样本观测数据，根据显著性检验结果选取最好方案。</p>
+<p>为了下文方便说明，我们不妨设A方案为参考方案（或旧方案），B方案为实验方案（或新方案）。以下我们以xx二手车的线索-车辆成交转化率为例（注：所有数据均属虚构，仅做示例说明之用），假设进行A/B-test的时间是一周。</p>
+<h2 id="选择观测指标"><a href="#选择观测指标" class="headerlink" title="选择观测指标"></a>选择观测指标</h2><p>使用A方案的人数$N_A$，使用B方案的人数$N_B$，通常情况下$N_A = N_B = N$；由样本计算出A方案的线索-车辆成交转化率为$\hat{P}_a$，B方案的线索-车辆成交转化率 为$\hat{P}_b$；总体A的分布：$A \sim B(N, P_a)$，总体B的分布：$B \sim B(N, P_b)$；</p>
+<p>根据中心极限定理可知，$\hat{P}_a$和$\hat{P}_b$均可认为近似服从正态分布：<br>$$<br>\begin{eqnarray}<br>\hat{P}_a \sim N(P_a, \hat{P}_a(1-\hat{P}_a) / N) \\<br>\hat{P}_b \sim N(P_b, \hat{P}_b(1-\hat{P}_b) / N)<br>\end{eqnarray} \tag{1.1}<br>$$</p>
+<p>所以根据正态分布的性质：<br>$$<br>X = \hat{P}_b - \hat{P}_a \sim N(P_b-P_a, \hat{P}_b(1-\hat{P}_b) / N + \hat{P}_a(1-\hat{P}_a) / N) \tag{1.2}<br>$$</p>
+<h2 id="建立原假设和备择假设"><a href="#建立原假设和备择假设" class="headerlink" title="建立原假设和备择假设"></a>建立原假设和备择假设</h2><p>由于我们的期望结果是B方案所带来的线索-车辆成交转化率高于A方案所带来的线索 -车辆成交转化率，所以原假设和备择假设如下：<br>$$<br>\begin{eqnarray}<br>H_0: X = P_b - P_a \leq 0 \\<br>H_1: X = P_b - P_a &gt; 0<br>\end{eqnarray} \tag{1.3}<br>$$</p>
+<h2 id="构建检验统计量"><a href="#构建检验统计量" class="headerlink" title="构建检验统计量"></a>构建检验统计量</h2><p>检验统计量：<br>$$<br>Z = \frac{\hat{P}_b - \hat{P}_a}{\sqrt{\frac{\hat{P}_b(1-\hat{P}_b)}{N} + \frac{\hat{P}_a(1-\hat{P}_a)}{N}}} \tag{1.4}<br>$$</p>
+<h2 id="显著性检验结论"><a href="#显著性检验结论" class="headerlink" title="显著性检验结论"></a>显著性检验结论</h2><p>给定显著性水平$\alpha$为。当$Z &gt; Z_{\alpha}$时，拒绝原假设，认为B方案所带来的线索-车辆成交转化率高于A方案所带来的线索-车辆成交转化率，建议可以进行推广；当$Z \leq Z_{\alpha}$时，不能拒绝原假设，即认为B方案所带来的线索-车辆成交转化率不高于A方案所带来的线索-车辆成交转化率，建议暂不建议进行推广。</p>
+<h1 id="A-B-test示例"><a href="#A-B-test示例" class="headerlink" title="A/B-test示例"></a>A/B-test示例</h1><p>假设我们进行A/B-test一周，参考版本（通常默认是原始版本，简记为A）和实验版本（添加了特定改进的版本,简记为B），分别得到了1000个线索，A的线索-车辆成交转化率为7%，B的线索-车辆成交转化率为8%。如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th>版本</th>
+<th>总线索数</th>
+<th>成交数(单位：辆)</th>
+<th>转化率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>参考版本(A)</td>
+<td>1,000</td>
+<td>70</td>
+<td>7.00%</td>
+</tr>
+<tr>
+<td>实验版本(B)</td>
+<td>1,000</td>
+<td>80</td>
+<td>8.00%</td>
+</tr>
+</tbody>
+</table>
+<p>在这儿，我们是肯定B比A版本所带来的转化率高呢，还是说这仅仅是由于一些随机的因素导致的这样的区别呢？我们严格按照A/B-test显著性检验过程进行如下计算。 </p>
+<ul>
+<li><p>选取测量指标：</p>
+<p>$N_A = N_B = N = 1000$；其中$\hat{P}_a = 7%$，$\hat{P}_b = 8%$</p>
+</li>
+</ul>
+<ul>
+<li>构建原假设和备择假设：<br>$$<br>\begin{eqnarray}<br>H_0&amp;:&amp; B版本所带来的线索-车辆成交转化率不高于A版本，即X=P_b - P_a \leq 0 \\<br>H_1&amp;:&amp; B版本所带来的线索-车辆成交转化率高于A版本，即X=P_b - P_a &gt; 0<br>\end{eqnarray}<br>$$</li>
+</ul>
+<ul>
+<li>构建检验统计量：<br>$$<br>Z = \frac{\hat{P}_b - \hat{P}_a}{\sqrt{\frac{\hat{P}_b(1-\hat{P}_b)}{N} + \frac{\hat{P}_a(1-\hat{P}_a)}{N}}}<br>$$<br>带入值，可以计算得到Z=0.849105726，</li>
+</ul>
+<ul>
+<li><p>显著性检验结论：</p>
+<p>如果取显著性水平$\alpha = 0.5$，则$Z_{\alpha} = 1.644854$，所以不能拒绝原假设，即认为B版本不一定比A版本所带来的线索-车辆成交转化率高。</p>
+</li>
+</ul>
+<p>如果我们将A/B-test的时间拉长，如两周时长的A/B-test分别得到5000条线索量；或者说同样做一周时间的A/B-test，但是测试的比例更大，分别得到5000条线索量。即 N=5000，且线索-车辆成交转化率保持不变。计算得出$Z_{\alpha}=1.89865812$，在同样显著性水 平下，可以拒绝原假设，得出B比A版本所带来的线索-车辆成交转化率高的结论。</p>
+<p>上述结论是符合我们的主观感受的。在小样本量时，新版所带来的线索-车辆成交转化率高于旧版本所带来的线索-车辆成交转化率，其原因也有可能是受到随机波动等因素影响，故不能肯定地说明新版要比旧版所带来的线索-车辆成交转化率高；但在大样本量时，或者说长期来看，新版本所带来的线索-车辆成交转化率都稳定地高于旧版本所带来的线索-车辆成交转化率，我们有理由相信，确实新版本所带来的线索-车辆成交转化率高于旧版本所带来的线索-车辆成交转化率。</p>
+<h1 id="A-B-test样本量的确定"><a href="#A-B-test样本量的确定" class="headerlink" title="A/B-test样本量的确定"></a>A/B-test样本量的确定</h1><p>由上述示例可以看出，样本量的不同对于最终结果是有很大影响的。所以在进行抽样之 前的很重要一步是确定样本量；在实践中，样本量是应该在正式抽样进行A/B-test之前便确认的。放到这里讲的原因是为了通过上述示例加深我们对样本量重要性的认识。</p>
+<p>实践中，我们对于样本量的确认，可以根据标准误（或者说我们需要检验的差异变化） 来求出，记标准误为$d$：<br>$$<br>d = Z_{\alpha} \times \hat{\sigma} \tag{1.5}<br>$$</p>
+<p>其中$Z_{\alpha}$是在显著性水平$\alpha$下的临界值；$\hat{\sigma}$是由样本估计出的总体标准差。</p>
+<p>显然，在给定显著性水平$\alpha$、需要检验的差异变化$d$和A版本（参考版本，旧版本）的线索-车辆成交转化率$\hat{P}_a$历史值（或经验值，或小样本预实验后得出的值[8]）后，即可推导得出我们进行A/B-test所需的样本量。</p>
+<p>$$<br>N = \frac{Z_{\alpha}^2}{d^2}(\hat{P}_a(1-\hat{P}_a) + \hat{P}_b(1-\hat{P}_b)) \tag{1.6}<br>$$</p>
+<h1 id="指标推广"><a href="#指标推广" class="headerlink" title="指标推广"></a>指标推广</h1><p>上文说明的是根据A/B-test进行新、旧版线索-车辆成交转化率的显著性检验。同理，如果需要根据A/B-test进行新、旧版本的UV-线索转化率、UV-上架转化率或者线索-上架转化率等的显著性检验，只需相应修改显著性检验过程中的观测指标($\hat{P}_a, \hat{P}_b$)即可。</p>
 
       
 
@@ -229,7 +277,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">基础知识</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">统计学运用</a>
         		</li>
       		
 		</ul>
@@ -285,7 +333,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://qr.liantu.com/api.php?text=https://buracagyang.github.io/2019/06/12/calculus-2/" alt="微信分享二维码">
+      <img src="http://qr.liantu.com/api.php?text=https://buracagyang.github.io/2019/05/28/ab-test/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -299,18 +347,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/06/14/probability-theory-1/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/05/29/aic-and-bic/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          概率论1-随机事件和概率
+          AIC和BIC相关知识
         
       </div>
     </a>
   
   
-    <a href="/2019/06/12/calculus-1/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">微积分1-导数</div>
+    <a href="/2019/05/09/numpy-vectorize/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">利用numpy.vectorize提升计算速度</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -337,7 +385,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-向量函数及其导数"><span class="toc-number">1.</span> <span class="toc-text">1. 向量函数及其导数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-按位计算的向量函数及其导数"><span class="toc-number">2.</span> <span class="toc-text">2. 按位计算的向量函数及其导数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Logistic函数的导数"><span class="toc-number">3.</span> <span class="toc-text">3. Logistic函数的导数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-Softmax函数的导数"><span class="toc-number">4.</span> <span class="toc-text">4. Softmax函数的导数</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#A-B-test解读"><span class="toc-number">1.</span> <span class="toc-text">A/B-test解读</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#测试目的"><span class="toc-number">2.</span> <span class="toc-text">测试目的</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#A-B-test显著性检验"><span class="toc-number">3.</span> <span class="toc-text">A/B-test显著性检验</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#选择观测指标"><span class="toc-number">3.1.</span> <span class="toc-text">选择观测指标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#建立原假设和备择假设"><span class="toc-number">3.2.</span> <span class="toc-text">建立原假设和备择假设</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构建检验统计量"><span class="toc-number">3.3.</span> <span class="toc-text">构建检验统计量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#显著性检验结论"><span class="toc-number">3.4.</span> <span class="toc-text">显著性检验结论</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#A-B-test示例"><span class="toc-number">4.</span> <span class="toc-text">A/B-test示例</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#A-B-test样本量的确定"><span class="toc-number">5.</span> <span class="toc-text">A/B-test样本量的确定</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#指标推广"><span class="toc-number">6.</span> <span class="toc-text">指标推广</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -372,7 +420,7 @@ if(true){
   	repo: 'blog_comments',
   	owner: 'buracagyang',
   	admin: ['buracagyang'],
-  	id: 'Wed Jun 12 2019 20:44:46 GMT+0800',
+  	id: 'Tue May 28 2019 16:39:43 GMT+0800',
   	distractionFreeMode: 'true'
 })
 gitalk.render('gitalk-container') 
