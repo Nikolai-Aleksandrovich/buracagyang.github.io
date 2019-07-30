@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://buracagyang.github.io/2019/05/08/svm-proving-process/</loc>
+    
+    <lastmod>2019-07-30T09:29:41.531Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://buracagyang.github.io/2019/07/14/breadth-depth-first-search/</loc>
     
     <lastmod>2019-07-30T09:13:03.667Z</lastmod>
@@ -103,13 +110,6 @@
     <loc>https://buracagyang.github.io/2019/05/09/numpy-vectorize/</loc>
     
     <lastmod>2019-06-12T12:45:42.710Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://buracagyang.github.io/2019/05/08/svm-proving-process/</loc>
-    
-    <lastmod>2019-06-03T10:51:36.385Z</lastmod>
     
   </url>
   
