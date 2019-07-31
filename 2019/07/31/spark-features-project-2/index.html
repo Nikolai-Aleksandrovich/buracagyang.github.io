@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://buracagyang.github.io">
-  <title>【Spark】特征工程1-Transformers | Buracag的博客</title>
+  <title>【Spark】特征工程2-Transformers | Buracag的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Spark MLlib中关于特征处理的相关算法，大致分为以下几组：  提取(Extraction)：从“原始”数据中提取特征 转换(Transformation)：缩放，转换或修改特征 选择(Selection)：从更大的一组特征中选择一个子集 局部敏感哈希(Locality Sensitive Hashing，LSH)：这类算法将特征变换的各个方面与其他算法相结合。  本文介绍第二组： 特征转换">
+  <meta name="description" content="Spark MLlib中关于特征处理的相关算法，大致分为以下几组：  提取(Extraction)：从“原始”数据中提取特征 转换(Transformation)：缩放，转换或修改特征 选择(Selection)：从较大的一组特征中选择一个子集 局部敏感哈希(Locality Sensitive Hashing，LSH)：这类算法将特征变换的各个方面与其他算法相结合。  本文介绍第二组： 特征转换">
 <meta name="keywords" content="技术备忘,大数据">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【Spark】特征工程1-Transformers">
+<meta property="og:title" content="【Spark】特征工程2-Transformers">
 <meta property="og:url" content="https://buracagyang.github.io/2019/07/31/spark-features-project-2/index.html">
 <meta property="og:site_name" content="Buracag的博客">
-<meta property="og:description" content="Spark MLlib中关于特征处理的相关算法，大致分为以下几组：  提取(Extraction)：从“原始”数据中提取特征 转换(Transformation)：缩放，转换或修改特征 选择(Selection)：从更大的一组特征中选择一个子集 局部敏感哈希(Locality Sensitive Hashing，LSH)：这类算法将特征变换的各个方面与其他算法相结合。  本文介绍第二组： 特征转换">
+<meta property="og:description" content="Spark MLlib中关于特征处理的相关算法，大致分为以下几组：  提取(Extraction)：从“原始”数据中提取特征 转换(Transformation)：缩放，转换或修改特征 选择(Selection)：从较大的一组特征中选择一个子集 局部敏感哈希(Locality Sensitive Hashing，LSH)：这类算法将特征变换的各个方面与其他算法相结合。  本文介绍第二组： 特征转换">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-31T07:01:28.725Z">
+<meta property="og:updated_time" content="2019-07-31T07:05:04.403Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="【Spark】特征工程1-Transformers">
-<meta name="twitter:description" content="Spark MLlib中关于特征处理的相关算法，大致分为以下几组：  提取(Extraction)：从“原始”数据中提取特征 转换(Transformation)：缩放，转换或修改特征 选择(Selection)：从更大的一组特征中选择一个子集 局部敏感哈希(Locality Sensitive Hashing，LSH)：这类算法将特征变换的各个方面与其他算法相结合。  本文介绍第二组： 特征转换">
+<meta name="twitter:title" content="【Spark】特征工程2-Transformers">
+<meta name="twitter:description" content="Spark MLlib中关于特征处理的相关算法，大致分为以下几组：  提取(Extraction)：从“原始”数据中提取特征 转换(Transformation)：缩放，转换或修改特征 选择(Selection)：从较大的一组特征中选择一个子集 局部敏感哈希(Locality Sensitive Hashing，LSH)：这类算法将特征变换的各个方面与其他算法相结合。  本文介绍第二组： 特征转换">
   
     <link rel="alternative" href="/atom.xml" title="Buracag的博客" type="application/atom+xml">
   
@@ -164,7 +164,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      【Spark】特征工程1-Transformers
+      【Spark】特征工程2-Transformers
     </h1>
   
 
@@ -181,7 +181,7 @@
 <ul>
 <li>提取(Extraction)：从“原始”数据中提取特征</li>
 <li>转换(Transformation)：缩放，转换或修改特征</li>
-<li>选择(Selection)：从更大的一组特征中选择一个子集</li>
+<li>选择(Selection)：从较大的一组特征中选择一个子集</li>
 <li>局部敏感哈希(Locality Sensitive Hashing，LSH)：这类算法将特征变换的各个方面与其他算法相结合。</li>
 </ul>
 <p>本文介绍第二组： 特征转换器(Transformers)</p>
