@@ -18,7 +18,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://buracagyang.github.io/2019/07/30/spark-ml-pipelines/ml-Pipeline.png">
 <meta property="og:image" content="https://buracagyang.github.io/2019/07/30/spark-ml-pipelines/ml-PipelineModel.png">
-<meta property="og:updated_time" content="2019-07-30T09:46:45.456Z">
+<meta property="og:updated_time" content="2019-07-31T06:41:14.511Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【Spark】Pipelines">
 <meta name="twitter:description" content="在本节中，我们将介绍ML Pipelines的概念。 ML Pipelines提供了一组基于DataFrame构建的统一的高级API，可帮助用户创建和调整实用的机器学习流程。">
@@ -215,7 +215,7 @@
 </ul>
 <p>MLlib将此类工作流表示为管道，其由一系列以特定顺序运行的PipelineStages（变换器和估算器）组成。我们将在本节中将此简单工作流用作运行示例。</p>
 <h3 id="1-3-1-运行原理"><a href="#1-3-1-运行原理" class="headerlink" title="1.3.1 运行原理"></a>1.3.1 运行原理</h3><p>管道被指定为不同阶段的序列，并且每个阶段是变换器或估计器。 这些阶段按顺序运行，输入DataFrame在通过每个阶段时进行转换。 对于Transformer阶段，在DataFrame上调用transform()方法。 对于Estimator阶段，调用fit()方法以生成Transformer（它成为PipelineModel或拟合管道的一部分），并在DataFrame上调用Transformer的transform()方法。</p>
-<p>我们为简单的文本文档工作流说明了这一点。 下图是管道的培训时间使用情况。</p>
+<p>我们为简单的文本文档工作流说明了这一点。 下图是管道的训练时间使用情况。</p>
 <p><img src="/2019/07/30/spark-ml-pipelines/ml-Pipeline.png" alt="ml-Pipeline"></p>
 <p>上图中，顶行表示具有三个阶段的管道。前两个（Tokenizer和HashingTF）是TransformerS（蓝色），第三个（LogisticRegression）是Estimator（红色）。底行表示流经管道的数据，其中柱面表示DataFrame。在原始DataFrame上调用Pipeline.fit()方法，该原始DataFrame具有原始文本文档和标签。 Tokenizer.transform()方法将原始文本文档拆分为单词，向DataFrame添加一个带有单词的新列。 HashingTF.transform()方法将单词列转换为要素向量，将包含这些向量的新列添加到DataFrame。现在，由于LogisticRegression是一个Estimator，因此Pipeline首先调用LogisticRegression.fit()来生成LogisticRegressionModel。如果Pipeline有更多的Estimators，它会在将DataFrame传递给下一个阶段之前在DataFrame上调用LogisticRegressionModel的transform()方法。</p>
 <p>一个Pipeline是Estimator。因此，在Pipeline的fit()方法运行之后，它会生成一个<strong>PipelineModel</strong>，<strong>它是一个Transformer</strong>。这个PipelineModel在测试时使用;下图说明了这种用法。</p>
@@ -245,7 +245,7 @@
 <p>模型行为：Spark版本X中的模型或管道在Spark版本Y中的行为是否相同？</p>
 <ul>
 <li>主要版本：没有保证，但是尽力而为。</li>
-<li>次要和补丁版本：相同的行为，除了错误修复。<br> 示例代码</li>
+<li>次要和补丁版本：相同的行为，除了错误修复。</li>
 </ul>
 <p>对于模型持久性和模型行为，在Spark版本发行说明中报告了次要版本或修补程序版本的任何重大更改。如果发行说明中未报告破损，则应将其视为要修复的错误。</p>
 <h1 id="2-代码示例"><a href="#2-代码示例" class="headerlink" title="2. 代码示例"></a>2. 代码示例</h1><p>本节给出了说明上述功能的代码示例(仅仅附上基于Python的示例代码)。 有关详细信息，请参阅<a href="http://spark.apache.org/docs/2.3.2/ml-pipeline.html#properties-of-pipeline-components" target="_blank" rel="noopener">这里</a>。</p>
@@ -366,6 +366,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2019/07/30/spark-features-project-1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          【Spark】特征工程1-Extractors
+        
+      </div>
+    </a>
   
   
     <a href="/2019/07/14/breadth-depth-first-search/" id="article-nav-older" class="article-nav-link-wrap">
@@ -557,15 +566,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">算法备忘</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">统计学运用</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">基础知识</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">算法备忘</a>
               </li>
              
               <li class="article-tag-list-item">

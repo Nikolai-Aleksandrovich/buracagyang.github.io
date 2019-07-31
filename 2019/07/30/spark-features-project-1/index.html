@@ -6,15 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://buracagyang.github.io">
-  <title>Tag: 大数据 | Buracag的博客</title>
+  <title>【Spark】特征工程1-Extractors | Buracag的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Buracag的博客">
-<meta property="og:url" content="https://buracagyang.github.io/tags/大数据/index.html">
+  <meta name="description" content="Spark MLlib中关于特征处理的相关算法，大致分为以下几组：  提取：从“原始”数据中提取要素 转换：缩放，转换或修改功能 选择：从更大的一组功能中选择一个子集 局部敏感哈希（LSH）：这类算法将特征变换的各个方面与其他算法相结合。  本文介绍第一组： 特征提取器(Extractors)">
+<meta name="keywords" content="技术备忘,大数据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Spark】特征工程1-Extractors">
+<meta property="og:url" content="https://buracagyang.github.io/2019/07/30/spark-features-project-1/index.html">
 <meta property="og:site_name" content="Buracag的博客">
+<meta property="og:description" content="Spark MLlib中关于特征处理的相关算法，大致分为以下几组：  提取：从“原始”数据中提取要素 转换：缩放，转换或修改功能 选择：从更大的一组功能中选择一个子集 局部敏感哈希（LSH）：这类算法将特征变换的各个方面与其他算法相结合。  本文介绍第一组： 特征提取器(Extractors)">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-07-31T06:41:17.682Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Buracag的博客">
+<meta name="twitter:title" content="【Spark】特征工程1-Extractors">
+<meta name="twitter:description" content="Spark MLlib中关于特征处理的相关算法，大致分为以下几组：  提取：从“原始”数据中提取要素 转换：缩放，转换或修改功能 选择：从更大的一组功能中选择一个子集 局部敏感哈希（LSH）：这类算法将特征变换的各个方面与其他算法相结合。  本文介绍第一组： 特征提取器(Extractors)">
   
     <link rel="alternative" href="/atom.xml" title="Buracag的博客" type="application/atom+xml">
   
@@ -152,78 +157,110 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-spark-features-project-1" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/31/spark-features-project-2/" class="archive-article-date">
-  	<time datetime="2019-07-31T06:37:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-31</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/31/spark-features-project-2/">【Spark】特征工程1-Extractors</a>
+    <h1 class="article-title" itemprop="name">
+      【Spark】特征工程1-Extractors
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术备忘</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">大数据</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/30/spark-features-project-1/" class="archive-article-date">
+        
+        <a href="/2019/07/30/spark-features-project-1/" class="archive-article-date">
   	<time datetime="2019-07-30T10:07:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-30</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/30/spark-features-project-1/">【Spark】特征工程1-Extractors</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Spark MLlib中关于特征处理的相关算法，大致分为以下几组：</p>
+<ul>
+<li>提取：从“原始”数据中提取要素</li>
+<li>转换：缩放，转换或修改功能</li>
+<li>选择：从更大的一组功能中选择一个子集</li>
+<li>局部敏感哈希（LSH）：这类算法将特征变换的各个方面与其他算法相结合。</li>
+</ul>
+<p>本文介绍第一组： 特征提取器(Extractors)</p>
+<a id="more"></a>
+<h1 id="1-特诊提取器"><a href="#1-特诊提取器" class="headerlink" title="1. 特诊提取器"></a>1. 特诊提取器</h1><h2 id="1-1-TF-IDF"><a href="#1-1-TF-IDF" class="headerlink" title="1.1 TF-IDF"></a>1.1 TF-IDF</h2><p>词频-逆文本频率<a href="http://en.wikipedia.org/wiki/Tf%E2%80%93idf" target="_blank" rel="noopener">(Term frequency-inverse document frequency, (TF-IDF)</a>是在文本挖掘中广泛使用的特征向量化方法，以反映术语对语料库中的文档的重要性。 用t表示一个术语，用d表示一个文件，用D表示语料库。词频TF(t，d)是术语t出现在文件d中的次数，而文档频率DF(t，D)是包含术语t的文件数量。 如果我们仅使用词频来衡量重要性，那么过分强调经常出现但很少提供有关文档的信息的术语非常容易，例如： “a”，“the”和“of”。 如果词语在语料库中经常出现，则表示它不包含有关特定文档的特殊信息。 逆向文档频率是词语提供的信息量的数字度量：<br>$$<br>IDF(t,D) = log\frac{|D| + 1}{DF(t,D) + 1}<br>$$<br>其中|D|是语料库中的文档总数。 由于使用了对数log，如果一个术语出现在所有文档中，其IDF值将变为0。请注意，应用平滑词语以避免语料库外的术语除以零。 TF-IDF指标只是TF和IDF的产物：<br>$$<br>TF-IDF = TF(t,d) \times IDF(t,D)<br>$$<br>词频和文档频率的定义有几种变体。 在MLlib中，我们将TF和IDF分开以使其灵活。</p>
+<p><strong>TF</strong>：HashingTF和CountVectorizer都可用于生成术语频率向量。</p>
+<ol>
+<li>HashingTF是一个Transformer，它接受一组词语并将这些集合转换为固定长度的特征向量。在文本处理中，“一组词语”可能是一个单词集合。 HashingTF利用散列技巧。通过应用散列函数将原始特征映射到索引。这里使用的哈希函数是<a href="https://en.wikipedia.org/wiki/MurmurHash" target="_blank" rel="noopener">MurmurHash 3</a>.然后，基于映射的索引计算术语频率。这种方法避免了计算全局词语到索引映射的需要，这对于大型语料库来说可能是昂贵的，但它遭受潜在的哈希冲突，其中不同的原始特征可能在散列之后变成相同的词语。为了减少冲突的可能性，我们可以增加目标特征维度，即哈希表的桶的数量。由于散列值的简单模数用于确定向量索引，因此建议使用2的幂作为要素维度，否则要素将不会均匀映射到向量索引。默认要素尺寸为$2^{18} = 262,144$。可选的二进制切换参数控制术语频率计数。设置为true时，所有非零频率计数都设置为1.这对于模拟二进制而非整数计数的离散概率模型特别有用。</li>
+<li>CountVectorizer将文本文档转换为词语计数向量。</li>
+</ol>
+<p><strong>IDF</strong>：IDF是一个Estimator，它训练数据集并生成IDFModel。 IDFModel采用特征向量（通常从HashingTF或CountVectorizer创建）并缩放每个特征。 直观地，它降低了在语料库中频繁出现的特征。</p>
+<p><strong>举例</strong></p>
+<p>在下面的代码中(基于Python)，Scala和Java的示例还请参照<a href="http://spark.apache.org/docs/2.3.2/ml-features.html#bucketizer" target="_blank" rel="noopener">这里</a>；我们从一组句子开始。 我们使用Tokenizer将每个句子分成单词。 对于每个句子，我们使用HashingTF将句子散列为特征向量。 我们使用IDF重新缩放特征向量; 这通常会在使用文本作为功能时提高性能。 然后我们的特征向量可以传递给学习算法。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Time     : 2019/7/31 14:03</span></span><br><span class="line"><span class="comment"># @Author   : buracagyang</span></span><br><span class="line"><span class="comment"># @File     : tf_idf_example.py</span></span><br><span class="line"><span class="comment"># @Software : PyCharm</span></span><br><span class="line"></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Describe:</span></span><br><span class="line"><span class="string">        </span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> print_function</span><br><span class="line"><span class="keyword">from</span> pyspark.ml.feature <span class="keyword">import</span> HashingTF, IDF, Tokenizer</span><br><span class="line"><span class="keyword">from</span> pyspark.sql <span class="keyword">import</span> SparkSession</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    spark = SparkSession\</span><br><span class="line">        .builder\</span><br><span class="line">        .appName(<span class="string">"TfIdfExample"</span>)\</span><br><span class="line">        .getOrCreate()</span><br><span class="line"></span><br><span class="line">    sentenceData = spark.createDataFrame([</span><br><span class="line">        (<span class="number">0.0</span>, <span class="string">"Hi I heard about Spark"</span>),</span><br><span class="line">        (<span class="number">0.0</span>, <span class="string">"I wish Java could use case classes"</span>),</span><br><span class="line">        (<span class="number">1.0</span>, <span class="string">"Logistic regression models are neat"</span>)</span><br><span class="line">    ], [<span class="string">"label"</span>, <span class="string">"sentence"</span>])</span><br><span class="line"></span><br><span class="line">    tokenizer = Tokenizer(inputCol=<span class="string">"sentence"</span>, outputCol=<span class="string">"words"</span>)</span><br><span class="line">    wordsData = tokenizer.transform(sentenceData)</span><br><span class="line"></span><br><span class="line">    hashingTF = HashingTF(inputCol=<span class="string">"words"</span>, outputCol=<span class="string">"rawFeatures"</span>, numFeatures=<span class="number">20</span>)</span><br><span class="line">    featurizedData = hashingTF.transform(wordsData)</span><br><span class="line">    <span class="comment"># 也可以选择CountVectorizer得到一个词频向量</span></span><br><span class="line"></span><br><span class="line">    idf = IDF(inputCol=<span class="string">"rawFeatures"</span>, outputCol=<span class="string">"features"</span>)</span><br><span class="line">    idfModel = idf.fit(featurizedData)</span><br><span class="line">    rescaledData = idfModel.transform(featurizedData)</span><br><span class="line"></span><br><span class="line">    rescaledData.select(<span class="string">"label"</span>, <span class="string">"features"</span>).show()</span><br><span class="line"></span><br><span class="line">    spark.stop()</span><br></pre></td></tr></table></figure>
+<p>结果如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">+-----+--------------------+</span><br><span class="line">|label|            features|</span><br><span class="line">+-----+--------------------+</span><br><span class="line">|  0.0|(20,[0,5,9,17],[0...|</span><br><span class="line">|  0.0|(20,[2,7,9,13,15]...|</span><br><span class="line">|  1.0|(20,[4,6,13,15,18...|</span><br><span class="line">+-----+--------------------+</span><br></pre></td></tr></table></figure>
+<h2 id="1-2-Word2Vec"><a href="#1-2-Word2Vec" class="headerlink" title="1.2 Word2Vec"></a>1.2 Word2Vec</h2><p>Word2Vec是一个Estimator，它采用代表文档的单词序列并训练Word2VecModel。 该模型将每个单词映射到一个<strong>唯一的固定大小的向量</strong>。 Word2VecModel使用文档中所有单词的平均值将每个文档转换为向量; 然后，此向量可用作预测，文档相似度计算等功能。</p>
+<p><strong>举例</strong></p>
+<p>我们从一组文档开始，每个文档都表示为一系列单词。 对于每个文档，我们将其转换为特征向量。 然后可以将该特征向量传递给学习算法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Time     : 2019/7/31 14:09</span></span><br><span class="line"><span class="comment"># @Author   : buracagyang</span></span><br><span class="line"><span class="comment"># @File     : word2vec_example.py</span></span><br><span class="line"><span class="comment"># @Software : PyCharm</span></span><br><span class="line"></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Describe:</span></span><br><span class="line"><span class="string">        </span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> print_function</span><br><span class="line"><span class="keyword">from</span> pyspark.ml.feature <span class="keyword">import</span> Word2Vec</span><br><span class="line"><span class="keyword">from</span> pyspark.sql <span class="keyword">import</span> SparkSession</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    spark = SparkSession\</span><br><span class="line">        .builder\</span><br><span class="line">        .appName(<span class="string">"Word2VecExample"</span>)\</span><br><span class="line">        .getOrCreate()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 输入数据: 每行是一个句子或文档中的单词集合。</span></span><br><span class="line">    documentDF = spark.createDataFrame([</span><br><span class="line">        (<span class="string">"Hi I heard about Spark"</span>.split(<span class="string">" "</span>), ),</span><br><span class="line">        (<span class="string">"I wish Java could use case classes"</span>.split(<span class="string">" "</span>), ),</span><br><span class="line">        (<span class="string">"Logistic regression models are neat"</span>.split(<span class="string">" "</span>), )</span><br><span class="line">    ], [<span class="string">"text"</span>])</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 从单词到向量的映射。</span></span><br><span class="line">    word2Vec = Word2Vec(vectorSize=<span class="number">3</span>, minCount=<span class="number">0</span>, inputCol=<span class="string">"text"</span>, outputCol=<span class="string">"result"</span>)</span><br><span class="line">    model = word2Vec.fit(documentDF)</span><br><span class="line"></span><br><span class="line">    result = model.transform(documentDF)</span><br><span class="line">    <span class="keyword">for</span> row <span class="keyword">in</span> result.collect():</span><br><span class="line">        text, vector = row</span><br><span class="line">        print(<span class="string">"Text: [%s] =&gt; \nVector: %s\n"</span> % (<span class="string">", "</span>.join(text), str(vector)))</span><br><span class="line"></span><br><span class="line">    spark.stop()</span><br></pre></td></tr></table></figure>
+<p>结果如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Text: [Hi, I, heard, about, Spark] =&gt; </span><br><span class="line">Vector: [0.010823638737201692,-0.005407899245619774,-0.02091031074523926]</span><br><span class="line"></span><br><span class="line">Text: [I, wish, Java, could, use, <span class="keyword">case</span>, classes] =&gt; </span><br><span class="line">Vector: [0.04387364802615983,0.028466253940548213,-0.02133789997813957]</span><br><span class="line"></span><br><span class="line">Text: [Logistic, regression, models, are, neat] =&gt; </span><br><span class="line">Vector: [0.054717136174440385,0.009467959217727185,0.034012694098055365]</span><br></pre></td></tr></table></figure>
+<h2 id="1-3-CountVectorizer"><a href="#1-3-CountVectorizer" class="headerlink" title="1.3 CountVectorizer"></a>1.3 CountVectorizer</h2><p>CountVectorizer和CountVectorizerModel旨在帮助将文本文档集合转换为计数向量(vectors of token counts)。当a-priori字典不可用时，CountVectorizer可用作Estimator来提取词汇表，并生成CountVectorizerModel。该模型为词汇表上的文档生成稀疏表示，然后可以将其传递给其他算法，如LDA。</p>
+<p>在拟合过程中，CountVectorizer将选择按语料库中的术语频率排序的顶级词汇量词。可选参数minDF还通过指定词语必须出现在文档中的最小数量（或&lt;1.0）来影响拟合过程。另一个可选的二进制切换参数控制输出向量。如果设置为true，则所有非零计数都设置为1.这对于模拟二进制而非整数计数的离散概率模型尤其有用。</p>
+<p><strong>举例</strong></p>
+<p>假设我们有以下DataFrame，其中包含列id和文本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> id | texts</span><br><span class="line">----|----------</span><br><span class="line"> 0  | Array(<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>)</span><br><span class="line"> 1  | Array(<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>, <span class="string">"a"</span>)</span><br></pre></td></tr></table></figure>
+<p>文本中的每一行都是Array [String]类型的文档。 调用CountVectorizer的拟合会生成带有词汇表（a，b，c）的CountVectorizerModel。 然后转换后的输出列“vector”包含：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> id | texts                           | vector</span><br><span class="line">----|---------------------------------|---------------</span><br><span class="line"> 0  | Array(<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>)            | (3,[0,1,2],[1.0,1.0,1.0])</span><br><span class="line"> 1  | Array(<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>, <span class="string">"a"</span>)  | (3,[0,1,2],[2.0,2.0,1.0])</span><br></pre></td></tr></table></figure>
+<p>每个向量表示文档在词汇表中的词语计数(id 0: ‘a’, ‘b’, ‘c’各出现一次；id1: ‘a’, ‘b’, ‘c’各出现2， 2， 1次)。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Time     : 2019/7/31 14:24</span></span><br><span class="line"><span class="comment"># @Author   : buracagyang</span></span><br><span class="line"><span class="comment"># @File     : count_vectorizer_example.py</span></span><br><span class="line"><span class="comment"># @Software : PyCharm</span></span><br><span class="line"></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Describe:</span></span><br><span class="line"><span class="string">        </span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> print_function</span><br><span class="line"><span class="keyword">from</span> pyspark.sql <span class="keyword">import</span> SparkSession</span><br><span class="line"><span class="keyword">from</span> pyspark.ml.feature <span class="keyword">import</span> CountVectorizer</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    spark = SparkSession\</span><br><span class="line">        .builder\</span><br><span class="line">        .appName(<span class="string">"CountVectorizerExample"</span>)\</span><br><span class="line">        .getOrCreate()</span><br><span class="line"></span><br><span class="line">    df = spark.createDataFrame([</span><br><span class="line">        (<span class="number">0</span>, <span class="string">"a b c"</span>.split(<span class="string">" "</span>)),</span><br><span class="line">        (<span class="number">1</span>, <span class="string">"a b b c a"</span>.split(<span class="string">" "</span>))</span><br><span class="line">    ], [<span class="string">"id"</span>, <span class="string">"words"</span>])</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 用语料库拟合一个CountVectorizerModel</span></span><br><span class="line">    cv = CountVectorizer(inputCol=<span class="string">"words"</span>, outputCol=<span class="string">"features"</span>, vocabSize=<span class="number">3</span>, minDF=<span class="number">2.0</span>)</span><br><span class="line"></span><br><span class="line">    model = cv.fit(df)</span><br><span class="line">    result = model.transform(df)</span><br><span class="line">    result.show(truncate=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">    spark.stop()</span><br></pre></td></tr></table></figure>
+<p>结果如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">+---+---------------+-------------------------+</span><br><span class="line">|id |words          |features                 |</span><br><span class="line">+---+---------------+-------------------------+</span><br><span class="line">|0  |[a, b, c]      |(3,[0,1,2],[1.0,1.0,1.0])|</span><br><span class="line">|1  |[a, b, b, c, a]|(3,[0,1,2],[2.0,2.0,1.0])|</span><br><span class="line">+---+---------------+-------------------------+</span><br></pre></td></tr></table></figure>
+<h2 id="1-4-FeatureHasher"><a href="#1-4-FeatureHasher" class="headerlink" title="1.4 FeatureHasher"></a>1.4 FeatureHasher</h2><p>特征散列(Feature Hashing)将一组分类或数字特征映射到指定尺寸的特征向量中（通常远小于原始特征空间的特征向量）。这是使用散列技巧将要素映射到特征向量中的索引来完成的。</p>
+<p>FeatureHasher转换器在多个特征上运行。每个特征可能是数值特征或分类特征。不同数据类型的处理方法如下：</p>
+<ul>
+<li>数值特征：对于数值特征，特征名称的哈希值用于将值映射到向量中的索引。默认情况下，数值元素不被视为分类属性（即使它们是整数）。要将它们视为分类属性，请使用categoricalCols参数指定相关列。</li>
+<li>字符串(属性)特征：对于属性特征，字符串“column_name = value”的哈希值用于映射到矢量索引，指示符值为1.0。因此，属性特征是“one-hot”编码的（类似于使用具有dropLast = false的OneHotEncoder）。</li>
+<li>布尔特征：布尔值的处理方式与字符串特征相同。也就是说，布尔特征表示为“column_name = true”或“column_name = false”，指标值为1.0。</li>
+</ul>
+<p>忽略空（缺失）值（在结果特征向量中隐式为零）。</p>
+<p>这里使用的哈希函数也是HashingTF中使用的MurmurHash 3。由于散列值的简单模数用于确定向量索引，因此建议使用2的幂作为numFeatures参数;否则，特征将不会均匀地映射到矢量索引。</p>
+<p><strong>举例</strong></p>
+<p>假设我们有一个DataFrame，其中包含4个输入列real，bool，stringNum和string。这些不同的数据类型作为输入将说明变换的行为以产生一列特征向量。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">real| bool|stringNum|string</span><br><span class="line">----|-----|---------|------</span><br><span class="line"> 2.2| <span class="literal">true</span>|        1|   foo</span><br><span class="line"> 3.3|<span class="literal">false</span>|        2|   bar</span><br><span class="line"> 4.4|<span class="literal">false</span>|        3|   baz</span><br><span class="line"> 5.5|<span class="literal">false</span>|        4|   foo</span><br></pre></td></tr></table></figure>
+<p>训练过程示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Time     : 2019/7/31 14:34</span></span><br><span class="line"><span class="comment"># @Author   : buracagyang</span></span><br><span class="line"><span class="comment"># @File     : feature_hasher_example.py</span></span><br><span class="line"><span class="comment"># @Software : PyCharm</span></span><br><span class="line"></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Describe:</span></span><br><span class="line"><span class="string">        </span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> print_function</span><br><span class="line"><span class="keyword">from</span> pyspark.sql <span class="keyword">import</span> SparkSession</span><br><span class="line"><span class="keyword">from</span> pyspark.ml.feature <span class="keyword">import</span> FeatureHasher</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    spark = SparkSession\</span><br><span class="line">        .builder\</span><br><span class="line">        .appName(<span class="string">"FeatureHasherExample"</span>)\</span><br><span class="line">        .getOrCreate()</span><br><span class="line"></span><br><span class="line">    dataset = spark.createDataFrame([</span><br><span class="line">        (<span class="number">2.2</span>, <span class="literal">True</span>, <span class="string">"1"</span>, <span class="string">"foo"</span>),</span><br><span class="line">        (<span class="number">3.3</span>, <span class="literal">False</span>, <span class="string">"2"</span>, <span class="string">"bar"</span>),</span><br><span class="line">        (<span class="number">4.4</span>, <span class="literal">False</span>, <span class="string">"3"</span>, <span class="string">"baz"</span>),</span><br><span class="line">        (<span class="number">5.5</span>, <span class="literal">False</span>, <span class="string">"4"</span>, <span class="string">"foo"</span>)</span><br><span class="line">    ], [<span class="string">"real"</span>, <span class="string">"bool"</span>, <span class="string">"stringNum"</span>, <span class="string">"string"</span>])</span><br><span class="line"></span><br><span class="line">    hasher = FeatureHasher(inputCols=[<span class="string">"real"</span>, <span class="string">"bool"</span>, <span class="string">"stringNum"</span>, <span class="string">"string"</span>],</span><br><span class="line">                           outputCol=<span class="string">"features"</span>)</span><br><span class="line"></span><br><span class="line">    featurized = hasher.transform(dataset)</span><br><span class="line">    featurized.show(truncate=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">    spark.stop()</span><br></pre></td></tr></table></figure>
+<p>结果如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">+----+-----+---------+------+--------------------------------------------------------+</span><br><span class="line">|real|bool |stringNum|string|features                                                |</span><br><span class="line">+----+-----+---------+------+--------------------------------------------------------+</span><br><span class="line">|2.2 |<span class="literal">true</span> |1        |foo   |(262144,[174475,247670,257907,262126],[2.2,1.0,1.0,1.0])|</span><br><span class="line">|3.3 |<span class="literal">false</span>|2        |bar   |(262144,[70644,89673,173866,174475],[1.0,1.0,1.0,3.3])  |</span><br><span class="line">|4.4 |<span class="literal">false</span>|3        |baz   |(262144,[22406,70644,174475,187923],[1.0,1.0,4.4,1.0])  |</span><br><span class="line">|5.5 |<span class="literal">false</span>|4        |foo   |(262144,[70644,101499,174475,257907],[1.0,1.0,5.5,1.0]) |</span><br><span class="line">+----+-----+---------+------+--------------------------------------------------------+</span><br></pre></td></tr></table></figure>
+<p>然后可以将得到的特征向量传递给学习算法。</p>
 
-        <div class="article-info info-on-right">
-          
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -239,61 +276,152 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://qr.liantu.com/api.php?text=https://buracagyang.github.io/2019/07/30/spark-features-project-1/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/30/spark-ml-pipelines/" class="archive-article-date">
-  	<time datetime="2019-07-30T08:48:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-30</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2019/07/31/spark-features-project-2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          【Spark】特征工程1-Extractors
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/07/30/spark-ml-pipelines/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">【Spark】Pipelines</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/30/spark-ml-pipelines/">【Spark】Pipelines</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术备忘</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">大数据</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-特诊提取器"><span class="toc-number">1.</span> <span class="toc-text">1. 特诊提取器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-TF-IDF"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 TF-IDF</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-Word2Vec"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 Word2Vec</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-CountVectorizer"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 CountVectorizer</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-FeatureHasher"><span class="toc-number">1.4.</span> <span class="toc-text">1.4 FeatureHasher</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
   
-    </div></section>
   
 
-    
+  
+
+  
+
+  
+  
+  
+    <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div> 
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+
+if(true){
+	var gitalk = new Gitalk({
+  	clientID: 'b59e8ee91a1328df0e4b',
+  	clientSecret: 'e8a8251bb9bd5ec9913a699734a6824bea1d6ec3',
+  	repo: 'blog_comments',
+  	owner: 'buracagyang',
+  	admin: ['buracagyang'],
+  	id: 'Tue Jul 30 2019 18:07:31 GMT+0800',
+  	distractionFreeMode: 'true'
+})
+gitalk.render('gitalk-container') 
+}
+</script>
+  
+  
+
 
 
           </div>
@@ -316,9 +444,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,

@@ -6,15 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://buracagyang.github.io">
-  <title>Tag: 大数据 | Buracag的博客</title>
+  <title>【Spark】特征工程1-Extractors | Buracag的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Buracag的博客">
-<meta property="og:url" content="https://buracagyang.github.io/tags/大数据/index.html">
+  <meta name="description" content="Spark MLlib中关于特征处理的相关算法，大致分为以下几组：  提取：从“原始”数据中提取要素 转换：缩放，转换或修改功能 选择：从更大的一组功能中选择一个子集 局部敏感哈希（LSH）：这类算法将特征变换的各个方面与其他算法相结合。  本文介绍第二组： 特征转换器(Transformers)">
+<meta name="keywords" content="技术备忘,大数据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Spark】特征工程1-Extractors">
+<meta property="og:url" content="https://buracagyang.github.io/2019/07/31/spark-features-project-2/index.html">
 <meta property="og:site_name" content="Buracag的博客">
+<meta property="og:description" content="Spark MLlib中关于特征处理的相关算法，大致分为以下几组：  提取：从“原始”数据中提取要素 转换：缩放，转换或修改功能 选择：从更大的一组功能中选择一个子集 局部敏感哈希（LSH）：这类算法将特征变换的各个方面与其他算法相结合。  本文介绍第二组： 特征转换器(Transformers)">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-07-31T06:41:21.997Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Buracag的博客">
+<meta name="twitter:title" content="【Spark】特征工程1-Extractors">
+<meta name="twitter:description" content="Spark MLlib中关于特征处理的相关算法，大致分为以下几组：  提取：从“原始”数据中提取要素 转换：缩放，转换或修改功能 选择：从更大的一组功能中选择一个子集 局部敏感哈希（LSH）：这类算法将特征变换的各个方面与其他算法相结合。  本文介绍第二组： 特征转换器(Transformers)">
   
     <link rel="alternative" href="/atom.xml" title="Buracag的博客" type="application/atom+xml">
   
@@ -152,36 +157,64 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-spark-features-project-2" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      【Spark】特征工程1-Extractors
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/31/spark-features-project-2/" class="archive-article-date">
+
+        
+        <a href="/2019/07/31/spark-features-project-2/" class="archive-article-date">
   	<time datetime="2019-07-31T06:37:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-31</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/31/spark-features-project-2/">【Spark】特征工程1-Extractors</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Spark MLlib中关于特征处理的相关算法，大致分为以下几组：</p>
+<ul>
+<li>提取：从“原始”数据中提取要素</li>
+<li>转换：缩放，转换或修改功能</li>
+<li>选择：从更大的一组功能中选择一个子集</li>
+<li>局部敏感哈希（LSH）：这类算法将特征变换的各个方面与其他算法相结合。</li>
+</ul>
+<p>本文介绍第二组： 特征转换器(Transformers)</p>
+<a id="more"></a>
+<h1 id="1-特征转换器"><a href="#1-特征转换器" class="headerlink" title="1. 特征转换器"></a>1. 特征转换器</h1><h2 id="1-1-分词器-Tokenizer"><a href="#1-1-分词器-Tokenizer" class="headerlink" title="1.1 分词器(Tokenizer)"></a>1.1 分词器(Tokenizer)</h2><h2 id="1-2-StopWordsRemover"><a href="#1-2-StopWordsRemover" class="headerlink" title="1.2 StopWordsRemover"></a>1.2 StopWordsRemover</h2><h2 id="1-3-n-gram"><a href="#1-3-n-gram" class="headerlink" title="1.3 n-gram"></a>1.3 n-gram</h2><h2 id="1-4-二元化-Binarizer"><a href="#1-4-二元化-Binarizer" class="headerlink" title="1.4 二元化(Binarizer)"></a>1.4 二元化(Binarizer)</h2><h2 id="1-5-主成分分析-PCA"><a href="#1-5-主成分分析-PCA" class="headerlink" title="1.5 主成分分析(PCA)"></a>1.5 主成分分析(PCA)</h2><h2 id="1-6-多项式扩展-PolynomialExpansion"><a href="#1-6-多项式扩展-PolynomialExpansion" class="headerlink" title="1.6 多项式扩展(PolynomialExpansion)"></a>1.6 多项式扩展(PolynomialExpansion)</h2><h2 id="1-7-离散余弦距离-Discrete-Cosine-Transform-DCT"><a href="#1-7-离散余弦距离-Discrete-Cosine-Transform-DCT" class="headerlink" title="1.7 离散余弦距离(Discrete Cosine Transform, DCT)"></a>1.7 离散余弦距离(Discrete Cosine Transform, DCT)</h2><h2 id="1-8-字符串索引器-StringIndexer"><a href="#1-8-字符串索引器-StringIndexer" class="headerlink" title="1.8 字符串索引器(StringIndexer)"></a>1.8 字符串索引器(StringIndexer)</h2><h2 id="1-9-IndexToString"><a href="#1-9-IndexToString" class="headerlink" title="1.9 IndexToString"></a>1.9 IndexToString</h2><h2 id="1-10-One-Hot-OneHotEncoderEstimator"><a href="#1-10-One-Hot-OneHotEncoderEstimator" class="headerlink" title="1.10 One-Hot(OneHotEncoderEstimator)"></a>1.10 One-Hot(OneHotEncoderEstimator)</h2><h2 id="1-11-矢量索引器-VectorIndexer"><a href="#1-11-矢量索引器-VectorIndexer" class="headerlink" title="1.11 矢量索引器(VectorIndexer)"></a>1.11 矢量索引器(VectorIndexer)</h2><h2 id="1-12-交互作用-Interaction"><a href="#1-12-交互作用-Interaction" class="headerlink" title="1.12 交互作用(Interaction)"></a>1.12 交互作用(Interaction)</h2><h2 id="1-13-标准化-Normalizer"><a href="#1-13-标准化-Normalizer" class="headerlink" title="1.13 标准化(Normalizer)"></a>1.13 标准化(Normalizer)</h2><h2 id="1-14-特征缩放-StandardScaler"><a href="#1-14-特征缩放-StandardScaler" class="headerlink" title="1.14 特征缩放(StandardScaler)"></a>1.14 特征缩放(StandardScaler)</h2><h2 id="1-15-MinMaxScaler"><a href="#1-15-MinMaxScaler" class="headerlink" title="1.15 MinMaxScaler"></a>1.15 MinMaxScaler</h2><h2 id="1-16-MaxAbsScaler"><a href="#1-16-MaxAbsScaler" class="headerlink" title="1.16 MaxAbsScaler"></a>1.16 MaxAbsScaler</h2><h2 id="1-17-Bucketizer"><a href="#1-17-Bucketizer" class="headerlink" title="1.17 Bucketizer"></a>1.17 Bucketizer</h2><h2 id="1-18-向量内积-ElementwiseProduct"><a href="#1-18-向量内积-ElementwiseProduct" class="headerlink" title="1.18 向量内积(ElementwiseProduct)"></a>1.18 向量内积(ElementwiseProduct)</h2><h2 id="1-19-SQLTransformer"><a href="#1-19-SQLTransformer" class="headerlink" title="1.19 SQLTransformer"></a>1.19 SQLTransformer</h2><h2 id="1-20-矢量汇编-VectorAssembler"><a href="#1-20-矢量汇编-VectorAssembler" class="headerlink" title="1.20 矢量汇编(VectorAssembler)"></a>1.20 矢量汇编(VectorAssembler)</h2><h2 id="1-21-矢量大小提示-VectorSizeHint"><a href="#1-21-矢量大小提示-VectorSizeHint" class="headerlink" title="1.21 矢量大小提示(VectorSizeHint)"></a>1.21 矢量大小提示(VectorSizeHint)</h2><h2 id="1-22-分位数离散化器-QuantileDiscretizer"><a href="#1-22-分位数离散化器-QuantileDiscretizer" class="headerlink" title="1.22 分位数离散化器(QuantileDiscretizer)"></a>1.22 分位数离散化器(QuantileDiscretizer)</h2><h2 id="1-23-Imputer"><a href="#1-23-Imputer" class="headerlink" title="1.23 Imputer"></a>1.23 Imputer</h2>
+      
 
-        <div class="article-info info-on-right">
-          
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -197,103 +230,143 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://qr.liantu.com/api.php?text=https://buracagyang.github.io/2019/07/31/spark-features-project-2/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/30/spark-features-project-1/" class="archive-article-date">
-  	<time datetime="2019-07-30T10:07:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-30</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/07/30/spark-features-project-1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">【Spark】特征工程1-Extractors</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/30/spark-features-project-1/">【Spark】特征工程1-Extractors</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术备忘</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">大数据</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-特征转换器"><span class="toc-number">1.</span> <span class="toc-text">1. 特征转换器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-分词器-Tokenizer"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 分词器(Tokenizer)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-StopWordsRemover"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 StopWordsRemover</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-n-gram"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 n-gram</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-二元化-Binarizer"><span class="toc-number">1.4.</span> <span class="toc-text">1.4 二元化(Binarizer)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5-主成分分析-PCA"><span class="toc-number">1.5.</span> <span class="toc-text">1.5 主成分分析(PCA)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-6-多项式扩展-PolynomialExpansion"><span class="toc-number">1.6.</span> <span class="toc-text">1.6 多项式扩展(PolynomialExpansion)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-7-离散余弦距离-Discrete-Cosine-Transform-DCT"><span class="toc-number">1.7.</span> <span class="toc-text">1.7 离散余弦距离(Discrete Cosine Transform, DCT)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-8-字符串索引器-StringIndexer"><span class="toc-number">1.8.</span> <span class="toc-text">1.8 字符串索引器(StringIndexer)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-9-IndexToString"><span class="toc-number">1.9.</span> <span class="toc-text">1.9 IndexToString</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-10-One-Hot-OneHotEncoderEstimator"><span class="toc-number">1.10.</span> <span class="toc-text">1.10 One-Hot(OneHotEncoderEstimator)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-11-矢量索引器-VectorIndexer"><span class="toc-number">1.11.</span> <span class="toc-text">1.11 矢量索引器(VectorIndexer)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-12-交互作用-Interaction"><span class="toc-number">1.12.</span> <span class="toc-text">1.12 交互作用(Interaction)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-13-标准化-Normalizer"><span class="toc-number">1.13.</span> <span class="toc-text">1.13 标准化(Normalizer)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-14-特征缩放-StandardScaler"><span class="toc-number">1.14.</span> <span class="toc-text">1.14 特征缩放(StandardScaler)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-15-MinMaxScaler"><span class="toc-number">1.15.</span> <span class="toc-text">1.15 MinMaxScaler</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-16-MaxAbsScaler"><span class="toc-number">1.16.</span> <span class="toc-text">1.16 MaxAbsScaler</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-17-Bucketizer"><span class="toc-number">1.17.</span> <span class="toc-text">1.17 Bucketizer</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-18-向量内积-ElementwiseProduct"><span class="toc-number">1.18.</span> <span class="toc-text">1.18 向量内积(ElementwiseProduct)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-19-SQLTransformer"><span class="toc-number">1.19.</span> <span class="toc-text">1.19 SQLTransformer</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-20-矢量汇编-VectorAssembler"><span class="toc-number">1.20.</span> <span class="toc-text">1.20 矢量汇编(VectorAssembler)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-21-矢量大小提示-VectorSizeHint"><span class="toc-number">1.21.</span> <span class="toc-text">1.21 矢量大小提示(VectorSizeHint)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-22-分位数离散化器-QuantileDiscretizer"><span class="toc-number">1.22.</span> <span class="toc-text">1.22 分位数离散化器(QuantileDiscretizer)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-23-Imputer"><span class="toc-number">1.23.</span> <span class="toc-text">1.23 Imputer</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/30/spark-ml-pipelines/" class="archive-article-date">
-  	<time datetime="2019-07-30T08:48:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-30</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/30/spark-ml-pipelines/">【Spark】Pipelines</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术备忘</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">大数据</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+  
+  
+  
+    <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div> 
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+
+if(true){
+	var gitalk = new Gitalk({
+  	clientID: 'b59e8ee91a1328df0e4b',
+  	clientSecret: 'e8a8251bb9bd5ec9913a699734a6824bea1d6ec3',
+  	repo: 'blog_comments',
+  	owner: 'buracagyang',
+  	admin: ['buracagyang'],
+  	id: 'Wed Jul 31 2019 14:37:16 GMT+0800',
+  	distractionFreeMode: 'true'
+})
+gitalk.render('gitalk-container') 
+}
+</script>
+  
+  
+
 
 
           </div>
@@ -316,9 +389,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
