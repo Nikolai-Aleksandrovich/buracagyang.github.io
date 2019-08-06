@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="https://buracagyang.github.io">
   <title>【Spark】分类和回归算法-分类 | Buracag的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本节主要说Spark ML中关于分类算法的实现。目录结构请参见： [TOC]">
+  <meta name="description" content="本节主要讲Spark ML中关于分类算法的实现。示例的算法Demo包含：LR、DT、RF、GBTs、多层感知器、线性支持向量机、One-vs-Rest分类器以及NB等。">
 <meta name="keywords" content="技术备忘,大数据">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【Spark】分类和回归算法-分类">
 <meta property="og:url" content="https://buracagyang.github.io/2019/08/02/spark-classification-and-regression-1/index.html">
 <meta property="og:site_name" content="Buracag的博客">
-<meta property="og:description" content="本节主要说Spark ML中关于分类算法的实现。目录结构请参见： [TOC]">
+<meta property="og:description" content="本节主要讲Spark ML中关于分类算法的实现。示例的算法Demo包含：LR、DT、RF、GBTs、多层感知器、线性支持向量机、One-vs-Rest分类器以及NB等。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-06T01:49:29.161Z">
+<meta property="og:updated_time" content="2019-08-06T01:57:08.511Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【Spark】分类和回归算法-分类">
-<meta name="twitter:description" content="本节主要说Spark ML中关于分类算法的实现。目录结构请参见： [TOC]">
+<meta name="twitter:description" content="本节主要讲Spark ML中关于分类算法的实现。示例的算法Demo包含：LR、DT、RF、GBTs、多层感知器、线性支持向量机、One-vs-Rest分类器以及NB等。">
   
     <link rel="alternative" href="/atom.xml" title="Buracag的博客" type="application/atom+xml">
   
@@ -177,8 +177,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>本节主要说Spark ML中关于分类算法的实现。目录结构请参见：</p>
-<p>[TOC]</p>
+        <p>本节主要讲Spark ML中关于分类算法的实现。示例的算法Demo包含：LR、DT、RF、GBTs、多层感知器、线性支持向量机、One-vs-Rest分类器以及NB等。</p>
 <a id="more"></a>
 <h1 id="1-Logistic-regression"><a href="#1-Logistic-regression" class="headerlink" title="1. Logistic regression"></a>1. Logistic regression</h1><p>在spark.ml中，逻辑回归可以用于通过二项逻辑回归来预测二元结果，或者它可以用于通过使用多项逻辑回归来预测多类结果。 使用family参数在这两个算法之间进行选择，或者保持不设置，Spark将推断出正确的变量。</p>
 <blockquote>
