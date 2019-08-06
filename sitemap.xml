@@ -2,16 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://buracagyang.github.io/2019/08/02/spark-classification-and-regression-1/</loc>
+    
+    <lastmod>2019-08-06T01:49:29.161Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://buracagyang.github.io/2019/07/31/spark-features-project-2/</loc>
     
-    <lastmod>2019-08-01T08:16:44.939Z</lastmod>
+    <lastmod>2019-08-05T08:47:37.354Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://buracagyang.github.io/2019/07/30/spark-features-project-1/</loc>
     
-    <lastmod>2019-07-31T07:04:53.549Z</lastmod>
+    <lastmod>2019-08-02T09:27:20.238Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://buracagyang.github.io/2019/05/28/ab-test/</loc>
+    
+    <lastmod>2019-08-01T07:27:45.658Z</lastmod>
     
   </url>
   
@@ -19,13 +33,6 @@
     <loc>https://buracagyang.github.io/2019/07/30/spark-ml-pipelines/</loc>
     
     <lastmod>2019-07-31T06:41:14.511Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://buracagyang.github.io/2019/05/28/ab-test/</loc>
-    
-    <lastmod>2019-07-31T05:36:03.039Z</lastmod>
     
   </url>
   

@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Buracag的博客">
 <meta property="og:description" content="Spark MLlib中关于特征处理的相关算法，大致分为以下几组：  提取(Extraction)：从“原始”数据中提取特征 转换(Transformation)：缩放，转换或修改特征 选择(Selection)：从较大的一组特征中选择一个子集 局部敏感哈希(Locality Sensitive Hashing，LSH)：这类算法将特征变换的各个方面与其他算法相结合。  本文介绍第二组： 特征转换">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-01T08:16:44.939Z">
+<meta property="og:updated_time" content="2019-08-05T08:47:37.354Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【Spark】特征工程2-Transformers">
 <meta name="twitter:description" content="Spark MLlib中关于特征处理的相关算法，大致分为以下几组：  提取(Extraction)：从“原始”数据中提取特征 转换(Transformation)：缩放，转换或修改特征 选择(Selection)：从较大的一组特征中选择一个子集 局部敏感哈希(Locality Sensitive Hashing，LSH)：这类算法将特征变换的各个方面与其他算法相结合。  本文介绍第二组： 特征转换">
@@ -273,7 +273,7 @@
 <h2 id="1-11-矢量索引器-VectorIndexer"><a href="#1-11-矢量索引器-VectorIndexer" class="headerlink" title="1.11 矢量索引器(VectorIndexer)"></a>1.11 矢量索引器(VectorIndexer)</h2><p>VectorIndexer帮助索引Vectors的数据集中的分类特征。它既可以自动决定哪些特征是分类的，也可以将原始值转换为类别索引。具体来说，它执行以下操作：</p>
 <ol>
 <li>获取Vector类型的输入列和参数maxCategories。</li>
-<li>根据不同值的数量确定哪些要素应该是分类的，其中最多maxCategories的要素被声明为分类。<br>为每个分类特征计算基于0的类别索引。</li>
+<li>根据不同值的数量确定哪些要素应该是分类的，其中最多maxCategories的要素被声明为分类。为每个分类特征计算基于0的类别索引。</li>
 <li>索引分类要素并将原始要素值转换为索引。</li>
 <li>索引分类特征允许决策树和树集合等算法适当地处理分类特征，从而提高性能。</li>
 </ol>
@@ -495,6 +495,15 @@
   
 <nav id="article-nav">
   
+    <a href="/2019/08/02/spark-classification-and-regression-1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          【Spark】分类和回归算法-分类
+        
+      </div>
+    </a>
+  
   
     <a href="/2019/07/30/spark-features-project-1/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">【Spark】特征工程1-Extractors</div>
@@ -685,11 +694,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">统计学运用</a>
+                <a href="javascript:void(0)" class="js-tag color5">基础知识</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">基础知识</a>
+                <a href="javascript:void(0)" class="js-tag color1">统计学运用</a>
               </li>
              
               <li class="article-tag-list-item">
