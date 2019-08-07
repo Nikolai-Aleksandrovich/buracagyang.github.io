@@ -6,15 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://buracagyang.github.io">
-  <title>Archives: 2019/5 | Buracag的博客</title>
+  <title>【Spark】分类和回归算法-回归 | Buracag的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Buracag的博客">
-<meta property="og:url" content="https://buracagyang.github.io/archives/2019/05/index.html">
+  <meta name="description" content="本节主要讲Spark ML中关于回归算法的实现。示例的算法Demo包含：线性回归、广义线性回顾、决策树回归、随机森另回归、梯度提升树回归、等。">
+<meta name="keywords" content="技术备忘,大数据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Spark】分类和回归算法-回归">
+<meta property="og:url" content="https://buracagyang.github.io/2019/08/07/spark-classification-and-regression-2/index.html">
 <meta property="og:site_name" content="Buracag的博客">
+<meta property="og:description" content="本节主要讲Spark ML中关于回归算法的实现。示例的算法Demo包含：线性回归、广义线性回顾、决策树回归、随机森另回归、梯度提升树回归、等。">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-08-07T05:56:22.548Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Buracag的博客">
+<meta name="twitter:title" content="【Spark】分类和回归算法-回归">
+<meta name="twitter:description" content="本节主要讲Spark ML中关于回归算法的实现。示例的算法Demo包含：线性回归、广义线性回顾、决策树回归、随机森另回归、梯度提升树回归、等。">
   
     <link rel="alternative" href="/atom.xml" title="Buracag的博客" type="application/atom+xml">
   
@@ -152,82 +157,102 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-spark-classification-and-regression-2" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      【Spark】分类和回归算法-回归
+    </h1>
+  
+
+        
+        <a href="/2019/08/07/spark-classification-and-regression-2/" class="archive-article-date">
+  	<time datetime="2019-08-07T02:01:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-07</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本节主要讲Spark ML中关于回归算法的实现。示例的算法Demo包含：线性回归、广义线性回顾、决策树回归、随机森另回归、梯度提升树回归、等。</p>
+<a id="more"></a>
+<h1 id="1-线性回归-Linear-regression"><a href="#1-线性回归-Linear-regression" class="headerlink" title="1. 线性回归(Linear regression)"></a>1. 线性回归(Linear regression)</h1><p>与logistic regression类似的，直接附上示例代码吧：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Time     : 2019/8/7 10:11</span></span><br><span class="line"><span class="comment"># @Author   : buracagyang</span></span><br><span class="line"><span class="comment"># @File     : linear_regression_with_elastic_net.py</span></span><br><span class="line"><span class="comment"># @Software : PyCharm</span></span><br><span class="line"></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Describe:</span></span><br><span class="line"><span class="string">        </span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> print_function</span><br><span class="line"><span class="keyword">from</span> pyspark.ml.regression <span class="keyword">import</span> LinearRegression</span><br><span class="line"><span class="keyword">from</span> pyspark.sql <span class="keyword">import</span> SparkSession</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    spark = SparkSession.builder.appName(<span class="string">"LinearRegressionWithElasticNet"</span>).getOrCreate()</span><br><span class="line"></span><br><span class="line">    training = spark.read.format(<span class="string">"libsvm"</span>).load(<span class="string">"../data/mllib/sample_linear_regression_data.txt"</span>)</span><br><span class="line"></span><br><span class="line">    lr = LinearRegression(maxIter=<span class="number">20</span>, regParam=<span class="number">0.01</span>, elasticNetParam=<span class="number">0.6</span>)</span><br><span class="line">    lrModel = lr.fit(training)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 参数和截距项</span></span><br><span class="line">    <span class="comment"># print("Coefficients: %s" % str(lrModel.coefficients))</span></span><br><span class="line">    <span class="comment"># print("Intercept: %s" % str(lrModel.intercept))</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 模型评估指标</span></span><br><span class="line">    trainingSummary = lrModel.summary</span><br><span class="line">    print(<span class="string">"numIterations: %d"</span> % trainingSummary.totalIterations)</span><br><span class="line">    print(<span class="string">"objectiveHistory: %s"</span> % str(trainingSummary.objectiveHistory))</span><br><span class="line">    trainingSummary.residuals.show()</span><br><span class="line">    print(<span class="string">"RMSE: %f"</span> % trainingSummary.rootMeanSquaredError)</span><br><span class="line">    print(<span class="string">"r2: %f"</span> % trainingSummary.r2)</span><br><span class="line"></span><br><span class="line">    spark.stop()</span><br></pre></td></tr></table></figure>
+<p>结果如下($r^2$如此低。。。。)：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">numIterations: 8</span><br><span class="line">objectiveHistory: [0.49999999999999994, 0.4931849471651455, 0.4863393782275527, 0.48633557300904495, 0.48633543657045664, 0.4863354337756586, 0.4863354337094886, 0.4863354337092549]</span><br><span class="line">+-------------------+</span><br><span class="line">|          residuals|</span><br><span class="line">+-------------------+</span><br><span class="line">|  -10.9791066152217|</span><br><span class="line">| 0.9208605107751258|</span><br><span class="line">| -4.608888656779226|</span><br><span class="line">|-20.424003572582702|</span><br><span class="line">|-10.316545030639608|</span><br><span class="line">+-------------------+</span><br><span class="line">only showing top 5 rows</span><br><span class="line"></span><br><span class="line">RMSE: 10.163110</span><br><span class="line">r2: 0.027836</span><br></pre></td></tr></table></figure>
+<h1 id="2-广义线性回归-Generalized-linear-regression"><a href="#2-广义线性回归-Generalized-linear-regression" class="headerlink" title="2. 广义线性回归(Generalized linear regression)"></a>2. 广义线性回归(Generalized linear regression)</h1><p>与假设输出遵循高斯分布的线性回归相反，广义线性模型（GLMs）是线性模型的规范，其中响应变量$Y_i$遵循指数分布族的一些分布。 Spark的GeneralizedLinearRegression接口允许灵活地指定GLMs，可用于各种类型的预测问题，包括线性回归，泊松回归，逻辑回归等。目前在spark.ml中，仅支持指数族分布的子集，在下面列出。</p>
+<table>
+<thead>
+<tr>
+<th>分布族</th>
+<th>响应变量类型</th>
+<th>Supported Links</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>高斯分布</td>
+<td>Continuous</td>
+<td>Identity*,Log,Inverse</td>
+</tr>
+<tr>
+<td>Binomial</td>
+<td>二元变量</td>
+<td>Logit*, Probit, CLogLog</td>
+</tr>
+<tr>
+<td>泊松分布</td>
+<td>数值</td>
+<td>Log*, Identity, Sqrt</td>
+</tr>
+<tr>
+<td>Gamma分布</td>
+<td>连续变量</td>
+<td>Inverse*, Identity, Log</td>
+</tr>
+<tr>
+<td>Tweedie分布</td>
+<td>zero-inflated continuous</td>
+</tr>
+</tbody>
+</table>
+<p>*标准Link</p>
+<p><strong>注意</strong>：Spark目前仅通过其GeneralizedLinearRegression接口支持4096个特征，如果超出此约束，则会抛出异常。尽管如此，对于线性回归和逻辑回归，可以使用LinearRegression和LogisticRegression估计来训练具有更多特征的模型。</p>
+<p>GLMs需要指数族分布，这些分布可以用“标准(canonical)”或“自然(natural)”形式写成，也就是自然指数族分布。自然指数分布族(natural exponential family distribution)的形式如下：<br>$$<br>f_Y(y|\theta, \tau) = h(y, \tau)exp(\frac{\theta.y - A(\theta)}{d(\tau)}) \tag{1}<br>$$<br>其中$\theta$是parameter of interest，$\tau$是dispersion parameter。 在GLMs中，假设响应变量$Y_i$是从自然指数分布族中提取的：<br>$$<br>Y_i \sim f(\cdot|\theta_i, \tau) \tag{2}<br>$$<br>其中，parameter of interest $\theta_i$与响应变量的期望值$\mu_i$相关:<br>$$<br>\mu_i = A’(\theta_i) \tag{3}<br>$$<br>这里，$A’(\theta_i)$根据选择的分布形式定义，GLMs还支持指定的链接函数(link function)，该函数定义响应变量的期望值$\mu_i$与线性预测值$\eta_i$之间的关系：<br>$$<br>g(\mu_i) = \eta_i = \vec{x_i}^T \cdot \vec{\beta} \tag{4}<br>$$<br>通常，选择链接函数(link function)使得$A’ =  g^{-1}$，其产生的parameter of interest $θ$与线性预测值$\eta$之间的简化关系。 在这种情况下，链接函数$g(μ)$被称为“标准”(“canonical”)链接函数。<br>$$<br>\theta_i = A’^{-1}(\mu_i) = g(g^{-1}(\eta_i)) = \eta_i \tag{5}<br>$$<br>一个GLM根据最大化似然概率函数值寻找回归系数$\vec{\beta}$:<br>$$<br>\max_{\vec{\beta}} \mathcal{L}(\vec{\theta}|\vec{y},X) =<br>\prod_{i=1}^{N} h(y_i, \tau) \exp{\left(\frac{y_i\theta_i - A(\theta_i)}{d(\tau)}\right)} \tag{6}<br>$$<br>其中the parameter of interest $\theta_i$与回归系数$\vec{\beta}$的关系为：<br>$$<br>\theta_i = A’^{-1}(g^{-1}(\vec{x_i} \cdot \vec{\beta})) \tag{7}<br>$$</p>
+<p>示例代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Time     : 2019/8/7 13:52</span></span><br><span class="line"><span class="comment"># @Author   : buracagyang</span></span><br><span class="line"><span class="comment"># @File     : generalized_linear_regression_example.py</span></span><br><span class="line"><span class="comment"># @Software : PyCharm</span></span><br><span class="line"></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Describe:</span></span><br><span class="line"><span class="string">        </span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> print_function</span><br><span class="line"><span class="keyword">from</span> pyspark.sql <span class="keyword">import</span> SparkSession</span><br><span class="line"><span class="keyword">from</span> pyspark.ml.regression <span class="keyword">import</span> GeneralizedLinearRegression</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    spark = SparkSession.builder.appName(<span class="string">"GeneralizedLinearRegressionExample"</span>).getOrCreate()</span><br><span class="line"></span><br><span class="line">    dataset = spark.read.format(<span class="string">"libsvm"</span>).load(<span class="string">"../data/mllib/sample_linear_regression_data.txt"</span>)</span><br><span class="line"></span><br><span class="line">    glr = GeneralizedLinearRegression(family=<span class="string">"gaussian"</span>, link=<span class="string">"identity"</span>, maxIter=<span class="number">10</span>, regParam=<span class="number">0.3</span>)</span><br><span class="line">    model = glr.fit(dataset)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 参数和截距项</span></span><br><span class="line">    print(<span class="string">"Coefficients: "</span> + str(model.coefficients))</span><br><span class="line">    print(<span class="string">"Intercept: "</span> + str(model.intercept))</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 通不过模型检验啊...</span></span><br><span class="line">    summary = model.summary</span><br><span class="line">    print(<span class="string">"Coefficient Standard Errors: "</span> + str(summary.coefficientStandardErrors))</span><br><span class="line">    print(<span class="string">"T Values: "</span> + str(summary.tValues))</span><br><span class="line">    print(<span class="string">"P Values: "</span> + str(summary.pValues))</span><br><span class="line">    print(<span class="string">"Dispersion: "</span> + str(summary.dispersion))</span><br><span class="line">    print(<span class="string">"Null Deviance: "</span> + str(summary.nullDeviance))</span><br><span class="line">    print(<span class="string">"Residual Degree Of Freedom Null: "</span> + str(summary.residualDegreeOfFreedomNull))</span><br><span class="line">    print(<span class="string">"Deviance: "</span> + str(summary.deviance))</span><br><span class="line">    print(<span class="string">"Residual Degree Of Freedom: "</span> + str(summary.residualDegreeOfFreedom))</span><br><span class="line">    print(<span class="string">"AIC: "</span> + str(summary.aic))</span><br><span class="line">    print(<span class="string">"Deviance Residuals: "</span>)</span><br><span class="line">    summary.residuals().show()</span><br><span class="line"></span><br><span class="line">    spark.stop()</span><br></pre></td></tr></table></figure>
+<h2 id="2-1-可用的分布族"><a href="#2-1-可用的分布族" class="headerlink" title="2.1 可用的分布族"></a>2.1 可用的分布族</h2><h1 id="3-决策树回归-Decision-tree-regression"><a href="#3-决策树回归-Decision-tree-regression" class="headerlink" title="3. 决策树回归(Decision tree regression)"></a>3. 决策树回归(Decision tree regression)</h1><h1 id="4-随机森林回归-Random-forest-regression"><a href="#4-随机森林回归-Random-forest-regression" class="headerlink" title="4. 随机森林回归(Random forest regression)"></a>4. 随机森林回归(Random forest regression)</h1><h1 id="5-梯度提升树回归-Gradient-boosted-tree-regression"><a href="#5-梯度提升树回归-Gradient-boosted-tree-regression" class="headerlink" title="5. 梯度提升树回归(Gradient-boosted tree regression)"></a>5. 梯度提升树回归(Gradient-boosted tree regression)</h1><h1 id="6-生存回归-Survival-regression"><a href="#6-生存回归-Survival-regression" class="headerlink" title="6. 生存回归(Survival regression)"></a>6. 生存回归(Survival regression)</h1><h1 id="7-Isotonic-regression"><a href="#7-Isotonic-regression" class="headerlink" title="7. Isotonic regression"></a>7. Isotonic regression</h1>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/29/logistic-loss-function/" class="archive-article-date">
-  	<time datetime="2019-05-29T09:16:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-29</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/29/logistic-loss-function/">Logistic loss函数</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法备忘</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">统计学运用</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">机器学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/29/python-basic-about-class/" class="archive-article-date">
-  	<time datetime="2019-05-29T09:12:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-29</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/29/python-basic-about-class/">Python中定义类的相关知识</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -237,239 +262,149 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">大数据</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://qr.liantu.com/api.php?text=https://buracagyang.github.io/2019/08/07/spark-classification-and-regression-2/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/29/single-layer-perceptron/" class="archive-article-date">
-  	<time datetime="2019-05-29T09:05:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-29</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/08/02/spark-classification-and-regression-1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">【Spark】分类和回归算法-分类</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/29/single-layer-perceptron/">单层感知器为什么不能解决异或(XOR)问题</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术备忘</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法备忘</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-线性回归-Linear-regression"><span class="toc-number">1.</span> <span class="toc-text">1. 线性回归(Linear regression)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-广义线性回归-Generalized-linear-regression"><span class="toc-number">2.</span> <span class="toc-text">2. 广义线性回归(Generalized linear regression)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-可用的分布族"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 可用的分布族</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-决策树回归-Decision-tree-regression"><span class="toc-number">3.</span> <span class="toc-text">3. 决策树回归(Decision tree regression)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-随机森林回归-Random-forest-regression"><span class="toc-number">4.</span> <span class="toc-text">4. 随机森林回归(Random forest regression)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-梯度提升树回归-Gradient-boosted-tree-regression"><span class="toc-number">5.</span> <span class="toc-text">5. 梯度提升树回归(Gradient-boosted tree regression)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-生存回归-Survival-regression"><span class="toc-number">6.</span> <span class="toc-text">6. 生存回归(Survival regression)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-Isotonic-regression"><span class="toc-number">7.</span> <span class="toc-text">7. Isotonic regression</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/29/aic-and-bic/" class="archive-article-date">
-  	<time datetime="2019-05-29T07:14:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-29</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/29/aic-and-bic/">AIC和BIC相关知识</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术备忘</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">统计学运用</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/28/ab-test/" class="archive-article-date">
-  	<time datetime="2019-05-28T08:39:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-28</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/28/ab-test/">A/B-test显著性检验</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术备忘</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">统计学运用</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/09/numpy-vectorize/" class="archive-article-date">
-  	<time datetime="2019-05-09T09:11:56.441Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/09/numpy-vectorize/">利用numpy.vectorize提升计算速度</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术备忘</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/08/svm-proving-process/" class="archive-article-date">
-  	<time datetime="2019-05-08T05:48:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-08</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/08/svm-proving-process/">SVM推导过程注解</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术备忘</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法备忘</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">统计学运用</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
+  
+    <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div> 
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+
+if(true){
+	var gitalk = new Gitalk({
+  	clientID: 'b59e8ee91a1328df0e4b',
+  	clientSecret: 'e8a8251bb9bd5ec9913a699734a6824bea1d6ec3',
+  	repo: 'blog_comments',
+  	owner: 'buracagyang',
+  	admin: ['buracagyang'],
+  	id: 'Wed Aug 07 2019 10:01:34 GMT+0800',
+  	distractionFreeMode: 'true'
+})
+gitalk.render('gitalk-container') 
+}
+</script>
+  
   
 
-    
 
 
           </div>
@@ -492,8 +427,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
