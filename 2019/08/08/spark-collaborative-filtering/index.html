@@ -6,15 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://buracagyang.github.io">
-  <title>Archives: 2019 | Buracag的博客</title>
+  <title>【Spark】协同过滤 | Buracag的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Buracag的博客">
-<meta property="og:url" content="https://buracagyang.github.io/archives/2019/page/3/index.html">
+  <meta name="description" content="协同过滤通常用于推荐系统。这些技术旨在根据user-item关联矩阵的缺失条目。 spark.ml目前支持基于模型的协同过滤，其中users和items由一小组可用于预测缺失条目的潜在因子（latent factors）描述。 spark.ml使用交替最小二乘（ALS）算法来学习这些潜在因素。 spark.ml中的实现具有以下参数：  numBlocks，是users和items将被分区为多个块的">
+<meta name="keywords" content="技术备忘,大数据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Spark】协同过滤">
+<meta property="og:url" content="https://buracagyang.github.io/2019/08/08/spark-collaborative-filtering/index.html">
 <meta property="og:site_name" content="Buracag的博客">
+<meta property="og:description" content="协同过滤通常用于推荐系统。这些技术旨在根据user-item关联矩阵的缺失条目。 spark.ml目前支持基于模型的协同过滤，其中users和items由一小组可用于预测缺失条目的潜在因子（latent factors）描述。 spark.ml使用交替最小二乘（ALS）算法来学习这些潜在因素。 spark.ml中的实现具有以下参数：  numBlocks，是users和items将被分区为多个块的">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-08-08T11:48:01.612Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Buracag的博客">
+<meta name="twitter:title" content="【Spark】协同过滤">
+<meta name="twitter:description" content="协同过滤通常用于推荐系统。这些技术旨在根据user-item关联矩阵的缺失条目。 spark.ml目前支持基于模型的协同过滤，其中users和items由一小组可用于预测缺失条目的潜在因子（latent factors）描述。 spark.ml使用交替最小二乘（ALS）算法来学习这些潜在因素。 spark.ml中的实现具有以下参数：  numBlocks，是users和items将被分区为多个块的">
   
     <link rel="alternative" href="/atom.xml" title="Buracag的博客" type="application/atom+xml">
   
@@ -152,82 +157,85 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-spark-collaborative-filtering" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      【Spark】协同过滤
+    </h1>
+  
+
+        
+        <a href="/2019/08/08/spark-collaborative-filtering/" class="archive-article-date">
+  	<time datetime="2019-08-08T10:09:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-08</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>协同过滤通常用于推荐系统。这些技术旨在根据user-item关联矩阵的缺失条目。 spark.ml目前支持基于模型的协同过滤，其中users和items由一小组可用于预测缺失条目的潜在因子（latent factors）描述。 spark.ml使用交替最小二乘（ALS）算法来学习这些潜在因素。 spark.ml中的实现具有以下参数：</p>
+<ul>
+<li>numBlocks，是users和items将被分区为多个块的数量，以便并行化计算（默认为10）。</li>
+<li>rank，是模型中潜在因子（latent factors）的数量（默认为10）。</li>
+<li>maxIter，是要运行的最大迭代次数（默认为10）。</li>
+<li>regParam，指定ALS中的正则化参数（默认为1.0）。</li>
+<li>implicitPrefs，指定是使用显式反馈ALS变体还是使用适用于隐式反馈数据的（默认为false，这意味着使用显式反馈）。</li>
+<li>alpha，是适用于ALS的隐式反馈变量的参数，其控制偏好观察中的基线置信度（默认为1.0）。</li>
+<li>nonnegative，指定是否对最小二乘使用非负约束（默认为false）。</li>
+</ul>
+<a id="more"></a>
+<p><strong>注意：</strong>基于DataFrame的ALS API目前仅支持整数类型的user和item ID。 </p>
+<h1 id="1-显式和隐式反馈"><a href="#1-显式和隐式反馈" class="headerlink" title="1. 显式和隐式反馈"></a>1. 显式和隐式反馈</h1><p>基于矩阵分解的协同过滤的标准方法将user-item矩阵中的数据视为user对item给出的显式偏好，例如，给予电影评级的用户。</p>
+<p>在许多现实世界的用例中，通常只能访问隐式反馈（例如，观看，点击，购买，喜欢，分享等）。 spark.ml中用于处理此类数据的方法取自<a href="https://ieeexplore.ieee.org/document/4781121/" target="_blank" rel="noopener">Collaborative Filtering for Implicit Feedback Datasets</a>。 本质上，这种方法不是试图直接对评级矩阵进行建模，而是将数据视为表示用户操作观察强度的数字（例如点击次数或某人花在观看电影上的累积持续时间）。 然后，这些数字与观察到的用户偏好的置信水平相关，而不是与item的明确评级相关。 然后，该模型试图找到可用于预测user对item的预期偏好的潜在因素。</p>
+<h1 id="2-正则化参数的缩放"><a href="#2-正则化参数的缩放" class="headerlink" title="2. 正则化参数的缩放"></a>2. 正则化参数的缩放</h1><p>我们通过用户在更新用户因素（user factors）时产生的评级数或在更新产品因素（product factors）时收到的产品评级数来缩小正则化参数regParam以解决每个最小二乘问题。 这种方法被命名为“ALS-WR”，并在“<a href="http://dx.doi.org/10.1007/978-3-540-68880-8_32" target="_blank" rel="noopener">Large-Scale Parallel Collaborative Filtering for the Netflix Prize</a>”一文中进行了讨论。 它使regParam较少依赖于数据集的规模，因此我们可以将从采样子集中学习的最佳参数应用于完整数据集，并期望获得类似的性能。</p>
+<h1 id="3-冷启动的策略"><a href="#3-冷启动的策略" class="headerlink" title="3. 冷启动的策略"></a>3. 冷启动的策略</h1><p>在使用ALSModel进行预测时，通常会遇到测试数据集中的user或者item在训练模型期间不存在。这通常发生在两种情况中：</p>
+<ol>
+<li>在生产中，对于没有评级历史且未对模型进行过训练的新user或item（这是“冷启动问题”）。</li>
+<li>在交叉验证期间，数据在训练和评估集之间分配。当使用Spark的CrossValidator或TrainValidationSplit中的简单随机拆分时，实际上很常见的是在评估集中遇到不在训练集中的user 或 item。</li>
+</ol>
+<p>默认情况下，当模型中不存在user or item factors时，Spark会在ALSModel.transform期间分配NaN预测。这在生产系统中很有用，因为它表示新用户或项目，因此系统可以决定使用某些后备作为预测。</p>
+<p>但是，这在交叉验证期间是不合需要的，因为任何NaN预测值都将导致评估指标的NaN结果（例如，使用RegressionEvaluator时）。这使得模型选择不可能。</p>
+<p>Spark允许用户将coldStartStrategy参数设置为“drop”，以便删除包含NaN值的预测的DataFrame中的任何行。然后将根据非NaN数据计算评估度量并且该评估度量将是有效的。以下示例说明了此参数的用法。</p>
+<p><strong>注意：</strong>目前支持的冷启动策略是“nan”（上面提到的默认行为）和“drop”。将来可能会支持更多的策略。</p>
+<p>在以下示例中，我们从MovieLens数据集加载评级数据，每行包含用户，电影，评级和时间戳。 然后我们训练一个ALS模型，默认情况下假设评级是显式的（implicitPrefs是False）。 我们通过测量评级预测的均方根误差来评估推荐模型。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Time     : 2019/8/8 19:40</span></span><br><span class="line"><span class="comment"># @Author   : buracagyang</span></span><br><span class="line"><span class="comment"># @File     : als_example.py</span></span><br><span class="line"><span class="comment"># @Software : PyCharm</span></span><br><span class="line"></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Describe:</span></span><br><span class="line"><span class="string">        </span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> print_function</span><br><span class="line"><span class="keyword">from</span> pyspark.sql <span class="keyword">import</span> SparkSession</span><br><span class="line"><span class="keyword">from</span> pyspark.ml.evaluation <span class="keyword">import</span> RegressionEvaluator</span><br><span class="line"><span class="keyword">from</span> pyspark.ml.recommendation <span class="keyword">import</span> ALS</span><br><span class="line"><span class="keyword">from</span> pyspark.sql <span class="keyword">import</span> Row</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    spark = SparkSession.builder.appName(<span class="string">"ALSExample"</span>).getOrCreate()</span><br><span class="line"></span><br><span class="line">    lines = spark.read.text(<span class="string">"../data/mllib/als/sample_movielens_ratings.txt"</span>).rdd</span><br><span class="line">    parts = lines.map(<span class="keyword">lambda</span> row: row.value.split(<span class="string">"::"</span>))</span><br><span class="line">    ratingsRDD = parts.map(<span class="keyword">lambda</span> p: Row(userId=int(p[<span class="number">0</span>]), movieId=int(p[<span class="number">1</span>]), rating=float(p[<span class="number">2</span>]), timestamp=long(p[<span class="number">3</span>])))</span><br><span class="line">    ratings = spark.createDataFrame(ratingsRDD)</span><br><span class="line">    (training, test) = ratings.randomSplit([<span class="number">0.8</span>, <span class="number">0.2</span>])</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 冷启动策略使用"drop"，不对NaN进行评估</span></span><br><span class="line">    als = ALS(maxIter=<span class="number">5</span>, regParam=<span class="number">0.01</span>, userCol=<span class="string">"userId"</span>, itemCol=<span class="string">"movieId"</span>, ratingCol=<span class="string">"rating"</span>,</span><br><span class="line">              coldStartStrategy=<span class="string">"drop"</span>)</span><br><span class="line">    model = als.fit(training)</span><br><span class="line"></span><br><span class="line">    predictions = model.transform(test)</span><br><span class="line">    evaluator = RegressionEvaluator(metricName=<span class="string">"rmse"</span>, labelCol=<span class="string">"rating"</span>, predictionCol=<span class="string">"prediction"</span>)</span><br><span class="line">    rmse = evaluator.evaluate(predictions)</span><br><span class="line">    print(<span class="string">"Root-mean-square error = "</span> + str(rmse))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 对每个用户推荐top 10的movie</span></span><br><span class="line">    userRecs = model.recommendForAllUsers(<span class="number">10</span>)</span><br><span class="line">    <span class="comment"># 对每部电影推荐top 10的user</span></span><br><span class="line">    movieRecs = model.recommendForAllItems(<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 为指定的用户组推荐top 10的电影</span></span><br><span class="line">    users = ratings.select(als.getUserCol()).distinct().limit(<span class="number">3</span>)</span><br><span class="line">    userSubsetRecs = model.recommendForUserSubset(users, <span class="number">10</span>)</span><br><span class="line">    <span class="comment"># 为指定的电影组推荐top 10的用户</span></span><br><span class="line">    movies = ratings.select(als.getItemCol()).distinct().limit(<span class="number">3</span>)</span><br><span class="line">    movieSubSetRecs = model.recommendForItemSubset(movies, <span class="number">10</span>)</span><br><span class="line">    userRecs.show(<span class="number">10</span>)</span><br><span class="line">    movieRecs.show(<span class="number">10</span>)</span><br><span class="line">    userSubsetRecs.show()</span><br><span class="line">    movieSubSetRecs.show()</span><br><span class="line"></span><br><span class="line">    spark.stop()</span><br></pre></td></tr></table></figure>
+<p>结果如下:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">Root-mean-square error = 1.65962683297</span><br><span class="line">+------+--------------------+</span><br><span class="line">|userId|     recommendations|</span><br><span class="line">+------+--------------------+</span><br><span class="line">|    28|[[92, 4.7627287],...|</span><br><span class="line">|    26|[[22, 5.353035], ...|</span><br><span class="line">|    27|[[75, 4.7605653],...|</span><br><span class="line">|    12|[[12, 5.364489], ...|</span><br><span class="line">|    22|[[51, 5.1232195],...|</span><br><span class="line">|     1|[[34, 6.5673475],...|</span><br><span class="line">|    13|[[93, 3.92995], [...|</span><br><span class="line">|     6|[[25, 5.123874], ...|</span><br><span class="line">|    16|[[85, 5.03955], [...|</span><br><span class="line">|     3|[[51, 4.974762], ...|</span><br><span class="line">+------+--------------------+</span><br><span class="line">only showing top 10 rows</span><br><span class="line"></span><br><span class="line">+-------+--------------------+</span><br><span class="line">|movieId|     recommendations|</span><br><span class="line">+-------+--------------------+</span><br><span class="line">|     31|[[28, 3.4169104],...|</span><br><span class="line">|     85|[[16, 5.03955], [...|</span><br><span class="line">|     65|[[23, 4.9267926],...|</span><br><span class="line">|     53|[[23, 6.9966245],...|</span><br><span class="line">|     78|[[24, 1.1653752],...|</span><br><span class="line">|     34|[[1, 6.5673475], ...|</span><br><span class="line">|     81|[[11, 4.0272694],...|</span><br><span class="line">|     28|[[18, 4.8363395],...|</span><br><span class="line">|     76|[[14, 4.6251163],...|</span><br><span class="line">|     26|[[12, 4.3116484],...|</span><br><span class="line">+-------+--------------------+</span><br><span class="line">only showing top 10 rows</span><br><span class="line"></span><br><span class="line">+------+--------------------+</span><br><span class="line">|userId|     recommendations|</span><br><span class="line">+------+--------------------+</span><br><span class="line">|    26|[[22, 5.353035], ...|</span><br><span class="line">|    19|[[98, 3.8704958],...|</span><br><span class="line">|    29|[[30, 4.1840963],...|</span><br><span class="line">+------+--------------------+</span><br><span class="line"></span><br><span class="line">+-------+--------------------+</span><br><span class="line">|movieId|     recommendations|</span><br><span class="line">+-------+--------------------+</span><br><span class="line">|     65|[[23, 4.9267926],...|</span><br><span class="line">|     26|[[12, 4.3116484],...|</span><br><span class="line">|     29|[[8, 4.954544], [...|</span><br><span class="line">+-------+--------------------+</span><br></pre></td></tr></table></figure>
+<p>如果评级矩阵是从另一个信息源派生的（即从其他信号推断出来），您可以将implicitPrefs设置为True以获得更好的结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">als = ALS(maxIter=<span class="number">5</span>, regParam=<span class="number">0.01</span>, implicitPrefs=<span class="literal">True</span>, userCol=<span class="string">"userId"</span>, itemCol=<span class="string">"movieId"</span>, ratingCol=<span class="string">"rating"</span>)</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/29/logistic-loss-function/" class="archive-article-date">
-  	<time datetime="2019-05-29T09:16:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-29</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/29/logistic-loss-function/">Logistic loss函数</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">统计学运用</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法备忘</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">机器学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/29/python-basic-about-class/" class="archive-article-date">
-  	<time datetime="2019-05-29T09:12:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-29</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/29/python-basic-about-class/">Python中定义类的相关知识</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -237,243 +245,149 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">大数据</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://qr.liantu.com/api.php?text=https://buracagyang.github.io/2019/08/08/spark-collaborative-filtering/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/29/single-layer-perceptron/" class="archive-article-date">
-  	<time datetime="2019-05-29T09:05:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-29</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/08/08/spark-clustering/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">【Spark】聚类分析</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/29/single-layer-perceptron/">单层感知器为什么不能解决异或(XOR)问题</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术备忘</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法备忘</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-显式和隐式反馈"><span class="toc-number">1.</span> <span class="toc-text">1. 显式和隐式反馈</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-正则化参数的缩放"><span class="toc-number">2.</span> <span class="toc-text">2. 正则化参数的缩放</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-冷启动的策略"><span class="toc-number">3.</span> <span class="toc-text">3. 冷启动的策略</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/29/aic-and-bic/" class="archive-article-date">
-  	<time datetime="2019-05-29T07:14:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-29</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/29/aic-and-bic/">AIC和BIC相关知识</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术备忘</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">统计学运用</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/28/ab-test/" class="archive-article-date">
-  	<time datetime="2019-05-28T08:39:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-28</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/28/ab-test/">A/B-test显著性检验</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术备忘</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">统计学运用</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/09/numpy-vectorize/" class="archive-article-date">
-  	<time datetime="2019-05-09T09:11:56.441Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/09/numpy-vectorize/">利用numpy.vectorize提升计算速度</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术备忘</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/08/svm-proving-process/" class="archive-article-date">
-  	<time datetime="2019-05-08T05:48:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-08</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/08/svm-proving-process/">SVM推导过程注解</a>
-    </h1>
+  
+    <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div> 
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+
+if(true){
+	var gitalk = new Gitalk({
+  	clientID: 'b59e8ee91a1328df0e4b',
+  	clientSecret: 'e8a8251bb9bd5ec9913a699734a6824bea1d6ec3',
+  	repo: 'blog_comments',
+  	owner: 'buracagyang',
+  	admin: ['buracagyang'],
+  	id: 'Thu Aug 08 2019 18:09:07 GMT+0800',
+  	distractionFreeMode: 'true'
+})
+gitalk.render('gitalk-container') 
+}
+</script>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术备忘</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">统计学运用</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">算法备忘</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/2019/page/2/">&laquo; Prev</a><a class="page-number" href="/archives/2019/">1</a><a class="page-number" href="/archives/2019/page/2/">2</a><span class="page-number current">3</span>
-    </nav>
-  
 
 
           </div>
@@ -496,8 +410,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

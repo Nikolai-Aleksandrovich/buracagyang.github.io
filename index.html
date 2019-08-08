@@ -154,6 +154,96 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-spark-collaborative-filtering" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/08/spark-collaborative-filtering/">【Spark】协同过滤</a>
+    </h1>
+  
+
+        
+        <a href="/2019/08/08/spark-collaborative-filtering/" class="archive-article-date">
+  	<time datetime="2019-08-08T10:09:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>协同过滤通常用于推荐系统。这些技术旨在根据user-item关联矩阵的缺失条目。 spark.ml目前支持基于模型的协同过滤，其中users和items由一小组可用于预测缺失条目的潜在因子（latent factors）描述。 spark.ml使用交替最小二乘（ALS）算法来学习这些潜在因素。 spark.ml中的实现具有以下参数：</p>
+<ul>
+<li>numBlocks，是users和items将被分区为多个块的数量，以便并行化计算（默认为10）。</li>
+<li>rank，是模型中潜在因子（latent factors）的数量（默认为10）。</li>
+<li>maxIter，是要运行的最大迭代次数（默认为10）。</li>
+<li>regParam，指定ALS中的正则化参数（默认为1.0）。</li>
+<li>implicitPrefs，指定是使用显式反馈ALS变体还是使用适用于隐式反馈数据的（默认为false，这意味着使用显式反馈）。</li>
+<li>alpha，是适用于ALS的隐式反馈变量的参数，其控制偏好观察中的基线置信度（默认为1.0）。</li>
+<li>nonnegative，指定是否对最小二乘使用非负约束（默认为false）。</li>
+</ul>
+        
+          <a class="article-more-a" href="/2019/08/08/spark-collaborative-filtering/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术备忘</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">大数据</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/08/spark-collaborative-filtering/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+  
     <article id="post-spark-clustering" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -874,88 +964,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/06/21/information-theory-1/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-  
-    <article id="post-mathematical-optimization-3" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/19/mathematical-optimization-3/">数学优化3-拉格朗日乘数法与KKT条件</a>
-    </h1>
-  
-
-        
-        <a href="/2019/06/19/mathematical-optimization-3/" class="archive-article-date">
-  	<time datetime="2019-06-19T12:47:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>同步于<a href="https://blog.csdn.net/buracag_mc" target="_blank" rel="noopener">CSDN</a>;<a href="https://www.runblog.online/" target="_blank" rel="noopener">音尘杂记</a></p>
-<p>主要介绍一下数学优化中的拉格朗日乘数法和KKT条件，其实在 <a href="https://blog.csdn.net/buracag_mc/article/details/76762249" target="_blank" rel="noopener">拙文</a> 中已经有关于KKT条件的简要介绍和自己的个人总结，这里再一起回顾一下。</p>
-        
-          <a class="article-more-a" href="/2019/06/19/mathematical-optimization-3/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术备忘</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">基础知识</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/06/19/mathematical-optimization-3/">展开全文 >></a>
         </p>
       
 

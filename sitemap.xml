@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://buracagyang.github.io/2019/08/08/spark-collaborative-filtering/</loc>
+    
+    <lastmod>2019-08-08T11:48:01.612Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://buracagyang.github.io/2019/08/08/spark-clustering/</loc>
     
-    <lastmod>2019-08-08T08:28:51.723Z</lastmod>
+    <lastmod>2019-08-08T10:08:35.578Z</lastmod>
     
   </url>
   
