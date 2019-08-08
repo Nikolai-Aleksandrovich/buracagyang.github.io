@@ -2,6 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://buracagyang.github.io/2019/08/08/spark-clustering/</loc>
+    
+    <lastmod>2019-08-08T08:23:53.503Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://buracagyang.github.io/2019/08/02/spark-classification-and-regression-1/</loc>
+    
+    <lastmod>2019-08-08T07:41:54.011Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://buracagyang.github.io/2019/07/30/spark-features-project-1/</loc>
+    
+    <lastmod>2019-08-08T07:37:58.192Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://buracagyang.github.io/2019/07/31/spark-features-project-2/</loc>
+    
+    <lastmod>2019-08-08T07:37:45.988Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://buracagyang.github.io/2019/08/07/spark-classification-and-regression-2/</loc>
     
     <lastmod>2019-08-07T07:03:42.640Z</lastmod>
@@ -9,23 +37,9 @@
   </url>
   
   <url>
-    <loc>https://buracagyang.github.io/2019/08/02/spark-classification-and-regression-1/</loc>
+    <loc>https://buracagyang.github.io/2019/06/11/linear-algebra-1/</loc>
     
-    <lastmod>2019-08-06T01:58:02.005Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://buracagyang.github.io/2019/07/31/spark-features-project-2/</loc>
-    
-    <lastmod>2019-08-05T08:47:37.354Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://buracagyang.github.io/2019/07/30/spark-features-project-1/</loc>
-    
-    <lastmod>2019-08-02T09:27:20.238Z</lastmod>
+    <lastmod>2019-08-07T06:32:47.756Z</lastmod>
     
   </url>
   
@@ -96,13 +110,6 @@
     <loc>https://buracagyang.github.io/2019/06/19/mathematical-optimization-3/</loc>
     
     <lastmod>2019-06-21T06:32:47.303Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://buracagyang.github.io/2019/06/11/linear-algebra-1/</loc>
-    
-    <lastmod>2019-06-21T06:11:44.865Z</lastmod>
     
   </url>
   
