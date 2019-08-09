@@ -6,15 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://buracagyang.github.io">
-  <title>Tag: 技术备忘 | Buracag的博客</title>
+  <title>【Spark】频繁项集挖掘 | Buracag的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Buracag的博客">
-<meta property="og:url" content="https://buracagyang.github.io/tags/技术备忘/page/2/index.html">
+  <meta name="description" content="挖掘频繁项目，项目集，子序列或其他子结构通常是分析大规模数据集的第一步，这是数据挖掘多年来一直活跃的研究课题。 可以参考一下维基百科中关于关联规则学习的基础知识。">
+<meta name="keywords" content="技术备忘,大数据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Spark】频繁项集挖掘">
+<meta property="og:url" content="https://buracagyang.github.io/2019/08/09/spark-frequent-pattern-mining/index.html">
 <meta property="og:site_name" content="Buracag的博客">
+<meta property="og:description" content="挖掘频繁项目，项目集，子序列或其他子结构通常是分析大规模数据集的第一步，这是数据挖掘多年来一直活跃的研究课题。 可以参考一下维基百科中关于关联规则学习的基础知识。">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-08-09T02:45:07.859Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Buracag的博客">
+<meta name="twitter:title" content="【Spark】频繁项集挖掘">
+<meta name="twitter:description" content="挖掘频繁项目，项目集，子序列或其他子结构通常是分析大规模数据集的第一步，这是数据挖掘多年来一直活跃的研究课题。 可以参考一下维基百科中关于关联规则学习的基础知识。">
   
     <link rel="alternative" href="/atom.xml" title="Buracag的博客" type="application/atom+xml">
   
@@ -152,36 +157,74 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-spark-frequent-pattern-mining" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      【Spark】频繁项集挖掘
+    </h1>
+  
+
+        
+        <a href="/2019/08/09/spark-frequent-pattern-mining/" class="archive-article-date">
+  	<time datetime="2019-08-09T02:32:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-09</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>挖掘频繁项目，项目集，子序列或其他子结构通常是分析大规模数据集的第一步，这是数据挖掘多年来一直活跃的研究课题。 可以参考一下维基百科中关于<a href="http://en.wikipedia.org/wiki/Association_rule_learning" target="_blank" rel="noopener">关联规则学习</a>的基础知识。</p>
+<a id="more"></a>
+<h1 id="1-FP-Growth"><a href="#1-FP-Growth" class="headerlink" title="1. FP-Growth"></a>1. FP-Growth</h1><p>FP-growth算法在<a href="https://dl.acm.org/citation.cfm?doid=335191.335372" target="_blank" rel="noopener">Han等人的文章</a>中描述，挖掘频繁模式而没有候选生成，其中“FP”代表频繁模式。 给定数据集，FP-growth的第一步是计算项目频率并识别频繁项目。 与为同一目的而设计的类似Apriori的算法不同，FP-growth的第二步使用后缀树（FP-tree）结构来编码事务而不显式生成候选集，这通常很难生成。 在第二步之后，可以从FP-tree中提取频繁项集。 在spark.mllib中，我们实现了称为PFP的FP-growth的分布式版本，如Li等人，在<a href="https://dl.acm.org/citation.cfm?doid=1454008.1454027" target="_blank" rel="noopener">PFP：Parallel FP-growth for query recommendation</a>中所述。 PFP基于事务的后缀分配增长FP-tree的工作，因此比单机实现更具可扩展性。</p>
+<p>spark.ml的FP-growth实现采用以下（超）参数：</p>
+<ul>
+<li>minSupport：对项目集进行频繁识别的最低支持。例如，如果一个项目出现在5个交易中的3个中，则它具有3/5 = 0.6的支持。</li>
+<li>minConfidence：生成关联规则的最小置信度。置信度表明关联规则经常被发现的频率。例如，如果在交易项目集X中出现4次，X和Y仅出现2次，则规则X =&gt; Y的置信度则为2/4 = 0.5。该参数不会影响频繁项集的挖掘，但会指定从频繁项集生成关联规则的最小置信度。</li>
+<li>numPartitions：用于并行工作的分区数。默认情况下，不设置参数，并使用输入数据集的分区数。</li>
+</ul>
+<p>FPGrowthModel提供：</p>
+<ul>
+<li>freqItemsets：DataFrame格式的频繁项集（“items”[Array]，“freq”[Long]）</li>
+<li>associationRules：以高于minConfidence的置信度生成的关联规则，格式为DataFrame（“antecedent”[Array]，“consequent”[Array]，“confidence”[Double]）。</li>
+<li>transform：对于itemsCol中的每个事务，transform方法将其项目与每个关联规则的前提进行比较。如果记录包含特定关联规则的所有前提，则该规则将被视为适用，并且其结果将被添加到预测结果中。变换方法将所有适用规则的结果总结为预测。预测列与itemsCol具有相同的数据类型，并且不包含itemsCol中的现有项。</li>
+</ul>
+<p>示例代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Time     : 2019/8/9 10:40</span></span><br><span class="line"><span class="comment"># @Author   : buracagyang</span></span><br><span class="line"><span class="comment"># @File     : fpgrowth_example.py</span></span><br><span class="line"><span class="comment"># @Software : PyCharm</span></span><br><span class="line"></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Describe:</span></span><br><span class="line"><span class="string">        </span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pyspark.ml.fpm <span class="keyword">import</span> FPGrowth</span><br><span class="line"><span class="keyword">from</span> pyspark.sql <span class="keyword">import</span> SparkSession</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    spark = SparkSession.builder.appName(<span class="string">"FPGrowthExample"</span>).getOrCreate()</span><br><span class="line"></span><br><span class="line">    df = spark.createDataFrame([</span><br><span class="line">        (<span class="number">0</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">5</span>]),</span><br><span class="line">        (<span class="number">1</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>]),</span><br><span class="line">        (<span class="number">2</span>, [<span class="number">1</span>, <span class="number">2</span>])</span><br><span class="line">    ], [<span class="string">"id"</span>, <span class="string">"items"</span>])</span><br><span class="line"></span><br><span class="line">    fpGrowth = FPGrowth(itemsCol=<span class="string">"items"</span>, minSupport=<span class="number">0.5</span>, minConfidence=<span class="number">0.6</span>)</span><br><span class="line">    model = fpGrowth.fit(df)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 频繁项集</span></span><br><span class="line">    model.freqItemsets.show()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 生成的关联规则</span></span><br><span class="line">    model.associationRules.show()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># transform根据所有关联规则检查输入项，并将结果作为预测</span></span><br><span class="line">    model.transform(df).show()</span><br><span class="line"></span><br><span class="line">    spark.stop()</span><br></pre></td></tr></table></figure>
+<p>结果如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">+---------+----+</span><br><span class="line">|    items|freq|</span><br><span class="line">+---------+----+</span><br><span class="line">|      [1]|   3|</span><br><span class="line">|      [2]|   3|</span><br><span class="line">|   [2, 1]|   3|</span><br><span class="line">|      [5]|   2|</span><br><span class="line">|   [5, 2]|   2|</span><br><span class="line">|[5, 2, 1]|   2|</span><br><span class="line">|   [5, 1]|   2|</span><br><span class="line">+---------+----+</span><br><span class="line"></span><br><span class="line">+----------+----------+------------------+</span><br><span class="line">|antecedent|consequent|        confidence|</span><br><span class="line">+----------+----------+------------------+</span><br><span class="line">|    [5, 2]|       [1]|               1.0|</span><br><span class="line">|    [2, 1]|       [5]|0.6666666666666666|</span><br><span class="line">|    [5, 1]|       [2]|               1.0|</span><br><span class="line">|       [5]|       [2]|               1.0|</span><br><span class="line">|       [5]|       [1]|               1.0|</span><br><span class="line">|       [1]|       [2]|               1.0|</span><br><span class="line">|       [1]|       [5]|0.6666666666666666|</span><br><span class="line">|       [2]|       [1]|               1.0|</span><br><span class="line">|       [2]|       [5]|0.6666666666666666|</span><br><span class="line">+----------+----------+------------------+</span><br><span class="line"></span><br><span class="line">+---+------------+----------+</span><br><span class="line">| id|       items|prediction|</span><br><span class="line">+---+------------+----------+</span><br><span class="line">|  0|   [1, 2, 5]|        []|</span><br><span class="line">|  1|[1, 2, 3, 5]|        []|</span><br><span class="line">|  2|      [1, 2]|       [5]|</span><br><span class="line">+---+------------+----------+</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/21/information-theory-1/" class="archive-article-date">
-  	<time datetime="2019-06-21T05:52:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/21/information-theory-1/">信息论1-熵</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -191,407 +234,149 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">基础知识</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">大数据</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://qr.liantu.com/api.php?text=https://buracagyang.github.io/2019/08/09/spark-frequent-pattern-mining/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/19/mathematical-optimization-3/" class="archive-article-date">
-  	<time datetime="2019-06-19T12:47:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-19</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/08/08/spark-collaborative-filtering/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">【Spark】协同过滤</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/19/mathematical-optimization-3/">数学优化3-拉格朗日乘数法与KKT条件</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术备忘</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">基础知识</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-FP-Growth"><span class="toc-number">1.</span> <span class="toc-text">1. FP-Growth</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/18/mathematical-optimization-2/" class="archive-article-date">
-  	<time datetime="2019-06-18T05:17:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-18</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/18/mathematical-optimization-2/">数学优化2-优化算法</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术备忘</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">基础知识</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/17/mathematical-optimization-1/" class="archive-article-date">
-  	<time datetime="2019-06-17T11:45:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/17/mathematical-optimization-1/">数学优化1-数学优化的类型</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术备忘</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">基础知识</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/14/probability-theory-2/" class="archive-article-date">
-  	<time datetime="2019-06-14T12:09:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/14/probability-theory-2/">概率论2-随机过程</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术备忘</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">基础知识</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/14/probability-theory-1/" class="archive-article-date">
-  	<time datetime="2019-06-14T02:15:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-14</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/14/probability-theory-1/">概率论1-随机事件和概率</a>
-    </h1>
+  
+    <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div> 
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+
+if(true){
+	var gitalk = new Gitalk({
+  	clientID: 'b59e8ee91a1328df0e4b',
+  	clientSecret: 'e8a8251bb9bd5ec9913a699734a6824bea1d6ec3',
+  	repo: 'blog_comments',
+  	owner: 'buracagyang',
+  	admin: ['buracagyang'],
+  	id: 'Fri Aug 09 2019 10:32:02 GMT+0800',
+  	distractionFreeMode: 'true'
+})
+gitalk.render('gitalk-container') 
+}
+</script>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术备忘</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">基础知识</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/12/calculus-2/" class="archive-article-date">
-  	<time datetime="2019-06-12T12:44:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/12/calculus-2/">微积分2-常见函数的导数</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术备忘</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">基础知识</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/12/calculus-1/" class="archive-article-date">
-  	<time datetime="2019-06-12T09:23:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/12/calculus-1/">微积分1-导数</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术备忘</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">基础知识</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/12/linear-algebra-2/" class="archive-article-date">
-  	<time datetime="2019-06-12T06:47:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/12/linear-algebra-2/">线性代数2-矩阵</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术备忘</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">基础知识</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/11/linear-algebra-1/" class="archive-article-date">
-  	<time datetime="2019-06-11T09:36:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/11/linear-algebra-1/">线性代数1-向量和向量空间</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">技术备忘</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">基础知识</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/tags/技术备忘/">&laquo; Prev</a><a class="page-number" href="/tags/技术备忘/">1</a><span class="page-number current">2</span><a class="page-number" href="/tags/技术备忘/page/3/">3</a><a class="extend next" rel="next" href="/tags/技术备忘/page/3/">Next &raquo;</a>
-    </nav>
-  
 
 
           </div>
@@ -614,9 +399,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,

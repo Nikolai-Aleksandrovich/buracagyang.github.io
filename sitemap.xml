@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://buracagyang.github.io/2019/08/09/spark-frequent-pattern-mining/</loc>
+    
+    <lastmod>2019-08-09T02:45:07.859Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://buracagyang.github.io/2019/07/31/spark-features-project-2/</loc>
+    
+    <lastmod>2019-08-09T02:32:29.762Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://buracagyang.github.io/2019/08/08/spark-collaborative-filtering/</loc>
     
-    <lastmod>2019-08-08T11:48:01.612Z</lastmod>
+    <lastmod>2019-08-08T11:51:25.633Z</lastmod>
     
   </url>
   
@@ -26,13 +40,6 @@
     <loc>https://buracagyang.github.io/2019/07/30/spark-features-project-1/</loc>
     
     <lastmod>2019-08-08T07:37:58.192Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://buracagyang.github.io/2019/07/31/spark-features-project-2/</loc>
-    
-    <lastmod>2019-08-08T07:37:45.988Z</lastmod>
     
   </url>
   
