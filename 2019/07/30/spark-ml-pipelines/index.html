@@ -18,7 +18,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://buracagyang.github.io/2019/07/30/spark-ml-pipelines/ml-Pipeline.png">
 <meta property="og:image" content="https://buracagyang.github.io/2019/07/30/spark-ml-pipelines/ml-PipelineModel.png">
-<meta property="og:updated_time" content="2019-07-31T06:41:14.511Z">
+<meta property="og:updated_time" content="2019-08-26T03:50:46.760Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【Spark】Pipelines">
 <meta name="twitter:description" content="在本节中，我们将介绍ML Pipelines的概念。 ML Pipelines提供了一组基于DataFrame构建的统一的高级API，可帮助用户创建和调整实用的机器学习流程。">
@@ -190,9 +190,9 @@
 </li>
 <li><p><strong>Estimator</strong>：Estimator是一种算法，可以适应DataFrame以生成Transformer。例如，学习算法是Estimator，其在DataFrame上训练并产生模型。</p>
 </li>
-<li><p><strong>Pipeline</strong>：管道将多个变形金刚和估算器链接在一起以指定ML工作流程。</p>
+<li><p><strong>Pipeline</strong>：管道将多个Transformers和Estimators链接在一起以指定ML工作流程。</p>
 </li>
-<li><p>参数：所有Transformers和Estimators现在共享一个用于指定参数的通用API。</p>
+<li><p><strong>参数</strong>：所有Transformers和Estimators现在共享一个用于指定参数的通用API。</p>
 </li>
 </ul>
 <h2 id="1-1-DataFrame"><a href="#1-1-DataFrame" class="headerlink" title="1.1 DataFrame"></a>1.1 DataFrame</h2><p>机器学习可以应用于各种数据类型，例如矢量，文本，图像和结构化数据。 此API采用Spark SQL的DataFrame以支持各种数据类型。</p>

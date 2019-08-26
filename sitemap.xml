@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://buracagyang.github.io/2019/07/30/spark-ml-pipelines/</loc>
+    
+    <lastmod>2019-08-26T03:50:46.760Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://buracagyang.github.io/2019/08/09/spark-ml-tuning/</loc>
     
     <lastmod>2019-08-12T08:01:24.107Z</lastmod>
@@ -68,13 +75,6 @@
     <loc>https://buracagyang.github.io/2019/05/28/ab-test/</loc>
     
     <lastmod>2019-08-01T07:27:45.658Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://buracagyang.github.io/2019/07/30/spark-ml-pipelines/</loc>
-    
-    <lastmod>2019-07-31T06:41:14.511Z</lastmod>
     
   </url>
   
