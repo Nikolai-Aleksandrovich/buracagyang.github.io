@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Buracag的博客">
 <meta property="og:description" content="《剑指Offer》中的一些常见练习题，包含二叉树、链表以及其他的一些常见算法练习题；最近又系统性地做了下，大致整理了一下解题思路，均用Python实现，持续更新中…">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-27T02:18:03.240Z">
+<meta property="og:updated_time" content="2019-08-27T02:27:12.766Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="剑指Offer-数据结构与算法练习题">
 <meta name="twitter:description" content="《剑指Offer》中的一些常见练习题，包含二叉树、链表以及其他的一些常见算法练习题；最近又系统性地做了下，大致整理了一下解题思路，均用Python实现，持续更新中…">
@@ -379,6 +379,7 @@
 </li>
 <li><p>第二个方法相对比较复杂：</p>
 <p>a. 如果将环抽象为如下形式，从链表起点A开始，经过环的入口B，假设从A–&gt;B的距离为x;</p>
+<figure class="highlight graph"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">graph TD;</span><br><span class="line">    A--&gt;B;</span><br><span class="line">    B--&gt;C;</span><br><span class="line">    C--&gt;B;</span><br></pre></td></tr></table></figure>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">A -----&gt; B -------&gt; C</span><br><span class="line">         ^      	|</span><br><span class="line">         |      	|</span><br><span class="line">         |      	|</span><br><span class="line">         &lt;-----------</span><br></pre></td></tr></table></figure>
 <p>b. 假设快指针fast一次移动2步，慢指针一次移动1步，当快慢指针在环中的C点相遇时，假设整个环B–&gt;C–&gt;B的距离为c；从环的入口B到环中相遇节点C的距离为a.</p>
 <p>c. 可以得到如下信息，</p>
