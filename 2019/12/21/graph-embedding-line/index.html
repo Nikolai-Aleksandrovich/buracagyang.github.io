@@ -28,7 +28,7 @@
 <meta property="og:image" content="https://buracagyang.github.io/2019/12/21/graph-embedding-line/figure3.png">
 <meta property="og:image" content="https://buracagyang.github.io/2019/12/21/graph-embedding-line/figure4.png">
 <meta property="og:image" content="https://buracagyang.github.io/2019/12/21/graph-embedding-line/figure5.png">
-<meta property="og:updated_time" content="2019-12-25T09:58:58.540Z">
+<meta property="og:updated_time" content="2019-12-25T13:32:19.143Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【Graph Embedding】line">
 <meta name="twitter:description" content="摘要本文研究了大型信息网络如何嵌入到低维向量空间的问题，应用于可视化，节点分类，和链路预测上。大多已存在的嵌入图方法并不适用于现有的包含百万个节点的信息网络。在本文中，我们提出了一个新型网络表征方法称为LINE，适用于任意类型的信息网络(有向的，无向的，以及无权的有权的)。该方法优化了一个精心设计的目标函数，保留了局部以及全局的网络结构。提出了一种边采样算法，该算法解决了经典随机梯度下降的局限性，">
@@ -191,6 +191,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>本文研究了大型信息网络如何嵌入到低维向量空间的问题，应用于可视化，节点分类，和链路预测上。大多已存在的嵌入图方法并不适用于现有的包含百万个节点的信息网络。在本文中，我们提出了一个新型网络表征方法称为LINE，适用于任意类型的信息网络(有向的，无向的，以及无权的有权的)。该方法优化了一个精心设计的目标函数，保留了局部以及全局的网络结构。提出了一种边采样算法，该算法解决了经典随机梯度下降的局限性，并提高了推理的有效性和效率。经过实验验证了LINE在多种真实世界的信息网络（语言、社会，引文）的有效性，该算法非常有效，能够在典型的单台机器上学习在几小时内嵌入具有数百万个顶点和数十亿个边缘的网络。LINE的源代码可在线获取。</p>
+<a id="more"></a>
 <h1 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1. 介绍"></a>1. 介绍</h1><p>本文研究了将信息网络嵌入到低维向量空间中，其中网络中的每个顶点都表示为低维的向量。这样一个低维的嵌入有助于可视化，节点分类，链路预测的应用。</p>
 <p>为了更好的在嵌入过程中保留网络中的拓扑结构信息（保留节点之间的关联关系）。提出了一阶相似度和二阶相似度的概念。</p>
 <p>一阶相似度指顶点之间直接连接信息。在真实网络数据中不足以用于保留全局的网络结构。故补充了二阶相似度的概念(即具有共享的邻居节点的顶点可能是相似的)。在社会学和文本语库中可以找到这样的推论。社交网络中，两个人的好友关系的重复度越高，两个人的相关性就越高。文本语料库中，我们可以通过一句话的其他内容来了解单个单词的意思。事实上，有许多共同好友的两个人大概率有相似的爱好并可能成为朋友，而常与同样的语句组合使用的单词更可能具有相同的意思。</p>
@@ -282,9 +283,6 @@
 <h2 id="5-6-可拓展性"><a href="#5-6-可拓展性" class="headerlink" title="5.6 可拓展性"></a>5.6 可拓展性</h2><p>最后我们通过部署多个线程进行优化来研究了LINE模型经过边取样处理和异步梯度下降优化后的LINE模型的可拓展性。。图5a展示了在Youtube数据集上线程数量与速率的关系。关系相当接近于线性关系。图5b展示了在模型更新时使用多个线程下的分类性能保持平稳。这两个图共同展示了LINE模型的推理算法是可拓展的。</p>
 <p><img src="/2019/12/21/graph-embedding-line/figure5.png" alt="这里写图片描述"></p>
 <h1 id="6-结论"><a href="#6-结论" class="headerlink" title="6. 结论"></a>6. 结论</h1><p>本论文研究了一个新颖的网络嵌入模型称为LINE，它精心设计的目标函数是能够保留了一阶相似度和二阶相似度（两者是互补的）。也可以轻松应用于百万节点和上亿边的网络，一个有效的边取样算法被应用于模型推理，在不影响效率的情况下解决了随机梯度下降算法对于边权重的限制。在真实网络上的实验结果展示了LINE的有效性以及效率。未来我们将研究网络中更高级的相似度。此外，我们还将研究含有多种定点类型的异构信息网络上的图嵌入。</p>
-<p>### </p>
-<p>$$<br>\begin{eqnarray}<br>W=(w_1,w_2,w_3,…,w_{|E|}) \\<br>w_{sum}=\sum_{i=1}^{|E|}w_i \\<br>[\sum_{j=0}^{i-1}w_j,\sum_{j=0}^iw_j]</p>
-<p>\end{eqnarray}<br>$$</p>
 
       
 
@@ -583,7 +581,19 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">技术备忘</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">统计学运用</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">算法备忘</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">基础知识</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -595,23 +605,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">技术备忘</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">统计学运用</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">基础知识</a>
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
               <li class="article-tag-list-item">
