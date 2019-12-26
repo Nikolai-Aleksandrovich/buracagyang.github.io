@@ -8,13 +8,13 @@
   <link rel="dns-prefetch" href="https://buracagyang.github.io">
   <title>【Graph Embedding】line | Buracag的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="关于Graph Embedding系列的论文翻译解读文章： 【Graph Embedding】DeepWalk 【Graph Embedding】line … 参考资料paper: https://arxiv.org/pdf/1503.03578.pdf code: https://github.com/tangjianpku/LINE 摘要本文研究了大型信息网络如何嵌入到低维向量空间的问题，应用">
+  <meta name="description" content="关于Graph Embedding系列的论文翻译解读文章： 【Graph Embedding】DeepWalk 【Graph Embedding】line … 参考资料paper: https://arxiv.org/pdf/1503.03578.pdf code: https://github.com/tangjianpku/LINE">
 <meta name="keywords" content="算法备忘,图计算,Embedding">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【Graph Embedding】line">
 <meta property="og:url" content="https://buracagyang.github.io/2019/12/21/graph-embedding-line/index.html">
 <meta property="og:site_name" content="Buracag的博客">
-<meta property="og:description" content="关于Graph Embedding系列的论文翻译解读文章： 【Graph Embedding】DeepWalk 【Graph Embedding】line … 参考资料paper: https://arxiv.org/pdf/1503.03578.pdf code: https://github.com/tangjianpku/LINE 摘要本文研究了大型信息网络如何嵌入到低维向量空间的问题，应用">
+<meta property="og:description" content="关于Graph Embedding系列的论文翻译解读文章： 【Graph Embedding】DeepWalk 【Graph Embedding】line … 参考资料paper: https://arxiv.org/pdf/1503.03578.pdf code: https://github.com/tangjianpku/LINE">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://buracagyang.github.io/2019/12/21/graph-embedding-line/word-analogy.png">
 <meta property="og:image" content="https://buracagyang.github.io/2019/12/21/graph-embedding-line/page-classification.png">
@@ -28,10 +28,10 @@
 <meta property="og:image" content="https://buracagyang.github.io/2019/12/21/graph-embedding-line/figure3.png">
 <meta property="og:image" content="https://buracagyang.github.io/2019/12/21/graph-embedding-line/figure4.png">
 <meta property="og:image" content="https://buracagyang.github.io/2019/12/21/graph-embedding-line/figure5.png">
-<meta property="og:updated_time" content="2019-12-26T03:07:47.492Z">
+<meta property="og:updated_time" content="2019-12-26T03:12:55.051Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【Graph Embedding】line">
-<meta name="twitter:description" content="关于Graph Embedding系列的论文翻译解读文章： 【Graph Embedding】DeepWalk 【Graph Embedding】line … 参考资料paper: https://arxiv.org/pdf/1503.03578.pdf code: https://github.com/tangjianpku/LINE 摘要本文研究了大型信息网络如何嵌入到低维向量空间的问题，应用">
+<meta name="twitter:description" content="关于Graph Embedding系列的论文翻译解读文章： 【Graph Embedding】DeepWalk 【Graph Embedding】line … 参考资料paper: https://arxiv.org/pdf/1503.03578.pdf code: https://github.com/tangjianpku/LINE">
 <meta name="twitter:image" content="https://buracagyang.github.io/2019/12/21/graph-embedding-line/word-analogy.png">
   
     <link rel="alternative" href="/atom.xml" title="Buracag的博客" type="application/atom+xml">
@@ -196,8 +196,8 @@
 <p>…</p>
 <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>paper: <a href="https://arxiv.org/pdf/1503.03578.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1503.03578.pdf</a></p>
 <p>code: <a href="https://github.com/tangjianpku/LINE" target="_blank" rel="noopener">https://github.com/tangjianpku/LINE</a></p>
-<h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>本文研究了大型信息网络如何嵌入到低维向量空间的问题，应用于可视化，节点分类，和链路预测上。大多已存在的嵌入图方法并不适用于现有的包含百万个节点的信息网络。在本文中，我们提出了一个新型网络表征方法称为LINE，适用于任意类型的信息网络(有向的，无向的，以及无权的有权的)。该方法优化了一个精心设计的目标函数，保留了局部以及全局的网络结构。提出了一种边采样算法，该算法解决了经典随机梯度下降的局限性，并提高了推理的有效性和效率。经过实验验证了LINE在多种真实世界的信息网络（语言、社会，引文）的有效性，该算法非常有效，能够在典型的单台机器上学习在几小时内嵌入具有数百万个顶点和数十亿个边缘的网络。LINE的源代码可在线获取。</p>
 <a id="more"></a>
+<h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>本文研究了大型信息网络如何嵌入到低维向量空间的问题，应用于可视化，节点分类，和链路预测上。大多已存在的嵌入图方法并不适用于现有的包含百万个节点的信息网络。在本文中，我们提出了一个新型网络表征方法称为LINE，适用于任意类型的信息网络(有向的，无向的，以及无权的有权的)。该方法优化了一个精心设计的目标函数，保留了局部以及全局的网络结构。提出了一种边采样算法，该算法解决了经典随机梯度下降的局限性，并提高了推理的有效性和效率。经过实验验证了LINE在多种真实世界的信息网络（语言、社会，引文）的有效性，该算法非常有效，能够在典型的单台机器上学习在几小时内嵌入具有数百万个顶点和数十亿个边缘的网络。LINE的源代码可在线获取。</p>
 <h1 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1. 介绍"></a>1. 介绍</h1><p>本文研究了将信息网络嵌入到低维向量空间中，其中网络中的每个顶点都表示为低维的向量。这样一个低维的嵌入有助于可视化，节点分类，链路预测的应用。</p>
 <p>为了更好的在嵌入过程中保留网络中的拓扑结构信息（保留节点之间的关联关系）。提出了一阶相似度和二阶相似度的概念。</p>
 <p>一阶相似度指顶点之间直接连接信息。在真实网络数据中不足以用于保留全局的网络结构。故补充了二阶相似度的概念(即具有共享的邻居节点的顶点可能是相似的)。在社会学和文本语库中可以找到这样的推论。社交网络中，两个人的好友关系的重复度越高，两个人的相关性就越高。文本语料库中，我们可以通过一句话的其他内容来了解单个单词的意思。事实上，有许多共同好友的两个人大概率有相似的爱好并可能成为朋友，而常与同样的语句组合使用的单词更可能具有相同的意思。</p>
@@ -261,7 +261,7 @@
 <h2 id="5-2-定量结果"><a href="#5-2-定量结果" class="headerlink" title="5.2 定量结果"></a>5.2 定量结果</h2><h3 id="5-2-1-语言网络"><a href="#5-2-1-语言网络" class="headerlink" title="5.2.1 语言网络"></a>5.2.1 语言网络</h3><p>单词分析和文本分类的应用场景被用于评估学习嵌入的有效性。</p>
 <p>（一）单词分析</p>
 <p><img src="/2019/12/21/graph-embedding-line/word-analogy.png" alt="这里写图片描述"></p>
-<p> 给定单词对$(a,b)$和单词$c$，目标是找到一个$d$使得$ab$之间的关系与$cd$之间的关系是相同的。给定一个单词的嵌入，目标是找到一个单词$d^{*}$，其嵌入与向量$\vec u_b-\vec u_a+\vec u_c$余弦接近。即，$d^<em>=argmax_dcos((\vec u_b - \vec u_a+ \vec u_c), \vec u_d)$。任务中的单词分析包括语义分析和句法分析。表2展示了对维基百科网络应用网络嵌入的单词分析结果。对于GF，单词对之间的权重被定义为共现次数的对数，比直接定位为共现次数的性能表现更好。对于DeepWalk,将语言网络转换为二进制网络过程中尝试使用不同的截断门槛，当所有的边都保留在网络中时能够获得最好的性能。我们还与最先进的单词嵌入模型Skip-Gram做了对比，该模型直接从原始维基百科页面中学习嵌入，也是隐式的矩阵分解方法。窗口大小被设置为5，与创建语言网络时使用的一样。<br>$$<br>d^</em><br>$$</p>
+<p> 给定单词对$(a,b)$和单词$c$，目标是找到一个$d$使得$ab$之间的关系与$cd$之间的关系是相同的。给定一个单词的嵌入，目标是找到一个单词$d^{*}$，其嵌入与向量$\vec u_b-\vec u_a+\vec u_c$余弦接近。即，$d^{*}=argmax_dcos((\vec u_b - \vec u_a+ \vec u_c), \vec u_d)$。任务中的单词分析包括语义分析和句法分析。表2展示了对维基百科网络应用网络嵌入的单词分析结果。对于GF，单词对之间的权重被定义为共现次数的对数，比直接定位为共现次数的性能表现更好。对于DeepWalk,将语言网络转换为二进制网络过程中尝试使用不同的截断门槛，当所有的边都保留在网络中时能够获得最好的性能。我们还与最先进的单词嵌入模型Skip-Gram做了对比，该模型直接从原始维基百科页面中学习嵌入，也是隐式的矩阵分解方法。窗口大小被设置为5，与创建语言网络时使用的一样。</p>
 <p>我们可以看到LINE(2nd)的表现优于其他方法，包括Skip-Gram。这表示了二阶相似度能够比一阶相似度更好的获取单词语义。这并不意外，高的二阶相似度意味着两个单词能够在同样的上下文中相互替换。意外的是，LINE(2nd)的表现甚至优于在原始文集上训练的最先进的单词嵌入模型（Skip-Gram）。原因可能是语言网络比单词序列能够更好的捕获全局的单词共现结构。其他方法中,GF和LINE(1st)表现显著优于DeepWalk即使Deepwalk拓展了二阶相似度,这可能是因为Deepwalk需要忽略在语言网络中非常重要的边权重。通过SGD优化的LINE模型表现比较差，因为，语言网络的边的权重的偏差范围较大，可能从1-1万，影响了学习进程。使用经过边取样处理优化的LINE模型能够较好处理以上问题，使用了一阶相似度和二阶相似度的表现的尤其好。</p>
 <p>所有的方法都运行在一个单个机器（1T内存，40个20Ghz、16个线程的CPU内核）。LINE(1st)和LINE(2nd)都非常有效，处理2百万节点和十亿条边的网络仅需要不到3个小时。两者都比图分解方法快至少10%，比DeepWalk方法快了5倍。LINE-SGD的速度较慢可以归因于其需要通过阈值切割技术来防止梯度爆炸。</p>
 <p>（二）文件分类</p>
