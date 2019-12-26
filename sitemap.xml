@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://buracagyang.github.io/2019/12/26/graph-embedding-deepwalk/</loc>
+    
+    <lastmod>2019-12-26T11:37:04.926Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://buracagyang.github.io/2019/12/21/graph-embedding-line/</loc>
     
     <lastmod>2019-12-26T03:12:55.051Z</lastmod>
