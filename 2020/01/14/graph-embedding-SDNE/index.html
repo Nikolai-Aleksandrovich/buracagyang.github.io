@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://buracagyang.github.io/2020/01/14/graph-embedding-SDNE/figure7.png">
 <meta property="og:image" content="https://buracagyang.github.io/2020/01/14/graph-embedding-SDNE/figure8.png">
 <meta property="og:image" content="https://buracagyang.github.io/2020/01/14/graph-embedding-SDNE/table6.png">
-<meta property="og:updated_time" content="2020-01-15T06:06:08.965Z">
+<meta property="og:updated_time" content="2020-01-15T06:16:26.949Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【Graph Embedding】SDNE">
 <meta name="twitter:description" content="关于Graph Embedding系列的论文翻译解读文章： 【Graph Embedding】DeepWalk 【Graph Embedding】line 【Graph Embedding】node2Vec 【Graph Embedding】SDNE 【Graph Embedding】struc2vec … 参考资料 paper: https://www.kdd.org/kdd2016/paper">
@@ -197,7 +197,7 @@
 <p><a href="https://buracagyang.github.io/2019/12/26/graph-embedding-deepwalk/">【Graph Embedding】DeepWalk</a></p>
 <p><a href="https://buracagyang.github.io/2019/12/21/graph-embedding-line/">【Graph Embedding】line</a></p>
 <p><a href="https://buracagyang.github.io/2019/12/26/graph-embedding-node2vec/">【Graph Embedding】node2Vec</a></p>
-<p>【Graph Embedding】SDNE</p>
+<p><a href="https://buracagyang.github.io/2020/01/14/graph-embedding-SDNE/">【Graph Embedding】SDNE</a></p>
 <p>【Graph Embedding】struc2vec</p>
 <p>…</p>
 <p><strong>参考资料</strong></p>
@@ -243,10 +243,13 @@
 <p>然而，由于网络的某些特定特性，这种重建过程不能直接应用于我们的问题。在网络中，我们可以观察到一些链接，但同时也观察不到许多合法的链接，这意味着顶点之间的链接确实表示它们之间的相似性，但没有链接不一定表示它们之间的差异性。此外，由于网络的稀疏性，$S$中非零元素的数量远远小于零元素的数量。然后如果我们直接使用$S$作为传统的自动编码器的输入，它更容易在$S$中重建零元素，然而，这不是我们想要的。为了解决这一问题，我们对非零元素的重构误差比零元素的重构误差施加了更多的惩罚。修正后的目标函数如下:<br>$$<br>\cal L_{2nd} = \mit \sum_{i=1}^n\parallel \hat{x_i} - x_i \odot b_i \parallel_{2}^2 \ =\parallel(\hat{X} - X) \odot B \parallel_F^2 \tag{3}<br>$$<br>其中$\odot$为Hadamard乘积，$bi = \{b_{i,j}\}_{j=1}^n$。如果$s_{i,j} =0$，则$b_{i,j} = 1$，否则$b_{i,j} = \beta &gt; 1$。利用修正后的深度自编码器，以邻接矩阵S作为输入，将具有相似邻域结构的顶点映射到表示空间附近，由重构准则保证。换句话说，我们的模型的无监督组件可以通过重建顶点之间的二阶接近度来保持全局网络结构。</p>
 <p>既要保留全局网络结构，又要捕捉局部结构。我们用一阶近似来表示局部网络结构。一阶近似可视为约束一对顶点潜在表示的相似性的监督信息。因此，我们设计监督组件来利用一阶邻近性。该目标的损失函数定义如下:<br>$$<br>\cal L_{1st} = \mit \sum_{i,j=1}^n s_{i,j} \parallel y_i^{(K)} - y_j^{(K)} \parallel_2^2 \ <br>= \sum_{i,j=1}^n s_{i,j} \parallel y_i - y_j \parallel_2^2 \tag{4}<br>$$<br>等式4的目标函数借用了拉普拉斯变换的思想[1]，当相似的顶点被映射到离嵌入空间很远的地方时，就会受到惩罚。一些关于社交网络[13]的工作也使用了类似的想法。我们区分它们的方面是，我们在深层模型中加入了这个想法，使由一条边连接的顶点被映射到嵌入空间附近。因此，该模型保持了一阶近似性。</p>
 <p>为了同时保持一阶和二阶邻近性，我们提出了一个结合等式3和等式4的半监督模型，使下列目标函数最小化：<br>$$<br>\cal L_{mix} = L_{2nd} + \alpha L_{1st} + vL_{reg} \\<br>= \mit \parallel(\hat{X} - X) \odot B\parallel_F^2 + \alpha\sum_{i,j=1}^n s_{i,j} \parallel y_i - y_j \parallel_2^2 + v \cal L_{reg} \tag{5}<br>$$<br>其中，$\cal L_{reg}$是一个$\cal L2$正则项：<br>$$<br>\cal L_{reg} = \mit \frac{1}{2}\sum_{k=1}^K(\parallel W^{(k)} \parallel_F^2 + \parallel \hat{W}^{(k)} \parallel_F^2)<br>$$</p>
-<h3 id="3-2-3-优化"><a href="#3-2-3-优化" class="headerlink" title="3.2.3 优化"></a>3.2.3 优化</h3><p>为了优化上述模型，目标是最小化$\theta$的函数$\cal L_{mix}$。其中的关键步骤是计算的偏导数$\cal \partial L_{mix} / \partial \hat{W}^{(k)}$和$\cal \partial L_{mix} / \partial W^{(k)}$。偏导数的详细数学形式如下:<br>$$<br>\frac {\cal \partial L_{mix}}{\partial \hat{W}^{(k)}} = \frac{\partial \cal L_{2nd}}{\partial \hat{W}^{(k)}} + v \frac{\partial \cal L_{reg}}{\partial \hat{W}^{(k)}} \\</p>
-<p>\frac {\cal \partial L_{mix}}{\partial W^{(k)}} = \frac{\partial \cal L_{2nd}}{\partial W^{(k)}} + \alpha \frac{\partial \cal L_{1st}}{\partial W^{(k)}} + v \frac{\partial \cal L_{reg}}{\partial W^{(k)}} \tag{6}<br>$$<br>我们首先看$\frac{\partial \cal L_{2nd}}{\partial \hat{W}^{(K)}}$，可以改写为：<br>$$<br>\frac{\partial \cal L_{2nd}}{\partial \hat{W}^{(K)}} = \frac{\partial \cal L_{2nd}}{\partial \hat{X}}.\frac{\partial \hat{X}}{\partial \hat{W}^{(K)}} \tag{7}<br>$$<br>对于第一项，根据等式3，我们有:<br>$$<br>\frac{\partial \cal L_{2nd}}{\partial \hat{X}} = 2(\hat{X} - X) \odot B \tag{8}<br>$$<br>第二项的计算$\frac{\partial \hat{X}}{\partial \hat{W}}$很容易根据$\hat{X} = \sigma(\hat{Y}^{(K-1)}\hat{W}^{(K)} + \hat{b}^{(K)})$计算。那么$\frac{\partial \cal L_{2nd}}{\partial \hat{W}^{(K)}}$也是可得的。基于反向传播，我们可以迭代得到$\frac{\partial \cal L_{2nd}}{\partial \hat{W}^{(K)}}, k=1,…,K-1$和$\frac{\partial \cal L_{2nd}}{\partial W^{(k)}}, k=1,…,K$。现在$\cal L_{2nd}$的偏导数的计算已经完成了。</p>
+<h3 id="3-2-3-优化"><a href="#3-2-3-优化" class="headerlink" title="3.2.3 优化"></a>3.2.3 优化</h3><p>为了优化上述模型，目标是最小化$\theta$的函数$\cal L_{mix}$。其中的关键步骤是计算的偏导数$\cal \partial L_{mix} / \partial \hat{W}^{(k)}$和$\cal \partial L_{mix} / \partial W^{(k)}$。偏导数的详细数学形式如下:</p>
+<p>$$<br>\frac {\cal \partial L_{mix}}{\partial \hat{W}^{(k)}} = \frac{\partial \cal L_{2nd}}{\partial \hat{W}^{(k)}} + v \frac{\partial \cal L_{reg}}{\partial \hat{W}^{(k)}} \\<br>\frac {\cal \partial L_{mix}}{\partial W^{(k)}} = \frac{\partial \cal L_{2nd}}{\partial W^{(k)}} + \alpha \frac{\partial \cal L_{1st}}{\partial W^{(k)}} + v \frac{\partial \cal L_{reg}}{\partial W^{(k)}} \tag{6}<br>$$</p>
+<p>我们首先看$\frac{\partial \cal L_{2nd}}{\partial \hat{W}^{(K)}}$，可以改写为：</p>
+<p>$$<br>\frac{\partial \cal L_{2nd}}{\partial \hat{W}^{(K)}} = \frac{\partial \cal L_{2nd}}{\partial \hat{X}}.\frac{\partial \hat{X}}{\partial \hat{W}^{(K)}} \tag{7}<br>$$</p>
+<p>对于第一项，根据等式3，我们有:<br>$$<br>\frac{\partial \cal L_{2nd}}{\partial \hat{X}} = 2(\hat{X} - X) \odot B \tag{8}<br>$$<br>第二项的计算$\frac{\partial \hat{X}}{\partial \hat{W}}$很容易根据$\hat{X} = \sigma(\hat{Y}^{(K-1)}\hat{W}^{(K)} + \hat{b}^{(K)})$计算。那么$\frac{\partial \cal L_{2nd}}{\partial \hat{W}^{(K)}}$也是可得的。基于反向传播，我们可以迭代得到$\frac{\partial \cal L_{2nd}}{\partial \hat{W}^{(K)}}, k=1,…,K-1$和$\frac{\partial \cal L_{2nd}}{\partial W^{(k)}}, k=1,…,K$。现在$\cal L_{2nd}$的偏导数的计算已经完成了。</p>
 <p>然后我们继续计算$\frac{\partial \cal L_{1st}}{\partial W^{(k)}}$的偏导数。$\cal L_{1st}$的损失函数可以重新表述为:<br>$$<br>\cal L_{1st} = \mit \sum_{i,j=1}^n s_{i,j} \parallel y_i - y_j \parallel_2^2 = 2tr(Y^TLY) \tag{9}<br>$$<br>其中$L = D - S$，$D \in \Bbb R^{n \times n}$是对角矩阵，$D_{i,j} = \sum_j s_{i,j}$。</p>
-<p>然后我们首先重点计算$\frac{\partial \cal L_{1st}}{\partial W^{(k)}}$:<br>$$<br>\frac{\partial \cal L_{1st}}{\partial W^{(k)}} = \frac{\partial \cal L_{1st}}{\partial Y}.\frac{\partial Y}{\partial W^{(K)}} \tag{10}<br>$$<br>因为$Y = \sigma(Y^{(K-1)}W^{(K)} + b^{(K)})$，第二项的计算\frac{\partial Y}{\partial W^{(K)}}也是比较容易的。对于第一项$\frac{\partial \cal L_{1st}}{\partial Y}$的计算，有：<br>$$<br>\frac{\partial \cal L_{1st}}{\partial Y} = 2(L + L^T).Y \tag{11}<br>$$<br>同样地，利用反向传播我们可以完成$\cal L_{1st}$的偏导计算。</p>
+<p>然后我们首先重点计算$\frac{\partial \cal L_{1st}}{\partial W^{(k)}}$:<br>$$<br>\frac{\partial \cal L_{1st}}{\partial W^{(k)}} = \frac{\partial \cal L_{1st}}{\partial Y}.\frac{\partial Y}{\partial W^{(K)}} \tag{10}<br>$$<br>因为$Y = \sigma(Y^{(K-1)}W^{(K)} + b^{(K)})$，第二项的计算$\frac{\partial Y}{\partial W^{(K)}}$也是比较容易的。对于第一项$\frac{\partial \cal L_{1st}}{\partial Y}$的计算，有：<br>$$<br>\frac{\partial \cal L_{1st}}{\partial Y} = 2(L + L^T).Y \tag{11}<br>$$<br>同样地，利用反向传播我们可以完成$\cal L_{1st}$的偏导计算。</p>
 <p>现在我们得到了参数的偏导数。在参数初始化的情况下，利用随机梯度下降法对模型进行优化。注意，由于模型高度非线性，在参数空间中存在许多局部最优。因此，为了找到一个好的参数空间区域，我们首先使用深度信念网络对参数进行预训练，这在文献中已经被证明是深度学习中参数初始化的必要步骤[7]。完整的算法参见Alg. 1。</p>
 <p><img src="/2020/01/14/graph-embedding-SDNE/algorithm1.png" alt="这里写图片描述"></p>
 <h2 id="3-3-分析和讨论"><a href="#3-3-分析和讨论" class="headerlink" title="3.3 分析和讨论"></a>3.3 分析和讨论</h2><p>在这一节中，我们对所提出的SDNE半监督深度模型进行了一些分析和讨论。</p>
@@ -281,11 +284,11 @@
 <li>Macro-F1是一个给<strong>每个类</strong>同等权重的度量。定义如下:</li>
 </ul>
 <p>$$<br>Macro-F1 = \frac{\sum_{A \in C}F1(A)}{|C|}<br>$$</p>
-<p>​    其中$F1(A)$为标签A的F1度量。</p>
+<p>其中$F1(A)$为标签A的F1度量。</p>
 <ul>
 <li>Micro-F1是一个给<strong>每个实例</strong>同等权重的度量。定义如下:</li>
 </ul>
-<p>$$<br>Pr = \frac{\sum_{A \in C}TP(A)}{\sum_{A \in C}(TA(A) + FP(A))}, R = \frac{\sum_{A \in C}TP(A)}{\sum_{A \in C}(TA(A) + FN(A))} \\<br>Micro-F1 = \frac{2<em>Pr</em>R}{Pr + R}<br>$$</p>
+<p>$$<br>Pr = \frac{\sum_{A \in C}TP(A)}{\sum_{A \in C}(TA(A) + FP(A))}, R = \frac{\sum_{A \in C}TP(A)}{\sum_{A \in C}(TA(A) + FN(A))} \\<br>Micro-F1 = \frac{2*Pr*R}{Pr + R}<br>$$</p>
 <h2 id="4-4-参数设置"><a href="#4-4-参数设置" class="headerlink" title="4.4 参数设置"></a>4.4 参数设置</h2><p>在本文中，我们提出了一个多层的深层结构，层的数量随着不同的数据集而变化。表3列出了每个层的维数。神经网络有三层影藏层用于BLOGCATALOG, ARXIV GR-QC和20-NEWSGROUP，四层影藏层用于FLICKR和YOUTUBE。如果我们使用更深层次的模型，性能几乎保持不变，甚至变得更差。</p>
 <p><img src="/2020/01/14/graph-embedding-SDNE/table3.png" alt="这里写图片描述"></p>
 <p>对于我们的方法，通过在验证集上使用网格搜索来调整超参数$\alpha$,$\beta$和$v$，将基线的参数调整为最优。对于LINE，随机梯度下降的小批量大小设置为1。初始值的学习率为0.025。设负采样数为5，样本总数为100亿个。此外，根据[26]，连接1阶和2阶表示形成最终的embedding向量并通过L2归一化到最终的embedding向量，LINE产生更好的结果。我们按照他们的方式来得到结果。对于DeepWalk，我们设置窗口大小为10，步长为40，每个顶点的步长为40。对于GraRep，我们设置最大矩阵转移步长为5。</p>

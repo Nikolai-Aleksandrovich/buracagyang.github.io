@@ -8,13 +8,13 @@
   <link rel="dns-prefetch" href="https://buracagyang.github.io">
   <title>【Graph Embedding】node2vec | Buracag的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="关于Graph Embedding系列的论文翻译解读文章： 【Graph Embedding】DeepWalk 【Graph Embedding】line 【Graph Embedding】node2Vec … 参考资料 paper: https://www.kdd.org/kdd2016/papers/files/rfp0218-groverA.pdf code: https://github.">
+  <meta name="description" content="关于Graph Embedding系列的论文翻译解读文章： 【Graph Embedding】DeepWalk 【Graph Embedding】line 【Graph Embedding】node2Vec 【Graph Embedding】SDNE … 参考资料 paper: https://www.kdd.org/kdd2016/papers/files/rfp0218-groverA.pdf">
 <meta name="keywords" content="算法备忘,图计算,Embedding">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【Graph Embedding】node2vec">
 <meta property="og:url" content="https://buracagyang.github.io/2020/01/05/graph-embedding-node2vec/index.html">
 <meta property="og:site_name" content="Buracag的博客">
-<meta property="og:description" content="关于Graph Embedding系列的论文翻译解读文章： 【Graph Embedding】DeepWalk 【Graph Embedding】line 【Graph Embedding】node2Vec … 参考资料 paper: https://www.kdd.org/kdd2016/papers/files/rfp0218-groverA.pdf code: https://github.">
+<meta property="og:description" content="关于Graph Embedding系列的论文翻译解读文章： 【Graph Embedding】DeepWalk 【Graph Embedding】line 【Graph Embedding】node2Vec 【Graph Embedding】SDNE … 参考资料 paper: https://www.kdd.org/kdd2016/papers/files/rfp0218-groverA.pdf">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://buracagyang.github.io/2020/01/05/graph-embedding-node2vec/figure1.png">
 <meta property="og:image" content="https://buracagyang.github.io/2020/01/05/graph-embedding-node2vec/figure2.png">
@@ -25,10 +25,10 @@
 <meta property="og:image" content="https://buracagyang.github.io/2020/01/05/graph-embedding-node2vec/figure5.png">
 <meta property="og:image" content="https://buracagyang.github.io/2020/01/05/graph-embedding-node2vec/table3.png">
 <meta property="og:image" content="https://buracagyang.github.io/2020/01/05/graph-embedding-node2vec/table4.png">
-<meta property="og:updated_time" content="2020-01-13T06:47:11.858Z">
+<meta property="og:updated_time" content="2020-01-15T06:16:13.127Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【Graph Embedding】node2vec">
-<meta name="twitter:description" content="关于Graph Embedding系列的论文翻译解读文章： 【Graph Embedding】DeepWalk 【Graph Embedding】line 【Graph Embedding】node2Vec … 参考资料 paper: https://www.kdd.org/kdd2016/papers/files/rfp0218-groverA.pdf code: https://github.">
+<meta name="twitter:description" content="关于Graph Embedding系列的论文翻译解读文章： 【Graph Embedding】DeepWalk 【Graph Embedding】line 【Graph Embedding】node2Vec 【Graph Embedding】SDNE … 参考资料 paper: https://www.kdd.org/kdd2016/papers/files/rfp0218-groverA.pdf">
 <meta name="twitter:image" content="https://buracagyang.github.io/2020/01/05/graph-embedding-node2vec/figure1.png">
   
     <link rel="alternative" href="/atom.xml" title="Buracag的博客" type="application/atom+xml">
@@ -191,6 +191,7 @@
 <p><a href="https://buracagyang.github.io/2019/12/26/graph-embedding-deepwalk/">【Graph Embedding】DeepWalk</a></p>
 <p><a href="https://buracagyang.github.io/2019/12/21/graph-embedding-line/">【Graph Embedding】line</a></p>
 <p><a href="https://buracagyang.github.io/2019/12/26/graph-embedding-node2vec/">【Graph Embedding】node2Vec</a></p>
+<p><a href="https://buracagyang.github.io/2020/01/14/graph-embedding-SDNE/">【Graph Embedding】SDNE</a></p>
 <p>…</p>
 <p><strong>参考资料</strong></p>
 <p>paper: <a href="https://www.kdd.org/kdd2016/papers/files/rfp0218-groverA.pdf" target="_blank" rel="noopener">https://www.kdd.org/kdd2016/papers/files/rfp0218-groverA.pdf</a></p>
