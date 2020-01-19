@@ -29,7 +29,7 @@
 <meta property="og:image" content="https://buracagyang.github.io/2019/12/21/graph-embedding-line/figure3.png">
 <meta property="og:image" content="https://buracagyang.github.io/2019/12/21/graph-embedding-line/figure4.png">
 <meta property="og:image" content="https://buracagyang.github.io/2019/12/21/graph-embedding-line/figure5.png">
-<meta property="og:updated_time" content="2020-01-19T03:41:06.896Z">
+<meta property="og:updated_time" content="2020-01-19T04:04:49.582Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【Graph Embedding】line">
 <meta name="twitter:description" content="关于Graph Embedding系列的论文翻译解读文章： 【Graph Embedding】DeepWalk 【Graph Embedding】line 【Graph Embedding】node2Vec 【Graph Embedding】SDNE 【Graph Embedding】struc2vec 参考资料 paper: https://arxiv.org/pdf/1503.03578.pd">
@@ -206,7 +206,6 @@
 <p>一阶相似度指顶点之间直接连接信息。在真实网络数据中不足以用于保留全局的网络结构。故补充了二阶相似度的概念(即具有共享的邻居节点的顶点可能是相似的)。在社会学和文本语库中可以找到这样的推论。社交网络中，两个人的好友关系的重复度越高，两个人的相关性就越高。文本语料库中，我们可以通过一句话的其他内容来了解单个单词的意思。事实上，有许多共同好友的两个人大概率有相似的爱好并可能成为朋友，而常与同样的语句组合使用的单词更可能具有相同的意思。</p>
 <p>LINE提出了一种保留了一阶相似度和二阶相似度的精心设计的目标函数。直接对真实信息网络使用随机梯度下降是不可取的。因为许多网络中的边是带权的，且权重呈现了高度的差异性。对于一个单词共现网络，单词对的权重变化可能从一到百到千，边的权重乘以梯度会引起梯度爆炸，进而影响性能。为了解决这个问题，LINE用与其权重成比例的概率对边进行采样，并将采样边视为<strong>二进制边</strong>以进行模型更新。在这样的取样过程下，目标函数不会发生变化， 且边的权重不再影响梯度。</p>
 <p>LINE的贡献如下三点：</p>
-<p>总结本文的贡献可分为以下三点：</p>
 <ul>
 <li>LINE适用于任意类型的信息网络，并能够轻易拓展到百万个节点。它拥有一个可以保留一阶相似度和二阶相似度的目标函数。</li>
 <li>提出了一种边采样算法以优化目标函数。该算法解决了经典随机梯度下降的局限性，提高了推理的有效性和效率。</li>
