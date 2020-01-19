@@ -25,7 +25,7 @@
 <meta property="og:image" content="https://buracagyang.github.io/2020/01/05/graph-embedding-node2vec/figure5.png">
 <meta property="og:image" content="https://buracagyang.github.io/2020/01/05/graph-embedding-node2vec/table3.png">
 <meta property="og:image" content="https://buracagyang.github.io/2020/01/05/graph-embedding-node2vec/table4.png">
-<meta property="og:updated_time" content="2020-01-17T06:10:27.985Z">
+<meta property="og:updated_time" content="2020-01-19T03:58:10.462Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【Graph Embedding】node2vec">
 <meta name="twitter:description" content="关于Graph Embedding系列的论文翻译解读文章： 【Graph Embedding】DeepWalk 【Graph Embedding】line 【Graph Embedding】node2Vec 【Graph Embedding】SDNE 【Graph Embedding】struc2vec 参考资料 paper: https://www.kdd.org/kdd2016/papers/">
@@ -197,9 +197,7 @@
 <p>paper: <a href="https://www.kdd.org/kdd2016/papers/files/rfp0218-groverA.pdf" target="_blank" rel="noopener">https://www.kdd.org/kdd2016/papers/files/rfp0218-groverA.pdf</a></p>
 <p>code: <a href="https://github.com/aditya-grover/node2vec" target="_blank" rel="noopener">https://github.com/aditya-grover/node2vec</a></p>
 <a id="more"></a>
-<h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>网络中节点和边上的预测任务的特征工程比较麻烦。最近在更广泛的表征学习领域的研究已经导致了通过学习特征本身来自动预测的重大进展。然而，目前的特征学习方法不足以表达网络中观察到的连接模式的多样性。</p>
-<p>在此，我们提出node2vec，这是一个学习网络中节点的连续特征表示的算法框架。在node2vec中，我们学习了如何将节点映射到低维特征空间，从而最大限度地保留节点的邻域信息。我们定义了一个灵活的节点网络邻居概念，并设计了一个有偏差的随机游走程序，有效地探索了不同的邻居。我们的算法推广了以前的工作，这些工作基于严格的网络邻域概念，我们认为增加了探索邻域的灵活性。</p>
-<p>我们证明了node2vec在多个不同领域的真实网络中，在多标签分类和链路预测方面优于现有的先进技术。综上所述，我们的工作代表了一种在复杂网络中有效学习独立于任务的状态的新方法。</p>
+<h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>参考DeepWalk和LINE，node2vec定义了一个灵活的节点邻域的概念，并设计了一个有偏差的随机游走程序，可以看做是DeepWalk的扩展，其结合了DFS和BFS的随机游走。</p>
 <h1 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1. 介绍"></a>1. 介绍</h1><p>网络分析中的许多重要任务都涉及对节点和边缘的预测。例如，</p>
 <ul>
 <li>在社交网络中，我们可能对预测用户的兴趣感兴趣，或者在蛋白-蛋白交互网络中，我们可能对预测蛋白质的功能标签感兴趣[25,37]。</li>
