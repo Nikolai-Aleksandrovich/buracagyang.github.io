@@ -29,7 +29,7 @@
 <meta property="og:image" content="https://buracagyang.github.io/2019/12/21/graph-embedding-line/figure3.png">
 <meta property="og:image" content="https://buracagyang.github.io/2019/12/21/graph-embedding-line/figure4.png">
 <meta property="og:image" content="https://buracagyang.github.io/2019/12/21/graph-embedding-line/figure5.png">
-<meta property="og:updated_time" content="2020-01-19T04:04:49.582Z">
+<meta property="og:updated_time" content="2020-03-17T12:11:36.330Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【Graph Embedding】line">
 <meta name="twitter:description" content="关于Graph Embedding系列的论文翻译解读文章： 【Graph Embedding】DeepWalk 【Graph Embedding】line 【Graph Embedding】node2Vec 【Graph Embedding】SDNE 【Graph Embedding】struc2vec 参考资料 paper: https://arxiv.org/pdf/1503.03578.pd">
@@ -214,7 +214,7 @@
 <p><img src="/2019/12/21/graph-embedding-line/figure1.png" alt="这里写图片描述"></p>
 <h1 id="2-相关工作"><a href="#2-相关工作" class="headerlink" title="2. 相关工作"></a>2. 相关工作</h1><p>经典的图表征方法和降维方法使用数据点的特征向量来创建关联图。最近的文献介绍了图矩阵分解方法，使用优化的随机梯度下降方法进行了矩阵分解。该方法不能保留网络全局结构，并且只能应用于无向图。还有之前结束的DeepWalk。DeepWalk为获取更高阶的节点产生相似的低维表示，使用DFS随机游走对图进行节点采样，但没有提供一个明确的目标函数。而LINE使用了BFS的策略。此外，DeepWalk只能应用到无权的网络，而LINE可以应用于包含有权/无权的边的网络。</p>
 <h1 id="3-问题定义"><a href="#3-问题定义" class="headerlink" title="3. 问题定义"></a>3. 问题定义</h1><p><strong>定义1  信息网络</strong></p>
-<p>信息网络被定义为$G = (V, E)$，其中$V$表示节点集合，每个节点表示一个数据对象。$E$表示节点间的边。每一个$e \in E$都是一个有序对 $e = (u, v)$且都有一个关联的权重$w_{uv} &gt; 0$。如果$G$是无向图，那么有$(u, v) \equiv (v, u)$且$w_{uv} \equiv w_{vu}$。如果$G$是无向图，则$(u, v) \not\equiv (v, u)$且$w_{uv} \not\equiv w_{vu}$。</p>
+<p>信息网络被定义为$G = (V, E)$，其中$V$表示节点集合，每个节点表示一个数据对象。$E$表示节点间的边。每一个$e \in E$都是一个有序对 $e = (u, v)$且都有一个关联的权重$w_{uv} &gt; 0$。如果$G$是无向图，那么有$(u, v) \equiv (v, u)$且$w_{uv} \equiv w_{vu}$。如果$G$是有向图，则$(u, v) \not\equiv (v, u)$且$w_{uv} \not\equiv w_{vu}$。</p>
 <p><strong>定义2  一阶相似度</strong></p>
 <p>一阶相似度：一阶相似度是网络中两个节点的局部相似度。若节点$u$和$v$之间有边$(u,v)$，则$w_{uv}$表示$u$和$v$之间的一阶相似度。如果$u$和$v$之间没有可以观察的边，一阶相似度则为0。</p>
 <p><strong>定义3  二阶相似度</strong></p>

@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://buracagyang.github.io/2019/12/21/graph-embedding-line/</loc>
+    
+    <lastmod>2020-03-17T12:11:36.330Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://buracagyang.github.io/2020/01/15/graph-embedding-struc2vec/</loc>
     
     <lastmod>2020-02-26T10:17:07.807Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>https://buracagyang.github.io/2020/01/05/graph-embedding-node2vec/</loc>
     
     <lastmod>2020-01-19T08:56:30.712Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://buracagyang.github.io/2019/12/21/graph-embedding-line/</loc>
-    
-    <lastmod>2020-01-19T04:04:49.582Z</lastmod>
     
   </url>
   
