@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://buracagyang.github.io/2020/01/05/graph-embedding-node2vec/</loc>
+    
+    <lastmod>2020-10-06T02:20:35.397Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://buracagyang.github.io/2019/06/12/calculus-1/</loc>
     
     <lastmod>2020-07-20T14:18:53.018Z</lastmod>
@@ -25,224 +32,217 @@
   <url>
     <loc>https://buracagyang.github.io/2020/01/15/graph-embedding-struc2vec/</loc>
     
-    <lastmod>2020-02-26T10:17:07.807Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://buracagyang.github.io/2020/01/05/graph-embedding-node2vec/</loc>
-    
-    <lastmod>2020-01-19T08:56:30.712Z</lastmod>
+    <lastmod>2020-02-26T10:17:06.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://buracagyang.github.io/2019/12/26/graph-embedding-deepwalk/</loc>
     
-    <lastmod>2020-01-17T09:35:11.784Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://buracagyang.github.io/2020/01/14/graph-embedding-SDNE/</loc>
-    
-    <lastmod>2020-01-17T06:10:18.876Z</lastmod>
+    <lastmod>2020-01-21T03:05:42.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://buracagyang.github.io/2019/06/12/linear-algebra-2/</loc>
     
-    <lastmod>2019-12-20T06:20:55.980Z</lastmod>
+    <lastmod>2020-01-17T06:19:08.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://buracagyang.github.io/2020/01/14/graph-embedding-SDNE/</loc>
+    
+    <lastmod>2020-01-17T06:10:18.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://buracagyang.github.io/2019/06/17/mathematical-optimization-1/</loc>
     
-    <lastmod>2019-12-17T12:11:31.243Z</lastmod>
+    <lastmod>2019-12-17T12:11:30.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://buracagyang.github.io/2019/06/19/mathematical-optimization-3/</loc>
     
-    <lastmod>2019-09-27T07:52:42.397Z</lastmod>
+    <lastmod>2019-09-27T07:52:42.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://buracagyang.github.io/2019/08/26/sword-refers-to-offer/</loc>
     
-    <lastmod>2019-08-27T02:30:09.214Z</lastmod>
+    <lastmod>2019-08-27T02:30:08.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://buracagyang.github.io/2019/07/30/spark-ml-pipelines/</loc>
     
-    <lastmod>2019-08-26T03:50:46.760Z</lastmod>
+    <lastmod>2019-08-26T03:50:46.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://buracagyang.github.io/2019/08/09/spark-ml-tuning/</loc>
     
-    <lastmod>2019-08-12T08:01:24.107Z</lastmod>
+    <lastmod>2019-08-12T08:01:24.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://buracagyang.github.io/2019/06/18/mathematical-optimization-2/</loc>
     
-    <lastmod>2019-08-09T08:10:26.436Z</lastmod>
+    <lastmod>2019-08-09T08:10:26.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://buracagyang.github.io/2019/08/09/spark-frequent-pattern-mining/</loc>
     
-    <lastmod>2019-08-09T02:45:07.859Z</lastmod>
+    <lastmod>2019-08-09T02:45:06.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://buracagyang.github.io/2019/07/31/spark-features-project-2/</loc>
     
-    <lastmod>2019-08-09T02:32:29.762Z</lastmod>
+    <lastmod>2019-08-09T02:32:28.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://buracagyang.github.io/2019/08/08/spark-collaborative-filtering/</loc>
     
-    <lastmod>2019-08-08T11:51:25.633Z</lastmod>
+    <lastmod>2019-08-08T11:51:24.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://buracagyang.github.io/2019/08/08/spark-clustering/</loc>
     
-    <lastmod>2019-08-08T10:08:35.578Z</lastmod>
+    <lastmod>2019-08-08T10:08:34.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://buracagyang.github.io/2019/08/02/spark-classification-and-regression-1/</loc>
     
-    <lastmod>2019-08-08T07:41:54.011Z</lastmod>
+    <lastmod>2019-08-08T07:41:54.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://buracagyang.github.io/2019/07/30/spark-features-project-1/</loc>
     
-    <lastmod>2019-08-08T07:37:58.192Z</lastmod>
+    <lastmod>2019-08-08T07:37:58.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://buracagyang.github.io/2019/08/07/spark-classification-and-regression-2/</loc>
     
-    <lastmod>2019-08-07T07:03:42.640Z</lastmod>
+    <lastmod>2019-08-07T07:03:42.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://buracagyang.github.io/2019/06/11/linear-algebra-1/</loc>
     
-    <lastmod>2019-08-07T06:32:47.756Z</lastmod>
+    <lastmod>2019-08-07T06:32:46.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://buracagyang.github.io/2019/05/28/ab-test/</loc>
     
-    <lastmod>2019-08-01T07:27:45.658Z</lastmod>
+    <lastmod>2019-08-01T07:27:44.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://buracagyang.github.io/2019/05/08/svm-proving-process/</loc>
     
-    <lastmod>2019-07-30T09:29:41.531Z</lastmod>
+    <lastmod>2019-07-30T09:29:40.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://buracagyang.github.io/2019/06/12/calculus-2/</loc>
     
-    <lastmod>2019-07-28T08:55:50.444Z</lastmod>
+    <lastmod>2019-07-28T08:55:50.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://buracagyang.github.io/2019/05/29/aic-and-bic/</loc>
     
-    <lastmod>2019-07-28T08:55:35.276Z</lastmod>
+    <lastmod>2019-07-28T08:55:34.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://buracagyang.github.io/2019/06/21/information-theory-2/</loc>
     
-    <lastmod>2019-07-14T06:52:21.445Z</lastmod>
+    <lastmod>2019-07-14T06:52:20.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://buracagyang.github.io/2019/06/21/information-theory-1/</loc>
     
-    <lastmod>2019-06-24T08:37:39.650Z</lastmod>
+    <lastmod>2019-06-24T08:37:38.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://buracagyang.github.io/2019/06/14/probability-theory-2/</loc>
     
-    <lastmod>2019-06-21T05:53:35.092Z</lastmod>
+    <lastmod>2019-06-21T05:53:34.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://buracagyang.github.io/2019/06/14/probability-theory-1/</loc>
     
-    <lastmod>2019-06-21T05:53:25.791Z</lastmod>
+    <lastmod>2019-06-21T05:53:24.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://buracagyang.github.io/2019/09/25/numpy-vectorize/</loc>
+    <loc>https://buracagyang.github.io/2019/06/12/numpy-vectorize/</loc>
     
-    <lastmod>2019-06-12T12:45:42.710Z</lastmod>
+    <lastmod>2019-06-12T12:45:42.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://buracagyang.github.io/2019/05/29/single-layer-perceptron/</loc>
     
-    <lastmod>2019-06-03T10:51:33.221Z</lastmod>
+    <lastmod>2019-06-03T10:51:32.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://buracagyang.github.io/2019/06/03/quantile-regression/</loc>
     
-    <lastmod>2019-06-03T10:51:29.009Z</lastmod>
+    <lastmod>2019-06-03T10:51:28.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://buracagyang.github.io/2019/05/29/python-basic-about-class/</loc>
     
-    <lastmod>2019-06-03T10:51:24.181Z</lastmod>
+    <lastmod>2019-06-03T10:51:24.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://buracagyang.github.io/2019/05/29/logistic-loss-function/</loc>
     
-    <lastmod>2019-06-03T10:51:02.378Z</lastmod>
+    <lastmod>2019-06-03T10:51:02.000Z</lastmod>
     
   </url>
   

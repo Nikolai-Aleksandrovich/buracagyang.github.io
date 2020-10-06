@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://buracagyang.github.io/2020/01/05/graph-embedding-node2vec/figure5.png">
 <meta property="og:image" content="https://buracagyang.github.io/2020/01/05/graph-embedding-node2vec/table3.png">
 <meta property="og:image" content="https://buracagyang.github.io/2020/01/05/graph-embedding-node2vec/table4.png">
-<meta property="og:updated_time" content="2020-01-19T08:56:30.712Z">
+<meta property="og:updated_time" content="2020-10-06T02:20:35.397Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【Graph Embedding】node2vec">
 <meta name="twitter:description" content="关于Graph Embedding系列的论文翻译解读文章： 【Graph Embedding】DeepWalk 【Graph Embedding】line 【Graph Embedding】node2Vec 【Graph Embedding】SDNE 【Graph Embedding】struc2vec 参考资料 paper: https://www.kdd.org/kdd2016/papers/">
@@ -202,7 +202,7 @@
 <h1 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1. 介绍"></a>1. 介绍</h1><p>网络分析中的许多重要任务都涉及对节点和边缘的预测。例如，</p>
 <ul>
 <li>在社交网络中，我们可能对预测用户的兴趣感兴趣，或者在蛋白-蛋白交互网络中，我们可能对预测蛋白质的功能标签感兴趣[25,37]。</li>
-<li>同样，在链路预测中，我们希望预测网络中的一对节点是否应该有一条连接它们的边[18]。链路预测在很多领域都很有用;在基因组学中，它帮助我们发现基因之间的新相互作用，在社会网络中，它可以识别现实世界中二人是否是朋友[2,34]。</li>
+<li>同样，在链路预测中，我们希望预测网络中的一对节点是否应该有一条连接它们的边[18]。链路预测在很多领域都很有用。在基因组学中，它帮助我们发现基因之间的新相互作用；在社会网络中，它可以识别现实世界中二人是否是朋友[2,34]。</li>
 </ul>
 <p>任何监督机器学习算法都需要一组信息丰富的、有区别的和独立的特征。在网络预测问题中，这意味着必须为节点和边构造一个特征向量表示。典型的解决方案包括基于domain knowledge和手动的特征工程。即使不考虑特征工程所需的繁琐工作，这些特征通常是针对特定任务设计的，不会泛化到不同的预测任务中。</p>
 <p>另一种方法是通过解决优化问题[4]来学习特征表示。特征学习的挑战是定义一个目标函数，它涉及计算效率和预测精度之间的平衡。虽然这种监督过程有较高的准确性，但其代价是由于需要估计的参数数量激增，导致训练时间复杂性很高。</p>
@@ -631,15 +631,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">大数据</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">机器学习</a>
               </li>
             
             <div class="clearfix"></div>

@@ -6,22 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="https://buracagyang.github.io">
-  <title>数学优化2-优化算法 | Buracag的博客</title>
+  <title>利用numpy.vectorize提升计算速度 | Buracag的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="同步于CSDN;音尘杂记 优化问题一般都是通过迭代的方式来求解：通过猜测一个初始的估计$x_0$，然后不断迭代产生新的估计$x_1, x_2, …  x_t$，希望$x_t$最终收敛到期望的最优解$x^∗$。 一个好的优化算法应该是在一定的时间或空间复杂度下能够快速准确地找到最优解。同时，好的优化算法受初始猜测点的影响较小，通过迭代能稳定地找到最优解$x^∗$的邻域，然后迅速收敛于$x^∗$。 优">
-<meta name="keywords" content="技术备忘,基础知识">
+  <meta name="description" content="同步于CSDN;音尘杂记 在实际项目中，对超大矩阵进行计算或者对超大的DataFrame进行计算是一个经常会出现的场景。这里先不考虑开发机本身内存等客观硬件因素，仅从设计上讨论一下不同实现方式带来的性能差异，抛砖引玉。">
+<meta name="keywords" content="技术备忘,Python">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数学优化2-优化算法">
-<meta property="og:url" content="https://buracagyang.github.io/2019/06/18/mathematical-optimization-2/index.html">
+<meta property="og:title" content="利用numpy.vectorize提升计算速度">
+<meta property="og:url" content="https://buracagyang.github.io/2019/06/12/numpy-vectorize/index.html">
 <meta property="og:site_name" content="Buracag的博客">
-<meta property="og:description" content="同步于CSDN;音尘杂记 优化问题一般都是通过迭代的方式来求解：通过猜测一个初始的估计$x_0$，然后不断迭代产生新的估计$x_1, x_2, …  x_t$，希望$x_t$最终收敛到期望的最优解$x^∗$。 一个好的优化算法应该是在一定的时间或空间复杂度下能够快速准确地找到最优解。同时，好的优化算法受初始猜测点的影响较小，通过迭代能稳定地找到最优解$x^∗$的邻域，然后迅速收敛于$x^∗$。 优">
+<meta property="og:description" content="同步于CSDN;音尘杂记 在实际项目中，对超大矩阵进行计算或者对超大的DataFrame进行计算是一个经常会出现的场景。这里先不考虑开发机本身内存等客观硬件因素，仅从设计上讨论一下不同实现方式带来的性能差异，抛砖引玉。">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://buracagyang.github.io/2019/06/18/mathematical-optimization-2/sample.gif">
-<meta property="og:updated_time" content="2019-08-09T08:10:26.000Z">
+<meta property="og:image" content="https://buracagyang.github.io/2019/06/12/numpy-vectorize/1.png">
+<meta property="og:image" content="https://buracagyang.github.io/2019/06/12/numpy-vectorize/2.png">
+<meta property="og:image" content="https://buracagyang.github.io/2019/06/12/numpy-vectorize/3.png">
+<meta property="og:image" content="https://buracagyang.github.io/2019/06/12/numpy-vectorize/4.png">
+<meta property="og:image" content="https://buracagyang.github.io/2019/06/12/numpy-vectorize/5.png">
+<meta property="og:image" content="https://buracagyang.github.io/2019/06/12/numpy-vectorize/6.png">
+<meta property="og:updated_time" content="2019-06-12T12:45:42.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数学优化2-优化算法">
-<meta name="twitter:description" content="同步于CSDN;音尘杂记 优化问题一般都是通过迭代的方式来求解：通过猜测一个初始的估计$x_0$，然后不断迭代产生新的估计$x_1, x_2, …  x_t$，希望$x_t$最终收敛到期望的最优解$x^∗$。 一个好的优化算法应该是在一定的时间或空间复杂度下能够快速准确地找到最优解。同时，好的优化算法受初始猜测点的影响较小，通过迭代能稳定地找到最优解$x^∗$的邻域，然后迅速收敛于$x^∗$。 优">
-<meta name="twitter:image" content="https://buracagyang.github.io/2019/06/18/mathematical-optimization-2/sample.gif">
+<meta name="twitter:title" content="利用numpy.vectorize提升计算速度">
+<meta name="twitter:description" content="同步于CSDN;音尘杂记 在实际项目中，对超大矩阵进行计算或者对超大的DataFrame进行计算是一个经常会出现的场景。这里先不考虑开发机本身内存等客观硬件因素，仅从设计上讨论一下不同实现方式带来的性能差异，抛砖引玉。">
+<meta name="twitter:image" content="https://buracagyang.github.io/2019/06/12/numpy-vectorize/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Buracag的博客" type="application/atom+xml">
   
@@ -159,51 +164,56 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-mathematical-optimization-2" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-numpy-vectorize" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      数学优化2-优化算法
+      利用numpy.vectorize提升计算速度
     </h1>
   
 
         
-        <a href="/2019/06/18/mathematical-optimization-2/" class="archive-article-date">
-  	<time datetime="2019-06-18T05:17:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-18</time>
+        <a href="/2019/06/12/numpy-vectorize/" class="archive-article-date">
+  	<time datetime="2019-06-12T12:45:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-12</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>同步于<a href="https://blog.csdn.net/buracag_mc" target="_blank" rel="noopener">CSDN</a>;<a href="https://www.runblog.online/" target="_blank" rel="noopener">音尘杂记</a></p>
-<p>优化问题一般都是通过迭代的方式来求解：通过猜测一个初始的估计$x_0$，然后不断迭代产生新的估计$x_1, x_2, …  x_t$，希望$x_t$最终收敛到期望的最优解$x^∗$。</p>
-<p>一个好的优化算法应该是在一定的时间或空间复杂度下能够快速准确地找到最优解。同时，好的优化算法受初始猜测点的影响较小，通过迭代能稳定地找到最优解$x^∗$的邻域，然后迅速收敛于$x^∗$。</p>
-<p>优化算法中常用的迭代方法有线性搜索和置信域方法等。线性搜索的策略是寻找方向和步长，具体算法有梯度下降法、牛顿法、共轭梯度法等。在<a href="https://blog.csdn.net/buracag_mc/article/details/77620686" target="_blank" rel="noopener">文章</a>中也简要介绍过梯度下降的概念，这里为使得整个体系完整故重新记录一下。</p>
+        <hr>
+<p>同步于<a href="https://blog.csdn.net/buracag_mc/article/details/88748607" title="https://blog.csdn.net/buracag_mc/article/details/88748607" target="_blank" rel="noopener">CSDN</a>;<a href="https://www.runblog.online/2019/03/18/increase-calculation-speed-with-numpy-vectorize/" target="_blank" rel="noopener">音尘杂记</a></p>
+<p>在实际项目中，对超大矩阵进行计算或者对超大的DataFrame进行计算是一个经常会出现的场景。这里先不考虑开发机本身内存等客观硬件因素，仅从设计上讨论一下不同实现方式带来的性能差异，抛砖引玉。</p>
 <a id="more"></a>
-<h1 id="1-全局最优和局部最优"><a href="#1-全局最优和局部最优" class="headerlink" title="1. 全局最优和局部最优"></a>1. 全局最优和局部最优</h1><p>对于很多非线性优化问题，会存在若干个局部的极小值。<strong>局部最小值</strong>，或<strong>局部最优解</strong>$x^∗$定义为：存在一个$\delta &gt; 0$，对于所有的满足$∥x−x^*∥ \leq \delta$的x，公式$f(x^∗) \leq f(x)$成立。也就是说，在$x^∗$的附近区域内，所有的函数值都大于或者等于$f(x^∗)$。</p>
-<p>对于所有的$x \in A$，都有$f(x^∗) \leq f(x)$成立，则$x^∗$为全局最小值，或全局最优解。一般的，求局部最优解是容易的，但很难保证其为全局最优解。对于线性规划或凸优化问题，局部最优解就是全局最优解。</p>
-<p>要确认一个点$x^∗$是否为局部最优解，通过比较它的邻域内有没有更小的函数值是不现实的。如果函数$f(x)$是二次连续可微的，我们可以通过检查目标函数在点$x^∗$的梯度$∇f(x^∗)$和Hessian矩阵$\nabla^2f(x^∗)$来判断。</p>
-<blockquote>
-<p><strong>定理1 局部最小值的一阶必要条件：</strong> 如果$x^∗$为局部最优解并且函数$f$在$x^∗$的邻域内一阶可微，则在$∇f(x^∗) = 0$。</p>
-</blockquote>
-<p><strong>证明.</strong> 如果函数$f(x)$是连续可微的，根据泰勒展开公式（Taylor’s Formula），函数$f(x)$的一阶展开可以近似为<br>$$<br>f(x^∗ + \Delta x) = f(x^∗) + \Delta x^T \nabla f(x^∗) \tag{1}<br>$$<br>假设$∇f(x^∗) \neq 0$，则可以找到一个$\Delta x$（比如$\Delta x = −\alpha ∇f(x^∗)$，$\alpha$为很小的正数），使得<br>$$<br>f(x^∗ + \Delta x) − f(x^∗) = \Delta x^T \nabla f(x^∗) \leq 0 \tag{2}<br>$$</p>
-<p>这和局部最优的定义矛盾。</p>
-<blockquote>
-<p><strong>定理2 局部最优解的二阶必要条件：</strong> 如果$x^∗$为局部最优解并且函数$f$在$x^∗$的领域内二阶可微，则$\nabla f(x^∗)=0, \nabla^2 f(x^*)$为半正定矩阵。</p>
-</blockquote>
-<p><strong>证明.</strong> 如果函数$f(x)$是二次连续可微的，函数$f(x)$的二阶展开可以近似为<br>$$<br>f(x^∗ + \Delta x) = f(x^∗) + \Delta x^T \nabla f(x^∗) + \frac{1}{2}\Delta x^T (\nabla^2f(x^∗))\Delta x \tag{3}<br>$$<br>由一阶必要性定理可知$\nabla f(x^∗) = 0$，则<br>$$<br>f(x^∗ + \Delta x) − f(x^∗) = \frac{1}{2}\Delta x^T (\nabla^2 f(x^∗))\Delta x \geq 0 \tag{4}<br>$$<br>即Hessian矩阵$\nabla^2f(x^∗)$为半正定矩阵。</p>
-<h1 id="2-梯度下降法"><a href="#2-梯度下降法" class="headerlink" title="2. 梯度下降法"></a>2. 梯度下降法</h1><p><strong>梯度下降法（Gradient Descent Method）</strong>，也叫<strong>最速下降法（Steepest Descend Method）</strong>，经常用来求解无约束优化的极小值问题。</p>
-<p>对于函数$f(x)$，如果$f(x)$在点$x_t$附近是连续可微的，那么$f(x)$下降最快的方向是$f(x)$在$x_t$点的梯度方法的反方向。根据泰勒一阶展开公式，<br>$$<br>f(x_{t+1}) = f(x_t + \Delta x) \approx f(x_t) + \Delta x^T \nabla f(x_t) \tag{5}<br>$$<br>要使得$f(x_{t+1}) &lt; f(x_t)$，就得使$\Delta x^T\nabla f(x_t) &lt; 0$。我们取$\Delta x = −\alpha \nabla f(x_t)$。如果$\alpha &gt; 0$为一个够小数值时，那么$f(x_{t+1}) &lt; f(x_t)$ 成立。</p>
-<p>这样我们就可以从一个初始值$x_0$出发，通过迭代公式<br>$$<br>x_{t+1} = x_t − \alpha_t\nabla f(x_t), t \geq 0 \tag{6}<br>$$<br>生成序列$x_0, x_1, x_2, …$ 使得<br>$$<br>f(x_0) \geq f(x_1) \geq f(x_2) \geq … \tag{7}<br>$$<br>如果顺利的话，序列($x_n$) 收敛到局部最优解$x^∗$。注意每次迭代步长$\alpha$可以改变，但其取值必须合适，如果过大就不会收敛，如果过小则收敛速度太慢。</p>
-<p>梯度下降法的示例过程可以参见下图：</p>
-<p><img src="/2019/06/18/mathematical-optimization-2/sample.gif" alt="sample"></p>
-<p>梯度下降法为一阶收敛算法，当靠近极小值时梯度变小，收敛速度会变慢，并且可能以“之字形”的方式下降。如果目标函数为二阶连续可微，我们可以采用牛顿法。牛顿法为二阶收敛算法，收敛速度更快，但是每次迭代需要计算Hessian矩阵的逆矩阵，复杂度较高。相反，如果我们要求解一个最大值问题，就需要向梯度正方向迭代进行搜索，逐渐接近函数的局部极大值点，这个过程则被称为梯度上升法（GradientAscent）。</p>
-<p>后面准备专门整理一份梯度下降中关于批量梯度下降(BGD)、随机梯度下降(SGD)、小批量梯度下降(MBGD)、Momentum、Adagrad等资料。</p>
-<p>主要参考<a href="https://github.com/nndl/nndl.github.io" target="_blank" rel="noopener">https://github.com/nndl/nndl.github.io</a></p>
+<p>项目中有这样一个需求，需要根据历史销量数据计算SKU(Stock Keeping Unit)之间的相似度，或者更通俗一点说是根据历史销量数据求不同SKU之间出现的订单交集以及并集大小(注:SKU数量大概15k左右，订单数大概1000k左右)。</p>
+<p>这里给几条示例数据，可以更直观形象地理解这个需求：</p>
+<p><img src="/2019/06/12/numpy-vectorize/1.png" alt="1"></p>
+<p>然后需要根据这些历史的orderno-sku(订单-商品)数据求解出sku的相似度矩阵。其中SKU1和SKU2之间的相似度定义为:</p>
+<p><img src="/2019/06/12/numpy-vectorize/2.png" alt="2"></p>
+<p>可以很快速地想到几种解决方案：</p>
+<ul>
+<li><p>直接for loops；</p>
+</li>
+<li><p>for loops稍微改进采用列表生成器；</p>
+</li>
+<li><p>采用多进程并行计算；</p>
+</li>
+<li><p><strong>采用numpy.vectorize</strong></p>
+</li>
+</ul>
+<h1 id="1-for-loops计算相似度矩阵"><a href="#1-for-loops计算相似度矩阵" class="headerlink" title="1.for loops计算相似度矩阵"></a>1.for loops计算相似度矩阵</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@timer</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gen_corr_matrix_for_loops</span><span class="params">(order_df)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    for loops计算相似度矩阵</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    df = order_df.groupby([<span class="string">'sku'</span>]).agg(&#123;<span class="string">'orderno'</span>: <span class="keyword">lambda</span> x: set(x)&#125;).reset_index()</span><br><span class="line">    <span class="keyword">del</span> order_df</span><br><span class="line">    gc.collect()</span><br><span class="line">    l = len(df)</span><br><span class="line">    sku_series = df.sku.astype(str)</span><br><span class="line">    corr_matrix_arr = np.ones((l, l))</span><br><span class="line"></span><br><span class="line">    tbar = trange(l)</span><br><span class="line">    tbar.set_description(<span class="string">"compute corr matrix"</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> tbar:</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(i + <span class="number">1</span>, l):</span><br><span class="line">            corr_matrix_arr[j, i] = corr_matrix_arr[i, j] = len(df.iloc[i, <span class="number">1</span>] &amp; df.iloc[j, <span class="number">1</span>]) / len(</span><br><span class="line">                df.iloc[i, <span class="number">1</span>] | df.iloc[j, <span class="number">1</span>])</span><br><span class="line">    corr_matrix_df = pd.DataFrame(columns=sku_series, index=sku_series, data=corr_matrix_arr)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> corr_matrix_df</span><br></pre></td></tr></table></figure>
+<p>计算耗时：2000s+<br><img src="/2019/06/12/numpy-vectorize/3.png" alt="3"></p>
+<h1 id="2-list-generator计算相似度矩阵"><a href="#2-list-generator计算相似度矩阵" class="headerlink" title="2.list generator计算相似度矩阵"></a>2.list generator计算相似度矩阵</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@timer</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gen_corr_matrix_generator</span><span class="params">(order_df)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    列表生成器计算相似度矩阵</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    df = order_df.groupby([<span class="string">'sku'</span>]).agg(&#123;<span class="string">'orderno'</span>: <span class="keyword">lambda</span> x: set(x)&#125;).reset_index()</span><br><span class="line">    <span class="keyword">del</span> order_df</span><br><span class="line">    gc.collect()</span><br><span class="line">    l= len(df)</span><br><span class="line">    sku_series = df.sku.astype(str)</span><br><span class="line">    corr_matrix_arr = np.ones((l, l))</span><br><span class="line"></span><br><span class="line">    l1 = df.orderno</span><br><span class="line">    l2 = np.array(df[<span class="string">'orderno'</span>].apply(len), dtype=np.int8)</span><br><span class="line"></span><br><span class="line">    result_list = [[i, j, len(l1[i] &amp; l1[j])] <span class="keyword">for</span> i <span class="keyword">in</span> range(l)</span><br><span class="line">                   <span class="keyword">for</span> j <span class="keyword">in</span> range(i+<span class="number">1</span>, l) <span class="keyword">if</span> len(l1[i] &amp; l1[j]) &gt; <span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i, j, k <span class="keyword">in</span> result_list:</span><br><span class="line">        corr_matrix_arr[j, i] = corr_matrix_arr[i, j] = k * <span class="number">1.0</span> / (l2[i] + l2[j] - k)</span><br><span class="line">    corr_matrix_df = pd.DataFrame(columns=sku_series, index=sku_series, data=corr_matrix_arr)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> corr_matrix_df</span><br></pre></td></tr></table></figure>
+<p>计算耗时：1296s<br><img src="/2019/06/12/numpy-vectorize/4.png" alt="4"></p>
+<h1 id="3-多进程计算相似度矩阵"><a href="#3-多进程计算相似度矩阵" class="headerlink" title="3.多进程计算相似度矩阵"></a>3.多进程计算相似度矩阵</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@timer</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gen_corr_matrix_multiprocessing</span><span class="params">(order_df)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    多进程计算相似度矩阵</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    df = order_df.groupby([<span class="string">'sku'</span>]).agg(&#123;<span class="string">'orderno'</span>: <span class="keyword">lambda</span> x: set(x)&#125;).reset_index()</span><br><span class="line">    <span class="keyword">del</span> order_df</span><br><span class="line">    gc.collect()</span><br><span class="line">    l = len(df)</span><br><span class="line">    sku_series = df.sku.astype(str)</span><br><span class="line">    </span><br><span class="line">    l1 = df.orderno</span><br><span class="line">    l2 = np.array(df[<span class="string">'orderno'</span>].apply(len), dtype=np.int8)</span><br><span class="line">    <span class="keyword">del</span> df</span><br><span class="line">    gc.collect()</span><br><span class="line"></span><br><span class="line">    arr2 = np.zeros((l, l), dtype=np.float32)</span><br><span class="line">    pairs = [[i, j] <span class="keyword">for</span> i <span class="keyword">in</span> range(l - <span class="number">1</span>) <span class="keyword">for</span> j <span class="keyword">in</span> range(i + <span class="number">1</span>, l)]</span><br><span class="line"></span><br><span class="line">    loops = int(math.ceil((l ** <span class="number">2</span> - l) / <span class="number">10</span> ** <span class="number">6</span> / <span class="number">2</span>))</span><br><span class="line"></span><br><span class="line">    tbar = trange(loops)</span><br><span class="line">    tbar.set_description(<span class="string">"compute corr matrix"</span>)</span><br><span class="line">    pool = Pool(<span class="number">4</span>)</span><br><span class="line">    <span class="keyword">for</span> loop <span class="keyword">in</span> tbar:</span><br><span class="line">        temp_lists = [[i, j, l1[i], l1[j]] <span class="keyword">for</span> i, j <span class="keyword">in</span> pairs[(<span class="number">10</span> ** <span class="number">6</span> * loop): (<span class="number">10</span> ** <span class="number">6</span> * (loop + <span class="number">1</span>))]]</span><br><span class="line">        temp_results = pool.map(cal, temp_lists)</span><br><span class="line">        <span class="keyword">for</span> i, j, k <span class="keyword">in</span> temp_results:</span><br><span class="line">            arr2[i, j] = k</span><br><span class="line">    pool.close()</span><br><span class="line">    pool.join()</span><br><span class="line"></span><br><span class="line">    arr1 = l2 + l2.reshape((l, <span class="number">1</span>))</span><br><span class="line">    arr2 = arr2 + arr2.T  <span class="comment"># 变对称阵</span></span><br><span class="line">    arr3 = arr2 / (arr1 - arr2) + np.eye(l)</span><br><span class="line">    <span class="keyword">del</span> arr1</span><br><span class="line">    <span class="keyword">del</span> arr2</span><br><span class="line">    gc.collect()</span><br><span class="line"></span><br><span class="line">    corr_matrix_df = pd.DataFrame(columns=sku_series, index=sku_series, data=arr3)</span><br><span class="line">    <span class="keyword">return</span> corr_matrix_df</span><br></pre></td></tr></table></figure>
+<p>计算耗时：1563s<br><img src="/2019/06/12/numpy-vectorize/5.png" alt="5"></p>
+<h1 id="4-numpy-vectorize计算相似度矩阵"><a href="#4-numpy-vectorize计算相似度矩阵" class="headerlink" title="4.numpy.vectorize计算相似度矩阵"></a>4.numpy.vectorize计算相似度矩阵</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@timer</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gen_corr_matrix_vectorize</span><span class="params">(order_df)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    numpy.vectorice计算相似度矩阵</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    df = order_df.groupby([<span class="string">'sku'</span>]).agg(&#123;<span class="string">'orderno'</span>: <span class="keyword">lambda</span> x: set(x)&#125;).reset_index()</span><br><span class="line">    l = len(df)</span><br><span class="line">    sku_series = df.sku.astype(str)</span><br><span class="line">    arr = df.orderno.values</span><br><span class="line">    corr_matrix_arr = np.zeros((l, l))</span><br><span class="line">    f_vec = np.vectorize(len)</span><br><span class="line">    arr1 = f_vec(arr)</span><br><span class="line"></span><br><span class="line">    tbar = trange(l - <span class="number">1</span>)</span><br><span class="line">    tbar.set_description(<span class="string">"compute corr matrix"</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> tbar(l - <span class="number">1</span>):</span><br><span class="line">        corr_matrix_arr[i, (i + <span class="number">1</span>): l] = f_vec(arr[(i + <span class="number">1</span>): l] &amp; arr[i])</span><br><span class="line">    corr_matrix_arr1 = np.add.outer(arr1, arr1)</span><br><span class="line">    temp = corr_matrix_arr / (corr_matrix_arr1 - corr_matrix_arr)</span><br><span class="line">    temp = temp + temp.T + np.eye(l)</span><br><span class="line">    <span class="keyword">return</span> pd.DataFrame(columns=sku_series, index=sku_series, data=temp)</span><br></pre></td></tr></table></figure>
+<p>计算耗时：72s<br><img src="/2019/06/12/numpy-vectorize/6.png" alt="6"></p>
+<p>可以看到，使用numpy.vectorize提升了20倍左右！</p>
+<p><strong>思考：</strong><br>结合到实际业务中，其实有很多可以改进的地方：1. 并不需要计算所有SKU之间的相似度（提速）; 2. 可以只保存上三角阵或保存有效的相似SKU数据(降低内存)。这块儿就不展开赘述了。</p>
 
       
 
@@ -242,7 +252,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">基础知识</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
         		</li>
       		
 		</ul>
@@ -298,7 +308,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://qr.liantu.com/api.php?text=https://buracagyang.github.io/2019/06/18/mathematical-optimization-2/" alt="微信分享二维码">
+      <img src="http://qr.liantu.com/api.php?text=https://buracagyang.github.io/2019/06/12/numpy-vectorize/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -312,18 +322,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/06/19/mathematical-optimization-3/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/06/14/probability-theory-1/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          数学优化3-拉格朗日乘数法与KKT条件
+          概率论1-随机事件和概率
         
       </div>
     </a>
   
   
-    <a href="/2019/06/17/mathematical-optimization-1/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">数学优化1-数学优化的类型</div>
+    <a href="/2019/06/12/calculus-2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">微积分2-常见函数的导数</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -350,7 +360,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-全局最优和局部最优"><span class="toc-number">1.</span> <span class="toc-text">1. 全局最优和局部最优</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-梯度下降法"><span class="toc-number">2.</span> <span class="toc-text">2. 梯度下降法</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-for-loops计算相似度矩阵"><span class="toc-number">1.</span> <span class="toc-text">1.for loops计算相似度矩阵</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-list-generator计算相似度矩阵"><span class="toc-number">2.</span> <span class="toc-text">2.list generator计算相似度矩阵</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-多进程计算相似度矩阵"><span class="toc-number">3.</span> <span class="toc-text">3.多进程计算相似度矩阵</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-numpy-vectorize计算相似度矩阵"><span class="toc-number">4.</span> <span class="toc-text">4.numpy.vectorize计算相似度矩阵</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -385,7 +395,7 @@ if(true){
   	repo: 'blog_comments',
   	owner: 'buracagyang',
   	admin: ['buracagyang'],
-  	id: 'Tue Jun 18 2019 13:17:45 GMT+0800',
+  	id: 'Wed Jun 12 2019 20:45:42 GMT+0800',
   	distractionFreeMode: 'true'
 })
 gitalk.render('gitalk-container') 
